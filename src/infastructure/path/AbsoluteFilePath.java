@@ -1,0 +1,158 @@
+package infastructure.path;
+
+import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
+import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteFile;
+import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
+import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
+import infastructure.path.empty.EmptyRelativeFilePath;
+import infastructure.path.exceptions.NoParentException;
+import infastructure.path.exceptions.PathsNotMatchingException;
+import infastructure.path.interfaces.ConstructorCommand;
+
+/**
+ * @author Patrick
+ * @created 04.07.2016
+ */
+public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> implements AbsoluteFile {
+    private FileNode _fileNode;
+    private FilePathImpl _filePath;
+
+    public AbsoluteFilePath(DirectoryNode head, DirectoryNode tail, FileNode fileNode, int nodeCount) {
+        super(head, tail, nodeCount);
+        _fileNode = fileNode;
+        _filePath = new FilePathImpl();
+    }
+
+
+    // ====================
+    //   Absolute File
+    // ====================
+
+    /**
+     * Removes the path to an absolute file and returns the difference as relative directory {@link AbsoluteFile}
+     * @param absFile the absolute Directory that is being removed from this path
+     * @return  Relative Directory, being the difference between current path and parameter {@link AbsoluteFile}
+     *          EmptyPath is EmptyPath is given as parameter
+     * @throws  PathsNotMatchingException if the absolute directory is not a subset of current path
+     *          IllegalArgumentException if empty path was given as argument
+     */
+    public RelativeDirectory remove(AbsoluteFile absFile) throws PathsNotMatchingException {
+        if (!fileNode().equals(absFile.fileNode())) throw new PathsNotMatchingException();
+
+        ConstructorCommand<RelativeDirectoryPath> constructor = (head, tail, file, length) ->
+                head == null
+                    ? null
+                    : new RelativeDirectoryPath(head, tail, length);
+
+        return removeImpl(absFile, constructor);
+    }
+
+    @Override
+    public boolean hasParent() {
+        return tailNode() != null;
+    }
+
+    @Override
+    public RelativeDirectory getParent() {
+        if (!hasParent()) throw new NoParentException();
+        DirectoryNode parentNode = new DirectoryNode(null, tailNode().getNodeName());
+
+        return new RelativeDirectoryPath(parentNode, parentNode, 1);
+    }
+
+    @Override
+    public AbsoluteDirectory getParentPath() {
+        if (!hasParent()) throw new NoParentException();
+
+        return copy(tailNode());
+    }
+
+    @Override
+    public AbsoluteFile copy() {
+        PathNodeList nodeList = tailNode().copy();
+
+        return new AbsoluteFilePath(nodeList.getHead(), nodeList.getTail(), nodeList.getFile(), nodeList.length());
+    }
+
+    @Override
+    public AbsoluteDirectory remove(RelativeFile relFile) throws PathsNotMatchingException{
+        ConstructorCommand<AbsoluteDirectory> constructor = (head, tail, file, length) ->
+                head == null
+                    // ? EmptyAbsoluteDirectoryPath.instance()
+                    ? null
+                    : new AbsoluteDirectoryPath(head, tail, length);
+
+        return _filePath.remove(this, relFile, constructor);
+    }
+
+    @Override
+    public AbsoluteFile concat(RelativeDirectory relDir) {
+        return _filePath.concat(this, relDir, AbsoluteFilePath::new);
+    }
+
+    @Override
+    public AbsoluteFile remove(RelativeDirectory removal) throws PathsNotMatchingException{
+        ConstructorCommand<AbsoluteFile> constructor = (head, tail, file, length) ->
+                head == null
+                        // ? EmptyAbsoluteDirectoryPath.instance()
+                        ? null
+                        : new AbsoluteFilePath(head, tail, file, length);
+
+        return removeImpl(removal, constructor);
+    }
+
+    @Override
+    public RelativeFile remove(AbsoluteDirectory absDir) throws PathsNotMatchingException {
+        ConstructorCommand<RelativeFilePath> constructor = (head, tail, file, length) ->
+            head == null
+                ? new EmptyRelativeFilePath(new FileNode(null, file.getNodeName()))
+                : new RelativeFilePath(head, tail, file, length);
+
+        RelativeFilePath relativeFile = removeImpl(absDir, constructor);
+        relativeFile.setFile(new FileNode(relativeFile.tailNode(), _fileNode._nodeName));
+
+        return relativeFile;
+        // return _filePath.remove(this, absDir, RelativeFilePath::new);
+    }
+
+    @Override
+    public String getName() {
+        return _fileNode.getNodeName();
+    }
+
+    @Override
+    public String getAbsolutePath() {
+        return super.getAbsolutePath() + "\\" + _fileNode.getNodeName();
+    }
+
+    // ====================
+    //   File Path
+    // ====================
+
+    @Override
+    public String getPostfix() {
+        return fileNode().getPostfix();
+    }
+
+    @Override
+    public String getPrefix() {
+        return fileNode().getPrefix();
+    }
+
+    @Override
+    public FileNode fileNode() {
+        return _fileNode;
+    }
+
+    // FilePathImpl
+
+    @Override
+    public String toString() {
+        return super.toString() + "\\" + _fileNode.getNodeName();
+    }
+
+    @Override
+    public int length() {
+        return super.length() + 1;
+    }
+}
