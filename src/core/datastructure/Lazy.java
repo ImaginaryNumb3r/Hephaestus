@@ -1,5 +1,6 @@
 package core.datastructure;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.util.function.Supplier;
 
@@ -7,7 +8,7 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 15.11.2016
  */
-public class Lazy<T> implements LazySupplier<T> {
+public class Lazy<T> implements LazySupplier<T>, Serializable {
     private Supplier<T> _supplier;
     private T _value;
 

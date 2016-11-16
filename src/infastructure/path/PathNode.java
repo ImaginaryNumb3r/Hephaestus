@@ -5,7 +5,7 @@ package infastructure.path;
  * @created 04.07.2016
  * @purpose Works as a single node in a path and represents a directory or a file
  */
-// TODO: Remove prev and make getPrev only in DirectoryNode
+// TODO: Remove prev and get getPrev only in DirectoryNode
 abstract class PathNode {
     protected String _nodeName;
     protected DirectoryNode _prev;

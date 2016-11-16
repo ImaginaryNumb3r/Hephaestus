@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author Patrick
- * @created 31.07.2016
+ * @since 31.07.2016
  */
 public class HEntryTest {
 

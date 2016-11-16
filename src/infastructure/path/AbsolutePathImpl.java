@@ -5,9 +5,8 @@ import infastructure.filetype.interfaces.aubtypes.FilePath;
 import infastructure.filetype.interfaces.aubtypes.RelativePath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
-import infastructure.path.exceptions.NoParentException;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 import java.io.File;
 
@@ -86,7 +85,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
      *          EmptyPath if EmptyPath is given as parameter
      * @throws  PathsNotMatchingException if the absolute directory is not a subset of current path
      */
-    protected <P extends RelativePathImpl<P>> P removeImpl(AbsolutePath  absDir, ConstructorCommand<P> constructor) throws PathsNotMatchingException{
+    protected <P extends RelativePathImpl<P>> P removeImpl(AbsolutePath  absDir, PathSupplier<P> constructor) throws PathsNotMatchingException{
         if (absDir == null) throw new IllegalArgumentException("Path may not be null!");
         if (absDir.isEmpty()) throw new IllegalArgumentException("Path may not be empty!");
 
@@ -101,10 +100,10 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
 
             newHead.setPrev(temp);
 
-            relDir = constructor.execute(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
+            relDir = constructor.get(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
         } else {
             // null = empty path = still empty path when copies
-            relDir = constructor.execute(null, null, null, 0);
+            relDir = constructor.get(null, null, null, 0);
         }
 
         return relDir;
@@ -126,7 +125,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
      *          EmptyPath if EmptyPath is given as parameter
      * @throws PathsNotMatchingException
      */
-    protected <P extends AbsolutePath> P removeImpl(RelativeDirectory removal, ConstructorCommand<P> constructor) throws PathsNotMatchingException{
+    protected <P extends AbsolutePath> P removeImpl(RelativeDirectory removal, PathSupplier<P> constructor) throws PathsNotMatchingException{
         if (removal == null) throw new IllegalArgumentException("Path may not be null!");
 
         P retVal;
@@ -135,7 +134,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
             // Return copy
 
             PathNodeList nodeList = tailNode().copy();
-            retVal = constructor.execute(nodeList.getHead(), nodeList.getTail(), nodeList.getFile(), nodeList.length());
+            retVal = constructor.get(nodeList.getHead(), nodeList.getTail(), nodeList.getFile(), nodeList.length());
 
         } else {
             DirectoryNode curBase = getNewTail(tailNode().iterator(), removal.tailNode().iterator());
@@ -146,14 +145,14 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
                 // If base class is a file, simply add it to the end
                 FileNode file = this instanceof FilePath ? ((FilePath) this).fileNode() : newNodes.getFile();
 
-                retVal = constructor.execute(newNodes.getHead(), newNodes.getTail(), file, newNodes.length());
+                retVal = constructor.get(newNodes.getHead(), newNodes.getTail(), file, newNodes.length());
                 // retVal = new AbsoluteDirectoryPath(newNodes.getHead(), newNodes.getTail(), newNodes.length());
 
             // is empty path
             } else {
                 // Make complete copy of list
                 PathNodeList newNodes = tailNode().copy();
-                retVal = constructor.execute(null, null, null, 0);
+                retVal = constructor.get(null, null, null, 0);
                 throw new RuntimeException("You should not be here! - if a copy was to be made, it should have been done in the first if@ removal.isEmpty() ");
             }
         }

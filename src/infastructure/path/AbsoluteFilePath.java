@@ -7,7 +7,7 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
 import infastructure.path.empty.EmptyRelativeFilePath;
 import infastructure.path.exceptions.NoParentException;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 /**
  * @author Patrick
@@ -39,7 +39,7 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
     public RelativeDirectory remove(AbsoluteFile absFile) throws PathsNotMatchingException {
         if (!fileNode().equals(absFile.fileNode())) throw new PathsNotMatchingException();
 
-        ConstructorCommand<RelativeDirectoryPath> constructor = (head, tail, file, length) ->
+        PathSupplier<RelativeDirectoryPath> constructor = (head, tail, file, length) ->
                 head == null
                     ? null
                     : new RelativeDirectoryPath(head, tail, length);
@@ -76,7 +76,7 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
 
     @Override
     public AbsoluteDirectory remove(RelativeFile relFile) throws PathsNotMatchingException{
-        ConstructorCommand<AbsoluteDirectory> constructor = (head, tail, file, length) ->
+        PathSupplier<AbsoluteDirectory> constructor = (head, tail, file, length) ->
                 head == null
                     // ? EmptyAbsoluteDirectoryPath.instance()
                     ? null
@@ -92,7 +92,7 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
 
     @Override
     public AbsoluteFile remove(RelativeDirectory removal) throws PathsNotMatchingException{
-        ConstructorCommand<AbsoluteFile> constructor = (head, tail, file, length) ->
+        PathSupplier<AbsoluteFile> constructor = (head, tail, file, length) ->
                 head == null
                         // ? EmptyAbsoluteDirectoryPath.instance()
                         ? null
@@ -103,7 +103,7 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
 
     @Override
     public RelativeFile remove(AbsoluteDirectory absDir) throws PathsNotMatchingException {
-        ConstructorCommand<RelativeFilePath> constructor = (head, tail, file, length) ->
+        PathSupplier<RelativeFilePath> constructor = (head, tail, file, length) ->
             head == null
                 ? new EmptyRelativeFilePath(new FileNode(null, file.getNodeName()))
                 : new RelativeFilePath(head, tail, file, length);

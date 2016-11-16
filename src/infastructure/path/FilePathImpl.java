@@ -8,7 +8,7 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
 import infastructure.path.exceptions.EmptyPathException;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 import java.util.Iterator;
 
@@ -23,34 +23,34 @@ class FilePathImpl  {
     // Concat: File + RelDir
     // =======================
 
-    public final RelativeFilePath concat(RelativeFilePath base, RelativeDirectory relDir, ConstructorCommand<RelativeFilePath> constructor) {
+    public final RelativeFilePath concat(RelativeFilePath base, RelativeDirectory relDir, PathSupplier<RelativeFilePath> constructor) {
         return concat(toMask(base), relDir, constructor);
     }
 
-    public final AbsoluteFilePath concat(AbsoluteFilePath base, RelativeDirectory relDir, ConstructorCommand<AbsoluteFilePath> constructor) {
+    public final AbsoluteFilePath concat(AbsoluteFilePath base, RelativeDirectory relDir, PathSupplier<AbsoluteFilePath> constructor) {
         return concat(toMask(base), relDir, constructor);
     }
 
     // final - cannot be moved down further
-    protected final <T extends FilePath> T concat(FilePathMask base, RelativeDirectory relDir, ConstructorCommand<T> constructor) {
+    protected final <T extends FilePath> T concat(FilePathMask base, RelativeDirectory relDir, PathSupplier<T> constructor) {
         if (relDir == null) throw new IllegalArgumentException("Path may not be null!");
 
         PathNodeList nodeList = base.concatNodes(relDir);
         FileNode newFile = new FileNode(nodeList.getTail(), base.fileNode().getNodeName());
 
-        return constructor.execute(nodeList.getHead(), nodeList.getTail(), newFile, nodeList.length());
+        return constructor.get(nodeList.getHead(), nodeList.getTail(), newFile, nodeList.length());
     }
 
     // =======================
     // Concat: File - RelFile
     // =======================
 
-    public AbsoluteDirectory remove(AbsoluteFilePath base, RelativeFile removal, ConstructorCommand<AbsoluteDirectory> constructor) throws PathsNotMatchingException {
+    public AbsoluteDirectory remove(AbsoluteFilePath base, RelativeFile removal, PathSupplier<AbsoluteDirectory> constructor) throws PathsNotMatchingException {
         FilePathMask mask = toMask(base);
         return removeImpl(mask, removal, constructor);
     }
 
-    public RelativeDirectory remove(RelativeFilePath base, RelativeFile removal, ConstructorCommand<RelativeDirectory> constructor) throws PathsNotMatchingException {
+    public RelativeDirectory remove(RelativeFilePath base, RelativeFile removal, PathSupplier<RelativeDirectory> constructor) throws PathsNotMatchingException {
         FilePathMask mask = toMask(base);
 
         return removeImpl(mask, removal, constructor);
@@ -66,7 +66,7 @@ class FilePathImpl  {
      * @throws PathsNotMatchingException
      * @throws EmptyPathException
      */
-    private <T extends Path> T removeImpl(FilePathMask base, RelativeFile removal, ConstructorCommand<T> constructor) throws PathsNotMatchingException {
+    private <T extends Path> T removeImpl(FilePathMask base, RelativeFile removal, PathSupplier<T> constructor) throws PathsNotMatchingException {
         if (removal == null) throw new IllegalArgumentException("Path may not be null!");
         if (removal.isEmpty()) throw new EmptyPathException();
 
@@ -85,7 +85,7 @@ class FilePathImpl  {
             nodeList = base.tailNode().copy();
         }
 
-        return constructor.execute(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
+        return constructor.get(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
     }
 
     // ===================

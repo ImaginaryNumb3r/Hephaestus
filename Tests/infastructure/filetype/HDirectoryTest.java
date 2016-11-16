@@ -3,6 +3,7 @@ package infastructure.filetype;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -45,5 +46,17 @@ public class HDirectoryTest {
 
         String name = directory.getName();
         assert(result.equals(name));
+    }
+
+    @Test
+    public void testGetEntries() throws Exception {
+        String testDirectory = "D:\\Projekte\\Hephaestus\\Tests\\Files";
+        final String result = "Files";
+        HDirectory directory = new HDirectory(testDirectory);
+
+        File file = new File("D:\\Projekte\\Hephaestus\\Tests\\Files");
+        File[] files = file.listFiles();
+
+        // TODO: Finish test
     }
 }

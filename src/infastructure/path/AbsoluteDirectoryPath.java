@@ -8,7 +8,7 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
 import infastructure.path.empty.EmptyRelativeDirectoryPath;
 import infastructure.path.exceptions.NoParentException;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 /**
  * @author Patrick
@@ -40,7 +40,7 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
 
     @Override
     public AbsoluteDirectory concat(RelativeDirectory relDir) {
-        ConstructorCommand<AbsoluteDirectoryPath> constructor = (head, tail, file, length)
+        PathSupplier<AbsoluteDirectoryPath> constructor = (head, tail, file, length)
                 -> new AbsoluteDirectoryPath(head, tail, length);
 
         return _directoryPath.concat(this, relDir, constructor);
@@ -55,7 +55,7 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
 
     @Override
     public AbsoluteDirectory remove(RelativeDirectory removal) throws PathsNotMatchingException {
-        ConstructorCommand<AbsoluteDirectory> constructor = (head, tail, file, length) ->
+        PathSupplier<AbsoluteDirectory> constructor = (head, tail, file, length) ->
                 head == null
                         // ? EmptyAbsoluteDirectoryPath.instance()
                         ? null
@@ -66,7 +66,7 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
 
     @Override
     public RelativeDirectory remove (AbsoluteDirectory absDir) throws PathsNotMatchingException{
-        ConstructorCommand<RelativeDirectoryPath> constructor = (head, tail, file, length) ->
+        PathSupplier<RelativeDirectoryPath> constructor = (head, tail, file, length) ->
                 head == null
                         ? EmptyRelativeDirectoryPath.instance()
                         : new RelativeDirectoryPath(head, tail, length);
@@ -107,10 +107,6 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
     @Override
     public boolean equals(Path path) {
         boolean equals = false;
-
-        Class<? extends Path> aClass = path.getClass();
-
-        boolean b = path instanceof AbsoluteDirectory;
 
         if (path != null && !path.isEmpty() && path instanceof AbsoluteDirectory){
             equals = super.equals(path);

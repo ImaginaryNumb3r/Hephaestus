@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * An improved implementation of the default Java file, representing a directory on the file system
  * @author Patrick
- * @created 28.05.2016
+ * @since 28.05.2016
  */
 public class HDirectory extends HEntry implements Iterable<HDirectory>, AbstractDirectory {
     private final AbsoluteDirectory _absoluteDirectory;
@@ -52,6 +52,11 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
         _absoluteDirectory = PathFactory.makeAbsoluteDirectory(file.getAbsolutePath());
     }
 
+
+    // =======================
+    //     Methods
+    // =======================
+
     @Override
     public AbsoluteDirectory getPath() {
         return _absoluteDirectory;
@@ -61,11 +66,6 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
     public AbsoluteDirectory getParentPath() {
         return _absoluteDirectory.getParentPath();
     }
-
-
-    // =======================
-    //     Methods
-    // =======================
 
     @Override
     public String getName() {

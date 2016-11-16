@@ -5,7 +5,7 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
 import infastructure.path.empty.EmptyRelativeDirectoryPath;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 /**
  * @author Patrick
@@ -43,7 +43,7 @@ public class RelativeDirectoryPath extends RelativePathImpl<RelativeDirectoryPat
 
     @Override
     public RelativeDirectory concat(RelativeDirectory relDir) {
-        ConstructorCommand<RelativeDirectoryPath> constructor = (head, tail, file, length)
+        PathSupplier<RelativeDirectoryPath> constructor = (head, tail, file, length)
                 -> new RelativeDirectoryPath(head, tail, length);
 
         return _directoryPath.concat(this, relDir, constructor);
@@ -51,7 +51,7 @@ public class RelativeDirectoryPath extends RelativePathImpl<RelativeDirectoryPat
 
     @Override
     public RelativeDirectory remove(RelativeDirectory removal) throws PathsNotMatchingException {
-        ConstructorCommand<RelativeDirectoryPath> constructor = (head, tail, file, length) ->
+        PathSupplier<RelativeDirectoryPath> constructor = (head, tail, file, length) ->
                 head == null
                         ? null
                         : new RelativeDirectoryPath(head, tail, length);

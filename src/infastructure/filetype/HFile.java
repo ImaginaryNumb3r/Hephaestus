@@ -19,7 +19,7 @@ import java.io.FileReader;
 /**
  * @author Patrick
  * @created 28.05.2016
- * @purpose Represents a file on the hard driver
+ * Represents a file on the hard driver
  */
 public class HFile extends HEntry implements AbstractFile{
     private AbsoluteFile _absoluteFilePath;
@@ -28,7 +28,7 @@ public class HFile extends HEntry implements AbstractFile{
     //    Constructors
     // =====================
 
-    // TODO: Optimize, make Path right at the beginning and not lazy
+    // TODO: Optimize, get Path right at the beginning and not lazy
     public HFile(AbsoluteDirectory location, String fileName){
         this(location.toString() + "\\" + fileName);
         initialize(location.getAbsolutePath()  + "\\" + fileName);
@@ -71,6 +71,10 @@ public class HFile extends HEntry implements AbstractFile{
     // =====================
     //    Methods
     // =====================
+
+    public boolean equalsFile(File file){
+        return file.getAbsolutePath().equals(getAbsolutePath());
+    }
 
     @Override
     public String getName() {
@@ -186,7 +190,7 @@ public class HFile extends HEntry implements AbstractFile{
     }
 
     @Override
-    // TODO: Could make problems
+    // TODO: Could get problems
     public AbsoluteFile copy() {
         return new HFile((AbsoluteFile) this);
 }

@@ -6,7 +6,7 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
 import infastructure.path.empty.EmptyRelativeDirectoryPath;
 import infastructure.path.empty.EmptyRelativeFilePath;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 /**
  * @author Patrick
@@ -35,7 +35,7 @@ public class RelativeFilePath extends RelativePathImpl<RelativeFilePath> impleme
 
     @Override
     public RelativeFile remove(RelativeDirectory removal) throws PathsNotMatchingException {
-        ConstructorCommand<RelativeFilePath> constructor = (head, tail, file, length) ->
+        PathSupplier<RelativeFilePath> constructor = (head, tail, file, length) ->
                 head == null
                     ? new EmptyRelativeFilePath(new FileNode(null, file.getNodeName()))
                     : new RelativeFilePath(head, tail, file, length);
@@ -65,7 +65,7 @@ public class RelativeFilePath extends RelativePathImpl<RelativeFilePath> impleme
 
     @Override
     public RelativeDirectory remove(RelativeFile removal) throws PathsNotMatchingException{
-        ConstructorCommand<RelativeDirectory> constructor = (head, tail, file, length) ->
+        PathSupplier<RelativeDirectory> constructor = (head, tail, file, length) ->
                 head == null
                     ? EmptyRelativeDirectoryPath.instance()
                     : new RelativeDirectoryPath(head, tail, length);

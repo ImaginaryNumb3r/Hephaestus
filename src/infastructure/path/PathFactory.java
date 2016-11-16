@@ -267,7 +267,7 @@ public class PathFactory {
     /**
      *
      * @param entries Array of VALID directory names
-     * @param isFilePath make last node a file when specified
+     * @param isFilePath get last node a file when specified
      * @return first element of the newly generated list of nodes
      * @throws IllegalArgumentException if [@link entries] is empty
      * @throws IllegalArgumentException if [@link entries] is null

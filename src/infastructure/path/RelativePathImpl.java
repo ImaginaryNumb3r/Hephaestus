@@ -4,7 +4,7 @@ package infastructure.path;
 import infastructure.filetype.interfaces.aubtypes.RelativePath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 /**
  * @author Patrick
@@ -28,7 +28,7 @@ public abstract class RelativePathImpl<R> extends AbstractPath implements Relati
     @Override
     public abstract RelativePath remove (RelativeDirectory removal) throws PathsNotMatchingException;
 
-    protected final <T extends RelativePathImpl<R>> T removeImpl(RelativeDirectory removal, ConstructorCommand<T> constructor) throws PathsNotMatchingException {
+    protected final <T extends RelativePathImpl<R>> T removeImpl(RelativeDirectory removal, PathSupplier<T> constructor) throws PathsNotMatchingException {
         if (removal == null) throw new IllegalArgumentException("Path may not be null");
         if (constructor == null) throw new IllegalArgumentException("ConstructorCommand may not be null");
 
@@ -42,12 +42,12 @@ public abstract class RelativePathImpl<R> extends AbstractPath implements Relati
             }
         }
 
-        // If nodeList could not be initialized, make copy of current path
+        // If nodeList could not be initialized, get copy of current path
         if (nodeList == null){
             nodeList = tailNode().copy();
         }
 
-        return constructor.execute(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
+        return constructor.get(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
 
     }
 

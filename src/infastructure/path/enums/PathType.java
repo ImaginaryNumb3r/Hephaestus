@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * @author Patrick
- * @created 05.07.2016
+ * @since 05.07.2016
  */
 public enum PathType {
     ABSOLUTE_DIRECTORY, RELATIVE_DIRECTORY, RELATIVE_FILE, ABSOLUTE_FILE;

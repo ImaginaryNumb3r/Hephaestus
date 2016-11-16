@@ -4,12 +4,12 @@ import infastructure.filetype.interfaces.aubtypes.DirectoryPath;
 import infastructure.filetype.interfaces.aubtypes.FilePath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
-import infastructure.path.interfaces.ConstructorCommand;
+import infastructure.path.interfaces.PathSupplier;
 
 /**
  * Helper class for Directory Path classes
  * @author Patrick
- * @created 08.07.2016
+ * @since 08.07.2016
  */
 class DirectoryPathImpl {
 
@@ -17,12 +17,12 @@ class DirectoryPathImpl {
     //  Concat: Dir + RelFile
     // =======================
 
-    public AbsoluteFilePath concat(AbsoluteDirectoryPath base, RelativeFile relFile, ConstructorCommand<AbsoluteFilePath> constructor) {
+    public AbsoluteFilePath concat(AbsoluteDirectoryPath base, RelativeFile relFile, PathSupplier<AbsoluteFilePath> constructor) {
         if (base == null) throw new IllegalArgumentException("Path may not be empty");
         return concatImpl(toMask(base), relFile, constructor);
     }
 
-    public RelativeFilePath concat(RelativeDirectoryPath base, RelativeFile relFile, ConstructorCommand<RelativeFilePath> constructor) {
+    public RelativeFilePath concat(RelativeDirectoryPath base, RelativeFile relFile, PathSupplier<RelativeFilePath> constructor) {
         if (base == null) throw new IllegalArgumentException("Path may not be empty");
         return concatImpl(toMask(base), relFile, constructor);
     }
@@ -35,22 +35,22 @@ class DirectoryPathImpl {
      * @param <T> either a relative file or relative directory
      * @return New path, composed of both parameter paths
      */
-    private <T extends FilePath> T concatImpl(DirPathMask base, RelativeFile relFile, ConstructorCommand<T> constructor) {
+    private <T extends FilePath> T concatImpl(DirPathMask base, RelativeFile relFile, PathSupplier<T> constructor) {
         if (relFile == null || constructor == null) throw new IllegalArgumentException("Path may not be empty");
 
         PathNodeList nodeList = base.concatNodes(relFile);
-        return constructor.execute(nodeList.getHead(), nodeList.getTail(), new FileNode(null, relFile.fileNode().getNodeName()), nodeList.length());
+        return constructor.get(nodeList.getHead(), nodeList.getTail(), new FileNode(null, relFile.fileNode().getNodeName()), nodeList.length());
     }
 
     // =======================
     //  Concat: Dir + RelDir
     // =======================
 
-    public AbsoluteDirectoryPath concat(AbsoluteDirectoryPath base, RelativeDirectory relDir, ConstructorCommand<AbsoluteDirectoryPath> constructor) {
+    public AbsoluteDirectoryPath concat(AbsoluteDirectoryPath base, RelativeDirectory relDir, PathSupplier<AbsoluteDirectoryPath> constructor) {
         return concatImpl(toMask(base), relDir, constructor);
     }
 
-    public RelativeDirectoryPath concat(RelativeDirectoryPath base, RelativeDirectory relDir, ConstructorCommand<RelativeDirectoryPath> constructor) {
+    public RelativeDirectoryPath concat(RelativeDirectoryPath base, RelativeDirectory relDir, PathSupplier<RelativeDirectoryPath> constructor) {
         return concatImpl(toMask(base), relDir, constructor);
     }
 
@@ -62,11 +62,11 @@ class DirectoryPathImpl {
      * @param <T> Either an absolute directory or relative directory
      * @return New path, composed of both parameter paths
      */
-    public <T extends DirectoryPath> T concatImpl(DirPathMask base, RelativeDirectory relDir, ConstructorCommand<T> constructor) {
+    public <T extends DirectoryPath> T concatImpl(DirPathMask base, RelativeDirectory relDir, PathSupplier<T> constructor) {
         if (relDir == null) throw new IllegalArgumentException("Path may not be empty");
 
         PathNodeList nodeList = base.concatNodes(relDir);
-        return constructor.execute(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
+        return constructor.get(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
     }
 
     // ===================
