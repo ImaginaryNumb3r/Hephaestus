@@ -8,6 +8,8 @@ import java.util.function.Supplier;
  */
 interface LazySupplier<T> extends Supplier<T> {
 
+    T get();
+
     void instantiate();
 
     boolean isInstantiated();

@@ -23,6 +23,7 @@ public class Lazy<T> implements LazySupplier<T>, Serializable {
         return _value;
     }
 
+    @Override
     public void instantiate(){
         if (_value == null){
             synchronized (this) {
@@ -33,6 +34,7 @@ public class Lazy<T> implements LazySupplier<T>, Serializable {
         }
     }
 
+    @Override
     public boolean isInstantiated(){
         return _value != null;
     }
