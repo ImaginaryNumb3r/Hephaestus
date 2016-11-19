@@ -15,4 +15,10 @@ public interface ListIterable<T> extends Iterable<T> {
     @Override
     ListIterator<T> iterator();
 
+    /**
+     * Returns a ListIterator over elements of type {@code T}.
+     * @return a ListIterator
+     */
+    ListIterator<T> listIterator();
+
 }

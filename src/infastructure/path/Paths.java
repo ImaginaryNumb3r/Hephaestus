@@ -13,7 +13,8 @@ import java.util.LinkedList;
 
 /**
  * @author Patrick
- * @created 04.07.2016
+ * @since  04.07.2016
+ * Utility class for paths and when working with them
  */
 public class Paths {
     private final HashMap<Character, Boolean> _forbiddenCharacter;

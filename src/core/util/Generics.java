@@ -12,10 +12,13 @@ public class Generics<T> {
      * @return null if type of object does not match the generic, otherwise returns the object as type T
      */
     @SuppressWarnings("unchecked")
+    // TODO: Does not totally work yet
     public T cast(Object object){
         T val;
         try{
             val = (T) object;
+
+            Inner<T> tInner = new Inner<>(val);
         } catch (ClassCastException ex){
             val = null;
         }
@@ -31,4 +34,14 @@ public class Generics<T> {
     public boolean instanceOf(Object object){
         return cast(object) != null;
     }
+
+    private class Inner<S extends T> {
+
+        public S test;
+
+        public Inner(S test) {
+            this.test = test;
+        }
+    }
+
 }

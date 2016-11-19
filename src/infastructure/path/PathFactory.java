@@ -1,6 +1,5 @@
 package infastructure.path;
 
-import infastructure.filetype.interfaces.EmptyPath;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.AbsolutePath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
@@ -19,7 +18,8 @@ import java.util.LinkedList;
 
 /**
  * @author Patrick
- * @created 05.07.2016
+ * @since  05.07.2016
+ * Factory class for all kinds of paths
  */
 public class PathFactory {
     private static final HashMap<Character, Boolean> _forbiddenCharacter;
