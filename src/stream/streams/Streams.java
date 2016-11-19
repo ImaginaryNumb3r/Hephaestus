@@ -1,4 +1,4 @@
-package stream;
+package stream.streams;
 
 import java.util.List;
 import java.util.Spliterator;
@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  * @author Patrick
  * @since 19.11.2016
  */
-public class Streams<T> extends AbstractStreams<T> {
+public class Streams<T> extends AbstractStreams<T>{
     public Streams(T[] array) {
         super(array);
     }
@@ -19,11 +19,6 @@ public class Streams<T> extends AbstractStreams<T> {
 
     public Streams(Spliterator<T> spliterator) {
         super(spliterator);
-    }
-
-    @Override
-    protected boolean isParallel() {
-        return false;
     }
 
     public static <T> Stream<T> stream(T[] array){
@@ -41,4 +36,8 @@ public class Streams<T> extends AbstractStreams<T> {
         return new Streams<>(spliterator).stream();
     }
 
+    @Override
+    public boolean isParallel() {
+        return false;
+    }
 }
