@@ -110,7 +110,7 @@ package infastructure.datastructure;
 //        LinkedList<HEntry> parents = new LinkedList<>();
 //        while (!rootReached && cur != null){
 //
-//            // check if current CnCFile is inside the path
+//            // checkNull if current CnCFile is inside the path
 //            rootReached = _root.getDirectory().getAbsolutePath().equals(cur.getAbsolutePath());
 //
 //            if (!rootReached){

@@ -1,6 +1,6 @@
 package core.tuple;
 
-import core.util.interfaces.ListIterable;
+import core.util.interfaces.IterableList;
 
 import java.io.Serializable;
 
@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Patrick
  * @since 17.11.2016
  */
-interface Pattern extends Serializable, ListIterable<Object> {
+interface Pattern extends Serializable, IterableList<Object> {
 }

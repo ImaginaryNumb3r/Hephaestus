@@ -19,5 +19,4 @@ public interface RelativePath extends Path {
     String getRelativePath();
 
     RelativePath copy();
-
 }
