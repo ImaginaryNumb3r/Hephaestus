@@ -4,7 +4,6 @@ import core.exception.FunctionalException;
 import core.exception.ParameterNullException;
 import core.util.contracts.exceptions.ContractException;
 import functional.exception.SupplierEx;
-import jdk.nashorn.internal.objects.annotations.Function;
 
 import java.util.function.BooleanSupplier;
 
@@ -21,11 +20,9 @@ public class Contract implements AutoCloseable {
         _contract = contract;
     }
 
-
-
     /**
      * Performs the contract checkNull
-     * @throws ContractException if contract is valid
+     * @throws ContractException if contract is violated
      */
     @Override
     public void close() throws ContractException {
@@ -33,14 +30,14 @@ public class Contract implements AutoCloseable {
     }
 
 
-    // ==================╝
-    //   Static Methods
+    // ==================╗
+    //   Static Methods  ║
     // ==================╝
 
     /**
      * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
-     * @throws ParameterNullException
+     * @throws ContractException if contract is violated
      */
     public static void checkNull(Object... objects) throws ContractException {
         checkAndThrow(() -> {
@@ -51,7 +48,7 @@ public class Contract implements AutoCloseable {
     /**
      * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
-     * @throws ParameterNullException
+     * @throws ContractException if contract is violated
      */
     public static void checkNull(Iterable<Object> objects) throws ContractException {
         checkAndThrow(() -> {
@@ -59,6 +56,11 @@ public class Contract implements AutoCloseable {
         }, objects);
     }
 
+    /**
+     * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
+     * @param objects arguments containing objects to be tested
+     * @throws ContractException if contract is violated
+     */
     public static <T> void checkAndThrow(SupplierEx<T> supplier, Object... objects) throws ContractException {
         try {
             if (objects == null) supplier.tryGet();
@@ -77,7 +79,12 @@ public class Contract implements AutoCloseable {
         }
     }
 
-    public static void checkAndThrow(String message, Object... objects) throws RuntimeException {
+    /**
+     * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
+     * @param objects arguments containing objects to be tested
+     * @throws ContractException if contract is violated
+     */
+    public static void checkAndThrow(String message, Object... objects) throws ContractException {
         checkAndThrow(() -> {throw new FunctionalException(message);}, objects);
     }
 }

@@ -14,7 +14,8 @@ public class ResultContractTest {
 
     @Test
     public void testContract() throws Exception {
-        final Object mayNotBeNull = null;
+        Object mayNotBeNull = null;
+
 
         BooleanSupplier booleanSupplier = () -> mayNotBeNull == null;
 
