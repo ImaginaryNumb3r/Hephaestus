@@ -94,7 +94,7 @@ public interface EmptyPath extends Path { // extends AbsoluteDirectory, Absolute
     }
 
     @Override
-    String toString();
+    String toString(); // Cannot make default directly...
 
     @Override
     default EmptyPath copy(){

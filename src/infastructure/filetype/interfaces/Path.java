@@ -7,9 +7,14 @@ import infastructure.path.exceptions.PathsNotMatchingException;
 
 /**
  * @author Patrick
- * @created 04.07.2016
+ * @since 04.07.2016
  */
 public interface Path{
+
+    // TODO:
+        // - boolean StartsWith()
+        // - boolean EndsWith()
+        // - Uri toUri()
 
     int length();
 
@@ -20,7 +25,7 @@ public interface Path{
     /**
      * Compares both paths
      * @param path the path that is to be compared
-     * @return
+     * @return true if both pats are functionally the same
      */
     boolean equals(Path path);
 
