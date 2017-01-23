@@ -1,4 +1,4 @@
-package core.util;
+package core.datastructure.value;
 
 import java.awt.*;
 

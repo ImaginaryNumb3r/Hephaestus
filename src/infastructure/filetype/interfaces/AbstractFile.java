@@ -10,8 +10,6 @@ import infastructure.path.exceptions.PathsNotMatchingException;
  */
 public interface AbstractFile extends AbsoluteFile {
 
-
-
     //<editor-fold desc="Absolute File">
     AbsoluteFile concat (RelativeDirectory rel);
 

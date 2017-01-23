@@ -54,7 +54,7 @@ public interface Path{
     Path copy();
 
     /**
-     * Performs a check whether this is an empty path
+     * Performs a checkNull whether this is an empty path
      * @return true if the path can be used safely in arithmetic concatenation and removal of paths
      */
     default boolean isEmpty(){

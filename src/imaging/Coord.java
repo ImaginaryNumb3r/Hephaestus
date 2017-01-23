@@ -3,10 +3,10 @@ package imaging;
 import java.awt.*;
 
 /**
- * @author Patrick
+ * Mutable Coordination class for 2D surfaces
+ *
+ * @author Patrick Plieschnegger
  * @since 10.11.2016
- * Mutable Coordinate
- * TODO: Replace with Tuple
  */
 public class Coord {
     private int _x;
@@ -72,6 +72,7 @@ public class Coord {
         _y += add._y;
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     public void invert(){
         int temp = _x;
         _x = _y;

@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/
+Hephaestus.iml
+META-INF/
+Tests/Files/Neuer Ordner - Kopie (2)/
+Tests/Files/Neuer Ordner - Kopie/
+Tests/Files/Neuer Ordner/
+Tests/infastructure/datastructure/basic/
+Tests/infastructure/datastructure/tree/TestDirectory/
+Tests/infastructure/filetype/util/
+out/
+src/infastructure/filetype/util/

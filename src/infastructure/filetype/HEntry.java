@@ -161,7 +161,7 @@ public abstract class HEntry implements AbsolutePath{
 
 
     /**
-     * Performs a check whether the compared files represent the same data on the file system
+     * Performs a checkNull whether the compared files represent the same data on the file system
      * @param file the file to be compared
      * @return true if paths are equal
      */
@@ -171,7 +171,7 @@ public abstract class HEntry implements AbsolutePath{
 
 
     /**
-     * Performs a check whether the compared files represent the same data on the file system
+     * Performs a checkNull whether the compared files represent the same data on the file system
      * @param file the file to be compared
      * @return true if paths are equal
      */

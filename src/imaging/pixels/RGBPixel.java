@@ -3,6 +3,8 @@ package imaging.pixels;
 import core.tuple.Triplet;
 
 /**
+ * Individual pixel for all
+ *
  * @author Patrick
  * @since 12.11.2016
  */
@@ -17,7 +19,7 @@ public class RGBPixel {
     }
 
     public RGBPixel(int[] pixel){
-        if (pixel.length > 3) throw new PixelConstructionException();
+        if (pixel.length != 3) throw new PixelConstructionException();
         _red = pixel[0];
         _green = pixel[0];
         _blue = pixel[0];

@@ -70,7 +70,7 @@ public class PathTest {
         }
 
         boolean deleted = false;
-        // Now check exists() again, after file has been deleted
+        // Now checkNull exists() again, after file has been deleted
         if (exists){
             deleted  = !path.exists();
         }

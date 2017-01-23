@@ -19,7 +19,7 @@ public class Strings {
      * @param remove The pattern which is deleted from the base
      * @return New String with removed parts
      */
-    public String remove(final String base, final String remove){
+    public String remove(String base, String remove){
         StringBuilder builder = new StringBuilder(base);
         boolean removed = false;
 

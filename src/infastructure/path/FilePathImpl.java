@@ -94,29 +94,20 @@ class FilePathImpl  {
 
     private FilePathMask toMask(RelativeFilePath relFile){
         return new FilePathMask() {
-            @Override
             public PathNodeList concatNodes(RelativeDirectory relDir) {
                 return relFile.concatNodes(relDir);
             }
-
-            @Override
             public FileNode fileNode() {
                 return relFile.fileNode();
             }
-
-            @Override
-            public DirectoryNode getNewTail(Iterator<DirectoryNode> iterator, Iterator<DirectoryNode>  iterator1) throws PathsNotMatchingException {
-                return relFile.getNewTail(iterator, iterator1);
+            public DirectoryNode tailNode() {
+                return relFile.tailNode();
             }
-
-            @Override
             public RelativeFile copy() {
                 return relFile.copy();
             }
-
-            @Override
-            public DirectoryNode tailNode() {
-                return relFile.tailNode();
+            public DirectoryNode getNewTail(Iterator<DirectoryNode> iterator, Iterator<DirectoryNode>  iterator1) throws PathsNotMatchingException {
+                return relFile.getNewTail(iterator, iterator1);
             }
 
         };
@@ -124,29 +115,20 @@ class FilePathImpl  {
 
     private FilePathMask toMask(AbsoluteFilePath relFile){
         return new FilePathMask() {
-            @Override
             public PathNodeList concatNodes(RelativeDirectory relDir) {
                 return relFile.concatNodes(relDir);
             }
-
-            @Override
-            public DirectoryNode tailNode() {
-                return relFile.tailNode();
-            }
-
-            @Override
             public FileNode fileNode() {
                 return relFile.fileNode();
             }
-
-            @Override
-            public DirectoryNode getNewTail(Iterator<DirectoryNode> iterator, Iterator<DirectoryNode> iterator1) throws PathsNotMatchingException {
-                return relFile.getNewTail(iterator, iterator1);
+            public DirectoryNode tailNode() {
+                return relFile.tailNode();
             }
-
-            @Override
             public AbsoluteFile copy() {
                 return relFile.copy();
+            }
+            public DirectoryNode getNewTail(Iterator<DirectoryNode> iterator, Iterator<DirectoryNode> iterator1) throws PathsNotMatchingException {
+                return relFile.getNewTail(iterator, iterator1);
             }
         };
     }

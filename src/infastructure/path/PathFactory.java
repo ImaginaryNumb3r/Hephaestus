@@ -321,7 +321,7 @@ public class PathFactory {
 
             isValid = _forbiddenCharacter.get(ch) == null;
 
-            // check if absolute
+            // checkNull if absolute
             if (isAbsolute && !isValid){
                 //  Double Colon must be at the end of the string
                 isValid = ch == ':' && (i + 1 == bytes.length);

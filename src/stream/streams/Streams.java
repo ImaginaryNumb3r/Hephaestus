@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  * @author Patrick
  * @since 19.11.2016
  */
-public class Streams<T> extends AbstractStreams<T>{
+public class Streams<T> extends AbstractStreams<T> {
     public Streams(T[] array) {
         super(array);
     }
