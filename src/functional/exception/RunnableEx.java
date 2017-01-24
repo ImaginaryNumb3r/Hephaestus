@@ -4,7 +4,6 @@ import core.exception.FunctionalException;
 
 /**
  * @author Patrick
- * @description
  * @since 23.01.2017
  */
 @FunctionalInterface

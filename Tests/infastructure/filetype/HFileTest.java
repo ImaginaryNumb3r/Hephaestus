@@ -4,7 +4,7 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteFile;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.path.PathFactory;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.io.File;
 

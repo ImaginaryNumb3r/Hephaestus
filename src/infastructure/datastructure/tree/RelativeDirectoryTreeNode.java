@@ -39,6 +39,16 @@ public class RelativeDirectoryTreeNode extends AbstractTreeNode {
     }
 
     @Override
+    public RelativeDirectory getParent() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public AbsoluteDirectory getParentPath() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public String getName() {
         return _name.toString();
     }

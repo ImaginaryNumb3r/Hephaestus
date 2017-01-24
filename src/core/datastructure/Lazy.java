@@ -47,11 +47,11 @@ public class Lazy<T> implements LazySupplier<T>, Serializable {
         }
     }
 
-    @Override
     /**
      * Checks if the value behind the Lazy has already been loaded
      * @return true if the value behind the lazy has already been loaded
      */
+    @Override
     public boolean isInstantiated(){
         return _value != null;
     }

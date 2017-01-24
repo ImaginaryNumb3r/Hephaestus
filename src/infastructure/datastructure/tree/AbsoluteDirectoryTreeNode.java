@@ -1,6 +1,7 @@
 package infastructure.datastructure.tree;
 
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
+import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 
 /**
  * @author Patrick
@@ -20,7 +21,7 @@ public class AbsoluteDirectoryTreeNode extends AbstractTreeNode {
      */
     @Override
     final AbstractTreeNode getParentNode() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -29,7 +30,17 @@ public class AbsoluteDirectoryTreeNode extends AbstractTreeNode {
      */
     @Override
     final public boolean hasParent() {
-        return false;
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public RelativeDirectory getParent() {
+        return null;
+    }
+
+    @Override
+    public AbsoluteDirectory getParentPath() {
+        return null;
     }
 
 
