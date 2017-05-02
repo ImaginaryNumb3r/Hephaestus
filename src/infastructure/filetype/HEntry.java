@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * @author Patrick
  * @created 28.05.2016
- * masks java default file for better type safety and additional features
+ * Masks java default file for better type safety and additional features
  */
 public abstract class HEntry implements AbsolutePath{
     protected File _file;

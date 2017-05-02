@@ -1,6 +1,7 @@
 package core.util;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author Patrick
@@ -8,17 +9,20 @@ import java.util.Iterator;
  */
 public class StringIterator implements Iterator<Character> { // TODO: Make ListIterator
     private final CharSequence _sequence;
-    private int pos = 0;
+    private int _pos = 0;
 
     public StringIterator(CharSequence sequence) {
         _sequence = sequence;
     }
 
+    @Override
     public boolean hasNext() {
-        return pos < _sequence.length();
+        return _pos < _sequence.length();
     }
 
+    @Override
     public Character next() {
-        return _sequence.charAt(pos++);
+        if (!hasNext()) throw new NoSuchElementException();
+        return _sequence.charAt(_pos++);
     }
 }

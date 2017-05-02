@@ -140,7 +140,7 @@ package infastructure.datastructure;
 //    public <T extends AbsolutePath> T contains(Iterator<T> iter, HEntry file) {
 //        boolean contains = false;
 //        T cur = null;
-//        while (iter.hasNext() && !contains){
+//        while (iter.hasNextChild() && !contains){
 //            cur = iter.next();
 //
 //            if (file.equals(cur)){
@@ -173,7 +173,7 @@ package infastructure.datastructure;
 //        boolean found = false;
 //        DirectoryNode cur = null;
 //
-//        for (Iterator<DirectoryNode> iter = _children.iterator(); iter.hasNext() && !found; ){
+//        for (Iterator<DirectoryNode> iter = _children.iterator(); iter.hasNextChild() && !found; ){
 //            cur = iter.next();
 //
 //            if (cur.equals(dir)){
@@ -189,11 +189,11 @@ package infastructure.datastructure;
 //        String toString = "[ Root : " + _file.toString() + " , ";
 //        toString += "Size: " + _children.size() + " , ";
 //
-//        for (NodeIterator<DirectoryNode> iter = nodeIterator(); iter.hasNext();) {
+//        for (NodeIterator<DirectoryNode> iter = nodeIterator(); iter.hasNextChild();) {
 //            // addDirectory each item
 //            toString += iter.next().toString();
 //
-//            if (iter.hasNext()){
+//            if (iter.hasNextChild()){
 //                toString += ", ";
 //            }
 //        }

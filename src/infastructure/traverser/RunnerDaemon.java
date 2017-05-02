@@ -14,7 +14,7 @@ package infastructure.traverser;
 // * @created 29.05.2016
 // */
 //public class RunnerDaemon implements Runnable {
-//    private HDirectory _root;
+//    private HDirectory ROOT;
 //    private Thread _thread;
 //    private DirectoryTree _tree;
 //    private HashMap<String, Boolean> _ignore;
@@ -26,7 +26,7 @@ package infastructure.traverser;
 //        if (root == null){
 //            throw new IllegalArgumentException();
 //        }
-//        _root = root;
+//        ROOT = root;
 //        _thread = null;
 //        _tree = tree;
 //
@@ -39,7 +39,7 @@ package infastructure.traverser;
 //    public void run() {
 //        try {
 //            while (true){
-//                traverse(_root);
+//                traverse(ROOT);
 //                Thread.sleep(100);
 //            }
 //        } catch (InterruptedException e) {

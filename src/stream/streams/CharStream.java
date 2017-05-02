@@ -26,6 +26,11 @@ public class CharStream extends Streams<Character>{
         super(spliterator);
     }
 
+    /**
+     * Requires low level implementation
+     * @param sequence
+     * @return
+     */
     protected static Spliterator<Character> getSpliterator(CharSequence sequence){
         Character[] array = new Character[sequence.length()];
         for (int i = 0; i != sequence.length(); ++i){

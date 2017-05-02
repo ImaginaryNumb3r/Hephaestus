@@ -19,7 +19,7 @@ import java.io.FileReader;
 /**
  * @author Patrick
  * @created 28.05.2016
- * Represents a file on the hard driver
+ * Represents a file on the hard drive
  */
 public class HFile extends HEntry implements AbstractFile{
     private AbsoluteFile _absoluteFilePath;

@@ -3,12 +3,10 @@ package core.util.contracts.exceptions;
 /**
  * Creator: Patrick
  * Created: 11.12.2016
- * Purpose: Is thrown when a contract is validated
+ * Thrown when a contract is validated
+ * @apiNote Always check for inner exceptions
  */
 public class ContractException extends RuntimeException {
-
-    public ContractException() {
-    }
 
     public ContractException(String message) {
         super(message);

@@ -80,12 +80,12 @@ package infastructure.traverser;
 //        HashMap<String, Boolean> _iteratedNodes = new HashMap<>(_curIter.size());
 //
 //        // addDirectory iterated nodes to HashMap
-//        while (_curIter.hasNext()){
+//        while (_curIter.hasNextChild()){
 //            DirectoryNode cur = _curIter.next();
 //            _iteratedNodes.put(cur.getAbsolutePath(), true);
 //        }
 //
-//        for (HDirectory dir : _root.getDirectories()){
+//        for (HDirectory dir : ROOT.getDirectories()){
 //            // addDirectory directory if not in hashmap
 //            if (!_iteratedNodes.get(dir.getAbsolutePath())){
 //                // _curIter.addDirectory(dir);

@@ -6,7 +6,7 @@ import infastructure.path.exceptions.PathsNotMatchingException;
 
 /**
  * @author Patrick
- * @created 27.07.2016
+ * @since 27.07.2016
  */
 public interface AbstractFile extends AbsoluteFile {
 

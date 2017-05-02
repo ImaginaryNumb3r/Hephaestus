@@ -15,4 +15,21 @@ public class EnumException extends EnumConstantNotPresentException {
     public EnumException(Enum enumConstant) {
         super(enumConstant.getClass(), enumConstant.toString());
     }
+
+    /**
+     * Constructs an <tt>EnumConstantNotPresentException</tt> for the
+     * specified constant.
+     *
+     * @param enumConstant the instance of the missing enum constant
+     */
+    public EnumException(Enum enumConstant, Class<? extends Enum> enumClass) {
+        super(enumClass, enumToString(enumConstant));
+    }
+
+    private static String enumToString(Enum enumeration){
+        return enumeration == null
+                ? "null"
+                : enumeration.toString();
+    }
+
 }

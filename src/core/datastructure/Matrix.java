@@ -66,7 +66,6 @@ public class Matrix<T> implements Iterable<T>{
         set(tuple.getA(), tuple.getB(), value);
     }
 
-
     public int getWidth(){
         return _matrix.length;
     }

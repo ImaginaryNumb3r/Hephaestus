@@ -1,3 +1,10 @@
+import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
+import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
+import graph.search.GraphIterator;
+import graph.search.GraphSearchStrategy;
+
+import java.util.Iterator;
+
 public class Main {
 /*
     public static void main(String[] args) {
@@ -11,9 +18,34 @@ public class Main {
         assert path.equals(string);
     }*/
 
-        public static void main(String[] args) {
+
+
+    private static <I, V, T extends MultiIdTreeNodeReader<I, V, T>, U extends Iterable<U>> void test(){
+        MultiIdTreeNodeImpl<I, V> test2 = new MultiIdTreeNodeImpl<>(null);
+        MultiIdTreeNodeReader<I, V, T> test = (MultiIdTreeNodeReader<I, V, T>) test2;
+        Iterable<T> iterable = test;
+
+        Iterator<MultiIdTreeNodeReader<I, V, T>> iter = null;
+
+        Iterable<T> source = null;
+        // iter = GraphIterator.from((T) null, GraphSearchStrategy.BREADTH_FIRST);
+    }
+
+    // TODO: Delete Me
+    public static void main(String[] args) {
+        test();
+
+        MultiIdTreeNodeReader<String, String, ?> readerNode = new MultiIdTreeNodeImpl<>(null);
+        Iterable<?> iterable = readerNode;
+
+        MultiIdTreeNodeImpl<String, String> node = new MultiIdTreeNodeImpl<>(null);
+        Iterator<MultiIdTreeNodeImpl<String, String>> iterator = node.iterator();
+        MultiIdTreeNodeImpl<String, String> next = iterator.next();
+    }
+
+        /*public static void main(String[] args) {
                 System.out.println("Ohai, World!");
-        }
+        }*/
 
 //    public static void main(String[] args) {
 //
@@ -33,15 +65,15 @@ public class Main {
 //
 //            HDirectory rootDir = new HDirectory(data);
 //            List<HEntry> ignoreList = new LinkedList<>();
-//            ignoreList.add(new HDirectory("D:\\KW SDK\\Mods\\One Vision\\Data\\.svn"));
+//            ignoreList.enqueue(new HDirectory("D:\\KW SDK\\Mods\\One Vision\\Data\\.svn"));
 //
 //            DirectoryNodeTraverser trav = new DirectoryNodeTraverser(new DirectoryNode(rootDir));
 //
 //            // Old Test
 //
-///*            boolean add = fileDirectoryTree.add(file.parentDirectory(), file);
-//            boolean add2 = fileDirectoryTree.add(file2.parentDirectory(), file2);
-//            boolean add3 = fileDirectoryTree.add(file3.parentDirectory(), file3);
+///*            boolean addToRoot = fileDirectoryTree.addToRoot(file.parentDirectory(), file);
+//            boolean add2 = fileDirectoryTree.enqueue(file2.parentDirectory(), file2);
+//            boolean add3 = fileDirectoryTree.enqueue(file3.parentDirectory(), file3);
 //
 //            boolean exists = fileDirectoryTree.exists(file);*/
 ///*

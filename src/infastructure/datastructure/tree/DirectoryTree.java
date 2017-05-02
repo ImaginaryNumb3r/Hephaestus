@@ -20,7 +20,7 @@ public class DirectoryTree {
     public boolean add(AbsoluteDirectory directory) {
         LinkedList<DirectoryNode> nodes = getNodes(directory);
 
-        // Yes, can add.
+        // Yes, can addToRoot.
         throw new NotImplementedException();
     }
 

@@ -12,10 +12,10 @@ package infastructure.datastructure;
 // * @created 28.05.2016
 // */
 //public class DirectoryTree{
-//    private DirectoryNode _root;
+//    private DirectoryNode ROOT;
 //
 //    DirectoryTree(HDirectory root) {
-//        _root = new DirectoryNode(root);
+//        ROOT = new DirectoryNode(root);
 //    }
 //    public HEntry hasFile(HEntry file){
 //        throw new UnsupportedOperationException();
@@ -26,20 +26,20 @@ package infastructure.datastructure;
 //     * @return null if there is no element in the tree
 //     */
 //    public DirectoryTraverser<HDirectory> directoryTraverser(){
-//        if (_root == null){
+//        if (ROOT == null){
 //            return null;
 //        }
 //
-//        return new DirTraverser(_root);
+//        return new DirTraverser(ROOT);
 //    }
 //
-//    public boolean add(HDirectory path, HFile file){
+//    public boolean addToRoot(HDirectory path, HFile file){
 //        List<HFile> files = new ArrayList<>();
-//        files.add(file);
+//        files.addToRoot(file);
 //
-//        return add(path, files);
+//        return addToRoot(path, files);
 //    }
-//    public boolean add(HDirectory path, List<HFile> files){
+//    public boolean addToRoot(HDirectory path, List<HFile> files){
 //        return insert(path, files);
 //    }
 //
@@ -52,7 +52,7 @@ package infastructure.datastructure;
 //    public boolean insert(HDirectory path, List<HFile> files){
 //        List<HDirectory> directories = breakDownPath(path);
 //
-//        return insert(_root, directories, files);
+//        return insert(ROOT, directories, files);
 //    }
 //
 //    /**
@@ -77,7 +77,7 @@ package infastructure.datastructure;
 //            insert(nextNode, path, files);
 //
 //        } else {
-//            files.stream().forEach(nextNode::add);
+//            files.stream().forEach(nextNode::addToRoot);
 //        }
 //
 //        //noinspection ConstantConditions - for now
@@ -91,7 +91,7 @@ package infastructure.datastructure;
 //        for (HEntry file : breakDownFile(path)){
 //            HDirectory dir;
 //            if ((dir = file.toDirectory()) != null){
-//                directoryPath.add(dir);
+//                directoryPath.addToRoot(dir);
 //            }
 //        }
 //
@@ -111,7 +111,7 @@ package infastructure.datastructure;
 //        while (!rootReached && cur != null){
 //
 //            // checkNull if current CnCFile is inside the path
-//            rootReached = _root.getDirectory().getAbsolutePath().equals(cur.getAbsolutePath());
+//            rootReached = ROOT.getDirectory().getAbsolutePath().equals(cur.getAbsolutePath());
 //
 //            if (!rootReached){
 //                // addDirectory to stack
@@ -134,7 +134,7 @@ package infastructure.datastructure;
 //        if (path != null){
 //            exists = true;
 //
-//            DirectoryNode pos = _root;
+//            DirectoryNode pos = ROOT;
 //            while (exists && !path.isEmpty()){
 //                HEntry file = path.remove(0);
 //
@@ -194,7 +194,7 @@ package infastructure.datastructure;
 //            _directoryIterator = _relativeRoot.nodeIterator(); // lazy initialization
 //            _index = -1;
 //
-//            _parents.add(_relativeRoot);
+//            _parents.addToRoot(_relativeRoot);
 //        }
 //
 //
@@ -238,8 +238,8 @@ package infastructure.datastructure;
 //        // =====================
 //
 //        @Override
-//        public boolean hasNext() {
-//            return _directoryIterator.hasNext();
+//        public boolean hasNextChild() {
+//            return _directoryIterator.hasNextChild();
 //        }
 //
 //        @Override
@@ -249,7 +249,7 @@ package infastructure.datastructure;
 //
 //        @Override
 //        public void enter() {
-//            _parents.add(_relativeRoot);
+//            _parents.addToRoot(_relativeRoot);
 //            _relativeRoot = _current;
 //            // reset current because it was only valid in the directory above
 //            _current = null;
@@ -281,12 +281,12 @@ package infastructure.datastructure;
 //
 //        @Override
 //        public boolean addFile(HFile file) {
-//            return _current.add(file);
+//            return _current.addToRoot(file);
 //        }
 //
 //        @Override
 //        public boolean addDirectory(HDirectory directory) {
-//            return _current.add(new DirectoryNode(directory));
+//            return _current.addToRoot(new DirectoryNode(directory));
 //        }
 //    }
 //}
