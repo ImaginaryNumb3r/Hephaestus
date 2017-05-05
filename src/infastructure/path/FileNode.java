@@ -1,5 +1,7 @@
 package infastructure.path;
 
+import java.util.Iterator;
+
 /**
  * @author Patrick
  * @created 04.07.2016

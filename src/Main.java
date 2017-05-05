@@ -1,7 +1,5 @@
 import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
-import graph.search.GraphIterator;
-import graph.search.GraphSearchStrategy;
 
 import java.util.Iterator;
 

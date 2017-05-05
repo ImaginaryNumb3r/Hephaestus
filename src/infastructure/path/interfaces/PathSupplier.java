@@ -13,6 +13,6 @@ import infastructure.path.FileNode;
 @FunctionalInterface
 public interface PathSupplier<T extends Path> extends QuintSupplier<T, DirectoryNode, DirectoryNode, FileNode, Integer> {
 
-    T get(DirectoryNode head, DirectoryNode tail, @Nullable  FileNode file, Integer length);
+    T get(DirectoryNode head, DirectoryNode tail, @Nullable FileNode file, Integer length);
 
 }

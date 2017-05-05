@@ -2,18 +2,14 @@ package datastructure.tree.impl;
 
 import datastructure.traverser.IdTraverser;
 import datastructure.tree.impl.exception.NodeAlreadyExistsException;
-import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
 import datastructure.tree.impl.node.MultiIdTreeNodeReaderImpl;
-import datastructure.tree.node.subtype.IdTreeNodeReader;
-import datastructure.tree.node.subtype.MultiTreeNode;
-import datastructure.tree.node.subtype.MultiTreeNodeReader;
-import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
-import graph.search.GraphSearchStrategy;
+import graph.search.BreadthFirstSearch;
+import graph.search.DepthFirstSearch;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-/**
+/**^´
  * @author Patrick
  * @since 30.04.2017
  */
@@ -100,13 +96,22 @@ class MultiIdTreeImplTest {
         tree.add(Arrays.asList(ROOT, "sub2"), "sub sub 1" , 5);
         tree.add(Arrays.asList(ROOT, "sub2"), "sub sub 2" , 6);
 
-        System.out.println("Breadth First:");
-        Iterator<MultiIdTreeNodeReaderImpl<String, Integer>> iterator = tree.iterator(GraphSearchStrategy.BREADTH_FIRST);
-        iterator.forEachRemaining(node -> System.out.println(node.getIdentifier() + " | " + node.getValue()));
-        System.out.println();
+        // Compare actual values with expected values
+        List<String> bfs = Arrays.asList(ROOT, "sub", "sub2", "sub sub 1", "sub sub 2", "sub sub 1", "sub sub 2");
+        Iterator<String> bfsIter = bfs.iterator();
 
-        System.out.println("Depth First:");
-        iterator = tree.iterator(GraphSearchStrategy.DEPTH_FIRST);
-        iterator.forEachRemaining(node -> System.out.println(node.getIdentifier() + " | " + node.getValue()));
+        Iterator<MultiIdTreeNodeReaderImpl<String, Integer>> iterator = tree.iterator(new BreadthFirstSearch<>());
+        iterator.forEachRemaining(node -> {
+            assert bfsIter.next().equals(node.getIdentifier());
+        } );
+
+        // Compare actual values with expected values
+        List<String> dfs = Arrays.asList(ROOT, "sub2", "sub sub 2", "sub sub 1", "sub", "sub sub 2", "sub sub 1");
+        Iterator<String> dfsIter = dfs.iterator();
+
+        iterator = tree.iterator(new DepthFirstSearch<>());
+        iterator.forEachRemaining(node -> {
+            assert dfsIter.next().equals(node.getIdentifier());
+        } );
     }
 }

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Iterator;
 
 /**
- * Iterator for 2D data objects, traversing through all available pixels line by line
+ * InnerIterator for 2D data objects, traversing through all available pixels line by line
  *
  * @author Patrick
  * @since 12.11.2016

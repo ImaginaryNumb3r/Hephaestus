@@ -1,7 +1,8 @@
-package datastructure.tree;
+package datastructure.tree.interfaces.basetypes;
 
 import com.sun.istack.internal.NotNull;
 import datastructure.traverser.IdTraverser;
+import datastructure.tree.interfaces.Tree;
 import datastructure.tree.node.subtype.IdTreeNodeReader;
 
 import java.util.Deque;

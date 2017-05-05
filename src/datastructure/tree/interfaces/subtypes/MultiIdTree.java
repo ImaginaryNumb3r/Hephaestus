@@ -1,8 +1,8 @@
-package datastructure.tree.subtypes;
+package datastructure.tree.interfaces.subtypes;
 
 import datastructure.traverser.IdTraversable;
-import datastructure.tree.IdTree;
-import datastructure.tree.MultiTree;
+import datastructure.tree.interfaces.basetypes.IdTree;
+import datastructure.tree.interfaces.basetypes.MultiTree;
 
 /**
  * @author Patrick

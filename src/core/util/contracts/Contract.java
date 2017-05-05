@@ -2,7 +2,7 @@ package core.util.contracts;
 
 import core.exception.FunctionalException;
 import core.exception.ParameterNullException;
-import core.util.Iterators;
+import core.util.collections.Iterators;
 import core.util.contracts.exceptions.ContractException;
 import functional.exception.SupplierEx;
 

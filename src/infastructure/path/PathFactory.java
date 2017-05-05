@@ -67,6 +67,12 @@ public class PathFactory {
     }
 
     // TODO: Use isAbsolute to lastModified whether this really is an absolute path
+
+    /**
+     * Creates the path from a given string
+     * @param path given path in string form
+     * @return null if the given path is invalid. Otherwise, return the path
+     */
     public static AbsoluteDirectory makeAbsoluteDirectory (String path){
         PathCommand<AbsoluteDirectory, PathNode, PathNode> command = (head, tail, length) -> {
 
@@ -79,7 +85,8 @@ public class PathFactory {
         };
 
         return makePath(path, command, PathType.ABSOLUTE_DIRECTORY);
-    }
+    } /*
+
     // TODO: Use isAbsolute to lastModified whether this really is an absolute path
     public static AbsoluteDirectory makeAbsoluteDirectory2 (String path){
         PathCommand<AbsoluteDirectory, PathNode, PathNode> command = (head, tail, length) -> {
@@ -92,7 +99,7 @@ public class PathFactory {
         };
 
         return makePath(path, command, PathType.ABSOLUTE_DIRECTORY);
-    }
+    } */
 
     // TODO: Use isAbsolute to lastModified whether this really is an absolute path
     public static AbsoluteFile makeAbsoluteFile (String path){

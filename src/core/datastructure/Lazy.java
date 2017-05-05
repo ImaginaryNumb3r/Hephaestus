@@ -9,6 +9,10 @@ import java.util.function.Supplier;
 /**
  * @author Patrick
  * @since 15.11.2016
+ *
+ * Creates a lazy instance of a value, delivered by a supplier.
+ * An assigned value to this class is permanent and will never change.
+ * Accessing this class is thread safe. However, the overhead of synchronization is gone once the value is instantiated.
  */
 public class Lazy<T> implements LazySupplier<T>, Serializable {
     private Supplier<T> _supplier;

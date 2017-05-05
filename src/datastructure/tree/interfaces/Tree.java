@@ -1,7 +1,6 @@
-package datastructure.tree;
+package datastructure.tree.interfaces;
 
 import datastructure.traverser.Traversable;
-import datastructure.traverser.Traverser;
 
 import java.io.Serializable;
 
@@ -14,4 +13,5 @@ import java.io.Serializable;
  */
 @SuppressWarnings("WeakerAccess")
 public interface Tree<T> extends Traversable<T>, Serializable {
+
 }

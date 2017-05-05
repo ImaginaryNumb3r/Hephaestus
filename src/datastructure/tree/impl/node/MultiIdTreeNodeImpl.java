@@ -15,8 +15,8 @@ import java.util.stream.Stream;
  * @param <V> Value of the current node
  */
 @SuppressWarnings("WeakerAccess")
-// TODO: Make it extend MultiIdTreeNodeReaderImpl
-public class MultiIdTreeNodeImpl<I, V> implements MultiIdTreeNode<I, V, MultiIdTreeNodeImpl<I, V>> {
+public class MultiIdTreeNodeImpl<I, V>  /* extends MultiIdTreeNodeReaderImpl<I, V> */
+        implements MultiIdTreeNode<I, V, MultiIdTreeNodeImpl<I, V>> {
     //<editor-fold desc="Attributes">
     protected MultiIdTreeNodeImpl<I, V>_parent;
     protected List<MultiIdTreeNodeImpl<I, V>> _children;

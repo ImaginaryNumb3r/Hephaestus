@@ -29,11 +29,31 @@ public class DirectoryNode extends PathNode implements Iterable<DirectoryNode>{
         return new DirectoryIterator();
     }
 
+    /**
+     * Returns an iterator providing the names of the individual nodes
+     * @return an iterator providing the names of the individual nodes
+     */
+    public Iterator<String> stringIterator(){
+        Iterator<? extends PathNode> iterator = iterator();
+        return new Iterator<String>() {
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
 
+            @Override
+            public String next() {
+                return iterator.next()._nodeName;
+            }
+        };
+    }
     // =================
-    //     Iterator
+    //     InnerIterator
     // =================
 
+    /**
+     * An iterator that returns the individual nodes
+     */
     private class DirectoryIterator implements Iterator<DirectoryNode>{
         private DirectoryNode _cur; // lazy
 
@@ -47,7 +67,6 @@ public class DirectoryNode extends PathNode implements Iterable<DirectoryNode>{
                 // Empty paths do not count as elements
                 hasNext = !DirectoryNode.this._nodeName.isEmpty();
             }
-
 
             return hasNext;
         }

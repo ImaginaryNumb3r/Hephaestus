@@ -223,7 +223,6 @@ public abstract class AbstractPath implements Path {
         return curBase;
     }
 
-
     // Path
 
     @Override

@@ -5,6 +5,8 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.path.DirectoryNode;
 import infastructure.path.exceptions.PathsNotMatchingException;
 
+import java.util.Iterator;
+
 /**
  * @author Patrick
  * @since 04.07.2016
@@ -21,6 +23,14 @@ public interface Path{
     Path concat (RelativeDirectory rel);
 
     Path remove (RelativeDirectory removal) throws PathsNotMatchingException;
+
+    /**
+     * Returns an iterator that provides the name of the individual nodes
+     * @return an iterator that provides the name of the individual nodes
+     */
+    default Iterator<String> stringIterator(){
+        return headNode().stringIterator();
+    }
 
     /**
      * Compares both paths

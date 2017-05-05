@@ -1,4 +1,6 @@
-package datastructure.tree;
+package datastructure.tree.interfaces.basetypes;
+
+import datastructure.tree.interfaces.Tree;
 
 /**
  * @author Patrick
@@ -7,5 +9,5 @@ package datastructure.tree;
  * An N-Tree where each node nas a arbitrary number of child nodes.
  * This is the opposite to LeafTree
  */
-public interface MultiTree<T> extends Tree<T>  {
+public interface MultiTree<T> extends Tree<T> {
 }

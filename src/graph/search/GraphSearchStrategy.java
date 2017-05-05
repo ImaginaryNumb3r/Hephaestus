@@ -1,10 +1,25 @@
 package graph.search;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * @author Patrick
- * @description
  * @since 01.05.2017
  */
-public enum GraphSearchStrategy {
-    BREADTH_FIRST, DEPTH_FIRST;
+public interface GraphSearchStrategy<T> {
+
+    /**
+     * Enqueues the next node into the given collection.
+     * @param nodeCollection The collection of nodes
+     * @param node that is to be added to the LinkedList.
+     */
+    void enqueue(Deque<T> nodeCollection, T node);
+
+    /**
+     * Dequeues the next node from the given list
+     * @param nodeCollection The list that serves as the provider for the next node
+     * @return Next node from the list
+     */
+     T dequeue(Deque<T> nodeCollection);
 }

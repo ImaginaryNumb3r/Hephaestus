@@ -17,7 +17,7 @@ public abstract class NodeIterator<T extends HDirectory> implements ListIterator
     protected Node _curNode;
     /** list that is currently being iterated */
     protected List<T> _nodes;
-    /** Source list that is fallen back in case the Iterator is set to reset */
+    /** Source list that is fallen back in case the InnerIterator is set to reset */
     protected final List<T> _init;
 
     private boolean _isSplit;

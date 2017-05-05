@@ -7,11 +7,30 @@ import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
 import infastructure.path.exceptions.PathsNotMatchingException;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * @author Patrick
  * @created 07.07.2016
  */
 public class AbsoluteDirectoryPathTest {
+
+    @Test
+    public void testIterator() throws Exception {
+        final String absDir = "D:\\Hephaestus\\Tests\\Files";
+        AbsoluteDirectory absoluteDirectory = PathFactory.makeAbsoluteDirectory(absDir);
+
+        List<String> strings = Arrays.asList(absDir.split("\\\\"));
+        Iterator<String> expectedIter = strings.iterator();
+        Iterator<String> iterator = absoluteDirectory.stringIterator();
+
+        iterator.forEachRemaining(name -> {
+            assert expectedIter.next().equals(name);
+        });
+    }
+
     @Test
     public void testParentPath() throws Exception {
         final String absDir = "D:\\Hephaestus\\Tests\\Files";

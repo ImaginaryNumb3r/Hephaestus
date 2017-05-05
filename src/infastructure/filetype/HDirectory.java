@@ -168,8 +168,8 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
     }
 
     /**
-     * Directory Iterator
-     * @return Iterator of the directories
+     * Directory InnerIterator
+     * @return InnerIterator of the directories
      */
 
     public NodeIterator<HDirectory> iterator(){
@@ -248,7 +248,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
     }
 
     /******************
-     * Node Iterator
+     * Node InnerIterator
      /*****************/
     protected class CnCDirectoryIterator<T extends HDirectory> extends NodeIterator<HDirectory> {
 

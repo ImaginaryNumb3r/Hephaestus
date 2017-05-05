@@ -5,8 +5,8 @@ import core.datastructure.Matrix;
 import java.util.Iterator;
 
 /**
- * Iterator for 2D objects
- * Iterator which iterates through a matrix, line by line and returns the according pixels
+ * InnerIterator for 2D objects
+ * InnerIterator which iterates through a matrix, line by line and returns the according pixels
  *
  * @author Patrick
  * @since 12.11.2016

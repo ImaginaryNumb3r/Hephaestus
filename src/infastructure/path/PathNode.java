@@ -1,5 +1,7 @@
 package infastructure.path;
 
+import java.util.Iterator;
+
 /**
  * @author Patrick
  * @created 04.07.2016
@@ -19,7 +21,6 @@ abstract class PathNode {
         _nodeName = nodeName;
         _prev = prev;
     }
-
 
     // Getter
 
@@ -56,8 +57,8 @@ abstract class PathNode {
         _prev = prev;
     }
 
-
     // Other
+
 
     public boolean hasPrev() {
         return _prev != null;

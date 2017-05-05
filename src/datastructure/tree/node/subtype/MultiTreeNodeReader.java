@@ -14,7 +14,7 @@ public interface MultiTreeNodeReader<V, N extends MultiTreeNodeReader<V, N>> ext
 
     /**
      * @apiNote Must be an iterator which supports the "Remove" operation.
-     * @return Iterator for all child nodes
+     * @return InnerIterator for all child nodes
      */
     Iterable<N> children();
 

@@ -21,13 +21,12 @@ public class AppUtil {
      * @throws UnsupportedEncodingException
      */
     public static String getDecodedRootPath(Class<?> clazz) throws UnsupportedEncodingException {
-
+        String decPath; //to hold decoded path of JAR-file
         String path = clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
 
         final File jarFile = new File(path);
         final int cutLength = determineCutLength(jarFile);
 
-        String decPath; //to hold decoded path of JAR-file
 
         if (System.getProperty("os.name").startsWith("Windows")) {
             decPath = URLDecoder.decode(path.substring(
@@ -56,5 +55,4 @@ public class AppUtil {
 
         return cutLength;
     }
-
 }

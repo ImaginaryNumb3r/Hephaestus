@@ -10,7 +10,7 @@ import java.util.Stack;
 /**
  * @author Patrick
  * @created 28.05.2016
- * @purpose Tree Iterator which traverses over Nodes of a Tree composed of DirectoryNodes
+ * @purpose Tree InnerIterator which traverses over Nodes of a Tree composed of DirectoryNodes
  */
 public abstract class DirectoryTraverser<T extends HDirectory> implements TreeTraverser<T> {
     /** The current directory in the file system hierarchy */
@@ -19,7 +19,7 @@ public abstract class DirectoryTraverser<T extends HDirectory> implements TreeTr
     protected T _destDir;
     /** A stack of Iterators from the directories which were used to reach the current level in the hierarchy */
     protected Stack<NodeIterator<T>> _prevIter;
-    /** The Iterator of the current hierarchy. Is being added to the stack of previous Iterators (_prevIter) when entering a new level */
+    /** The InnerIterator of the current hierarchy. Is being added to the stack of previous Iterators (_prevIter) when entering a new level */
     protected NodeIterator<T> _curIter;
 
     /** The starting point of the traverser. When moving back you cannot go beyond this Node. */

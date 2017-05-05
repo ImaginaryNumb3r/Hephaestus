@@ -1,4 +1,6 @@
-package datastructure.tree;
+package datastructure.tree.interfaces.basetypes;
+
+import datastructure.tree.interfaces.Tree;
 
 /**
  * @author Patrick
@@ -7,7 +9,7 @@ package datastructure.tree;
  * A Tree where values are saved at the leaves of a tree
  * This is the opposite to a MultiTree
  */
-public interface LeafTree<T> extends Tree<T>  {
+public interface LeafTree<T> extends Tree<T> {
 
     void add(T value);
 

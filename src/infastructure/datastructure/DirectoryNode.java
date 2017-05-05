@@ -7,7 +7,7 @@ package infastructure.datastructure;
 //import infastructure.filetype.HFile;
 //import infastructure.filetype.interfaces.aubtypes.AbsolutePath;
 //
-//import java.util.Iterator;
+//import java.util.InnerIterator;
 //import java.util.LinkedList;
 //import java.util.List;
 //
@@ -137,7 +137,7 @@ package infastructure.datastructure;
 //        return contains(_children.iterator(), file);
 //    }
 //
-//    public <T extends AbsolutePath> T contains(Iterator<T> iter, HEntry file) {
+//    public <T extends AbsolutePath> T contains(InnerIterator<T> iter, HEntry file) {
 //        boolean contains = false;
 //        T cur = null;
 //        while (iter.hasNextChild() && !contains){
@@ -173,7 +173,7 @@ package infastructure.datastructure;
 //        boolean found = false;
 //        DirectoryNode cur = null;
 //
-//        for (Iterator<DirectoryNode> iter = _children.iterator(); iter.hasNextChild() && !found; ){
+//        for (InnerIterator<DirectoryNode> iter = _children.iterator(); iter.hasNextChild() && !found; ){
 //            cur = iter.next();
 //
 //            if (cur.equals(dir)){
@@ -209,7 +209,7 @@ package infastructure.datastructure;
 //
 //
 //    /******************
-//     * Node Iterator
+//     * Node InnerIterator
 //     /*****************/
 //    protected class DirectoryNodeIterator extends NodeIterator<DirectoryNode> {
 //

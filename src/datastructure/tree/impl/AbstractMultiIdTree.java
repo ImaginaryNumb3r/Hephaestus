@@ -4,13 +4,18 @@ import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 import core.exception.ParameterNullException;
 import core.tuple.Tuple;
+import core.util.collections.Lists;
 import core.util.contracts.Contract;
 import datastructure.traverser.IdTraverser;
+import datastructure.tree.impl.node.MultiIdTreeNodeReaderImpl;
+import datastructure.tree.interfaces.ReadableTree;
 import datastructure.tree.impl.exception.NodeAlreadyExistsException;
 import datastructure.tree.node.subtype.IdTreeNodeReader;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNode;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
-import datastructure.tree.subtypes.MultiIdTree;
+import datastructure.tree.interfaces.subtypes.MultiIdTree;
+import graph.search.DepthFirstSearch;
+import graph.search.GraphSearchStrategy;
 
 import java.util.*;
 
@@ -20,14 +25,16 @@ import java.util.*;
  * @param <I> The identifier for individual nodes
  * @param <V> The value for individual nodes
  * @param <N> The Node itself
+ * @param <R> The read only version of the node
  *
  * A tree where every node has a variable number of sub-nodes.
  * Furthermore, each node in the tree can have its own value.
  */
 // TODO: Adding mechanism
 @SuppressWarnings("WeakerAccess")
-public abstract class AbstractMultiIdTree<I extends Comparable<I>, V, N extends MultiIdTreeNode<I, V, N>>
-        implements MultiIdTree<I, V> {
+public abstract class AbstractMultiIdTree
+        <I extends Comparable<I>, V, N extends MultiIdTreeNode<I, V, N>, R extends MultiIdTreeNodeReader<I, V, R>>
+        implements MultiIdTree<I, V>, ReadableTree<R>, Iterable<R>{
     //<editor-fold desc="Attributes">
     protected final N _sentinel;
     //</editor-fold>
@@ -54,12 +61,6 @@ public abstract class AbstractMultiIdTree<I extends Comparable<I>, V, N extends 
         _sentinel = makeNode(identifier, value,null);
     }
     //</editor-fold>
-
-    protected abstract N makeNode(I identifier, V value, N root);
-
-    protected N makeNode(I identifier, N root){
-        return makeNode(identifier, null, root);
-    }
 
     //<editor-fold desc="Access Methods">
 
@@ -101,11 +102,11 @@ public abstract class AbstractMultiIdTree<I extends Comparable<I>, V, N extends 
         add(Collections.singletonList(_sentinel.getIdentifier()), identifier, value);
     }
 
-    public void addTreeToRoot(AbstractMultiIdTree<I, V, N> subTree){
+    public void addTreeToRoot(AbstractMultiIdTree<I, V, N, R> subTree){
         addTree(Collections.singletonList(_sentinel.getIdentifier()), subTree);
     }
 
-    public void addTree(List<I> path, AbstractMultiIdTree<I, V, N> subTree){
+    public void addTree(List<I> path, AbstractMultiIdTree<I, V, N, R> subTree){
         Contract.checkNull(subTree);
         N node = searchNode(path);
         verifyNode(node, subTree._sentinel.getIdentifier());
@@ -225,6 +226,33 @@ public abstract class AbstractMultiIdTree<I extends Comparable<I>, V, N extends 
     //</editor-fold>
 
     /**
+     * Returns an iterator, based on the traversing strategy
+     * @param strategy how to create a list from a DAG (directed acyclic graph). May not be null
+     * @return Iterator of all nodes inside the tree
+     */
+    public abstract Iterator<R> iterator(@NotNull GraphSearchStrategy<R> strategy);
+
+    /**
+     * Iterated the tree via a Depth First Search
+     * @return InnerIterator for all nodes of the tree
+     */
+    public Iterator<R> iterator(){
+        return iterator(new DepthFirstSearch<>());
+    }
+
+    @Override
+    public List<R> toList(GraphSearchStrategy<R> strategy) {
+        return Lists.toLinkedList(iterator(strategy));
+    }
+
+    //<editor-fold desc="Protected Methods">
+    protected abstract N makeNode(I identifier, V value, N root);
+
+    protected N makeNode(I identifier, N root){
+        return makeNode(identifier, null, root);
+    }
+
+    /**
      *
      * @param id - Identifier of the node
      * @param root - Parent node whose children are to be searched
@@ -278,34 +306,7 @@ public abstract class AbstractMultiIdTree<I extends Comparable<I>, V, N extends 
 
         return new Tuple<>(node, state);
     }
-
-    private enum NodeState{
-        NEW, EXISTING
-    }
-
-
-    /*
-    public Iterator<MultiIdTreeNodeReader<I, V, N>> iterator(GraphSearchStrategy strategy){
-        // MultiIdTreeNode      <I, V, N>
-        // MultiIdTreeNodeReader<I, V, N>
-
-        MultiIdTreeNodeReader<I, V, N> x1 = new MultiIdTreeNodeReader<>();
-        Iterable<N> x2 = x1;
-        N x3 = x2.iterator().next();
-
-        GraphIterator<MultiIdTreeNodeReader<I, V, N>> iterator2 = null;
-        GraphIterator<I, V, N> iterator3 = iterator2;
-
-        Iterator<MultiIdTreeNodeReader<I, V, N>> iter = new GraphIterator<MultiIdTreeNodeReader<I, V, N>>();
-        Iterator<MultiIdTreeNodeReader<I, V, N>> iter2 = iterator2;
-
-        iter = iterator3;
-
-        return iter;
-//        return TreeIterator.from((N) _sentinel, (I) i, (V) v);
-        throw new UnsupportedOperationException();
-    } */
-
+    //</editor-fold>
 
     //<editor-fold desc="Traversing">
     @Override
@@ -412,4 +413,8 @@ public abstract class AbstractMultiIdTree<I extends Comparable<I>, V, N extends 
         //</editor-fold>
     }
     //</editor-fold>
+
+    private enum NodeState{
+        NEW, EXISTING
+    }
 }
