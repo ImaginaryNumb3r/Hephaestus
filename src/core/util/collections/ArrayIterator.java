@@ -15,7 +15,12 @@ public class ArrayIterator<T> implements Iterator<T> {
     private final T[] _array;
     private int _pos = 0;
 
-    ArrayIterator(T[] array) {
+    /**
+     * Restricted Constructor, use factory method "from" instead.
+     * @param array for internal access. Must not be null
+     */
+    @SuppressWarnings("WeakerAccess")
+    protected ArrayIterator(T[] array) {
         _array = array;
     }
 

@@ -1,5 +1,6 @@
 package core.util.collections;
 
+import com.sun.istack.internal.NotNull;
 import core.util.contracts.Contract;
 
 import java.util.Iterator;
@@ -16,7 +17,7 @@ public final class Iterators {
         throw new UnsupportedOperationException("Cannot instantiate class \"Iterators\"");
     }
 
-    public static <T> Iterable<T> asIterable(T[] array){
+    public static <T> Iterable<T> asIterable(@NotNull T[] array){
         Contract.checkNull((Object[]) array);
         return () -> from(array);
     }

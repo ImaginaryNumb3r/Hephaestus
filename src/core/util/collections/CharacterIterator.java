@@ -13,17 +13,26 @@ import java.util.Iterator;
 @SuppressWarnings("WeakerAccess")
 public class CharacterIterator extends GenericIterator<Character> { // TODO: Make ListIterator
 
-    public CharacterIterator(@NotNull Accessible<Character> collection, int length) {
+    protected CharacterIterator(@NotNull Accessible<Character> collection, int length) {
         super(collection, length);
     }
 
-    public CharacterIterator from(@NotNull CharSequence sequence){
-        Contract.checkNull(sequence);
-        return new CharacterIterator(sequence::charAt, sequence.length());
+    public CharacterIterator(@NotNull CharSequence sequence) {
+        super(sequence::charAt, sequence.length());
     }
 
-    public Iterator<Character> from(@NotNull char[] sequence){
-        Contract.checkNull((Object) sequence);
-        return new CharacterIterator(i -> sequence[i], sequence.length);
+    public CharacterIterator(@NotNull char[] chars) {
+        super(i -> chars[i], chars.length);
+    }
+
+
+    public CharacterIterator from(@NotNull CharSequence sequence){
+        Contract.checkNull(sequence);
+        return new CharacterIterator(sequence);
+    }
+
+    public Iterator<Character> from(@NotNull char[] chars){
+        Contract.checkNull((Object) chars);
+        return new CharacterIterator(chars);
     }
 }
