@@ -2,10 +2,13 @@ package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
 import core.exception.ParameterNullException;
+import core.util.contracts.Contract;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * @author Patrick
@@ -16,23 +19,52 @@ public class Lists {
 
     private Lists(){ throw new UnsupportedOperationException("Class \"Lists\" may not be instantiated");}
 
+    //<editor-fold desc="LinkedList">
+    private static <T, L extends List<T>> L toList(Iterable<T> iterable, Supplier<L> supplier){
+        L list = supplier.get();
+        iterable.forEach(list::add);
+        return list;
+    }
+
     public static <T> LinkedList<T> toLinkedList(@NotNull Iterable<T> iterable){
         if (iterable == null) throw new ParameterNullException("iterable");
-
-        LinkedList<T> linkedList = new LinkedList<>();
-        iterable.forEach(linkedList::add);
-        return linkedList;
+        return toList(iterable, LinkedList::new);
     }
 
     public static <T> LinkedList<T> toLinkedList(@NotNull Iterator<T> iterator){
-        return toLinkedList(() -> iterator);
+        if (iterator == null) throw new ParameterNullException("iterable");
+        return toList(() -> iterator, LinkedList::new);
     }
 
+    public static <T> LinkedList<T> toLinkedList(@NotNull T[] array){
+        if (array == null) throw new ParameterNullException("iterable");
+        return toList(() -> ArrayIterator.from(array), LinkedList::new);
+    }
+    //</editor-fold>
+
     public static <T> List<T> toList(@NotNull Iterable<T> iterable){
-        return toLinkedList(iterable);
+        return toArrayList(iterable);
     }
 
     public static <T> List<T> toList(@NotNull Iterator<T> iterator){
-        return toLinkedList(() -> iterator);
+        return toArrayList(() -> iterator);
     }
+
+    //<editor-fold desc="ArrayList">
+    public static <T> ArrayList<T> toArrayList(@NotNull Iterable<T> iterable){
+        if (iterable == null) throw new ParameterNullException("iterable");
+        return toList(iterable, ArrayList::new);
+    }
+
+    public static <T> ArrayList<T> toArrayList(@NotNull Iterator<T> iterator){
+        if (iterator == null) throw new ParameterNullException("iterable");
+        return toList(() -> iterator, ArrayList::new);
+    }
+
+    public static <T> ArrayList<T> toArrayList(@NotNull T[] array){
+        if (array == null) throw new ParameterNullException("iterable");
+        return toList(() -> ArrayIterator.from(array), ArrayList::new);
+    }
+    //</editor-fold>
+
 }
