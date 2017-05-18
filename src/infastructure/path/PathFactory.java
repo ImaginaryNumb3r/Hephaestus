@@ -40,13 +40,17 @@ public class PathFactory {
         for (int i = 0; i != invalidChars.length; ++i){
             _forbiddenCharacter.put(invalidChars[i], true);
         }
-
     }
 
     // ===================
     //   Factory Methods
     // ===================
 
+    public static boolean isAbsolutePath(String path){
+        return makeAbsolutePath(path) != null;
+    }
+
+    @SuppressWarnings("WeakerAccess")
     public static AbsolutePath makeAbsolutePath (String path){
         PathCommand<AbsolutePath, PathNode, PathNode> command =
                 ( (PathNode head, PathNode file, int length) -> {
@@ -67,6 +71,10 @@ public class PathFactory {
     }
 
     // TODO: Use isAbsolute to lastModified whether this really is an absolute path
+
+    public static boolean isAbsoluteDirectory(String path){
+        return makeAbsoluteDirectory(path) != null;
+    }
 
     /**
      * Creates the path from a given string
@@ -101,6 +109,10 @@ public class PathFactory {
         return makePath(path, command, PathType.ABSOLUTE_DIRECTORY);
     } */
 
+    public static boolean isAbsoluteFile(String path){
+        return makeAbsoluteFile(path) != null;
+    }
+
     // TODO: Use isAbsolute to lastModified whether this really is an absolute path
     public static AbsoluteFile makeAbsoluteFile (String path){
         PathCommand<AbsoluteFile, PathNode, PathNode> command =
@@ -119,6 +131,9 @@ public class PathFactory {
         return makePath(path, command, PathType.ABSOLUTE_FILE);
     }
 
+    public static boolean isRelativeDirectory(String path){
+        return makeRelativeDirectory(path) != null;
+    }
 
     public static RelativeDirectory makeRelativeDirectory (String path){
         PathCommand<RelativeDirectory, PathNode, PathNode> command =
@@ -136,10 +151,14 @@ public class PathFactory {
     }
 
 
+    public static boolean isRelativeFile(String path){
+        return makeRelativeFile(path) != null;
+    }
+
     /**
      *
      * @param path path
-     * @return EmptyRelativeFile if only a file is added without a path
+     * @return EmptyRelativeFile if a file is added without a path
      */
     public static RelativeFile makeRelativeFile (String path){
         PathCommand<RelativeFile, PathNode, PathNode> command =

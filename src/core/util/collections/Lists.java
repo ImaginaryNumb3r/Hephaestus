@@ -2,6 +2,7 @@ package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
 import core.exception.ParameterNullException;
+import core.util.annotations.ToTest;
 import core.util.contracts.Contract;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.function.Supplier;
  * @since 05.05.2017
  */
 @SuppressWarnings("WeakerAccess")
+@ToTest
 public class Lists {
 
     private Lists(){ throw new UnsupportedOperationException("Class \"Lists\" may not be instantiated");}
