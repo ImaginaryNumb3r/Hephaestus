@@ -6,6 +6,7 @@ import core.util.contracts.Contract;
 import core.util.interfaces.Accessible;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author Patrick
@@ -13,12 +14,12 @@ import java.util.Iterator;
  */
 @SuppressWarnings("WeakerAccess")
 public class GenericIterator<T> implements Iterator<T> {
-    private final Accessible<T> _collection;
-    private final int _length;
-    private int _pos;
+    protected final Accessible<T> _accessible;
+    protected final int _length;
+    protected int _pos;
 
-    public GenericIterator(@NotNull Accessible<T> collection, int length) {
-        _collection = collection;
+    GenericIterator(@NotNull Accessible<T> accessible, int length) {
+        _accessible = accessible;
         _length = length;
     }
 
@@ -41,7 +42,7 @@ public class GenericIterator<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        if (!hasNext()) throw new ParameterNullException();
-        return _collection.getAt(_pos++);
+        if (!hasNext()) throw new NoSuchElementException();
+        return _accessible.getAt(_pos++);
     }
 }

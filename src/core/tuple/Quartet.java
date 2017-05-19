@@ -6,6 +6,7 @@ import core.util.contracts.Contract;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.function.Supplier;
 
 /**
@@ -41,4 +42,16 @@ public interface Quartet<A, B, C, D> extends Triplet<A, B, C> {
     D getD();
 
     void setD(D d);
+
+    @Override
+    default ListIterator<Object> iterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default ListIterator<Object> listIterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
 }

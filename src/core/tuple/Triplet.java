@@ -6,6 +6,7 @@ import core.util.contracts.Contract;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.function.Supplier;
 
 /**
@@ -37,6 +38,17 @@ public interface Triplet<A, B, C> extends Tuple<A, B> {
 
     void setC(C c);
 
+    @Override
+    default ListIterator<Object> iterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default ListIterator<Object> listIterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
     /*@Override
     protected TripletImpl<A, B, C> convert(Object object) {
         return new Generics<TripletImpl<A, B, C>>().cast(object);

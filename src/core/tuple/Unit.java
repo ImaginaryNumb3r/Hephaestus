@@ -30,4 +30,15 @@ public interface Unit<A> extends Pattern {
 
     void setA(A a);
 
+    @Override
+    default ListIterator<Object> iterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default ListIterator<Object> listIterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
 }

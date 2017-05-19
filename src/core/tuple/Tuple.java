@@ -5,6 +5,7 @@ import core.util.contracts.Contract;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.function.Supplier;
 
 /**
@@ -30,4 +31,16 @@ public interface Tuple<A, B> extends Unit<A>{
     B getB();
 
     void setB(B b);
+
+    @Override
+    default ListIterator<Object> iterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    default ListIterator<Object> listIterator(){
+        // TODO: Create custom ListIterator and return that
+        throw new UnsupportedOperationException();
+    }
 }
