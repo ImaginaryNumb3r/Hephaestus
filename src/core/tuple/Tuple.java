@@ -1,6 +1,7 @@
 package core.tuple;
 
 import com.sun.istack.internal.Nullable;
+import core.util.contracts.Contract;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,33 +11,23 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 16.11.2016
  */
-public class Tuple<A, B> extends Unit<A>{
-    protected B B;
+public interface Tuple<A, B> extends Unit<A>{
 
-    public Tuple(Tuple<A, B> tuple){
-        this(tuple.getA(), tuple.getB());
+    static <A, B> Tuple<A, B> from(Tuple<A, B> tuple){
+        Contract.checkNull(tuple, "tuple");
+        return new TupleImpl<>(tuple);
     }
 
-    public Tuple(@Nullable A a, @Nullable B b) {
-        super(a);
-        B = b;
+    static <A, B> Tuple<A, B> from(Unit<A> unit, @Nullable B b){
+        Contract.checkNull(unit, "unit");
+        return new TupleImpl<>(unit.getA(), b);
     }
 
-    public B getB() {
-        return B;
+    static <A, B> Tuple<A, B> from(@Nullable A a, @Nullable B b){
+        return new TupleImpl<>(a, b);
     }
 
-    public void setB(B b) {
-        B = b;
-    }
+    B getB();
 
-    @Override
-    protected Supplier<List<Object>> makeArray(){
-        return () -> Arrays.asList(A, B);
-    }
-
-    /*@Override
-    protected Tuple<A, B> convert(Object object) {
-        return new Generics<Tuple<A, B>>().cast(object);
-    }*/
+    void setB(B b);
 }

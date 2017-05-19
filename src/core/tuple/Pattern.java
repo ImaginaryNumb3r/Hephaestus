@@ -9,4 +9,5 @@ import java.io.Serializable;
  * @since 17.11.2016
  */
 interface Pattern extends Serializable, IterableList<Object> {
+
 }

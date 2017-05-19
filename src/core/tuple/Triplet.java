@@ -1,6 +1,8 @@
 package core.tuple;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import core.util.contracts.Contract;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,33 +12,33 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 16.11.2016
  */
-public class Triplet<A, B, C> extends Tuple<A, B>{
-    protected C C;
+public interface Triplet<A, B, C> extends Tuple<A, B> {
 
-    public Triplet(Triplet<A, B, C> triplet){
-        this(triplet.getA(), triplet.getB(), triplet.getC());
+    static <A, B, C> Triplet from (@NotNull Triplet<A, B, C> triplet){
+        Contract.checkNull(triplet, "triplet");
+        return new TripletImpl<>(triplet.getA(), triplet.getB(), triplet.getC());
     }
 
-    public Triplet(@Nullable A a, @Nullable B b, @Nullable C c) {
-        super(a, b);
-        C = c;
+    static <A, B, C> Triplet from (@NotNull Tuple<A, B> tuple, @Nullable C c){
+        Contract.checkNull(tuple, "tuple");
+        return new TripletImpl<>(tuple.getA(), tuple.getB(), c);
     }
 
-    public C getC() {
-        return C;
+    static <A, B, C> Triplet from (@NotNull Unit<A> unit, @Nullable B b , @Nullable C c){
+        Contract.checkNull(unit, "unit");
+        return new TripletImpl<>(unit.getA(), b, c);
     }
 
-    public void setC(C c) {
-        C = c;
+    static <A, B, C> Triplet<A, B, C> from (@Nullable A a, @Nullable B b, @Nullable C c) {
+        return new TripletImpl<>(a, b, c);
     }
 
-    @Override
-    protected Supplier<List<Object>> makeArray(){
-        return () -> Arrays.asList(A, B, C);
-    }
+    C getC();
+
+    void setC(C c);
 
     /*@Override
-    protected Triplet<A, B, C> convert(Object object) {
-        return new Generics<Triplet<A, B, C>>().cast(object);
+    protected TripletImpl<A, B, C> convert(Object object) {
+        return new Generics<TripletImpl<A, B, C>>().cast(object);
     }*/
 }

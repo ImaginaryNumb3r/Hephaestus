@@ -43,6 +43,18 @@ public class Lists {
         if (array == null) throw new ParameterNullException("array");
         return toList(() -> new ArrayIterator<>(array), LinkedList::new);
     }
+
+    public static <T> LinkedList<T> toLinkedList(T item){
+        LinkedList<T> list = new LinkedList<>();
+        list.add(item);
+        return list;
+    }
+
+    public static <T> LinkedList<T> toSingleLinkedList(T item){
+        LinkedList<T> list = new LinkedList<>();
+        list.add(item);
+        return list;
+    }
     //</editor-fold>
 
     public static <T> List<T> toList(@NotNull Iterable<T> iterable){
@@ -69,6 +81,17 @@ public class Lists {
         if (array == null) throw new ParameterNullException("array");
         return toList(() -> new ArrayIterator<>(array), ArrayList::new);
     }
-    //</editor-fold>
 
+    public static <T> ArrayList<T> toArrayList(T item){
+        ArrayList<T> list = new ArrayList<>();
+        list.add(item);
+        return list;
+    }
+
+    public static <T> ArrayList<T> toSingleArrayList(T item){
+        ArrayList<T> list = new ArrayList<>();
+        list.add(item);
+        return list;
+    }
+    //</editor-fold>
 }

@@ -46,6 +46,17 @@ public class Contract implements AutoCloseable {
     }
 
     /**
+     * Performs a checkNull on the given objects and throws a named ParameterNullException if it is null
+     * @param object argument containing the object to be tested
+     * @param name name of the parameter that was tested
+     * @throws ContractException if contract is violated
+     */
+    public static void checkNull(Object object, String name) throws ContractException {
+        name = name == null ? "null" : name;
+        if (object == null) throw new ParameterNullException(name);
+    }
+
+    /**
      * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
      * @throws ContractException if contract is violated

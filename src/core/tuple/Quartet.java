@@ -1,6 +1,8 @@
 package core.tuple;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import core.util.contracts.Contract;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,33 +12,33 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 16.11.2016
  */
-public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
-    protected D D;
+public interface Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
-    public Quartet(Quartet<A, B, C, D> quartet) {
-        this(quartet.getA(), quartet.getB(), quartet.getC(), quartet.getD());
+    static <A, B, C, D> Quartet from(@NotNull Quartet<A, B, C, D> quartet) {
+        Contract.checkNull(quartet);
+        return new QuartetImpl<>(quartet.getA(), quartet.getB(), quartet.getC(), quartet.getD());
     }
 
-    public Quartet(@Nullable A a, @Nullable B b, @Nullable C c, @Nullable D d) {
-        super(a, b, c);
-        D = d;
+    static <A, B, C, D> Quartet from(@NotNull Triplet<A, B, C> triplet, @Nullable D d) {
+        Contract.checkNull(triplet, "triplet");
+        return new QuartetImpl<>(triplet.getA(), triplet.getB(), triplet.getC(), d);
     }
 
-    public D getD() {
-        return D;
+    static <A, B, C, D> Quartet from(@NotNull Tuple<A, B> tuple, @Nullable C c, @Nullable D d) {
+        Contract.checkNull(tuple, "tuple");
+        return new QuartetImpl<>(tuple.getA(), tuple.getB(), c, d);
     }
 
-    public void setD(D d) {
-        D = d;
+    static <A, B, C, D> Quartet from(@NotNull Unit<A> unit, @Nullable B b, @Nullable C c, @Nullable D d) {
+        Contract.checkNull(unit, "unit");
+        return new QuartetImpl<>(unit.getA(), b, c, d);
     }
 
-    @Override
-    protected Supplier<List<Object>> makeArray(){
-        return () -> Arrays.asList(A, B, C, D);
+    static <A, B, C, D> Quartet from(@Nullable A a, @Nullable B b, @Nullable C c, @Nullable D d) {
+        return new QuartetImpl<>(a, b, c, d);
     }
 
-    /*@Override
-    protected Quartet<A, B, C, D> convert(Object object) {
-        return new Generics<Quartet<A, B, C, D>>().cast(object);
-    }*/
+    D getD();
+
+    void setD(D d);
 }

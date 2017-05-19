@@ -1,6 +1,7 @@
 package core.tuple;
 
 import com.sun.istack.internal.Nullable;
+import core.util.contracts.Contract;
 
 import java.util.Map;
 
@@ -8,17 +9,16 @@ import java.util.Map;
  * @author Patrick
  * @since 19.11.2016
  */
-public class KeyPair<Key, Val> extends Tuple<Key, Val> {
+public interface KeyPair<Key, Val> extends Tuple<Key, Val> {
 
-    public KeyPair(Tuple<Key, Val> tuple) {
-        super(tuple);
+    static <Key, Val> KeyPair from (Tuple<Key, Val> tuple) {
+        Contract.checkNull(tuple, "tuple");
+        return new KeyPairImpl<>(tuple);
     }
 
-    public KeyPair(@Nullable Key key, @Nullable Val val) {
-        super(key, val);
+    static <Key, Val> KeyPair from(@Nullable Key key, @Nullable Val val) {
+        return new KeyPairImpl<>(key, val);
     }
 
-    public void putInto(Map<Key, Val> map){
-        map.put(A, B);
-    }
+    void putInto(Map<Key, Val> map);
 }
