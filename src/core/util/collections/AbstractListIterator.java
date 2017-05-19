@@ -1,7 +1,6 @@
 package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
-import core.util.contracts.Contract;
 import core.util.interfaces.Accessible;
 
 import java.util.ListIterator;
@@ -47,7 +46,7 @@ public abstract class AbstractListIterator<T> extends GenericIterator<T> impleme
     @Override
     public T previous() {
         if (!hasPrevious()) throw new NoSuchElementException();
-        return _accessible.getAt(--_pos);
+        return _accessible.getAt(_pos--);
     }
 
     /**

@@ -2,6 +2,7 @@ package core.tuple;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import core.util.collections.GenericListIterator;
 import core.util.contracts.Contract;
 
 import java.util.Arrays;
@@ -40,17 +41,11 @@ public interface Triplet<A, B, C> extends Tuple<A, B> {
 
     @Override
     default ListIterator<Object> iterator(){
-        // TODO: Create custom ListIterator and return that
-        throw new UnsupportedOperationException();
+        return listIterator();
     }
 
     @Override
     default ListIterator<Object> listIterator(){
-        // TODO: Create custom ListIterator and return that
-        throw new UnsupportedOperationException();
+        return GenericListIterator.from(getA(), getB(), getC());
     }
-    /*@Override
-    protected TripletImpl<A, B, C> convert(Object object) {
-        return new Generics<TripletImpl<A, B, C>>().cast(object);
-    }*/
 }

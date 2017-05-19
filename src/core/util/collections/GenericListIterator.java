@@ -13,14 +13,30 @@ import core.util.interfaces.Accessible;
 @ToTest
 public class GenericListIterator<T> extends AbstractListIterator<T> {
 
-    GenericListIterator(@NotNull Accessible<T> accessible, int length) {
+    protected GenericListIterator(@NotNull Accessible<T> accessible, int length) {
         super(accessible, length);
     }
 
+    /**
+     * Returns a GenericIterator<T> from the given lambda and length information
+     * @param accessible providing access to the collection or array. May not be null
+     * @param length of the array or collection to determine when the destination is reached
+     * @return GenericIterator<T> based on parameters
+     */
     public static <T> GenericListIterator<T> from(@NotNull Accessible<T> accessible, int length) {
         Contract.checkNull(accessible, "accessible");
         if (length < 0) throw new IllegalArgumentException("Length may not be smaller than zero");
         return new GenericListIterator<>(accessible, length);
+    }
+
+    /**
+     * Returns a GenericIterator<T> from the given lambda and length information
+     * @param items providing access to the collection or array. May not be null
+     * @return GenericIterator<T> based on parameters
+     */
+    public static <T> GenericListIterator<T> from(@NotNull T... items) {
+        Contract.checkNull(items, "items");
+        return new GenericListIterator<>(i -> items[i], items.length);
     }
 
     @Override

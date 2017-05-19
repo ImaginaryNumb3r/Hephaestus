@@ -1,6 +1,7 @@
 package core.tuple;
 
 import com.sun.istack.internal.Nullable;
+import core.util.collections.GenericListIterator;
 import core.util.contracts.Contract;
 
 import java.util.Arrays;
@@ -34,13 +35,11 @@ public interface Tuple<A, B> extends Unit<A>{
 
     @Override
     default ListIterator<Object> iterator(){
-        // TODO: Create custom ListIterator and return that
-        throw new UnsupportedOperationException();
+        return listIterator();
     }
 
     @Override
     default ListIterator<Object> listIterator(){
-        // TODO: Create custom ListIterator and return that
-        throw new UnsupportedOperationException();
-    }
+        return GenericListIterator.from(getA(), getB());
+     }
 }

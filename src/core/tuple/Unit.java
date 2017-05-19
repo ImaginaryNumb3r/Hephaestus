@@ -3,6 +3,8 @@ package core.tuple;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 import core.datastructure.Lazy;
+import core.util.collections.GenericIterator;
+import core.util.collections.GenericListIterator;
 import core.util.contracts.Contract;
 
 import java.util.Collections;
@@ -31,14 +33,13 @@ public interface Unit<A> extends Pattern {
     void setA(A a);
 
     @Override
-    default ListIterator<Object> iterator(){
+    default ListIterator<Object> listIterator(){
         // TODO: Create custom ListIterator and return that
-        throw new UnsupportedOperationException();
+        return GenericListIterator.from(getA());
     }
 
     @Override
-    default ListIterator<Object> listIterator(){
-        // TODO: Create custom ListIterator and return that
-        throw new UnsupportedOperationException();
+    default ListIterator<Object> iterator(){
+        return listIterator();
     }
 }

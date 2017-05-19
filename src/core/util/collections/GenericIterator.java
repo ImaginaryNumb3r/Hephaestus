@@ -34,6 +34,15 @@ public class GenericIterator<T> implements Iterator<T> {
         if (length < 0) throw new IllegalArgumentException("Length may not be smaller than zero");
         return new GenericIterator<>(accessible, length);
     }
+    /**
+     * Returns a GenericIterator<T> from the given lambda and length information
+     * @param items providing access to the collection or array. May not be null
+     * @return GenericIterator<T> based on parameters
+     */
+    public static <T> GenericIterator<T> from(@NotNull T... items) {
+        Contract.checkNull(items, "items");
+        return new GenericIterator<>(i -> items[i], items.length);
+    }
 
     @Override
     public boolean hasNext() {
