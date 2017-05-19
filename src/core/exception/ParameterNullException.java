@@ -1,5 +1,6 @@
 package core.exception;
 
+import com.sun.istack.internal.Nullable;
 import core.util.contracts.exceptions.ContractException;
 
 /**
@@ -7,9 +8,10 @@ import core.util.contracts.exceptions.ContractException;
  * @since 26.11.2016
  */
 public class ParameterNullException extends ContractException {
+    @SuppressWarnings("WeakerAccess")
     public static final String MESSAGE = "Parameter may not be null";
 
-   private static String makeMessage(String parameterName){
+   private static String makeMessage(@Nullable String parameterName){
        return  parameterName != null
        ? "Parameter: \"" + parameterName + "\" may not be null"
        : MESSAGE;
@@ -19,7 +21,12 @@ public class ParameterNullException extends ContractException {
         super(MESSAGE);
     }
 
-    public ParameterNullException(String parameterName) {
+    /**
+     * Creates the exception and highlights the name of the parameter that caused the exception.
+     * The parameter may be null, then it will simply name the default message
+     * @param parameterName may be null. Creates the exception and highlights the name of the parameter that caused the exception.
+     */
+    public ParameterNullException(@Nullable String parameterName) {
         super(makeMessage(parameterName));
     }
 }
