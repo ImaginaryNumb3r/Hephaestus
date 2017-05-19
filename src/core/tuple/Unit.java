@@ -33,13 +33,13 @@ public interface Unit<A> extends Pattern {
     void setA(A a);
 
     @Override
-    default ListIterator<Object> listIterator(){
-        // TODO: Create custom ListIterator and return that
-        return GenericListIterator.from(getA());
+    default ListIterator<Object> iterator(){
+        return listIterator();
     }
 
     @Override
-    default ListIterator<Object> iterator(){
-        return listIterator();
+    default ListIterator<Object> listIterator(){
+        // TODO: Create custom ListIterator and return that
+        return GenericListIterator.from(getA());
     }
 }
