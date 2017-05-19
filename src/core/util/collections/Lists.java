@@ -38,9 +38,10 @@ public class Lists {
         return toList(() -> iterator, LinkedList::new);
     }
 
-    public static <T> LinkedList<T> toLinkedList(@NotNull T[] array){
-        if (array == null) throw new ParameterNullException("iterable");
-        return toList(() -> ArrayIterator.from(array), LinkedList::new);
+    @SafeVarargs
+    public static <T> LinkedList<T> toLinkedList(@NotNull T... array){
+        if (array == null) throw new ParameterNullException("array");
+        return toList(() -> new ArrayIterator<>(array), LinkedList::new);
     }
     //</editor-fold>
 
@@ -63,9 +64,10 @@ public class Lists {
         return toList(() -> iterator, ArrayList::new);
     }
 
-    public static <T> ArrayList<T> toArrayList(@NotNull T[] array){
-        if (array == null) throw new ParameterNullException("iterable");
-        return toList(() -> ArrayIterator.from(array), ArrayList::new);
+    @SafeVarargs
+    public static <T> ArrayList<T> toArrayList(@NotNull T... array){
+        if (array == null) throw new ParameterNullException("array");
+        return toList(() -> new ArrayIterator<>(array), ArrayList::new);
     }
     //</editor-fold>
 

@@ -16,7 +16,8 @@ public class ArrayIterator<T> implements Iterator<T> {
     private int _pos = 0;
 
     /**
-     * Restricted Constructor, use factory method "from" instead.
+     * Internal Constructor.
+     * When called from outside the framework, use factory method "from" instead.
      * @param array for internal access. Must not be null
      */
     @SuppressWarnings("WeakerAccess")
@@ -30,7 +31,8 @@ public class ArrayIterator<T> implements Iterator<T> {
      * @throws core.exception.ParameterNullException if parameter array is null
      * @return the iterator from the given array
      */
-    public static <T> Iterator<T> from(@NotNull T[] array) {
+    @SafeVarargs
+    public static <T> Iterator<T> from(@NotNull T... array) {
         Contract.checkNull((Object[]) array);
         return new ArrayIterator<>(array);
     }
