@@ -13,8 +13,8 @@ public class TupleTest {
         String valA = "valA";
         Integer valB = 2;
 
-        Tuple<String, Integer> tuple1 = new Tuple<>(valA, valB);
-        Tuple<String, Integer> tuple2 = new Tuple<>(valA, valB);
+        Tuple<String, Integer> tuple1 = Tuple.from(valA, valB);
+        Tuple<String, Integer> tuple2 = Tuple.from(valA, valB);
 
         assert tuple1.equals(tuple2);
     }

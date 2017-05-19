@@ -304,7 +304,7 @@ public abstract class AbstractMultiIdTree
         NodeState state = optional.isPresent() ? NodeState.EXISTING : NodeState.NEW;
         N node = optional.orElseGet(() -> makeNode(id, value, root));
 
-        return new Tuple<>(node, state);
+        return Tuple.from(node, state);
     }
     //</editor-fold>
 
