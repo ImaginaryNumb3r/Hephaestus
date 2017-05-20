@@ -42,7 +42,7 @@ public interface Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
     D getD();
 
-    void setD(D d);
+    // void setD(D d);
 
     @Override
     default ListIterator<Object> iterator(){

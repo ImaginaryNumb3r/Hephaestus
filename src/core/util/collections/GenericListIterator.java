@@ -7,10 +7,10 @@ import core.util.interfaces.Accessible;
 
 /**
  * @author Patrick
- * @description
  * @since 19.05.2017
  */
 @ToTest
+@SuppressWarnings("WeakerAccess")
 public class GenericListIterator<T> extends AbstractListIterator<T> {
 
     protected GenericListIterator(@NotNull Accessible<T> accessible, int length) {

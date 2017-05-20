@@ -31,7 +31,7 @@ public interface Tuple<A, B> extends Unit<A>{
 
     B getB();
 
-    void setB(B b);
+    // void setB(B b);
 
     @Override
     default ListIterator<Object> iterator(){

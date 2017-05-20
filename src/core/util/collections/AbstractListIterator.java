@@ -9,6 +9,8 @@ import java.util.NoSuchElementException;
 /**
  * @author Patrick
  * @since 19.05.2017
+ *
+ * General purpose ListIterator that implements the most common traits just as next and previous.
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractListIterator<T> extends GenericIterator<T> implements ListIterator<T>{
@@ -76,8 +78,6 @@ public abstract class AbstractListIterator<T> extends GenericIterator<T> impleme
      */
     @Override
     public int previousIndex() {
-        return hasPrevious()
-                ? _pos - 1
-                : 0;
+        return _pos - 1;
     }
 }

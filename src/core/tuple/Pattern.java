@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Patrick
  * @since 17.11.2016
  */
-// TODO: Create readonly versions of all pattern descendants
+// TODO: Create separate mutable and readonly versions of all pattern descendants
 interface Pattern extends Serializable, IterableList<Object> {
 
 }

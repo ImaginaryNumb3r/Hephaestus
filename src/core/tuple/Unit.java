@@ -30,7 +30,7 @@ public interface Unit<A> extends Pattern {
 
     A getA();
 
-    void setA(A a);
+    // void setA(A a);
 
     @Override
     default ListIterator<Object> iterator(){
