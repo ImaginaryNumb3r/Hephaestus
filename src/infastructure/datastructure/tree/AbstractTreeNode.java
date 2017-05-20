@@ -28,7 +28,7 @@ public abstract class AbstractTreeNode implements TreeNode {
     // Saved Values
     protected List<String> _files;
     protected List<String> _directories;
-    // Lazy Instantiation
+    // LazyImpl Instantiation
     protected HDirectory _directory;
 
     // ================

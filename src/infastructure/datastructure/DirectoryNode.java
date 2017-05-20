@@ -33,7 +33,7 @@ package infastructure.datastructure;
 //        super(directory);
 //        _file = directory;
 //
-//        // Lazy instantiation - or step by step construction
+//        // LazyImpl instantiation - or step by step construction
 //        _children = new LinkedList<>();
 //        _values = new LinkedList<>();
 //    }

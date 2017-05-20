@@ -2,66 +2,45 @@ package core.datastructure;
 
 import com.sun.istack.internal.NotNull;
 
-import java.io.Serializable;
-import java.security.InvalidParameterException;
 import java.util.function.Supplier;
 
 /**
  * @author Patrick
  * @since 15.11.2016
  *
- * Creates a lazy instance of a value, delivered by a supplier.
- * An assigned value to this class is permanent and will never change.
- * Accessing this class is thread safe. However, the overhead of synchronization is gone once the value is instantiated.
+ * Interface for lazy instances of a given value, delivered by a supplier.
+ * An assigned value to this class needs to be permanent and will never change after its creation.
+ * Accessing this class is guaranteed to be thread safe.
+ * The implementation is expected to eliminate the cost of synchronization once the value is instanced.
  */
-public class Lazy<T> implements LazySupplier<T>, Serializable {
-    private Supplier<T> _supplier;
-    private T _value;
-
-    /**
-     * Creates a new instance, which creates a new object as declared with a supplier when demanded.
-     * @param supplier which creates the instance of value that will be accessed
-     */
-    public Lazy(@NotNull Supplier<T> supplier){
-        if (supplier == null) throw new InvalidParameterException("Supplier may not be null");
-        _supplier = supplier;
-    }
+public interface Lazy<T> extends Supplier<T> {
 
     /**
      * Atomically returns the already instance as determined in the supplier.
      * @return the already instance as determined in the supplier
      */
-    @Override
-    public T get() {
-        instantiate();
-        return _value;
-    }
+    T get();
 
     /**
-     * Atomically loads the value
+     * Atomically loads the value and makes it ready for retrieval from get()
      */
-    @Override
-    public void instantiate(){
-        if (_value == null){
-            synchronized (this) {
-                if (_value == null) {
-                    _value = _supplier.get();
-                }
-            }
-        }
-    }
+    void instantiate();
 
     /**
-     * Checks if the value behind the Lazy has already been loaded
+     * Checks if the value behind the LazyImpl has already been loaded
      * @return true if the value behind the lazy has already been loaded
      */
-    @Override
-    public boolean isInstantiated(){
-        return _value != null;
+    boolean isInstantiated();
+
+    /**
+     * Creates a new lazy loaded instance, which creates a new object as declared with a supplier when demanded.
+     * @param supplier which creates the instance of value that will be accessed
+     * @param <S> Type of the created instance
+     * @return LazyImpl instance of the provided supplier
+     * @throws core.exception.ParameterNullException if param supplier is null
+     */
+    static <S> Lazy<S> from(@NotNull Supplier<S> supplier){
+        return LazyImpl.from(supplier);
     }
 
-
-    public <S> Lazy<S> lazily(Supplier<S> lazy){
-        return new Lazy<>(lazy);
-    }
 }

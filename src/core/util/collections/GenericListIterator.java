@@ -39,16 +39,28 @@ public class GenericListIterator<T> extends AbstractListIterator<T> {
         return new GenericListIterator<>(i -> items[i], items.length);
     }
 
+    /**
+     * No implementation
+     * @throws UnsupportedOperationException on call
+     */
     @Override
     public void remove() {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * No implementation
+     * @throws UnsupportedOperationException on call
+     */
     @Override
     public void set(T t) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * No implementation
+     * @throws UnsupportedOperationException on call
+     */
     @Override
     public void add(T t) {
         throw new UnsupportedOperationException();

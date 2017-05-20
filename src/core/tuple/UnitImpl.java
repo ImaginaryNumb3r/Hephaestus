@@ -14,6 +14,7 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 16.11.2016
  */
+@SuppressWarnings("WeakerAccess")
 class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
     protected A A;
     protected final Lazy<List<Object>> _values;
@@ -28,7 +29,7 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
 
     public UnitImpl(A a) {
         A = a;
-        _values = new Lazy<>(makeArray());
+        _values = Lazy.from(makeArray());
     }
 
     // ===============
@@ -78,7 +79,6 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
 
         return equals;
     }
-
 
     @Override
     public int hashCode() {

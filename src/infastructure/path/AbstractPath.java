@@ -16,7 +16,7 @@ public abstract class AbstractPath implements Path {
     protected DirectoryNode _head;
     protected DirectoryNode _tail;
     protected int _nodeCount;
-    protected String _path; // Lazy
+    protected String _path; // LazyImpl
 
     public AbstractPath(DirectoryNode head, DirectoryNode tail, int nodeCount) {
         _tail = tail;

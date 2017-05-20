@@ -11,7 +11,7 @@ import infastructure.path.PathFactory;
  * @created 30.07.2016
  */
 public class RelativeDirectoryTreeNode extends AbstractTreeNode {
-    protected AbsoluteDirectory _absolutePath; // Lazy
+    protected AbsoluteDirectory _absolutePath; // LazyImpl
     protected AbstractTreeNode _parentNode;
     final protected RelativeDirectory _name;
 

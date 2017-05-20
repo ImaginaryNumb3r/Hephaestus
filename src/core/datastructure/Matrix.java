@@ -12,6 +12,8 @@ import java.util.Iterator;
  * Creator: Patrick
  * Created: 13.12.2016
  * TODO: ToString
+ * TODO: Matrix operations
+ * TODO: 2D Iterator Strategy, like with Trees
  */
 public class Matrix<T> implements Iterable<T>{
     private final T[][] _matrix;
