@@ -1,5 +1,6 @@
 package infastructure.datastructure.tree;
 
+import core.exception.NoImplementationException;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 
@@ -61,7 +62,17 @@ public class AbsoluteDirectoryTreeNode extends AbstractTreeNode {
     }
 
     @Override
+    public boolean isSubPath(RelativeDirectory relDir) {
+        throw new NoImplementationException();
+    }
+
+    @Override
     public String getAbsolutePath() {
         return _directory.toString();
+    }
+
+    @Override
+    public boolean isSubPath(AbsoluteDirectory absDir) {
+        throw new NoImplementationException();
     }
 }

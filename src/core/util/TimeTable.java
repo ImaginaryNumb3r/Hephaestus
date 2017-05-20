@@ -1,6 +1,7 @@
 package core.util;
 
 import com.sun.istack.internal.NotNull;
+import core.util.annotations.Unfinished;
 import core.util.contracts.Contract;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalTime;
  * @author Patrick
  * @since 29.11.2016
  */
+@Unfinished
 public class TimeTable {
 
     public LocalTime minus(@NotNull LocalTime time1, @NotNull LocalTime time2){

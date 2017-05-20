@@ -100,4 +100,14 @@ public class RelativeDirectoryTreeNode extends AbstractTreeNode {
         initializePath();
         return _absolutePath.toString();
     }
+
+    @Override
+    public boolean isSubPath(RelativeDirectory relDir) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isSubPath(AbsoluteDirectory absDir) {
+        throw new UnsupportedOperationException();
+    }
 }

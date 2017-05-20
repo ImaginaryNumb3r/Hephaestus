@@ -8,6 +8,7 @@ import java.util.function.Supplier;
  * @since 29.11.2016
  */
 @FunctionalInterface
+// TODO: Replace FunctionalException with X extends Throwable
 public interface SupplierEx<T> extends Supplier<T> {
 
     /**

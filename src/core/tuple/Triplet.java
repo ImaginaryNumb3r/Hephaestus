@@ -37,8 +37,6 @@ public interface Triplet<A, B, C> extends Tuple<A, B> {
 
     C getC();
 
-    // void setC(C c);
-
     @Override
     default ListIterator<Object> listIterator(){
         return GenericListIterator.from(getA(), getB(), getC());

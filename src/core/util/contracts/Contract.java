@@ -11,7 +11,8 @@ import java.util.function.BooleanSupplier;
 /**
  * Creator: Patrick
  * Created: 11.12.2016
- * Purpose:
+ *
+ * Experimental Class
  */
 @SuppressWarnings("WeakerAccess")
 public class Contract implements AutoCloseable {

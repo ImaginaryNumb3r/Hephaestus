@@ -84,7 +84,7 @@ package infastructure.datastructure;
 //    public boolean add(HFile file){
 //        boolean added;
 //
-//        if (!_values.contains(file)){
+//        if (!_values.isSubPath(file)){
 //            _values.add(file);
 //            added = true;
 //        } else {
@@ -110,7 +110,7 @@ package infastructure.datastructure;
 //    public boolean add(DirectoryNode directory){
 //        boolean added;
 //
-//        if (!_children.contains(directory)){
+//        if (!_children.isSubPath(directory)){
 //            _children.add(directory);
 //            added = true;
 //        } else {
@@ -134,17 +134,17 @@ package infastructure.datastructure;
 //    }
 //
 //    public DirectoryNode containsDirectory(HDirectory file) {
-//        return contains(_children.iterator(), file);
+//        return isSubPath(_children.iterator(), file);
 //    }
 //
-//    public <T extends AbsolutePath> T contains(InnerIterator<T> iter, HEntry file) {
-//        boolean contains = false;
+//    public <T extends AbsolutePath> T isSubPath(InnerIterator<T> iter, HEntry file) {
+//        boolean isSubPath = false;
 //        T cur = null;
-//        while (iter.hasNextChild() && !contains){
+//        while (iter.hasNextChild() && !isSubPath){
 //            cur = iter.next();
 //
 //            if (file.equals(cur)){
-//                contains = true;
+//                isSubPath = true;
 //            }
 //        }
 //
@@ -153,7 +153,7 @@ package infastructure.datastructure;
 //    }
 //
 //    public HEntry containsFile(HFile file) {
-//        return contains(_values.iterator(), file);
+//        return isSubPath(_values.iterator(), file);
 //    }
 //
 //    /**

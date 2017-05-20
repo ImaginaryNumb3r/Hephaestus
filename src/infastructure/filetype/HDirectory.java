@@ -231,6 +231,16 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
     }
 
     @Override
+    public boolean isSubPath(RelativeDirectory relDir) {
+        return false;
+    }
+
+    @Override
+    public boolean isSubPath(AbsoluteDirectory absDir) {
+        return false;
+    }
+
+    @Override
     public boolean hasParent() {
         return _absoluteDirectory.hasParent();
     }

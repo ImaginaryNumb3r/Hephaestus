@@ -5,16 +5,21 @@ import core.tuple.Tuple;
 import java.awt.*;
 
 /**
- * @author Patrick
- *         Created: 24.04.2016
- *         Purpose:
+ * Mutable Coordination class for 2D surfaces
+ *
+ * @author Patrick Plieschnegger
+ * @since 10.11.2016
  */
 public class Coord2D implements Tuple<Integer, Integer>{
     private int _x;
     private int _y;
 
     public Coord2D(Coord2D coord){
-        this(coord.getX(), coord.getY());
+        this(coord._x, coord._y);
+    }
+
+    public Coord2D(Tuple<Integer, Integer> tuple){
+        this(tuple.getA(), tuple.getB());
     }
 
     public Coord2D(int x, int y) {

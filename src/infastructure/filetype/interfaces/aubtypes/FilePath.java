@@ -29,4 +29,6 @@ public interface FilePath extends Path {
     FileNode fileNode();
 
     FilePath copy();
+
+    boolean isSubPath(RelativeFile filePath);
 }

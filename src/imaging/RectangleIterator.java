@@ -1,5 +1,7 @@
 package imaging;
 
+import core.datastructure.value.Coord2D;
+
 import java.awt.*;
 import java.util.Iterator;
 
@@ -9,7 +11,7 @@ import java.util.Iterator;
  * @author Patrick
  * @since 12.11.2016
  */
-public class RectangleIterator implements Iterator<Coord>, Iterable<Coord> {
+public class RectangleIterator implements Iterator<Coord2D>, Iterable<Coord2D> {
     private final int X;
     private final int Y;
     private final int WIDTH;
@@ -46,8 +48,8 @@ public class RectangleIterator implements Iterator<Coord>, Iterable<Coord> {
      * @return the next pixel of the matrix
      */
     @Override
-    public Coord next() {
-        Coord coord = new Coord(_curX, _curY);
+    public Coord2D next() {
+        Coord2D coord = new Coord2D(_curX, _curY);
 
         ++_curY;
         if (_curY >= WIDTH + Y){
@@ -58,7 +60,7 @@ public class RectangleIterator implements Iterator<Coord>, Iterable<Coord> {
     }
 
     @Override
-    public Iterator<Coord> iterator() {
+    public Iterator<Coord2D> iterator() {
         return this;
     }
 }

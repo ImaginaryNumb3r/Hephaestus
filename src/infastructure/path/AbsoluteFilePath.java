@@ -1,5 +1,6 @@
 package infastructure.path;
 
+import core.exception.NoImplementationException;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteFile;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
@@ -72,6 +73,21 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
         PathNodeList nodeList = tailNode().copy();
 
         return new AbsoluteFilePath(nodeList.getHead(), nodeList.getTail(), nodeList.getFile(), nodeList.length());
+    }
+
+    @Override
+    public boolean isSubPath(RelativeDirectory relDir) {
+        throw new NoImplementationException();
+    }
+
+    @Override
+    public boolean isSubPath(AbsoluteFile absFile) {
+        throw new NoImplementationException();
+    }
+
+    @Override
+    public boolean isSubPath(RelativeFile filePath) {
+        throw new NoImplementationException();
     }
 
     @Override

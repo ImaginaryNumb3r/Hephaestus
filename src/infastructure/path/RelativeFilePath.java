@@ -1,5 +1,6 @@
 package infastructure.path;
 
+import core.exception.NoImplementationException;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
@@ -53,10 +54,19 @@ public class RelativeFilePath extends RelativePathImpl<RelativeFilePath> impleme
         return new RelativeFilePath(nodeList.getHead(), nodeList.getTail(), nodeList.getFile(), nodeList.length());
     }
 
+    @Override
+    public boolean isSubPath(RelativeDirectory relDir) {
+        throw new NoImplementationException();
+    }
+
     // ====================
     //   Relative File
     // ====================
 
+    @Override
+    public boolean isSubPath(RelativeFile relFile) {
+        throw new NoImplementationException();
+    }
 
     @Override
     public String getName() {

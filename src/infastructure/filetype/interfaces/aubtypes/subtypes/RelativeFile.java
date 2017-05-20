@@ -21,4 +21,6 @@ public interface RelativeFile extends FilePath, RelativePath {
     RelativeFile remove (RelativeDirectory removal) throws PathsNotMatchingException;
 
     RelativeFile copy();
+
+    boolean isSubPath(RelativeFile relFile);
 }

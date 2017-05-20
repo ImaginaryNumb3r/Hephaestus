@@ -29,4 +29,6 @@ public interface AbsoluteFile extends AbsolutePath, FilePath {
     RelativeDirectory remove(AbsoluteFile absFile) throws PathsNotMatchingException;
 
     AbsoluteFile copy();
+
+    boolean isSubPath(AbsoluteFile absFile);
 }

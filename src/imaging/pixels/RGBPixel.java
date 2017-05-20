@@ -8,6 +8,7 @@ import core.tuple.Triplet;
  * @author Patrick
  * @since 12.11.2016
  */
+@SuppressWarnings("WeakerAccess")
 public class RGBPixel {
     protected int _red;
     protected int _green;

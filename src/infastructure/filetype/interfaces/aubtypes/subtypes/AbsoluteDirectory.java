@@ -26,8 +26,9 @@ public interface AbsoluteDirectory extends AbsolutePath, DirectoryPath {
     AbsoluteDirectory add (String rel); // TOOD: Remove
 
     AbsoluteDirectory remove (RelativeDirectory removal) throws PathsNotMatchingException;
-
     AbsoluteDirectory copy();
+
+    boolean isSubPath(AbsoluteDirectory absDir);
 
     // TODO: Move down
 

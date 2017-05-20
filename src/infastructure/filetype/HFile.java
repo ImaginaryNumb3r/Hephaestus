@@ -1,5 +1,6 @@
 package infastructure.filetype;
 
+import core.exception.NoImplementationException;
 import infastructure.filetype.interfaces.AbstractFile;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
@@ -194,6 +195,21 @@ public class HFile extends HEntry implements AbstractFile{
     public AbsoluteFile copy() {
         return new HFile((AbsoluteFile) this);
 }
+
+    @Override
+    public boolean isSubPath(RelativeDirectory relDir) {
+        throw new NoImplementationException();
+    }
+
+    @Override
+    public boolean isSubPath(AbsoluteFile absFile) {
+        throw new NoImplementationException();
+    }
+
+    @Override
+    public boolean isSubPath(RelativeFile filePath) {
+        throw new NoImplementationException();
+    }
 
     @Override
     public boolean hasParent() {

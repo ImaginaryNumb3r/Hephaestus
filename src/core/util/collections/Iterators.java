@@ -7,12 +7,14 @@ import java.util.Iterator;
 
 /**
  * @author Patrick
- * @description
  * @since 01.05.2017
  */
 @SuppressWarnings("WeakerAccess")
 public final class Iterators {
 
+    /**
+     * @throws UnsupportedOperationException Cannot be instantiated
+     */
     private Iterators(){
         throw new UnsupportedOperationException("Cannot instantiate class \"Iterators\"");
     }

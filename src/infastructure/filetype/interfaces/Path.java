@@ -17,6 +17,7 @@ public interface Path{
         // - boolean StartsWith()
         // - boolean EndsWith()
         // - Uri toUri()
+        // - isSubPath()
 
     int length();
 
@@ -70,4 +71,7 @@ public interface Path{
     default boolean isEmpty(){
         return false;
     }
+
+    boolean isSubPath(RelativeDirectory relDir);
+
 }
