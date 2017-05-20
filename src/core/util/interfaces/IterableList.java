@@ -13,12 +13,13 @@ public interface IterableList<T> extends Iterable<T> {
      * @return a ListIterator
      */
     @Override
-    ListIterator<T> iterator();
+    default ListIterator<T> iterator(){
+        return listIterator();
+    }
 
     /**
      * Returns a ListIterator over elements of type {@code T}.
      * @return a ListIterator
      */
     ListIterator<T> listIterator();
-
 }

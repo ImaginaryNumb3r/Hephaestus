@@ -1,5 +1,7 @@
 package core.datastructure.value;
 
+import core.tuple.Tuple;
+
 import java.awt.*;
 
 /**
@@ -7,7 +9,7 @@ import java.awt.*;
  *         Created: 24.04.2016
  *         Purpose:
  */
-public class Coord2D {
+public class Coord2D implements Tuple<Integer, Integer>{
     private int _x;
     private int _y;
 
@@ -66,6 +68,11 @@ public class Coord2D {
         _y *= mult;
     }
 
+    public void add(Tuple<Integer, Integer> add){
+        _x += add.getA();
+        _y += add.getB();
+    }
+
     public void add(Coord2D add){
         _x += add._x;
         _y += add._y;
@@ -77,4 +84,15 @@ public class Coord2D {
         _y = temp;
     }
 
+    @Deprecated
+    @Override
+    public Integer getA() {
+        return _x;
+    }
+
+    @Deprecated
+    @Override
+    public Integer getB() {
+        return _y;
+    }
 }

@@ -31,13 +31,6 @@ public interface Tuple<A, B> extends Unit<A>{
 
     B getB();
 
-    // void setB(B b);
-
-    @Override
-    default ListIterator<Object> iterator(){
-        return listIterator();
-    }
-
     @Override
     default ListIterator<Object> listIterator(){
         return GenericListIterator.from(getA(), getB());
