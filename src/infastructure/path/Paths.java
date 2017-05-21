@@ -1,5 +1,6 @@
 package infastructure.path;
 
+import core.datastructure.Lazy;
 import infastructure.path.enums.PathType;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -17,6 +18,7 @@ import java.util.LinkedList;
  * Utility class for paths and when working with them
  */
 public class Paths {
+    private static final Lazy<Paths> INSTANCE = Lazy.from(Paths::new);
     private final HashMap<Character, Boolean> _forbiddenCharacter;
     private String _testFilesPath;
 
@@ -134,10 +136,6 @@ public class Paths {
     // =================
 
     public static Paths instance(){
-        return PathsInstanceHolder.INSTANCE;
-    }
-
-    private static class PathsInstanceHolder {
-        private static final Paths INSTANCE = new Paths();
+        return INSTANCE.get();
     }
 }

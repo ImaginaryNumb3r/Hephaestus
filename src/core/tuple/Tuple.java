@@ -29,6 +29,11 @@ public interface Tuple<A, B> extends Unit<A>{
         return new TupleImpl<>(a, b);
     }
 
+    /**
+     * @apiNote When inheriting Tuple, make this a default method that is deprecated.
+     * This method should only be used when referred to as a Tuple.
+     * Do not call manually to improve code readability.
+     */
     B getB();
 
     @Override

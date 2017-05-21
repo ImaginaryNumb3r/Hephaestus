@@ -5,10 +5,10 @@ import core.tuple.Tuple;
 import java.awt.*;
 
 /**
- * Mutable Coordination class for 2D surfaces
- *
  * @author Patrick Plieschnegger
  * @since 10.11.2016
+ *
+ * Mutable Coordination class for 2D surfaces
  */
 public class Coord2D implements Tuple<Integer, Integer>{
     private int _x;
@@ -89,12 +89,20 @@ public class Coord2D implements Tuple<Integer, Integer>{
         _y = temp;
     }
 
+    /**
+     * Deprecated method, due to backwards comparability with Tuple.
+     * Use only when referred to as a Tuple. Do not call manually to improve code readability.
+     */
     @Deprecated
     @Override
     public Integer getA() {
         return _x;
     }
 
+    /**
+     * Deprecated method, due to backwards comparability with Tuple.
+     * Use only when referred to as a Tuple. Do not call manually to improve code readability.
+     */
     @Deprecated
     @Override
     public Integer getB() {

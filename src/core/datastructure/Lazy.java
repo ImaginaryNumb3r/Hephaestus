@@ -16,8 +16,9 @@ import java.util.function.Supplier;
 public interface Lazy<T> extends Supplier<T> {
 
     /**
-     * Atomically returns the already instance as determined in the supplier.
-     * @return the already instance as determined in the supplier
+     * Returns the instance if it was already loaded previously.
+     * Otherwise, the value is atomically generated as determined in the supplier
+     * @return the instance as determined in the supplier
      */
     T get();
 

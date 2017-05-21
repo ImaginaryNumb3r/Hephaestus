@@ -1,9 +1,13 @@
 package core.exception;
 
+import core.util.annotations.Unfinished;
+
 /**
  * @author Patrick
  * @since 15.11.2016
  */
+@Unfinished
+// TODO: Conceptual problem: Does not work with null as parameter
 public class EnumException extends EnumConstantNotPresentException {
 
     /**
@@ -31,5 +35,4 @@ public class EnumException extends EnumConstantNotPresentException {
                 ? "null"
                 : enumeration.toString();
     }
-
 }

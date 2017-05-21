@@ -59,7 +59,6 @@ class LazyImpl<T> implements Lazy<T>, Serializable {
         return _value != null;
     }
 
-
     /**
      * Creates a new lazy loaded instance, which creates a new object as declared with a supplier when demanded.
      * @param supplier which creates the instance of value that will be accessed

@@ -21,13 +21,41 @@ public interface KeyPair<Key, Val> extends Tuple<Key, Val> {
         return new KeyPairImpl<>(key, val);
     }
 
+    /**
+     * Returns the key of the KeyPair
+     * @return the key of the KeyPair
+     */
     default Key getKey(){
         return getA();
     }
 
+    /**
+     * Returns the value of the KeyPair
+     * @return the value of the KeyPair
+     */
     default Val getValue(){
         return getB();
     }
 
-    void putInto(Map<Key, Val> map);
+    /**
+     * Puts the value into the map, at the position of the given key.
+     * @param map that has the key-value pair to be inserted
+     */
+    void putInto(@NotNull Map<Key, Val> map);
+
+    /**
+     * Deprecated method, due to backwards comparability with Tuple.
+     * Use only when referred to as a Tuple. Do not call manually to improve code readability.
+     */
+    @Deprecated
+    @Override
+    Key getA();
+
+    /**
+     * Deprecated method, due to backwards comparability with Tuple.
+     * Use only when referred to as a Tuple. Do not call manually to improve code readability.
+     */
+    @Deprecated
+    @Override
+    Val getB();
 }

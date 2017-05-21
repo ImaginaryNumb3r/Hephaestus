@@ -5,6 +5,9 @@ import core.tuple.Tuple;
 /**
  * @author Patrick
  * @since 21.05.2017
+ *
+ * Saves the height and width of a 2D collection.
+ * Value class that only contains non-nullable values.
  */
 public class Bounds implements Tuple<Integer, Integer> {
     private final int WIDTH;
@@ -23,12 +26,20 @@ public class Bounds implements Tuple<Integer, Integer> {
         return HEIGHT;
     }
 
+    /**
+     * Deprecated method, due to backwards comparability with Tuple.
+     * Use only when referred to as a Tuple. Do not call manually to improve code readability.
+     */
     @Deprecated
     @Override
     public Integer getA() {
         return WIDTH;
     }
 
+    /**
+     * Deprecated method, due to backwards comparability with Tuple.
+     * Use only when referred to as a Tuple. Do not call manually to improve code readability.
+     */
     @Deprecated
     @Override
     public Integer getB() {

@@ -40,6 +40,11 @@ public interface Quartet<A, B, C, D> extends Triplet<A, B, C> {
         return new QuartetImpl<>(a, b, c, d);
     }
 
+    /**
+     * @apiNote When inheriting Tuple, make this a default method that is deprecated.
+     * This method should only be used when referred to as a Tuple.
+     * Do not call manually to improve code readability.
+     */
     D getD();
 
     @Override

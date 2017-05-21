@@ -6,6 +6,8 @@ import core.util.contracts.exceptions.ContractException;
 /**
  * @author Patrick
  * @since 26.11.2016
+ *
+ * An exception indicating that null was assigned to a non-nullable parameter
  */
 public class ParameterNullException extends ContractException {
     @SuppressWarnings("WeakerAccess")

@@ -5,6 +5,8 @@ package core.exception;
  * Created: 11.12.2016
  * Purpose:
  */
+@Deprecated
+// TODO: Remove, since unnecessary with generic throwables
 public class FunctionalException extends Exception {
 
     public FunctionalException() {

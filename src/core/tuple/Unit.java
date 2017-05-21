@@ -22,6 +22,11 @@ public interface Unit<A> extends Pattern {
         return new UnitImpl<>(a);
     }
 
+    /**
+     * @apiNote When inheriting Tuple, make this a default method that is deprecated.
+     * This method should only be used when referred to as a Tuple.
+     * Do not call manually to improve code readability.
+     */
     A getA();
 
     @Override

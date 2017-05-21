@@ -35,6 +35,11 @@ public interface Triplet<A, B, C> extends Tuple<A, B> {
         return new TripletImpl<>(a, b, c);
     }
 
+    /**
+     * @apiNote When inheriting Tuple, make this a default method that is deprecated.
+     * This method should only be used when referred to as a Tuple.
+     * Do not call manually to improve code readability.
+     */
     C getC();
 
     @Override
