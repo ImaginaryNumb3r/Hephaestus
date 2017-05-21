@@ -42,5 +42,4 @@ public interface Lazy<T> extends Supplier<T> {
     static <S> Lazy<S> from(@NotNull Supplier<S> supplier){
         return LazyImpl.from(supplier);
     }
-
 }

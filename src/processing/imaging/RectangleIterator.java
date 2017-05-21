@@ -1,6 +1,7 @@
-package imaging;
+package processing.imaging;
 
 import core.datastructure.value.Coord2D;
+import core.util.interfaces.Accessible2D;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import java.util.Iterator;
  * @author Patrick
  * @since 12.11.2016
  */
-public class RectangleIterator implements Iterator<Coord2D>, Iterable<Coord2D> {
+public class RectangleIterator implements Iterator<Coord2D> {
     private final int X;
     private final int Y;
     private final int WIDTH;
@@ -57,10 +58,5 @@ public class RectangleIterator implements Iterator<Coord2D>, Iterable<Coord2D> {
             ++_curX;
         }
         return coord;
-    }
-
-    @Override
-    public Iterator<Coord2D> iterator() {
-        return this;
     }
 }

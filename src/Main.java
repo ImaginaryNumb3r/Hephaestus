@@ -1,3 +1,4 @@
+import core.util.interfaces.Accessible;
 import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
 import stream.Count;
@@ -24,6 +25,9 @@ public class Main {
     }*/
 
 
+    private static void funcTest(Function<Integer, Integer> function){
+
+    }
 
     private static <I, V, T extends MultiIdTreeNodeReader<I, V, T>, U extends Iterable<U>> void test(){
         MultiIdTreeNodeImpl<I, V> test2 = new MultiIdTreeNodeImpl<>(null);

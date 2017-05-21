@@ -1,10 +1,13 @@
 package core.datastructure;
 
+import com.sun.istack.internal.NotNull;
+import core.datastructure.value.Bounds;
+import core.exception.NoImplementationException;
 import core.tuple.Tuple;
-import imaging.Iterator2D;
+import core.util.interfaces.Collection2D;
+import processing.imaging.Iterator2D;
 
 import java.security.InvalidParameterException;
-import java.util.Iterator;
 
 /**
  * Representation of a 2D data structure
@@ -15,8 +18,9 @@ import java.util.Iterator;
  * TODO: Matrix operations
  * TODO: 2D Iterator Strategy, like with Trees
  */
-public class Matrix<T> implements Iterable<T>{
+public class Matrix<T> implements Collection2D<T> {
     private final T[][] _matrix;
+    private final Lazy<Integer> _size;
 
     /**
      * Creates a new instance of a Matrix
@@ -28,14 +32,31 @@ public class Matrix<T> implements Iterable<T>{
      */
     @SuppressWarnings("unchecked")
     public Matrix(int width, int height) {
-        if (width < 0 || height < 0) throw new NegativeArraySizeException();
-        if (width == 0 && width != height) throw new InvalidParameterException("Matrix can only be empty if it is initialized with both, width and height at 0");
-
+        areValidParameters(width, height, false);
         _matrix = (T[][])new Object[width][height];
+        _size = Lazy.from(() -> getWidth() * getHeight());
     }
 
-    public Matrix(T[][] matrix) {
+    public boolean areValidParameters(int width, int height){
+        return areValidParameters(width, height, true);
+    }
+
+    private boolean areValidParameters(int width, int height, boolean suppressExceptions){
+        boolean isValid = width < 0 || height < 0;
+        if (!isValid && !suppressExceptions) throw new NegativeArraySizeException();
+        isValid &= width == 0 && width != height;
+        if (isValid && !suppressExceptions) throw new InvalidParameterException("Matrix can only be empty if it is initialized with both, width and height at 0");
+
+        return isValid;
+    }
+
+    public Matrix(@NotNull T[][] matrix) {
         _matrix = matrix;
+        _size = Lazy.from(() -> getWidth() * getHeight());
+    }
+
+    public int size(){
+        return _size.get();
     }
 
     /**
@@ -44,9 +65,8 @@ public class Matrix<T> implements Iterable<T>{
      * @return value at the spcified location
      * @throws ArrayIndexOutOfBoundsException if either one of the parameters is smaller than zero or greater the maximum length
      */
-    public T get(int width, int heigth){
+    public T getAt(int width, int heigth){
         if (width < 0 || heigth < 0) throw new ArrayIndexOutOfBoundsException();
-
         return _matrix[width][heigth];
     }
 
@@ -56,20 +76,24 @@ public class Matrix<T> implements Iterable<T>{
      * @return value at the spcified location
      * @throws ArrayIndexOutOfBoundsException if either one of the parameters is smaller than zero or greater the maximum length
      */
-    public T get(Tuple<Integer, Integer> tuple){
-        return get(tuple.getA(), tuple.getB());
+    public T getAt(Tuple<Integer, Integer> tuple){
+        return getAt(tuple.getA(), tuple.getB());
     }
 
     public void set(int width, int heigth, T value){
         _matrix[width][heigth] = value;
     }
 
-    public void Set(Tuple<Integer, Integer> tuple, T value){
+    public void set(Tuple<Integer, Integer> tuple, T value){
         set(tuple.getA(), tuple.getB(), value);
     }
 
     public int getWidth(){
         return _matrix.length;
+    }
+
+    public Bounds bounds(){
+        return new Bounds(getWidth(), getHeight());
     }
 
     public int getHeight(){
@@ -79,15 +103,26 @@ public class Matrix<T> implements Iterable<T>{
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public boolean contains(T element) {
+        throw new NoImplementationException();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        throw new NoImplementationException();
+    }
+
+    @Override
+    public Iterator2D<T> iterator() {
         return new Iterator2D<>(this);
     }
 
-        /**
-         * Returns a copy of the internal matrix
-         * @return a copy of the internal matrix
-         */
-        public T[][] toArray(){
-            return _matrix.clone();
-        }
+    /**
+     * Returns a copy of the internal matrix
+     * @return a copy of the internal matrix
+     */
+    public T[][] toArray(){
+        return _matrix.clone();
     }
+
+}

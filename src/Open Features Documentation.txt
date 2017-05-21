@@ -1,7 +1,5 @@
 Open Features:
     Contracts
-        - Beginning: Null and other common checks for parameters
-            -> e.g. Contract.NotNull(Object...);
         - Returning: An AutoClosable ResultContract that is called before the end
             -> eg:
     Own Streams

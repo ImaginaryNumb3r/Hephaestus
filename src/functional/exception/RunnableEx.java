@@ -7,7 +7,7 @@ import core.exception.FunctionalException;
  * @since 23.01.2017
  */
 @FunctionalInterface
-public interface RunnableEx extends Runnable{
+public interface RunnableEx<X extends Throwable> extends Runnable{
 
     /**
      * Executes a method, but a runtime exception may also be thrown
@@ -17,15 +17,15 @@ public interface RunnableEx extends Runnable{
     default void run(){
         try {
             tryRun();
-        } catch (FunctionalException e) {
-            throw new RuntimeException(e);
+        } catch (Throwable throwable) {
+            throw new RuntimeException(throwable);
         }
     }
 
     /**
      * Executes a method, but an exception may also be thrown
-     * @throws FunctionalException will have an inner exception, which needs to be specified in the implementation
+     * @throws X of specified type
      */
-    void tryRun() throws FunctionalException;
+    void tryRun() throws X;
 
 }

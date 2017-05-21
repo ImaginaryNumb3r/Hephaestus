@@ -1,18 +1,20 @@
-package imaging;
+package processing.imaging;
 
 import core.datastructure.Matrix;
+import core.util.interfaces.Collection2D;
 
 import java.util.Iterator;
 
 /**
- * InnerIterator for 2D objects
- * InnerIterator which iterates through a matrix, line by line and returns the according pixels
- *
  * @author Patrick
  * @since 12.11.2016
+ *
+ * InnerIterator for 2D objects
+ * InnerIterator which iterates through a matrix, line by line and returns the according pixels
  */
+// TODO: Different iteration strategies
 public class Iterator2D<T> implements Iterator<T> {
-    protected Matrix<T> _matrix;
+    protected Collection2D<T> _matrix;
     protected int _curX;
     protected int _curY;
 
@@ -46,7 +48,6 @@ public class Iterator2D<T> implements Iterator<T> {
         int x = _curX;
         int y = _curY;
 
-
         ++_curY;
         // Reset line and jump to next one
         if (_curY >= _matrix.getWidth()){
@@ -54,6 +55,6 @@ public class Iterator2D<T> implements Iterator<T> {
             ++_curX;
         }
 
-        return _matrix.get(x, y);
+        return _matrix.getAt(x, y);
     }
 }

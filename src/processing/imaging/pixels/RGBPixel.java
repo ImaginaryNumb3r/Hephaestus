@@ -1,4 +1,4 @@
-package imaging.pixels;
+package processing.imaging.pixels;
 
 import core.tuple.Triplet;
 

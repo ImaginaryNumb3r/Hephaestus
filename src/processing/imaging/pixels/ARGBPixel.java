@@ -1,4 +1,4 @@
-package imaging.pixels;
+package processing.imaging.pixels;
 
 import com.sun.istack.internal.NotNull;
 import core.tuple.Quartet;
