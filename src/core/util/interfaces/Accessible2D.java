@@ -2,6 +2,7 @@ package core.util.interfaces;
 
 import com.sun.istack.internal.NotNull;
 import core.tuple.Tuple;
+import core.util.contracts.Contract;
 
 import java.util.function.BiFunction;
 
@@ -36,6 +37,7 @@ public interface Accessible2D<T> extends BiFunction<Integer, Integer, T>{
      * @return the given value at the specified location
      */
     default T getAt(@NotNull Tuple<Integer, Integer> tuple){
+        Contract.checkNull(tuple, "tuple");
         return getAt(tuple.getA(), tuple.getB());
     }
 

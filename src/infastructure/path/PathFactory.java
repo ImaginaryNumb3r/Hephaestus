@@ -355,7 +355,7 @@ public class PathFactory {
             }
         }
 
-        // If isAbsolute is set, the name really must be absolute
+        // If isAbsolute is setAt, the name really must be absolute
         isValid &= confirmedAsAbsolute == isAbsolute;
 
         return isValid;

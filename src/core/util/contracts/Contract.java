@@ -1,5 +1,6 @@
 package core.util.contracts;
 
+import com.sun.istack.internal.NotNull;
 import core.exception.FunctionalException;
 import core.exception.ParameterNullException;
 import core.util.collections.Iterators;
@@ -7,6 +8,8 @@ import core.util.contracts.exceptions.ContractException;
 import functional.exception.SupplierEx;
 
 import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Creator: Patrick
@@ -15,6 +18,8 @@ import java.util.function.BooleanSupplier;
  * Experimental Class
  */
 @SuppressWarnings("WeakerAccess")
+
+// TODO: Consider removing everything from Contract, other than checkNull
 public class Contract implements AutoCloseable {
     private BooleanSupplier _contract;
 
@@ -73,8 +78,9 @@ public class Contract implements AutoCloseable {
      * @param objects arguments containing objects to be tested
      * @throws ContractException if contract is violated
      */
-    public static <T> void checkAndThrow(SupplierEx<T> supplier, Object... objects) throws ContractException {
-        try {
+    public static <T, X extends RuntimeException> void checkAndThrow(
+            SupplierEx<T, X> supplier, Object... objects) throws X{
+        /* try */{
             if (objects == null) {
                 supplier.tryGet(); // Throw exception of supplier
             }
@@ -86,18 +92,100 @@ public class Contract implements AutoCloseable {
                         isNull = true; // Terminate loop in case no exception is thrown
                     }
                 }
-            }
-        } catch (FunctionalException ex){
-            throw new ContractException(ex);
+            } /*
+        } catch (X ex){
+            throw new ContractException(ex);*/
         }
     }
 
     /**
-     * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
-     * @param objects arguments containing objects to be tested
-     * @throws ContractException if contract is violated
+     * Performs a check with a given predicate and throws the exception if the expression is true
+     * No null checks are performed, but parameters may not be called with null
+     * @param test expression that is to be tested
+     * @param supplier that produces he Exception of the test equals to true
+     * @throws X if predicate fails
      */
-    public static void checkAndThrow(String message, Object... objects) throws ContractException {
-        checkAndThrow(() -> {throw new FunctionalException(message);}, objects);
+    public static <X extends RuntimeException> void throwIf(
+            @NotNull BooleanSupplier test,@NotNull Supplier<X> supplier){
+        if (test.getAsBoolean()) {
+            throw supplier.get();
+        }
     }
+
+    //<editor-fold desc="Check for negative Number: Throws IllegalArgumentException">
+
+    /**
+     * Performs a check for a negative value on the given long.
+     * Causes an IllegalArgumentException exception if the check fails.
+     * @param number as long value
+     * @throws IllegalArgumentException if number is smaller zero
+     */
+    public static void checkNegative(long number) {
+        checkNegative((Number) number, null);
+    }
+
+    /**
+     * Performs a check for a negative value on the given long.
+     * Causes an IllegalArgumentException exception if the check fails.
+     * @param number as long value
+     * @param paraName name of the parameter that caused the exception. Will be specified in the exception message
+     * @throws IllegalArgumentException if number is smaller zero
+     */
+    public static void checkNegative(long number, String paraName) {
+        checkNegative((Number) number, paraName);
+    }
+
+    /**
+     * Performs a check for a negative value on the given char value.
+     * Causes an IllegalArgumentException exception if the check fails.
+     * @param charValue as char value
+     * @throws IllegalArgumentException if number is smaller zero
+     */
+    public static void checkNegative(char charValue) {
+        checkNegative(charValue, null);
+    }
+
+    /**
+     * Performs a check for a negative value on the given char value.
+     * Causes an IllegalArgumentException exception if the check fails.
+     * @param number as char value
+     * @param paraName name of the parameter that caused the exception. Will be specified in the exception message
+     * @throws IllegalArgumentException if number is smaller zero
+     */
+    public static void checkNegative(char number, String paraName) {
+        checkNegative((long) number, paraName);
+    }
+
+    /**
+     * Performs a check for a negative value on the double.
+     * Causes an IllegalArgumentException exception if the check fails.
+     * @param number as double value
+     * @throws IllegalArgumentException if number is smaller zero
+     */
+    public static void checkNegative(double number) {
+        checkNegative((Number) number, null);
+    }
+
+    /**
+     * Performs a check for a negative value on the double.
+     * Causes an IllegalArgumentException exception if the check fails.
+     * @param number as double value
+     * @param paraName name of the parameter that caused the exception. Will be specified in the exception message
+     * @throws IllegalArgumentException if number is smaller zero
+     */
+    public static void checkNegative(double number, String paraName) {
+        checkNegative((Number) number, paraName);
+    }
+
+    private static void checkNegative(Number number, String paraName) {
+        boolean isNegative = number.doubleValue() < 0;
+        if (isNegative){
+            paraName = paraName != null
+                    ? paraName = " \"" + paraName + "\""
+                    : "";
+            throw new IllegalArgumentException("Parameter" + paraName + " may not be null");
+        }
+    }
+    //</editor-fold>
+
 }

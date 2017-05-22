@@ -4,10 +4,16 @@ import com.sun.istack.internal.NotNull;
 import core.datastructure.value.Bounds;
 import core.exception.NoImplementationException;
 import core.tuple.Tuple;
+import core.util.collections.Maps;
+import core.util.contracts.Contract;
 import core.util.interfaces.Collection2D;
 import processing.imaging.Iterator2D;
 
 import java.security.InvalidParameterException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.function.BooleanSupplier;
 
 /**
  * Representation of a 2D data structure
@@ -20,11 +26,11 @@ import java.security.InvalidParameterException;
  */
 public class Matrix<T> implements Collection2D<T> {
     private final T[][] _matrix;
-    private final Lazy<Integer> _size;
+    private final Lazy<Integer> _size; // Calculate size only once
 
+    //<editor-fold desc="Constructors">
     /**
      * Creates a new instance of a Matrix
-     *
      * @param width of the matrix. May only be zero if height is zero as well
      * @param height of the matrix. May only be zero if width is zero as well
      * @throws NegativeArraySizeException if one of the indices is negative
@@ -37,10 +43,45 @@ public class Matrix<T> implements Collection2D<T> {
         _size = Lazy.from(() -> getWidth() * getHeight());
     }
 
+    public Matrix(@NotNull T[][] matrix) {
+        Contract.checkNull(matrix, "matrix");
+        _matrix = matrix;
+        _size = Lazy.from(() -> getWidth() * getHeight());
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Construction Validation">
+    /**
+     * Checks parameters of the matrix amd returns true if they are valid
+     * @param width of the matrix. May only be zero if height is zero as well
+     * @param height of the matrix. May only be zero if width is zero as well
+     * @throws NegativeArraySizeException if one of the indices is negative
+     * @throws InvalidParameterException when width or height are initialized with zero, but not both
+     * @return true if parameters are valid to initialize a Matrix
+     */
     public boolean areValidParameters(int width, int height){
         return areValidParameters(width, height, true);
     }
 
+    /**
+     * Checks parameters of the matrix amd returns true if they are valid
+     * @param bounds of the matrix, containing height and width. Values must not be zero when they are both
+     * @throws NegativeArraySizeException if one of the indices is negative
+     * @throws InvalidParameterException when width or height are initialized with zero, but not both
+     * @return true if parameters are valid to initialize a Matrix
+     */
+    public boolean areValidParameters(Bounds bounds){
+        return areValidParameters(bounds.getWidth(), bounds.getHeight(), true);
+    }
+
+    /**
+     * Checks parameters of the matrix
+     * @param suppressExceptions to decide whether to suppress the expression or not
+     * @param width of the matrix. May only be zero if height is zero as well
+     * @param height of the matrix. May only be zero if width is zero as well
+     * @throws NegativeArraySizeException if one of the indices is negative
+     * @throws InvalidParameterException when width or height are initialized with zero, but not both
+     */
     private boolean areValidParameters(int width, int height, boolean suppressExceptions){
         boolean isValid = width < 0 || height < 0;
         if (!isValid && !suppressExceptions) throw new NegativeArraySizeException();
@@ -49,16 +90,13 @@ public class Matrix<T> implements Collection2D<T> {
 
         return isValid;
     }
-
-    public Matrix(@NotNull T[][] matrix) {
-        _matrix = matrix;
-        _size = Lazy.from(() -> getWidth() * getHeight());
-    }
+    //</editor-fold>
 
     public int size(){
         return _size.get();
     }
 
+    //<editor-fold desc="Accessors">
     /**
      * @param width horizontal index for the value
      * @param heigth vertical index for the value
@@ -70,23 +108,10 @@ public class Matrix<T> implements Collection2D<T> {
         return _matrix[width][heigth];
     }
 
-
-    /**
-     * @param tuple for accessing the value at the given location
-     * @return value at the spcified location
-     * @throws ArrayIndexOutOfBoundsException if either one of the parameters is smaller than zero or greater the maximum length
-     */
-    public T getAt(Tuple<Integer, Integer> tuple){
-        return getAt(tuple.getA(), tuple.getB());
-    }
-
-    public void set(int width, int heigth, T value){
+    public void setAt(int width, int heigth, T value){
         _matrix[width][heigth] = value;
     }
-
-    public void set(Tuple<Integer, Integer> tuple, T value){
-        set(tuple.getA(), tuple.getB(), value);
-    }
+    //</editor-fold>
 
     public int getWidth(){
         return _matrix.length;
@@ -104,12 +129,18 @@ public class Matrix<T> implements Collection2D<T> {
 
     @Override
     public boolean contains(T element) {
-        throw new NoImplementationException();
+        for (T cur : this) {
+            boolean equals = Objects.equals(element, cur);
+            if (equals) return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean isEmpty() {
-        throw new NoImplementationException();
+    public boolean containsAll(Collection<T> elements) {
+        HashMap<T, Boolean> map = Maps.from(elements, () -> false);
+        
+        return false;
     }
 
     @Override

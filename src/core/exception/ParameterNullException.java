@@ -9,7 +9,7 @@ import core.util.contracts.exceptions.ContractException;
  *
  * An exception indicating that null was assigned to a non-nullable parameter
  */
-public class ParameterNullException extends ContractException {
+public class ParameterNullException extends IllegalArgumentException {
     @SuppressWarnings("WeakerAccess")
     public static final String MESSAGE = "Parameter may not be null";
 

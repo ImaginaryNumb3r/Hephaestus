@@ -7,3 +7,5 @@ Open Features:
             -> Stream.of <- equivalent that also allows arrays/Collections/Iterables
         - Better sinks
             -> to Collectors.toArrayList/toLinkedList
+    Data Types:
+        - BoolMap with boolean values

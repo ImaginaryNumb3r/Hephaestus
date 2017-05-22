@@ -69,7 +69,7 @@ public class MultiIdTreeNodeImpl<I, V>  /* extends MultiIdTreeNodeReaderImpl<I, 
     @Override
     public void addChild(MultiIdTreeNodeImpl<I, V> child) {
         if (child._parent != null && child._parent != this){
-            throw new NodeAlreadyExistsException("Parent node in node " + child.toString() + " was already set!");
+            throw new NodeAlreadyExistsException("Parent node in node " + child.toString() + " was already setAt!");
         }
 
         _children.add(child);

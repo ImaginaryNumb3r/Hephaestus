@@ -2,6 +2,7 @@ package stream.streams;
 
 import com.sun.istack.internal.NotNull;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -26,6 +27,10 @@ public abstract class AbstractStreams<T> implements BaseStreams<T>{
 
     public AbstractStreams(@NotNull Spliterator<T> spliterator) {
         _spliterator = spliterator;
+    }
+
+    public AbstractStreams(Iterator<T> iterator, int size) {
+        _spliterator = Spliterators.spliterator(iterator, 0, size);
     }
     //</editor-fold>
 

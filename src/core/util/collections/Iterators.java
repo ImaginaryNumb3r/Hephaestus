@@ -1,8 +1,12 @@
 package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
+import core.tuple.Tuple;
 import core.util.contracts.Contract;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 /**
@@ -33,4 +37,6 @@ public final class Iterators {
     public static <T> Iterator<T> from(T[] array){
         return ArrayIterator.from(array);
     }
+
+
 }

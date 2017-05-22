@@ -1,5 +1,6 @@
 package core.datastructure.value;
 
+import com.sun.istack.internal.NotNull;
 import core.tuple.Tuple;
 
 import java.awt.*;
@@ -73,18 +74,22 @@ public class Coord2D implements Tuple<Integer, Integer>{
         _y *= mult;
     }
 
-    public void add(Tuple<Integer, Integer> add){
+    public void add(@NotNull Tuple<Integer, Integer> add){
         _x += add.getA();
         _y += add.getB();
     }
 
-    public void add(Coord2D add){
+    public void add(@NotNull Coord2D add){
         _x += add._x;
         _y += add._y;
     }
 
+    /**
+     * Switches value of X with Y and vice versa
+     */
     public void invert(){
         int temp = _x;
+        //noinspection SuspiciousNameCombination
         _x = _y;
         _y = temp;
     }

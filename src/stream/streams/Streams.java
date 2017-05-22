@@ -1,38 +1,59 @@
 package stream.streams;
 
+import com.sun.istack.internal.NotNull;
+import core.exception.ParameterNullException;
+import core.util.contracts.Contract;
+
+import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Stream;
+
+import static core.util.contracts.Contract.checkNull;
+import static core.util.contracts.Contract.throwIf;
 
 /**
  * @author Patrick
  * @since 19.11.2016
  */
 public class Streams<T> extends AbstractStreams<T> {
-    public Streams(T[] array) {
+
+    //<editor-fold desc="Constructors">
+    protected Streams(T[] array) {
         super(array);
     }
 
-    public Streams(List<T> list) {
+    protected Streams(List<T> list) {
         super(list);
     }
 
-    public Streams(Spliterator<T> spliterator) {
+    protected Streams(Spliterator<T> spliterator) {
         super(spliterator);
     }
 
+    protected Streams(Iterator<T> iterator, int size) {
+        super(iterator, size);
+    }
+    //</editor-fold>
+
     public static <T> Stream<T> stream(T[] array){
-        if (array == null) throw new IllegalArgumentException("paramter may not be null");
+        checkNull(array, "array");
         return new Streams<>(array).stream();
     }
 
+    public static <T> Stream<T> stream(Iterator<T> iterator, int size){
+        checkNull(iterator, "iterator");
+        Contract.checkNegative(size);
+        return new Streams<>(iterator, size).stream();
+    }
     public static <T> Stream<T> stream(List<T> list){
-        if (list == null) throw new IllegalArgumentException("paramter may not be null");
+        checkNull(list, "list");
         return new Streams<>(list).stream();
     }
 
-    public static <T> Stream<T> stream(Spliterator<T> spliterator){
-        if (spliterator == null) throw new IllegalArgumentException("paramter may not be null");
+    public static <T> Stream<T> stream(@NotNull Spliterator<T> spliterator){
+        checkNull(spliterator, "spliterator");
+        if (spliterator == null) throw new ParameterNullException();
         return new Streams<>(spliterator).stream();
     }
 

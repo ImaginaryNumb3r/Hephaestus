@@ -12,6 +12,8 @@ import java.util.function.Supplier;
 /**
  * @author Patrick
  * @since 16.11.2016
+ *
+ * A simple generic value pair
  */
 public interface Tuple<A, B> extends Unit<A>{
 
