@@ -1,10 +1,16 @@
 package stream;
 
+import core.exception.InstanceNotAllowedException;
+
 /**
  * @author Patrick
  * @since 19.11.2016
  */
-public class Count {
+public final class Count {
+
+    private Count(){
+        throw new InstanceNotAllowedException(getClass());
+    }
 
     /**
      * Executes the given runnable method a number of times.

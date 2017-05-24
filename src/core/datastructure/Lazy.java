@@ -1,6 +1,7 @@
 package core.datastructure;
 
 import com.sun.istack.internal.NotNull;
+import core.util.contracts.Contract;
 
 import java.util.function.Supplier;
 
@@ -30,7 +31,7 @@ public interface Lazy<T> extends Supplier<T> {
     /**
      * Returns the hashCode of the saved value.
      * Instantiates the value if it hasn't been before.
-     * Returns 0 as hashcode if the saved value is null
+     * @implSpec If null is the internal value, it will be treated with a HashCode of 0.
      * @return the hashCode of the saved value.
      */
     @Override
@@ -51,6 +52,7 @@ public interface Lazy<T> extends Supplier<T> {
      * @throws core.exception.ParameterNullException if param supplier is null
      */
     static <S> Lazy<S> from(@NotNull Supplier<S> supplier){
-        return LazyImpl.from(supplier);
+        Contract.checkNull(supplier, "supplier");
+        return new LazyImpl<>(supplier);
     }
 }

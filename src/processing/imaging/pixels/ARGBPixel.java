@@ -2,6 +2,7 @@ package processing.imaging.pixels;
 
 import com.sun.istack.internal.NotNull;
 import core.tuple.Quartet;
+import util.hash.HashGenerator;
 
 /**
  * @author Patrick
@@ -31,5 +32,12 @@ public class ARGBPixel extends RGBPixel{
     @Override
     public int[] toArray() {
         return new int[]{_red, _green, _blue, _alpha};
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_red, _green, _blue, _alpha)
+                .toHashCode();
     }
 }

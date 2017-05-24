@@ -3,8 +3,10 @@ package core.util.collections.matrix;
 import com.sun.istack.internal.NotNull;
 import core.datastructure.Matrix;
 import core.tuple.Tuple;
+import core.util.HashCode;
 import core.util.contracts.Contract;
 import core.util.interfaces.Accessible2D;
+import util.hash.HashGenerator;
 
 import java.util.Iterator;
 
@@ -49,5 +51,18 @@ public class Generic2DIterator<T> implements Iterator<T> {
     @Override
     public T next() {
         return null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_accessible)
+                .append(_width, _heigth)
+                .toHashCode();
     }
 }

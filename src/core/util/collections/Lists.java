@@ -1,6 +1,7 @@
 package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
+import core.exception.InstanceNotAllowedException;
 import core.exception.ParameterNullException;
 import core.util.annotations.ToTest;
 import core.util.contracts.Contract;
@@ -17,9 +18,9 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("WeakerAccess")
 @ToTest
-public class Lists {
+public final class Lists {
 
-    private Lists(){ throw new UnsupportedOperationException("Class \"Lists\" may not be instantiated");}
+    private Lists(){ throw new InstanceNotAllowedException(getClass());}
 
     //<editor-fold desc="LinkedList">
     private static <T, L extends List<T>> L toList(Iterable<T> iterable, Supplier<L> supplier){

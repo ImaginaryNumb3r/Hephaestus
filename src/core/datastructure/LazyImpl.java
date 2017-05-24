@@ -1,6 +1,7 @@
 package core.datastructure;
 
 import com.sun.istack.internal.NotNull;
+import core.util.HashCode;
 import core.util.contracts.Contract;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 15.11.2016
  * @implNote Uses the boolean {@code _isInstantiated} for loading checks instead of a null check on the value. <br>
- *     This is since the actual value might be null.
+ *     Since the actual value might be null, no null checks can be performed to check if the lazy has been loaded already
  *
  * Creates a lazy instance of a value, delivered by a supplier.
  * An assigned value to this class is permanent and will never change.
@@ -75,7 +76,7 @@ class LazyImpl<T> implements Lazy<T>, Serializable {
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Lazy
-                && Objects.equals(get(), ((Lazy) obj).get());
+                && HashCode.equals(get(), ((Lazy) obj).get());
     }
 
     /**
@@ -87,20 +88,6 @@ class LazyImpl<T> implements Lazy<T>, Serializable {
     @Override
     public int hashCode() {
         instantiate();
-        return _value != null
-                ? _value.hashCode()
-                : 0;
-    }
-
-    /**
-     * Creates a new lazy loaded instance, which creates a new object as declared with a supplier when demanded.
-     * @param supplier which creates the instance of value that will be accessed
-     * @param <S> Type of the created instance
-     * @return LazyImpl instance of the provided supplier
-     * @throws core.exception.ParameterNullException if param supplier is null
-     */
-    public static <S> LazyImpl<S> from(@NotNull Supplier<S> supplier){
-        Contract.checkNull(supplier, "supplier");
-        return new LazyImpl<>(supplier);
+        return HashCode.permutate(_value);
     }
 }

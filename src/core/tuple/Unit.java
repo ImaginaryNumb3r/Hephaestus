@@ -11,7 +11,7 @@ import java.util.ListIterator;
  * @author Patrick
  * @since 16.11.2016
  */
-public interface Unit<A> extends Pattern {
+public interface Unit<A> extends Structure {
 
     static <A> Unit<A> from(@NotNull Unit<A> unit){
         Contract.checkNull(unit, "unit");

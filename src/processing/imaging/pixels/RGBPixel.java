@@ -1,6 +1,8 @@
 package processing.imaging.pixels;
 
 import core.tuple.Triplet;
+import core.util.HashCode;
+import util.hash.HashGenerator;
 
 /**
  * Individual pixel for all
@@ -77,23 +79,14 @@ public class RGBPixel {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof RGBPixel)) return false;
-
-        RGBPixel pixel = (RGBPixel) o;
-
-        if (_red != pixel._red) return false;
-        if (_green != pixel._green) return false;
-        return _blue == pixel._blue;
-
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
     }
 
     @Override
     public int hashCode() {
-        int result = _red;
-        result = 31 * result + _green;
-        result = 31 * result + _blue;
-        return result;
+        return new HashGenerator(getClass())
+                .append(_red, _green, _blue)
+                .toHashCode();
     }
 }

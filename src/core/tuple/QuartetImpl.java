@@ -40,9 +40,4 @@ public class QuartetImpl<A, B, C, D> extends TripletImpl<A, B, C> implements Qua
     protected Supplier<List<Object>> makeArray(){
         return () -> Arrays.asList(A, B, C, D);
     }
-
-    /*@Override
-    protected QuartetImpl<A, B, C, D> convert(Object object) {
-        return new Generics<QuartetImpl<A, B, C, D>>().cast(object);
-    }*/
 }

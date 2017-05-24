@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import core.datastructure.value.Bounds;
 import core.exception.NoImplementationException;
 import core.tuple.Tuple;
+import core.util.HashCode;
 import core.util.annotations.ToTest;
 import core.util.collections.Maps;
 import core.util.contracts.Contract;
@@ -11,6 +12,7 @@ import core.util.interfaces.Accessible2D;
 import core.util.interfaces.Collection2D;
 import functional.TriFunction;
 import processing.imaging.Iterator2D;
+import util.hash.HashGenerator;
 
 import java.awt.*;
 import java.security.InvalidParameterException;
@@ -197,4 +199,15 @@ public class Matrix<T> implements Collection2D<T> {
         return _matrix.clone();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(iterator())
+                .toHashCode();
+    }
 }

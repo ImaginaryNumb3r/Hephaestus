@@ -1,6 +1,7 @@
 package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
+import core.exception.InstanceNotAllowedException;
 import core.tuple.Tuple;
 import core.util.contracts.Contract;
 
@@ -20,7 +21,7 @@ public final class Iterators {
      * @throws UnsupportedOperationException Cannot be instantiated
      */
     private Iterators(){
-        throw new UnsupportedOperationException("Cannot instantiate class \"Iterators\"");
+        throw new InstanceNotAllowedException(getClass());
     }
 
     public static <T> Iterable<T> asIterable(@NotNull T[] array){

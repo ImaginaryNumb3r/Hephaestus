@@ -1,6 +1,7 @@
 package stream.streams;
 
 import com.sun.istack.internal.NotNull;
+import util.hash.HashGenerator;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,5 +37,12 @@ public abstract class AbstractStreams<T> implements BaseStreams<T>{
 
     public Stream<T> stream(){
         return StreamSupport.stream(_spliterator, isParallel());
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_spliterator)
+                .toHashCode();
     }
 }

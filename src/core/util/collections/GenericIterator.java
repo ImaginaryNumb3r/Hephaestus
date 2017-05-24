@@ -2,8 +2,10 @@ package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
 import core.exception.ParameterNullException;
+import core.util.HashCode;
 import core.util.contracts.Contract;
 import core.util.interfaces.Accessible;
+import util.hash.HashGenerator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -53,5 +55,18 @@ public class GenericIterator<T> implements Iterator<T> {
     public T next() {
         if (!hasNext()) throw new NoSuchElementException();
         return _accessible.getAt(_pos++);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_accessible)
+                .append(_length, _pos)
+                .toHashCode();
     }
 }

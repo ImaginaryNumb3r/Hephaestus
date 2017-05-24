@@ -1,10 +1,9 @@
 package core.tuple;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import core.datastructure.Lazy;
 import core.util.HashCode;
 import core.util.interfaces.IterableList;
+import util.hash.HashGenerator;
 
 import java.io.Serializable;
 import java.util.*;
@@ -67,35 +66,8 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
     @Override
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     public boolean equals(Object obj) {
-        return equalClass(obj) && HashCode.equsls(this, obj); /*
-        boolean equals;
-
-        try { @SuppressWarnings("unchecked")
-        UnitImpl<A> unit = (UnitImpl<A>) obj;
-            equals = unit != null && equals(_values.get(), unit._values.get());
-        } catch (ClassCastException ex){
-            equals = false;
-        }
-
-        return equals; */
+        return equalClass(obj) && HashCode.equals(this, obj);
     }
-
-    /*
-    protected boolean equals(@NotNull Collection<Object> thisValues, @Nullable Collection<Object> otherValues){
-        boolean equals = false;
-
-        if (otherValues != null && thisValues.size() == otherValues.size()){
-            Iterator<Object> thisIter = thisValues.iterator();
-            Iterator<Object> otherIter = otherValues.iterator();
-
-            equals = true;
-            while (equals && thisIter.hasNext()){
-                equals = thisIter.next().equals(otherIter.next());
-            }
-        }
-
-        return equals;
-    } */
 
     @Override
     public int hashCode() {
@@ -103,11 +75,9 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
     }
 
     public int makeHash() {
-        int hashCode = 0;
-        for (Object o : this) {
-            hashCode = 31 * hashCode + (o != null ? o.hashCode() : 0);
-        }
-        return hashCode;
+        return new HashGenerator(getClass())
+                .append(_values.get())
+                .toHashCode();
     }
 
     @Override

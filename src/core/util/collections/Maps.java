@@ -1,6 +1,7 @@
 package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
+import core.exception.InstanceNotAllowedException;
 import core.tuple.Tuple;
 
 import java.util.Collection;
@@ -17,11 +18,11 @@ public final class Maps {
      * @throws UnsupportedOperationException Cannot be instantiated
      */
     private Maps(){
-        throw new UnsupportedOperationException("Cannot instantiate class \"Iterators\"");
+        throw new InstanceNotAllowedException(getClass());
     }
 
     public static <K, V> HashMap<K, V> from(@NotNull Iterable<K> iterable, @NotNull Supplier<V> initializer){
-        return from(iterable, 0, initializer);
+        return from(iterable, 16 /* Default load factory */, initializer);
     }
 
     public static <K, V> HashMap<K, V> from(@NotNull Iterable<K> iterable, int size, @NotNull Supplier<V> initializer){

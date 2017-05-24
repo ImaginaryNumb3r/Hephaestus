@@ -2,7 +2,9 @@ package core.datastructure.value;
 
 import com.sun.istack.internal.NotNull;
 import core.tuple.Tuple;
+import core.util.HashCode;
 import core.util.contracts.Contract;
+import util.hash.HashGenerator;
 
 /**
  * @author Patrick
@@ -56,5 +58,17 @@ public class Bounds implements Tuple<Integer, Integer> {
     @Override
     public Integer getB() {
         return HEIGHT;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(WIDTH, HEIGHT)
+                .toHashCode();
     }
 }

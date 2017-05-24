@@ -1,30 +1,31 @@
 package util.hash;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.HashMap;
+
+import static core.util.HashCode.DEFAULT_HASHCODE_BASE;
+import static core.util.HashCode.DEFAULT_MULTIPLIER_BASE;
 
 /**
  * @author Patrick
  * @since 24.05.2017
  */
 public class HashGenerator {
-    //<editor-fold desc="Static Attributes">
+    //<editor-fold desc="Attributes">
     private static final HashMap<Class, Integer> CLASS_MAP = new HashMap<>(100);
-    public static final int MULTIPLIER_BASE = 17;
-    public static final int HASHCODE_BASE = 37;
     private static int _classCount = 0;
-    //</editor-fold>
     private int _multBase;
     private int _hashCode;
+    //</editor-fold>
 
-    public HashGenerator(Class<?> type){
-        this(_classCount);
-        CLASS_MAP.put(type, HASHCODE_BASE + _multBase);
-        ++_classCount;
+    public HashGenerator(@NotNull Class<?> type){
+        this(CLASS_MAP.computeIfAbsent(type, key -> _classCount++));
     }
 
     public HashGenerator(int offset){
-        _multBase = MULTIPLIER_BASE + offset * 2;
-        _hashCode = HASHCODE_BASE + _multBase;
+        _multBase = DEFAULT_MULTIPLIER_BASE + offset * 2;
+        _hashCode = DEFAULT_HASHCODE_BASE + _multBase;
     }
 
     //<editor-fold desc="Boolean">
@@ -119,13 +120,23 @@ public class HashGenerator {
         return this;
     }
 
-    public HashGenerator append(Object... objs){
+    public HashGenerator append( Object... objs){
         for (int i = 0; i != objs.length; ++i){
             _hashCode += objs[i].hashCode() * _multBase;
         }
         return this;
     }
     //</editor-fold>
+
+    //<editor-fold desc="Object">
+    public <T> HashGenerator append(Iterable<T> iterable){
+        for (T item : iterable) {
+            _hashCode += item.hashCode() * _multBase;
+        }
+        return this;
+    }
+    //</editor-fold>
+
 
     public int toHashCode(){
         return _hashCode;

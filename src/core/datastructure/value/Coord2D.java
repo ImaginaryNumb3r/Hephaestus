@@ -2,6 +2,8 @@ package core.datastructure.value;
 
 import com.sun.istack.internal.NotNull;
 import core.tuple.Tuple;
+import core.util.HashCode;
+import util.hash.HashGenerator;
 
 import java.awt.*;
 
@@ -113,4 +115,17 @@ public class Coord2D implements Tuple<Integer, Integer>{
     public Integer getB() {
         return _y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_x, _y)
+                .toHashCode();
+    }
+
 }

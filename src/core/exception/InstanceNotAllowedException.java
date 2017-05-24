@@ -1,5 +1,7 @@
 package core.exception;
 
+import com.sun.istack.internal.NotNull;
+
 /**
  * @author Patrick
  * @description
@@ -7,7 +9,7 @@ package core.exception;
  */
 public class InstanceNotAllowedException extends RuntimeException {
 
-    public InstanceNotAllowedException(Class<?> tClass) {
-        super("Class \"" + tClass.getName() +"\" cannot be instantiated");
+    public InstanceNotAllowedException(@NotNull Class<?> type) {
+        super("Class \"" + type.getName() +"\" cannot be instantiated");
     }
 }

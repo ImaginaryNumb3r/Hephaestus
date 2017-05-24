@@ -6,6 +6,7 @@ package core.util.contracts.exceptions;
  * Thrown when a contract is validated
  * @apiNote Always check for inner exceptions
  */
+// TODO: Consider removing, along with the Contract Constructor
 public class ContractException extends RuntimeException {
 
     public ContractException(String message) {

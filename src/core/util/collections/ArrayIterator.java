@@ -1,7 +1,9 @@
 package core.util.collections;
 
 import com.sun.istack.internal.NotNull;
+import core.util.HashCode;
 import core.util.contracts.Contract;
+import util.hash.HashGenerator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -47,5 +49,18 @@ public class ArrayIterator<T> implements Iterator<T> {
     public T next() {
         if (!hasNext()) throw new NoSuchElementException();
         return _array[_pos++];
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append((Object[]) _array)
+                .append(_array.length, _pos)
+                .toHashCode();
     }
 }

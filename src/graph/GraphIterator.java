@@ -1,8 +1,10 @@
 package graph;
 
 import com.sun.istack.internal.NotNull;
+import core.util.HashCode;
 import core.util.contracts.Contract;
 import graph.search.GraphSearchStrategy;
+import util.hash.HashGenerator;
 
 import java.util.*;
 
@@ -51,5 +53,17 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
         next.forEach(node -> _strategy.enqueue(_nodes, node));
 
         return next;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_strategy, _root, _current, _nodes)
+                .toHashCode();
     }
 }

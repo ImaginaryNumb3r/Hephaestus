@@ -1,7 +1,9 @@
 package processing.imaging;
 
 import core.datastructure.Matrix;
+import core.util.HashCode;
 import core.util.interfaces.Collection2D;
+import util.hash.HashGenerator;
 
 import java.util.Iterator;
 
@@ -56,5 +58,17 @@ public class Iterator2D<T> implements Iterator<T> {
         }
 
         return _matrix.getAt(x, y);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_curX, _curY, _matrix)
+                .toHashCode();
     }
 }
