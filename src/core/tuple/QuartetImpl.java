@@ -1,5 +1,6 @@
 package core.tuple;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
 import java.util.Arrays;
@@ -13,7 +14,7 @@ import java.util.function.Supplier;
 public class QuartetImpl<A, B, C, D> extends TripletImpl<A, B, C> implements Quartet<A, B, C, D> {
     protected D D;
 
-    public QuartetImpl(QuartetImpl<A, B, C, D> quartet) {
+    public QuartetImpl(@NotNull QuartetImpl<A, B, C, D> quartet) {
         this(quartet.getA(), quartet.getB(), quartet.getC(), quartet.getD());
     }
 
@@ -28,6 +29,11 @@ public class QuartetImpl<A, B, C, D> extends TripletImpl<A, B, C> implements Qua
 
     public void setD(D d) {
         D = d;
+    }
+
+    @Override
+    protected boolean equalClass(Object obj) {
+        return obj instanceof Quartet;
     }
 
     @Override

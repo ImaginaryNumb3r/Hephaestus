@@ -1,3 +1,5 @@
+import core.datastructure.Lazy;
+import core.tuple.Tuple;
 import core.util.interfaces.Accessible;
 import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
@@ -25,11 +27,18 @@ public class Main {
     }*/
 
 
-    private static void funcTest(Function<Integer, Integer> function){
-
+    private static Tuple<Double, String> tupleTest(){
+        return Tuple.from(10d, "text");
     }
 
     private static <I, V, T extends MultiIdTreeNodeReader<I, V, T>, U extends Iterable<U>> void test(){
+        // Test
+
+        Tuple<Double, String> objects = tupleTest();
+        Double a = objects.getA();
+        String b = objects.getB();
+
+
         MultiIdTreeNodeImpl<I, V> test2 = new MultiIdTreeNodeImpl<>(null);
         MultiIdTreeNodeReader<I, V, T> test = (MultiIdTreeNodeReader<I, V, T>) test2;
         Iterable<T> iterable = test;

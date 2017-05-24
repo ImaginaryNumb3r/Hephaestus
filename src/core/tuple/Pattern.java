@@ -11,4 +11,9 @@ import java.io.Serializable;
 // TODO: Create separate mutable and readonly versions of all pattern descendants
 interface Pattern extends Serializable, IterableList<Object> {
 
+
+    int hashCode();
+
+    boolean equals(Object obj);
+
 }

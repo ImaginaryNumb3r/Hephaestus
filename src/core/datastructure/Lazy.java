@@ -28,6 +28,16 @@ public interface Lazy<T> extends Supplier<T> {
     void instantiate();
 
     /**
+     * Returns the hashCode of the saved value.
+     * Instantiates the value if it hasn't been before.
+     * Returns 0 as hashcode if the saved value is null
+     * @return the hashCode of the saved value.
+     */
+    @Override
+    int hashCode();
+
+
+    /**
      * Checks if the value behind the LazyImpl has already been loaded
      * @return true if the value behind the lazy has already been loaded
      */

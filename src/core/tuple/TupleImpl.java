@@ -32,6 +32,11 @@ class TupleImpl<A, B> extends UnitImpl<A> implements Tuple<A, B> {
     }
 
     @Override
+    protected boolean equalClass(Object obj) {
+        return obj instanceof Tuple;
+    }
+
+    @Override
     protected Supplier<List<Object>> makeArray(){
         return () -> Arrays.asList(A, B);
     }

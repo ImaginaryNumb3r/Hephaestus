@@ -4,16 +4,20 @@ import com.sun.istack.internal.NotNull;
 import core.datastructure.value.Bounds;
 import core.exception.NoImplementationException;
 import core.tuple.Tuple;
+import core.util.annotations.ToTest;
 import core.util.collections.Maps;
 import core.util.contracts.Contract;
+import core.util.interfaces.Accessible2D;
 import core.util.interfaces.Collection2D;
+import functional.TriFunction;
 import processing.imaging.Iterator2D;
 
+import java.awt.*;
 import java.security.InvalidParameterException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
+import java.util.stream.Collectors;
 
 /**
  * Representation of a 2D data structure
@@ -24,9 +28,10 @@ import java.util.function.BooleanSupplier;
  * TODO: Matrix operations
  * TODO: 2D Iterator Strategy, like with Trees
  */
+@ToTest
 public class Matrix<T> implements Collection2D<T> {
     private final T[][] _matrix;
-    private final Lazy<Integer> _size; // Calculate size only once
+    private final int _size; // Calculate size only once
 
     //<editor-fold desc="Constructors">
     /**
@@ -35,18 +40,17 @@ public class Matrix<T> implements Collection2D<T> {
      * @param height of the matrix. May only be zero if width is zero as well
      * @throws NegativeArraySizeException if one of the indices is negative
      * @throws InvalidParameterException when width or height are initialized with zero, but not both
-     */
-    @SuppressWarnings("unchecked")
+     */ @SuppressWarnings("unchecked")
     public Matrix(int width, int height) {
         areValidParameters(width, height, false);
         _matrix = (T[][])new Object[width][height];
-        _size = Lazy.from(() -> getWidth() * getHeight());
+        _size = width * height;
     }
 
     public Matrix(@NotNull T[][] matrix) {
         Contract.checkNull(matrix, "matrix");
         _matrix = matrix;
-        _size = Lazy.from(() -> getWidth() * getHeight());
+        _size = getHeight() * getWidth();
     }
     //</editor-fold>
 
@@ -92,10 +96,6 @@ public class Matrix<T> implements Collection2D<T> {
     }
     //</editor-fold>
 
-    public int size(){
-        return _size.get();
-    }
-
     //<editor-fold desc="Accessors">
     /**
      * @param width horizontal index for the value
@@ -113,6 +113,11 @@ public class Matrix<T> implements Collection2D<T> {
     }
     //</editor-fold>
 
+    //<editor-fold desc="Bound Information">
+    public int size(){
+        return _size;
+    }
+
     public int getWidth(){
         return _matrix.length;
     }
@@ -126,8 +131,28 @@ public class Matrix<T> implements Collection2D<T> {
                 ? _matrix[0].length
                 : 0;
     }
+    //</editor-fold>
+
+    public void add(Accessible2D<T> accssor){
+        throw new NoImplementationException();
+    }
+
+    public void subtract(Accessible2D<T> accssor){
+        throw new NoImplementationException();
+    }
+
+    public void multiply(Number factor){
+        throw new NoImplementationException();
+    }
+
+    private void manipulate(){
+        for (T t : this) {
+
+        }
+    }
 
     @Override
+    @ToTest
     public boolean contains(T element) {
         for (T cur : this) {
             boolean equals = Objects.equals(element, cur);
@@ -137,10 +162,26 @@ public class Matrix<T> implements Collection2D<T> {
     }
 
     @Override
+    @ToTest
     public boolean containsAll(Collection<T> elements) {
-        HashMap<T, Boolean> map = Maps.from(elements, () -> false);
-        
-        return false;
+        HashSet<T> set = new HashSet<>(elements);
+
+        for (T cur : this) {
+            set.remove(cur);
+        }
+
+        return set.isEmpty();
+    }
+
+    @ToTest
+    public void mapValues(TriFunction<Integer, Integer, T, T> function){
+        Contract.checkNull(function, "function");
+        for (int w = 0; w != getWidth(); ++w){
+            for (int h = 0; h != getHeight(); ++h){
+                T value = _matrix[h][w];
+                _matrix[h][w] = function.apply(h, w, value);
+            }
+        }
     }
 
     @Override

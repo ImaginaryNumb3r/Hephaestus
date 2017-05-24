@@ -31,6 +31,11 @@ public class TripletImpl<A, B, C> extends TupleImpl<A, B> implements Triplet<A, 
     }
 
     @Override
+    protected boolean equalClass(Object obj) {
+        return obj instanceof Triplet;
+    }
+
+    @Override
     protected Supplier<List<Object>> makeArray(){
         return () -> Arrays.asList(A, B, C);
     }

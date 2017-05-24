@@ -1,13 +1,13 @@
 package core.tuple;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import core.datastructure.Lazy;
+import core.util.HashCode;
 import core.util.interfaces.IterableList;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
     protected A A;
     protected final Lazy<List<Object>> _values;
+    protected final Lazy<Integer> _hashCode;
 
     // ===============
     //  Constructors
@@ -30,6 +31,7 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
     public UnitImpl(A a) {
         A = a;
         _values = Lazy.from(makeArray());
+        _hashCode = Lazy.from(this::makeHash);
     }
 
     // ===============
@@ -52,9 +54,20 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
         return () -> Collections.singletonList(A);
     }
 
+    /**
+     * Part of the equals
+     * @apiNote Must be overridden by all subclasses
+     * @param obj the
+     * @return
+     */
+    protected boolean equalClass(Object obj){
+        return obj instanceof Unit;
+    }
+
     @Override
     @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     public boolean equals(Object obj) {
+        return equalClass(obj) && HashCode.equsls(this, obj); /*
         boolean equals;
 
         try { @SuppressWarnings("unchecked")
@@ -64,24 +77,32 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
             equals = false;
         }
 
-        return equals;
+        return equals; */
     }
 
-    protected boolean equals(List<Object> thisValues, List<Object> otherValues){
+    /*
+    protected boolean equals(@NotNull Collection<Object> thisValues, @Nullable Collection<Object> otherValues){
         boolean equals = false;
 
-        if (otherValues.size() == thisValues.size()){
-            HashSet<Object> valueSets = new HashSet<>(otherValues);
-            equals = thisValues
-                    .stream()
-                    .allMatch(valueSets::contains);
+        if (otherValues != null && thisValues.size() == otherValues.size()){
+            Iterator<Object> thisIter = thisValues.iterator();
+            Iterator<Object> otherIter = otherValues.iterator();
+
+            equals = true;
+            while (equals && thisIter.hasNext()){
+                equals = thisIter.next().equals(otherIter.next());
+            }
         }
 
         return equals;
-    }
+    } */
 
     @Override
     public int hashCode() {
+        return _hashCode.get();
+    }
+
+    public int makeHash() {
         int hashCode = 0;
         for (Object o : this) {
             hashCode = 31 * hashCode + (o != null ? o.hashCode() : 0);
@@ -91,11 +112,11 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
 
     @Override
     public ListIterator<Object> iterator() {
-        return listIterator();
+        return _values.get().listIterator();
     }
 
     @Override
     public ListIterator<Object> listIterator() {
-        return _values.get().listIterator();
+        return iterator();
     }
 }
