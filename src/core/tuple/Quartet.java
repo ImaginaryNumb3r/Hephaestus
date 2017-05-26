@@ -2,13 +2,10 @@ package core.tuple;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
-import core.util.collections.GenericListIterator;
+import core.util.collections.iterating.GenericListIterator;
 import core.util.contracts.Contract;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.ListIterator;
-import java.util.function.Supplier;
 
 /**
  * @author Patrick

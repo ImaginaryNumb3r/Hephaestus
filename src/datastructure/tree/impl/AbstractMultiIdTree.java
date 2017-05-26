@@ -34,13 +34,12 @@ import java.util.*;
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractMultiIdTree
         <I extends Comparable<I>, V, N extends MultiIdTreeNode<I, V, N>, R extends MultiIdTreeNodeReader<I, V, R>>
-        implements MultiIdTree<I, V>, ReadableTree<R>, Iterable<R>{
+        implements MultiIdTree<I, V>, ReadableTree<R>, Iterable<R> {
     //<editor-fold desc="Attributes">
     protected final N _sentinel;
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
-
     /**
      * Constructor for internal purposes
      * @param root node of the tree. Parent of all subsequent nodes

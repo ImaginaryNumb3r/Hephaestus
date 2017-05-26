@@ -1,6 +1,7 @@
 package util.hash;
 
 import com.sun.istack.internal.NotNull;
+import core.util.HashCode;
 
 import java.util.HashMap;
 
@@ -19,6 +20,7 @@ public class HashGenerator {
     private int _hashCode;
     //</editor-fold>
 
+    //<editor-fold desc="Constructors">
     public HashGenerator(@NotNull Class<?> type){
         this(CLASS_MAP.computeIfAbsent(type, key -> _classCount++));
     }
@@ -27,7 +29,9 @@ public class HashGenerator {
         _multBase = DEFAULT_MULTIPLIER_BASE + offset * 2;
         _hashCode = DEFAULT_HASHCODE_BASE + _multBase;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Hashing Methods">
     //<editor-fold desc="Boolean">
     public HashGenerator append(boolean bool){
         int value = bool ? 1 : 0;
@@ -115,12 +119,12 @@ public class HashGenerator {
     //</editor-fold>
 
     //<editor-fold desc="Object">
-    public HashGenerator append(Object obj){
+    public HashGenerator appendObj(Object obj){
         _hashCode += obj.hashCode() * _multBase;
         return this;
     }
 
-    public HashGenerator append( Object... objs){
+    public HashGenerator appendObj(Object... objs){
         for (int i = 0; i != objs.length; ++i){
             _hashCode += objs[i].hashCode() * _multBase;
         }
@@ -128,18 +132,29 @@ public class HashGenerator {
     }
     //</editor-fold>
 
-    //<editor-fold desc="Object">
-    public <T> HashGenerator append(Iterable<T> iterable){
+    //<editor-fold desc="Iterable">
+    public <T> HashGenerator appendAll(Iterable<T> iterable){
         for (T item : iterable) {
             _hashCode += item.hashCode() * _multBase;
         }
         return this;
     }
     //</editor-fold>
-
+    //</editor-fold>
 
     public int toHashCode(){
         return _hashCode;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_multBase, _hashCode)
+                .toHashCode();
+    }
 }

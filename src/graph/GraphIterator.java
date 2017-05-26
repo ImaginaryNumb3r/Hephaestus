@@ -63,7 +63,7 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(_strategy, _root, _current, _nodes)
+                .appendObj(_strategy, _root, _current, _nodes)
                 .toHashCode();
     }
 }

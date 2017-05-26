@@ -76,7 +76,7 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
 
     public int makeHash() {
         return new HashGenerator(getClass())
-                .append(_values.get())
+                .appendAll(_values.get())
                 .toHashCode();
     }
 

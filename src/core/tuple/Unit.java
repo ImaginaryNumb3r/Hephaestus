@@ -2,7 +2,7 @@ package core.tuple;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
-import core.util.collections.GenericListIterator;
+import core.util.collections.iterating.GenericListIterator;
 import core.util.contracts.Contract;
 
 import java.util.ListIterator;

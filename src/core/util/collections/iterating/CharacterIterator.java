@@ -1,4 +1,4 @@
-package core.util.collections;
+package core.util.collections.iterating;
 
 import com.sun.istack.internal.NotNull;
 import core.util.contracts.Contract;

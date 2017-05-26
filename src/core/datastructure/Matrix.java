@@ -207,7 +207,7 @@ public class Matrix<T> implements Collection2D<T> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(iterator())
+                .appendObj(iterator())
                 .toHashCode();
     }
 }

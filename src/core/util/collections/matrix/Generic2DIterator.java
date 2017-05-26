@@ -61,7 +61,7 @@ public class Generic2DIterator<T> implements Iterator<T> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(_accessible)
+                .appendObj(_accessible)
                 .append(_width, _heigth)
                 .toHashCode();
     }

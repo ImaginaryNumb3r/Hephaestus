@@ -4,7 +4,7 @@ import com.sun.istack.internal.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.exception.ParameterNullException;
 import core.util.annotations.ToTest;
-import core.util.contracts.Contract;
+import core.util.collections.iterating.ArrayIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,7 +42,7 @@ public final class Lists {
     @SafeVarargs
     public static <T> LinkedList<T> toLinkedList(@NotNull T... array){
         if (array == null) throw new ParameterNullException("array");
-        return toList(() -> new ArrayIterator<>(array), LinkedList::new);
+        return toList(() -> ArrayIterator.from(array), LinkedList::new);
     }
 
     public static <T> LinkedList<T> toLinkedList(T item){
@@ -80,7 +80,7 @@ public final class Lists {
     @SafeVarargs
     public static <T> ArrayList<T> toArrayList(@NotNull T... array){
         if (array == null) throw new ParameterNullException("array");
-        return toList(() -> new ArrayIterator<>(array), ArrayList::new);
+        return toList(() -> ArrayIterator.from(array), ArrayList::new);
     }
 
     public static <T> ArrayList<T> toArrayList(T item){

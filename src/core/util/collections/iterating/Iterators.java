@@ -1,13 +1,9 @@
-package core.util.collections;
+package core.util.collections.iterating;
 
 import com.sun.istack.internal.NotNull;
 import core.exception.InstanceNotAllowedException;
-import core.tuple.Tuple;
 import core.util.contracts.Contract;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 
 /**

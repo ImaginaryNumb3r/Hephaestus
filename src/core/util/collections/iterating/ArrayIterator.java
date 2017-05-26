@@ -1,4 +1,4 @@
-package core.util.collections;
+package core.util.collections.iterating;
 
 import com.sun.istack.internal.NotNull;
 import core.util.HashCode;
@@ -59,7 +59,7 @@ public class ArrayIterator<T> implements Iterator<T> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append((Object[]) _array)
+                .appendObj((Object[]) _array)
                 .append(_array.length, _pos)
                 .toHashCode();
     }

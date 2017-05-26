@@ -1,14 +1,12 @@
 package core.util.contracts;
 
 import com.sun.istack.internal.NotNull;
-import core.exception.FunctionalException;
 import core.exception.ParameterNullException;
-import core.util.collections.Iterators;
+import core.util.collections.iterating.Iterators;
 import core.util.contracts.exceptions.ContractException;
 import functional.exception.SupplierEx;
 
 import java.util.function.BooleanSupplier;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**

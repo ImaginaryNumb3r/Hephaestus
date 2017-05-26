@@ -1,7 +1,6 @@
-package core.util.collections;
+package core.util.collections.iterating;
 
 import com.sun.istack.internal.NotNull;
-import core.exception.ParameterNullException;
 import core.util.HashCode;
 import core.util.contracts.Contract;
 import core.util.interfaces.Accessible;
@@ -65,7 +64,7 @@ public class GenericIterator<T> implements Iterator<T> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(_accessible)
+                .appendObj(_accessible)
                 .append(_length, _pos)
                 .toHashCode();
     }

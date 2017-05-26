@@ -76,7 +76,15 @@ public class MultiIdTreeNodeImpl<I, V>  /* extends MultiIdTreeNodeReaderImpl<I, 
         child._parent = this;
     }
 
-
+    /**
+     * Creates a new child node with the given properties as parameters
+     * @param identifier of the new node
+     * @param value the new node
+     * @throws NodeAlreadyExistsException if the child already has a parent
+     */
+    public void addChild(I identifier, V value){
+        addChild(new MultiIdTreeNodeImpl<>(identifier, value, this));
+    }
 
     /**
      * Removes a child with the specified identifier and returns it
