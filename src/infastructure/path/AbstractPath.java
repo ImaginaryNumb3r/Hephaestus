@@ -1,10 +1,12 @@
 package infastructure.path;
 
 import com.sun.istack.internal.NotNull;
+import core.util.HashCode;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.RelativePath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.path.exceptions.PathsNotMatchingException;
+import util.hash.HashGenerator;
 
 import java.util.Iterator;
 
@@ -225,6 +227,7 @@ public abstract class AbstractPath implements Path {
 
     // Path
 
+    // TODO: Consider changing to HashCode
     @Override
     public boolean equals(Path path) {
         boolean equals = false;
@@ -251,5 +254,12 @@ public abstract class AbstractPath implements Path {
         }
 
         return equals;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .appendObj(_path)
+                .toHashCode();
     }
 }

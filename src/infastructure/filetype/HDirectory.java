@@ -109,21 +109,30 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
     }
 
     /**
-     *
+     * Returns the list of entries, as specified with the filters.
+     * Returns null if an I/O Exception occurred or if the file does not exist.
      * @param typeFilter First filter to determine the type
      * @param generalFilter Second filter for other sorts of filtering
      * @param constructor The Constructor to create the wanted type of value
      * @param <T> the desired type of value
+     * @throws  SecurityException
+     *          If a security manager exists and its {@link
+     *          SecurityManager#checkRead(String)} method denies read access to
+     *          the directory
      * @return List of creates types
      */
     public <T> List<T> getEntries(FileFilter typeFilter, FileFilter generalFilter, BiSupplier<T, File> constructor){
         FileFilter filter = pathname -> typeFilter.accept(pathname) && generalFilter.accept(pathname);
 
         File[] files = _file.listFiles(filter);
-        ArrayList<T> hFiles = new ArrayList<>(files.length);
+        ArrayList<T> hFiles = null;
 
-        for (int i = 0; i != files.length; ++i){
-            hFiles.add(i, constructor.make(files[i]));
+        if (files != null){
+            hFiles = new ArrayList<>(files.length);
+
+            for (int i = 0; i != files.length; ++i){
+                hFiles.add(i, constructor.make(files[i]));
+            }
         }
 
         return hFiles;
@@ -140,18 +149,33 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
 
         return getEntries(baseFilter, filter, HDirectory::new);
     }
+
     /**
-     * returns array of existing sub-directories in this directory
-     * @return array of existing sub-directories in this directory
+     * Returns the list of existing sub-directories in this directory
+     * Returns null if an I/O Exception occurred or if the file does not exist.
+     * returns array of
+     * @throws  SecurityException
+     *          If a security manager exists and its {@link
+     *          SecurityManager#checkRead(String)} method denies read access to
+     *          the directory
+     * @return  Null if the directory does not exist or if an I/O error occurs
+     *          list of existing sub-directories in this directory
      */
     public List<HDirectory> getDirectories() {
         return getDirectories(arg -> true);
     }
 
+
     /**
-     * Returns list of files that match the filter
+     * Returns the list of existing sub-directories in this directory
+     * Returns null if an I/O Exception occurred or if the file does not exist.
      * @param filter to sort unwanted entries
-     * @return List of files that match the filter
+     * @throws  SecurityException
+     *          If a security manager exists and its {@link
+     *          SecurityManager#checkRead(String)} method denies read access to
+     *          the directory
+     * @return  Null if the directory does not exist or if an I/O error occurs
+     *          Otherwise, a list of existing sub-directories that match he filter
      */
     public List<HFile> getFiles(FileFilter filter){
         FileFilter baseFilter = File::isFile;

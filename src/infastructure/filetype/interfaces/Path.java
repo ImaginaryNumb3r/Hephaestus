@@ -74,4 +74,5 @@ public interface Path{
 
     boolean isSubPath(RelativeDirectory relDir);
 
+    int hashCode();
 }

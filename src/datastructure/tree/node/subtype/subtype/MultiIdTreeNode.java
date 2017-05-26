@@ -3,9 +3,7 @@ package datastructure.tree.node.subtype.subtype;
 import datastructure.tree.node.subtype.IdTreeNode;
 import datastructure.tree.node.subtype.MultiTreeNode;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * @author Patrick
