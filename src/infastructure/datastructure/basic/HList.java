@@ -418,10 +418,10 @@ public class HList<T> implements List<T> {
             _current.delete();
             /*
             Node prev = _current.getPrevious();
-            Node next = _current.getPrev();
+            Node tryNext = _current.getPrev();
 
-            prev.setNext(next);
-            next.setNext(prev); */
+            prev.setNext(tryNext);
+            tryNext.setNext(prev); */
         }
 
         @Override

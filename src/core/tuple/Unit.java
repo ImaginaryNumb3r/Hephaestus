@@ -3,6 +3,7 @@ package core.tuple;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 import core.util.collections.iteration.GenericListIterator;
+import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
 
 import java.util.ListIterator;
@@ -32,6 +33,6 @@ public interface Unit<A> extends Structure {
     @Override
     default ListIterator<Object> listIterator(){
         // TODO: Create custom ListIterator and return that
-        return GenericListIterator.from(getA());
+        return Iterators.from(getA());
     }
 }

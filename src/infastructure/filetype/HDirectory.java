@@ -1,9 +1,8 @@
 package infastructure.filetype;
 
 import com.sun.istack.internal.NotNull;
-import core.util.collections.iterating.AbstractListIterator;
+import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
-import core.util.interfaces.Accessible;
 import infastructure.filetype.interfaces.AbstractDirectory;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.AbsolutePath;
@@ -201,9 +200,11 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * Directory InnerIterator
      * @return InnerIterator of the directories
      */
-
     public ListIterator<HDirectory> iterator(){
-        return new DirectoryIterator<>();
+        Optional<List<HDirectory>> optional = getDirectories();
+        return optional.isPresent()
+                ? optional.get().listIterator()
+                : Iterators.empty();
     }
     //</editor-fold>
 
@@ -285,29 +286,4 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
     }
     //</editor-fold>
 
-    /******************
-     * Node InnerIterator
-     /*****************/
-    protected class DirectoryIterator<T extends HDirectory> extends AbstractListIterator<T>
-            /*NodeIterator<HDirectory>*/ {
-
-        protected DirectoryIterator(@NotNull Accessible<T> accessible, int length) {
-            super(accessible, length);
-        }
-
-        @Override
-        public void remove() {
-
-        }
-
-        @Override
-        public void set(T hDirectories) {
-
-        }
-
-        @Override
-        public void add(T hDirectories) {
-
-        }
-    }
 }

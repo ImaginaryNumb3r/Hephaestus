@@ -12,14 +12,15 @@ import java.util.Stack;
  * @created 28.05.2016
  * @purpose Tree InnerIterator which traverses over Nodes of a Tree composed of DirectoryNodes
  */
+@Deprecated // TODO: Salvage the good parts and delete. Or just rename and find a different niece
 public abstract class DirectoryTraverser<T extends HDirectory> implements TreeTraverser<T> {
     /** The current directory in the file system hierarchy */
     protected T _curDir;
-    /** The next directory that would be entered with a "enter". In other words, it is the "current" node in the iteration */
+    /** The tryNext directory that would be entered with a "enter". In other words, it is the "current" node in the iteration */
     protected T _destDir;
     /** A stack of Iterators from the directories which were used to reach the current level in the hierarchy */
     protected Stack<NodeIterator<T>> _prevIter;
-    /** The InnerIterator of the current hierarchy. Is being added to the stack of previous Iterators (_prevIter) when entering a new level */
+    /** The InnerIterator of the current hierarchy. Is being added to the stack of tryPrevious Iterators (_prevIter) when entering a new level */
     protected NodeIterator<T> _curIter;
 
     /** The starting point of the traverser. When moving back you cannot go beyond this Node. */

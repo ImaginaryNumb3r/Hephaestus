@@ -8,9 +8,7 @@ import java.io.Serializable;
  * @author Patrick
  * @since 17.11.2016
  */
-// TODO: Create separate mutable and readonly versions of all pattern descendants
 interface Structure extends Serializable, IterableList<Object> {
-
 
     int hashCode();
 

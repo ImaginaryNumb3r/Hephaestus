@@ -55,4 +55,16 @@ public interface Lazy<T> extends Supplier<T> {
         Contract.checkNull(supplier, "supplier");
         return new LazyImpl<>(supplier);
     }
+
+    /**
+     * Creates a new lazy loaded instance, which creates a new object as declared with a supplier when demanded.
+     * @param supplier which creates the instance of value that will be accessed
+     * @param <S> Type of the created instance
+     * @return LazyImpl instance of the provided supplier
+     * @throws core.exception.ParameterNullException if param supplier is null
+     */
+    static <S> Lazy<S> lazily(@NotNull Supplier<S> supplier){
+        Contract.checkNull(supplier, "supplier");
+        return new LazyImpl<>(supplier);
+    }
 }

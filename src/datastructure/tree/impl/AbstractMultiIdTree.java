@@ -167,7 +167,7 @@ public abstract class AbstractMultiIdTree
             Optional<N> node = getNode(iter.next(), curNode);
 
             if (node.isPresent()){
-                // Continue iteration with the next node
+                // Continue iteration with the tryNext node
                 curNode = node.get();
                 finished = false;
             } else {
@@ -408,7 +408,7 @@ public abstract class AbstractMultiIdTree
 
         @Override
         public String toString() {
-            return "Current: { " + _current + " } | next: { " + _next + " }";
+            return "Current: { " + _current + " } | tryNext: { " + _next + " }";
         }
 
         //<editor-fold desc="Level">

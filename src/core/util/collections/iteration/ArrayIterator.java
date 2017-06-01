@@ -14,8 +14,8 @@ import java.util.NoSuchElementException;
  * @param <T> Generic Value of the array
  */
 public class ArrayIterator<T> implements Iterator<T> {
-    private final T[] _array;
-    private int _pos = 0;
+    protected final T[] _array;
+    protected int _pos = 0;
 
     /**
      * Internal Constructor.

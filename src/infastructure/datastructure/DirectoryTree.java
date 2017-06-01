@@ -215,7 +215,7 @@ package infastructure.datastructure;
 //
 //        public DirectoryNode previousNode() {
 //            _index = _directoryIterator.previousIndex();
-//            _current = _directoryIterator.previous();
+//            _current = _directoryIterator.tryPrevious();
 //
 //            return _current;
 //        }
@@ -275,7 +275,7 @@ package infastructure.datastructure;
 //        }
 //
 //        @Override
-//        public HDirectory previous() {
+//        public HDirectory tryPrevious() {
 //            return previousNode().getDirectory();
 //        }
 //

@@ -32,9 +32,9 @@ public interface TreeTraverser<T> extends HIterator<T> {
     public T current();
 
     /**
-     * Returns the next element in the iteration.
+     * Returns the tryNext element in the iteration.
      *
-     * @return the next element in the iteration
+     * @return the tryNext element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
     public T next();
@@ -42,9 +42,9 @@ public interface TreeTraverser<T> extends HIterator<T> {
 
 
     /**
-     * Returns the previous element in the iteration.
+     * Returns the tryPrevious element in the iteration.
      *
-     * @return the previous element in the iteration
+     * @return the tryPrevious element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
     public T previous();

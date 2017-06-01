@@ -8,10 +8,11 @@ import core.util.contracts.Contract;
  * @author Patrick
  * @since 01.06.2017
  */
-public abstract class NodeListIterator<T extends BiLinkable<T>> extends NodeIterator<T> implements ListIteratorHelper<T> {
+public abstract class NodeListIterator<T, L extends BiLinkable<T, L>>
+        extends NodeIterator<T, L> implements ListIteratorHelper<T> {
     protected int _index;
 
-    protected NodeListIterator(@NotNull T startNode) {
+    protected NodeListIterator(@NotNull L startNode) {
         super(startNode);
         _index = 0;
     }
@@ -19,13 +20,17 @@ public abstract class NodeListIterator<T extends BiLinkable<T>> extends NodeIter
     @Override
     public T next(){
         ++_index;
-        return _current.next();
+        return super.next();
     }
 
     @Override
     public T previous() {
         --_index;
-        return _current.previous();
+        L previous = _current != null
+                ? _current.tryPrevious()
+                : _start.tryPrevious();
+        _current = previous;
+        return previous.value();
     }
 
     @Override
@@ -33,15 +38,16 @@ public abstract class NodeListIterator<T extends BiLinkable<T>> extends NodeIter
         return _index;
     }
 
-    public static <T extends BiLinkable<T>> NodeListIterator<T> from(T startNode) {
+    public static <T, L extends BiLinkable<T, L>> NodeListIterator<T, L> from(L startNode) {
         Contract.checkNull(startNode, "startNode");
         return new NodeListIteratorImpl<>(startNode);
     }
 
     //<editor-fold desc="Inner Impl Class">
-    protected static class NodeListIteratorImpl<I extends BiLinkable<I>> extends NodeListIterator<I> {
+    protected static class NodeListIteratorImpl<TI, LI extends BiLinkable<TI, LI>>
+            extends NodeListIterator<TI, LI> {
 
-        protected NodeListIteratorImpl(@NotNull I startNode) {
+        protected NodeListIteratorImpl(@NotNull LI startNode) {
             super(startNode);
         }
 
@@ -59,7 +65,7 @@ public abstract class NodeListIterator<T extends BiLinkable<T>> extends NodeIter
          * @throws UnsupportedOperationException on call
          */
         @Override
-        public void set(I t) {
+        public void set(TI t) {
             throw new UnsupportedOperationException();
         }
 
@@ -68,7 +74,7 @@ public abstract class NodeListIterator<T extends BiLinkable<T>> extends NodeIter
          * @throws UnsupportedOperationException on call
          */
         @Override
-        public void add(I t) {
+        public void add(TI t) {
             throw new UnsupportedOperationException();
         }
     }

@@ -7,32 +7,23 @@ import core.util.annotations.Unfinished;
  * @since 15.11.2016
  */
 @Unfinished
-// TODO: Conceptual problem: Does not work with null as parameter
 public class EnumException extends EnumConstantNotPresentException {
 
     /**
      * Constructs an <tt>EnumConstantNotPresentException</tt> for the
      * specified constant.
      *
-     * @param enumConstant the instance of the missing enum constant
+     * @param enumConstant the instance of the missing enum constant ot just null
      */
     public EnumException(Enum enumConstant) {
-        super(enumConstant.getClass(), enumConstant.toString());
-    }
-
-    /**
-     * Constructs an <tt>EnumConstantNotPresentException</tt> for the
-     * specified constant.
-     *
-     * @param enumConstant the instance of the missing enum constant
-     */
-    public EnumException(Enum enumConstant, Class<? extends Enum> enumClass) {
-        super(enumClass, enumToString(enumConstant));
-    }
-
-    private static String enumToString(Enum enumeration){
-        return enumeration == null
+        super(enumConstant == null
+                ? Null.class
+                : enumConstant.getClass(),
+            enumConstant == null
                 ? "null"
-                : enumeration.toString();
+                : enumConstant.toString());
     }
+
+    private enum Null{}
+
 }

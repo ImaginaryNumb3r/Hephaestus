@@ -3,6 +3,7 @@ package core.tuple;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 import core.util.collections.iteration.GenericListIterator;
+import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
 
 import java.util.ListIterator;
@@ -41,6 +42,6 @@ public interface Triplet<A, B, C> extends Tuple<A, B> {
 
     @Override
     default ListIterator<Object> listIterator(){
-        return GenericListIterator.from(getA(), getB(), getC());
+        return Iterators.from(getA(), getB(), getC());
     }
 }
