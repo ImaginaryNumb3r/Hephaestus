@@ -1,4 +1,4 @@
-package datastructure.liat;
+package datastructure.list;
 
 import java.util.*;
 

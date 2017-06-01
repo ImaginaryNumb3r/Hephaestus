@@ -1,4 +1,4 @@
-package core.util.collections.iterating;
+package core.util.collections.iteration;
 
 import com.sun.istack.internal.NotNull;
 import core.util.HashCode;
@@ -19,7 +19,8 @@ public class GenericIterator<T> implements Iterator<T> {
     protected final int _length;
     protected int _pos;
 
-    GenericIterator(@NotNull Accessible<T> accessible, int length) {
+    //<editor-fold desc="Construction Methods">
+    protected GenericIterator(@NotNull Accessible<T> accessible, int length) {
         _accessible = accessible;
         _length = length;
     }
@@ -44,6 +45,7 @@ public class GenericIterator<T> implements Iterator<T> {
         Contract.checkNull(items, "items");
         return new GenericIterator<>(i -> items[i], items.length);
     }
+    //</editor-fold>
 
     @Override
     public boolean hasNext() {
@@ -64,8 +66,8 @@ public class GenericIterator<T> implements Iterator<T> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .appendObj(_accessible)
-                .append(_length, _pos)
+                .append(_accessible)
+                .appendAll(_length, _pos)
                 .toHashCode();
     }
 }

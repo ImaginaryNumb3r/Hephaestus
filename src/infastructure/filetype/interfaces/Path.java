@@ -3,6 +3,7 @@ package infastructure.filetype.interfaces;
 
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.path.DirectoryNode;
+import infastructure.path.PathFactory;
 import infastructure.path.exceptions.PathsNotMatchingException;
 
 import java.util.Iterator;
@@ -41,6 +42,13 @@ public interface Path{
     boolean equals(Path path);
 
     /**
+     * Compares the path with the given string
+     * @param path the path that is to be compared
+     * @return true if both pats are functionally the same
+     */
+    boolean equals(String path);
+
+    /**
      * Returns the first element of a path, pointing to the next node and subsequently every other node in the path
      * @return Starting node of the path
      */
@@ -65,7 +73,7 @@ public interface Path{
     Path copy();
 
     /**
-     * Performs a checkNull whether this is an empty path
+     * Performs a checkNulls whether this is an empty path
      * @return true if the path can be used safely in arithmetic concatenation and removal of paths
      */
     default boolean isEmpty(){

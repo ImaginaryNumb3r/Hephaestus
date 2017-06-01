@@ -1,6 +1,6 @@
 package infastructure.path.enums;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * @author Patrick
@@ -8,26 +8,26 @@ import java.util.HashMap;
  */
 public enum PathType {
     ABSOLUTE_DIRECTORY, RELATIVE_DIRECTORY, RELATIVE_FILE, ABSOLUTE_FILE;
-    private static HashMap<PathType, Boolean> _filePaths;
-    private static HashMap<PathType, Boolean> _directoryPaths;
+    private static HashSet<PathType> _filePaths;
+    private static HashSet<PathType> _directoryPaths;
 
     static {
         // Initialize file paths
-        _filePaths = new HashMap<>(2);
-        _filePaths.put(ABSOLUTE_FILE, true);
-        _filePaths.put(RELATIVE_FILE, true);
+        _filePaths = new HashSet<>(2);
+        _filePaths.add(ABSOLUTE_FILE);
+        _filePaths.add(RELATIVE_FILE);
 
         // Initialize directory paths
-        _directoryPaths = new HashMap<>(2);
-        _directoryPaths.put(ABSOLUTE_DIRECTORY, true);
-        _directoryPaths.put(RELATIVE_DIRECTORY, true);
+        _directoryPaths = new HashSet<>(2);
+        _directoryPaths.add(ABSOLUTE_DIRECTORY);
+        _directoryPaths.add(RELATIVE_DIRECTORY);
     }
 
     public boolean isFile(){
-        return _filePaths.get(this) != null;
+        return _filePaths.contains(this);
     }
 
     public boolean isDirectory(){
-        return _directoryPaths.get(this) != null;
+        return _directoryPaths.contains(this);
     }
 }

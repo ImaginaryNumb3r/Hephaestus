@@ -1,5 +1,8 @@
 package infastructure.path;
 
+import com.sun.istack.internal.NotNull;
+import core.exception.InstanceNotAllowedException;
+import core.util.collections.Maps;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.AbsolutePath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
@@ -21,26 +24,27 @@ import java.util.LinkedList;
  * @since  05.07.2016
  * Factory class for all kinds of paths
  */
-public class PathFactory {
-    private static final HashMap<Character, Boolean> _forbiddenCharacter;
+public final class PathFactory {
+    private static final Character[] invalidChars = {'\\', '/', ':', '*', '?', '"', '<', '>', '|' };
+    private static final HashMap<Character, Boolean> _forbiddenCharacter = Maps.from(() -> true, invalidChars);
 
     // ===================
     //   Constructor
     // ===================
 
     private PathFactory(){
-
+        throw new InstanceNotAllowedException(getClass());
     }
-
+/*
     static {
         // Initialize HashMap: Forbidden characters
-        Character[] invalidChars = {'\\', '/', ':', '*', '?', '"', '<', '>', '|' };
+        Maps.from(() -> true, invalidChars);
         _forbiddenCharacter = new HashMap<>(invalidChars.length);
 
         for (int i = 0; i != invalidChars.length; ++i){
             _forbiddenCharacter.put(invalidChars[i], true);
         }
-    }
+    }*/
 
     // ===================
     //   Factory Methods
@@ -150,9 +154,19 @@ public class PathFactory {
         return makePath(path, command, PathType.RELATIVE_DIRECTORY);
     }
 
-
     public static boolean isRelativeFile(String path){
         return makeRelativeFile(path) != null;
+    }
+
+    public static Path makePath(@NotNull String path){
+        Path retVal;
+        if (isAbsolute(path)){
+            retVal = makeAbsoluteDirectory(path);
+        } else {
+            retVal = makeRelativeDirectory(path);
+        }
+
+        return retVal;
     }
 
     /**
@@ -183,11 +197,12 @@ public class PathFactory {
     // ===================
 
     /**
-     *
+     * Returns true if the given path is absolute
+     * Basically searches for a semicolon.
      * @param path path
      * @return true if given path is absolute
      */
-    public static boolean isAbsolute(String path){
+    public static boolean isAbsolute(@NotNull String path){
         if (path == null) throw new IllegalArgumentException("Path may not be null");
         boolean isAbsolute = true;
 
@@ -197,9 +212,9 @@ public class PathFactory {
         } else {
             boolean found = false;
 
-            char[] charArray = path.toCharArray();
-            for (int i = 0, charArrayLength = charArray.length; i != charArrayLength && isAbsolute; ++i) {
-                char ch = charArray[i];
+            char[] pathArray = path.toCharArray();
+            for (int i = 0, charArrayLength = pathArray.length; i != charArrayLength && isAbsolute; ++i) {
+                char ch = pathArray[i];
 
                 if (ch == ':'){
                     isAbsolute = !found; // Only true if no colon has been found until now. Becomes false if colon was found twice.
@@ -236,7 +251,7 @@ public class PathFactory {
                 newPath = command.execute(null, new FileNode(null, split[split.length - 1]), 1);
 
             } else {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Given type of path is neither file nor directory");
             }
         }
 
@@ -347,7 +362,7 @@ public class PathFactory {
 
             isValid = _forbiddenCharacter.get(ch) == null;
 
-            // checkNull if absolute
+            // checkNulls if absolute
             if (isAbsolute && !isValid){
                 //  Double Colon must be at the end of the string
                 isValid = ch == ':' && (i + 1 == bytes.length);
@@ -379,7 +394,7 @@ public class PathFactory {
      * @param <P1> First Parameter
      * @param <P2> Second Parameter
      */
-    private static interface PathCommand<T, P1, P2> {
+    private interface PathCommand<T, P1, P2> {
 
         T execute(P1 head, P2 tail, int length);
     }

@@ -1,10 +1,8 @@
 package infastructure.path;
 
 import com.sun.istack.internal.NotNull;
-import core.util.HashCode;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.RelativePath;
-import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.path.exceptions.PathsNotMatchingException;
 import util.hash.HashGenerator;
 
@@ -259,7 +257,7 @@ public abstract class AbstractPath implements Path {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .appendObj(_path)
+                .append(_path)
                 .toHashCode();
     }
 }

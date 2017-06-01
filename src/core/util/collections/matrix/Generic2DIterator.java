@@ -32,7 +32,7 @@ public class Generic2DIterator<T> implements Iterator<T> {
     }
 
     public <I> Generic2DIterator<I> from (@NotNull Accessible2D<I> accessible, @NotNull Tuple<Integer, Integer> bounds){
-        Contract.checkNull(bounds, bounds.getA(), bounds.getB());
+        Contract.checkNulls(bounds, bounds.getA(), bounds.getB());
         return from(accessible, bounds.getA(), bounds.getB());
     }
 
@@ -61,8 +61,8 @@ public class Generic2DIterator<T> implements Iterator<T> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .appendObj(_accessible)
-                .append(_width, _heigth)
+                .append(_accessible)
+                .appendAll(_width, _heigth)
                 .toHashCode();
     }
 }

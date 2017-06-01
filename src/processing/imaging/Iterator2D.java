@@ -68,7 +68,7 @@ public class Iterator2D<T> implements Iterator<T> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .appendObj(_curX, _curY, _matrix)
+                .appendObjs(_curX, _curY, _matrix)
                 .toHashCode();
     }
 }

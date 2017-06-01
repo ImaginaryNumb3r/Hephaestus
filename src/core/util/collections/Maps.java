@@ -54,4 +54,14 @@ public final class Maps {
         }
         return map;
     }
+
+    public static <T> HashMap<Character, T> from(Supplier<T> supplier, Character... chars) {
+        HashMap<Character, T> map = new HashMap<>(chars.length);
+
+        for (int i = 0; i != chars.length; ++i){
+            map.put(chars[i], supplier.get());
+        }
+
+        return map;
+    }
 }

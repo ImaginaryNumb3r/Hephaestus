@@ -33,7 +33,7 @@ public class TimeTable {
     }
 
     public ProtoTime minusTime(@NotNull TimeProxy time1, @NotNull TimeProxy time2){
-        Contract.checkNull(time1, time2);
+        Contract.checkNulls(time1, time2);
 
         int nanos   = time1.getNano() - time2.getNano();
         int seconds = time1.getSecond() - time2.getSecond();

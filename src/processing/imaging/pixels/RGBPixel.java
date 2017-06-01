@@ -86,7 +86,7 @@ public class RGBPixel {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(_red, _green, _blue)
+                .appendAll(_red, _green, _blue)
                 .toHashCode();
     }
 }

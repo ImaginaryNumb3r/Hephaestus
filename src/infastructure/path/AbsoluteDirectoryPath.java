@@ -127,4 +127,9 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
 
         return equals;
     }
+
+    @Override
+    public boolean equals(String path) {
+        return toPath().equals(path);
+    }
 }

@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Stream;
 
-import static core.util.contracts.Contract.checkNull;
-import static core.util.contracts.Contract.throwIf;
-
 /**
  * @author Patrick
  * @since 19.11.2016
@@ -37,22 +34,22 @@ public class Streams<T> extends AbstractStreams<T> {
     //</editor-fold>
 
     public static <T> Stream<T> stream(T[] array){
-        checkNull(array, "array");
+        Contract.checkNull(array, "array");
         return new Streams<>(array).stream();
     }
 
     public static <T> Stream<T> stream(Iterator<T> iterator, int size){
-        checkNull(iterator, "iterator");
+        Contract.checkNull(iterator, "iterator");
         Contract.checkNegative(size);
         return new Streams<>(iterator, size).stream();
     }
     public static <T> Stream<T> stream(List<T> list){
-        checkNull(list, "list");
+        Contract.checkNull(list, "list");
         return new Streams<>(list).stream();
     }
 
     public static <T> Stream<T> stream(@NotNull Spliterator<T> spliterator){
-        checkNull(spliterator, "spliterator");
+        Contract.checkNull(spliterator, "spliterator");
         if (spliterator == null) throw new ParameterNullException();
         return new Streams<>(spliterator).stream();
     }

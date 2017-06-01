@@ -1,7 +1,5 @@
 package datastructure.tree.node;
 
-import java.util.Iterator;
-
 /**
  * @author Patrick
  * @since 29.01.2017
@@ -12,4 +10,5 @@ import java.util.Iterator;
 public interface TreeNodeReader<V>{
 
     V getValue();
+
 }

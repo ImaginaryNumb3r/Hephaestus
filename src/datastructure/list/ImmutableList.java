@@ -1,4 +1,4 @@
-package datastructure.liat;
+package datastructure.list;
 
 import core.util.interfaces.IterableList;
 import stream.streams.Streams;

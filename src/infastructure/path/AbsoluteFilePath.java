@@ -118,6 +118,11 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
     }
 
     @Override
+    public boolean equals(String path) {
+        return getAbsolutePath().equals(path);
+    }
+
+    @Override
     public RelativeFile remove(AbsoluteDirectory absDir) throws PathsNotMatchingException {
         PathSupplier<RelativeFilePath> constructor = (head, tail, file, length) ->
             head == null

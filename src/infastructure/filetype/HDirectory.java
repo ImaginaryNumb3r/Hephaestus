@@ -1,6 +1,9 @@
 package infastructure.filetype;
 
-import infastructure.datastructure.traverser.NodeIterator;
+import com.sun.istack.internal.NotNull;
+import core.util.collections.iterating.AbstractListIterator;
+import core.util.contracts.Contract;
+import core.util.interfaces.Accessible;
 import infastructure.filetype.interfaces.AbstractDirectory;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.AbsolutePath;
@@ -15,21 +18,19 @@ import infastructure.path.exceptions.PathsNotMatchingException;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * An improved implementation of the default Java file, representing a directory on the file system
  * @author Patrick
  * @since 28.05.2016
  */
+// TODO: Consider changing returned files and directories to optional. To signify that you might get a null as a return value
 public class HDirectory extends HEntry implements Iterable<HDirectory>, AbstractDirectory {
     private final AbsoluteDirectory _absoluteDirectory;
 
-    // =======================
-    //     Constructors
-    // =======================
-
+    //<editor-fold desc="Constructors">
     public HDirectory (AbsolutePath location){
         this(location.getAbsolutePath());
     }
@@ -51,11 +52,15 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
 
         _absoluteDirectory = PathFactory.makeAbsoluteDirectory(file.getAbsolutePath());
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Directory Methods">
+    public void forEachFile(@NotNull Consumer<HFile> action) {
+        Contract.checkNull(action);
+        Optional<List<HFile>> optionalFiles = getFiles();
 
-    // =======================
-    //     Methods
-    // =======================
+        optionalFiles.ifPresent(files -> files.forEach(action));
+    }
 
     @Override
     public AbsoluteDirectory getPath() {
@@ -110,6 +115,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
 
     /**
      * Returns the list of entries, as specified with the filters.
+     * If the file does not exist or if an I/O exception occurred, the optional will be empty
      * Returns null if an I/O Exception occurred or if the file does not exist.
      * @param typeFilter First filter to determine the type
      * @param generalFilter Second filter for other sorts of filtering
@@ -119,9 +125,9 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      *          If a security manager exists and its {@link
      *          SecurityManager#checkRead(String)} method denies read access to
      *          the directory
-     * @return List of creates types
+     * @return List of creates types or empty optional.
      */
-    public <T> List<T> getEntries(FileFilter typeFilter, FileFilter generalFilter, BiSupplier<T, File> constructor){
+    public <T> Optional<List<T>> getEntries(FileFilter typeFilter, FileFilter generalFilter, BiSupplier<T, File> constructor){
         FileFilter filter = pathname -> typeFilter.accept(pathname) && generalFilter.accept(pathname);
 
         File[] files = _file.listFiles(filter);
@@ -135,16 +141,17 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
             }
         }
 
-        return hFiles;
+        return Optional.ofNullable(hFiles);
     }
 
 
     /**
      * Returns list of directories that match the filter
      * @param filter to sort unwanted entries
-     * @return List of directories that match the filter
+     * @return List of directories that match the filter.
+     *
      */
-    public List<HDirectory> getDirectories(FileFilter filter) {
+    public Optional<List<HDirectory>> getDirectories(FileFilter filter) {
         FileFilter baseFilter = File::isDirectory;
 
         return getEntries(baseFilter, filter, HDirectory::new);
@@ -161,10 +168,9 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * @return  Null if the directory does not exist or if an I/O error occurs
      *          list of existing sub-directories in this directory
      */
-    public List<HDirectory> getDirectories() {
+    public Optional<List<HDirectory>> getDirectories() {
         return getDirectories(arg -> true);
     }
-
 
     /**
      * Returns the list of existing sub-directories in this directory
@@ -177,7 +183,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * @return  Null if the directory does not exist or if an I/O error occurs
      *          Otherwise, a list of existing sub-directories that match he filter
      */
-    public List<HFile> getFiles(FileFilter filter){
+    public Optional<List<HFile>> getFiles(FileFilter filter){
         FileFilter baseFilter = File::isFile;
 
         return getEntries(baseFilter, filter,  HFile::new);
@@ -187,7 +193,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * returns array of existing files in this directory
      * @return array of existing files in this directory
      */
-    public List<HFile> getFiles(){
+    public Optional<List<HFile>> getFiles(){
         return getFiles(arg -> true);
     }
 
@@ -196,34 +202,12 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * @return InnerIterator of the directories
      */
 
-    public NodeIterator<HDirectory> iterator(){
-        return new CnCDirectoryIterator<>();
+    public ListIterator<HDirectory> iterator(){
+        return new DirectoryIterator<>();
     }
+    //</editor-fold>
 
-
-    // ==================
-    //   Path Interface
-    // ==================
-
-    @Override
-    public int length() {
-        return _absoluteDirectory.length();
-    }
-
-    public DirectoryNode headNode() {
-        return _absoluteDirectory.headNode();
-    }
-
-    @Override
-    public DirectoryNode tailNode() {
-        return _absoluteDirectory.tailNode();
-    }
-
-
-    // =================
-    //   Absolute Path
-    // =================
-
+    //<editor-fold desc="Absolute Path">
     @Override
     public AbsoluteDirectory concat(RelativeDirectory rel) {
         return _absoluteDirectory.concat(rel);
@@ -273,28 +257,57 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
     public RelativeDirectory getParent() {
         return _absoluteDirectory.getParent();
     }
+    //</editor-fold>
 
-    // Path
+    //<editor-fold desc="Path Methods">
+    @Override
+    public int length() {
+        return _absoluteDirectory.length();
+    }
+
+    public DirectoryNode headNode() {
+        return _absoluteDirectory.headNode();
+    }
+
+    @Override
+    public DirectoryNode tailNode() {
+        return _absoluteDirectory.tailNode();
+    }
 
     @Override
     public boolean equals(Path path) {
         return _absoluteDirectory.equals(path);
     }
 
+    @Override
+    public boolean equals(String path) {
+        return false;
+    }
+    //</editor-fold>
+
     /******************
      * Node InnerIterator
      /*****************/
-    protected class CnCDirectoryIterator<T extends HDirectory> extends NodeIterator<HDirectory> {
+    protected class DirectoryIterator<T extends HDirectory> extends AbstractListIterator<T>
+            /*NodeIterator<HDirectory>*/ {
 
-        public CnCDirectoryIterator(List<HDirectory> init) {
-            super(init);
+        protected DirectoryIterator(@NotNull Accessible<T> accessible, int length) {
+            super(accessible, length);
         }
 
-        /**
-         * Default Constructor initializing with child directories
-         */
-        public CnCDirectoryIterator() {
-            this(getDirectories());
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(T hDirectories) {
+
+        }
+
+        @Override
+        public void add(T hDirectories) {
+
         }
     }
 }

@@ -12,6 +12,8 @@ import java.util.ListIterator;
  * @author Patrick
  * @created 29.05.2016
  */
+@Deprecated
+// TODO: Delete
 public abstract class NodeIterator<T extends HDirectory> implements ListIterator<T>, ListSplitter<T> {
     /** The current Node of the iteration */
     protected Node _curNode;

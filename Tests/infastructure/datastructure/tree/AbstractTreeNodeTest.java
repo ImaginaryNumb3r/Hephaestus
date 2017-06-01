@@ -28,7 +28,9 @@ public class AbstractTreeNodeTest {
 
         assert compare.getNewFiles().size() == 3;
 
-        List<HFile> files = directory.getFiles();
+        Optional<List<HFile>> optionalFiles = directory.getFiles();
+        assert optionalFiles.isPresent();
+        List<HFile> files = optionalFiles.get();
         Optional<HFile> hFile = files.stream().filter(file -> file.getName().equals("deleted.txt")).findFirst();
 
         assert hFile.isPresent();

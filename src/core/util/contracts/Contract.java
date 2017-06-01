@@ -2,11 +2,13 @@ package core.util.contracts;
 
 import com.sun.istack.internal.NotNull;
 import core.exception.ParameterNullException;
-import core.util.collections.iterating.Iterators;
+import core.util.collections.iteration.Iterables;
+import core.util.collections.iteration.Iterators;
 import core.util.contracts.exceptions.ContractException;
 import functional.exception.SupplierEx;
 
 import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 /**
@@ -17,17 +19,17 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("WeakerAccess")
 
-// TODO: Consider removing everything from Contract, other than checkNull
-public class Contract implements AutoCloseable {
+// TODO: Consider removing everything from Contract, other than checkNulls
+public final class Contract implements AutoCloseable {
     private BooleanSupplier _contract;
 
     public Contract(BooleanSupplier contract){
-        checkNull(contract);
+        checkNulls(contract);
         _contract = contract;
     }
 
     /**
-     * Performs the contract checkNull
+     * Performs the contract checkNulls
      * @throws ContractException if contract is violated
      */
     @Override
@@ -41,16 +43,16 @@ public class Contract implements AutoCloseable {
     // ==================╝
 
     /**
-     * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
+     * Performs a null check on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
      * @throws ContractException if contract is violated
      */
-    public static void checkNull(Object... objects) throws ContractException {
-        checkNull(Iterators.asIterable(objects));
+    public static void checkNulls(Object... objects) throws ContractException {
+        checkNulls(Iterables.from(objects));
     }
 
     /**
-     * Performs a checkNull on the given objects and throws a named ParameterNullException if it is null
+     * Performs a checkNulls on the given objects and throws a named ParameterNullException if it is null
      * @param object argument containing the object to be tested
      * @param name name of the parameter that was tested
      * @throws ContractException if contract is violated
@@ -61,11 +63,20 @@ public class Contract implements AutoCloseable {
     }
 
     /**
-     * Performs a checkNull on all given objects and throws a ParameterNullException if any are null
+     * Performs a checkNulls on the given objects and throws a named ParameterNullException if it is null
+     * @param object argument containing the object to be tested
+     * @throws ContractException if contract is violated
+     */
+    public static void checkNull(Object object) throws ContractException {
+        if (object == null) throw new ParameterNullException();
+    }
+
+    /**
+     * Performs a checkNulls on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
      * @throws ContractException if contract is violated
      */
-    public static void checkNull(Iterable<Object> objects) throws ContractException {
+    public static void checkNulls(Iterable<Object> objects) throws ContractException {
         for (Object object : objects) {
             if (object == null) throw new ParameterNullException();
         }
@@ -183,6 +194,14 @@ public class Contract implements AutoCloseable {
                     : "";
             throw new IllegalArgumentException("Parameter" + paraName + " may not be null");
         }
+    }
+
+    public static <X extends Throwable> void check(boolean verifier, Supplier<X> exception) throws X {
+        if (!verifier) throw exception.get();
+    }
+
+    public static <X extends Throwable> void check(BooleanSupplier verifier, Supplier<X> exception) throws X {
+        if (!verifier.getAsBoolean()) throw exception.get();
     }
     //</editor-fold>
 

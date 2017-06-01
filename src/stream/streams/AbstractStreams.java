@@ -42,7 +42,7 @@ public abstract class AbstractStreams<T> implements BaseStreams<T>{
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .appendObj(_spliterator)
+                .append(_spliterator)
                 .toHashCode();
     }
 }

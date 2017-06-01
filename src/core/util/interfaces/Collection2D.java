@@ -3,12 +3,9 @@ package core.util.interfaces;
 import com.sun.istack.internal.NotNull;
 import core.datastructure.value.Bounds;
 import core.tuple.Tuple;
-import core.util.collections.Lists;
 import core.util.contracts.Contract;
 import processing.imaging.Iterator2D;
 
-import javax.swing.plaf.TableUI;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Spliterator;
 import java.util.Spliterators;

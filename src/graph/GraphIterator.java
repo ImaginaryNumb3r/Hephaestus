@@ -36,7 +36,7 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
      * @return GraphIterator<T> based from the given parameters
      */
     public static <T extends Iterable<T>> GraphIterator<T> from (T source, @NotNull GraphSearchStrategy<T> strategy){
-        Contract.checkNull(strategy);
+        Contract.checkNulls(strategy);
         return new GraphIterator<>(source, strategy);
     }
 
@@ -63,7 +63,7 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .appendObj(_strategy, _root, _current, _nodes)
+                .appendObjs(_strategy, _root, _current, _nodes)
                 .toHashCode();
     }
 }

@@ -14,4 +14,5 @@ import java.io.Serializable;
 @SuppressWarnings("WeakerAccess")
 public interface Tree<T> extends Traversable<T>, Serializable {
 
+    // TODO: public int size();
 }

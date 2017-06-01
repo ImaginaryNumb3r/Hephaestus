@@ -37,7 +37,7 @@ public class ARGBPixel extends RGBPixel{
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(_red, _green, _blue, _alpha)
+                .appendAll(_red, _green, _blue, _alpha)
                 .toHashCode();
     }
 }

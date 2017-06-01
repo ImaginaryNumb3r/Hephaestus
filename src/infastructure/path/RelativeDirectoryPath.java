@@ -94,4 +94,9 @@ public class RelativeDirectoryPath extends RelativePathImpl<RelativeDirectoryPat
 
         return equals;
     }
+
+    @Override
+    public boolean equals(String path) {
+        return toPath().equals(path);
+    }
 }

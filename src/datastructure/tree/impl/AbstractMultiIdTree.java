@@ -14,6 +14,7 @@ import datastructure.tree.node.subtype.IdTreeNodeReader;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNode;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
 import datastructure.tree.interfaces.subtypes.MultiIdTree;
+import graph.GraphIterator;
 import graph.search.DepthFirstSearch;
 import graph.search.GraphSearchStrategy;
 
@@ -24,7 +25,7 @@ import java.util.*;
  * @since 26.01.2017
  * @param <I> The identifier for individual nodes
  * @param <V> The value for individual nodes
- * @param <N> The Node itself
+ * @param <N> The Node itself and of the children/parent
  * @param <R> The read only version of the node
  *
  * A tree where every node has a variable number of sub-nodes.
@@ -33,7 +34,7 @@ import java.util.*;
 // TODO: Adding mechanism
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractMultiIdTree
-        <I extends Comparable<I>, V, N extends MultiIdTreeNode<I, V, N>, R extends MultiIdTreeNodeReader<I, V, R>>
+        <I /*extends Comparable<I>*/, V, N extends MultiIdTreeNode<I, V, N>, R extends MultiIdTreeNodeReader<I, V, R>>
         implements MultiIdTree<I, V>, ReadableTree<R>, Iterable<R> {
     //<editor-fold desc="Attributes">
     protected final N _sentinel;
@@ -224,12 +225,12 @@ public abstract class AbstractMultiIdTree
     }
     //</editor-fold>
 
-    /**
-     * Returns an iterator, based on the traversing strategy
-     * @param strategy how to create a list from a DAG (directed acyclic graph). May not be null
-     * @return Iterator of all nodes inside the tree
-     */
-    public abstract Iterator<R> iterator(@NotNull GraphSearchStrategy<R> strategy);
+//    /**
+//     * Returns an iterator, based on the traversing strategy
+//     * @param strategy how to create a list from a DAG (directed acyclic graph). May not be null
+//     * @return Iterator of all nodes inside the tree
+//     */
+//    public abstract Iterator<R> iterator(@NotNull GraphSearchStrategy<R> strategy);
 
     /**
      * Iterated the tree via a Depth First Search
@@ -239,12 +240,28 @@ public abstract class AbstractMultiIdTree
         return iterator(new DepthFirstSearch<>());
     }
 
+    /**
+     * Iterate the tree by a given strategy
+     * @param strategy for iteration
+     * @return InnerIterator for all nodes of the tree
+     */
+    public Iterator<R> iterator(@NotNull GraphSearchStrategy<R> strategy){
+        return GraphIterator.from(iterationStartNode(), strategy);
+    }
+
     @Override
     public List<R> toList(GraphSearchStrategy<R> strategy) {
         return Lists.toLinkedList(iterator(strategy));
     }
 
     //<editor-fold desc="Protected Methods">
+    /**
+     * Returns the start node for iterations.
+     * Returns a version of the internal nodes which can be given outside.
+     * @return the start node for iterations.
+     */
+    protected abstract R iterationStartNode();
+
     protected abstract N makeNode(I identifier, V value, N root);
 
     protected N makeNode(I identifier, N root){
@@ -403,7 +420,7 @@ public abstract class AbstractMultiIdTree
             protected final Iterator<N> ITER;
 
             public Level(@NotNull N root, @NotNull Iterator<N> iter) {
-                Contract.checkNull(root, iter);
+                Contract.checkNulls(root, iter);
 
                 ROOT = root;
                 ITER = ROOT.children().iterator();

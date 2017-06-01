@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Patrick
@@ -25,7 +26,9 @@ public class HDirectoryTest {
         String testDirectory = "D:\\Projekte\\Hephaestus\\Tests\\Files";
         HDirectory directory = new HDirectory(testDirectory);
 
-        List<HDirectory> directories = directory.getDirectories();
+        Optional<List<HDirectory>> optionalDirectories = directory.getDirectories();
+        assert optionalDirectories.isPresent();
+        List<HDirectory> directories =  optionalDirectories.get();
         assert(directories.size() == 3);
     }
 
@@ -34,7 +37,11 @@ public class HDirectoryTest {
         String testDirectory = "D:\\Projekte\\Hephaestus\\Tests\\Files";
         HDirectory directory = new HDirectory(testDirectory);
 
-        List<HFile> files = directory.getFiles();
+        Optional<List<HFile>> optionalFiles = directory.getFiles();
+        assert optionalFiles.isPresent();
+
+        List<HFile> files = optionalFiles.get();
+        assert optionalFiles.isPresent();
         assert(files.size() == 4);
     }
 

@@ -68,7 +68,7 @@ public class Bounds implements Tuple<Integer, Integer> {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(WIDTH, HEIGHT)
+                .appendAll(WIDTH, HEIGHT)
                 .toHashCode();
     }
 }

@@ -2,7 +2,7 @@ package core.tuple;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
-import core.util.collections.iterating.GenericListIterator;
+import core.util.collections.iteration.GenericListIterator;
 import core.util.contracts.Contract;
 
 import java.util.ListIterator;
@@ -14,7 +14,7 @@ import java.util.ListIterator;
 public interface Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
     static <A, B, C, D> Quartet from(@NotNull Quartet<A, B, C, D> quartet) {
-        Contract.checkNull(quartet);
+        Contract.checkNulls(quartet);
         return new QuartetImpl<>(quartet.getA(), quartet.getB(), quartet.getC(), quartet.getD());
     }
 

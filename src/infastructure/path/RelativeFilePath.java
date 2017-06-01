@@ -126,6 +126,11 @@ public class RelativeFilePath extends RelativePathImpl<RelativeFilePath> impleme
         return equals;
     }
 
+    @Override
+    public boolean equals(String path) {
+        return toPath().equals(path);
+    }
+
     public void setFile(FileNode file) {
         _fileNode = file;
     }

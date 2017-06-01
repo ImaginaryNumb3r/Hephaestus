@@ -39,7 +39,7 @@ public class HashGenerator {
         return this;
     }
 
-    public HashGenerator append(boolean... bools){
+    public HashGenerator appendAll(boolean... bools){
         for (int i = 0; i != bools.length; ++i){
             int value = bools[i] ? 1 : 0;
             _hashCode += value * _multBase;
@@ -54,7 +54,7 @@ public class HashGenerator {
         return this;
     }
 
-    public HashGenerator append(char... chars){
+    public HashGenerator appendAll(char... chars){
         for (int i = 0; i != chars.length; ++i){
             _hashCode += chars[i] * _multBase;
         }
@@ -68,7 +68,7 @@ public class HashGenerator {
         return this;
     }
 
-    public HashGenerator append(int... ints){
+    public HashGenerator appendAll(int... ints){
         for (int i = 0; i != ints.length; ++i){
             _hashCode += ints[i] * _multBase;
         }
@@ -82,7 +82,7 @@ public class HashGenerator {
         return this;
     }
 
-    public HashGenerator append(long... longs){
+    public HashGenerator appendAll(long... longs){
         for (int i = 0; i != longs.length; ++i){
             _hashCode += longs[i] * _multBase;
         }
@@ -96,7 +96,7 @@ public class HashGenerator {
         return this;
     }
 
-    public HashGenerator append(float... floats){
+    public HashGenerator appendAll(float... floats){
         for (int i = 0; i != floats.length; ++i){
             _hashCode += floats[i] * _multBase;
         }
@@ -110,7 +110,7 @@ public class HashGenerator {
         return this;
     }
 
-    public HashGenerator append(double... doubles){
+    public HashGenerator appendAll(double... doubles){
         for (int i = 0; i != doubles.length; ++i){
             _hashCode += doubles[i] * _multBase;
         }
@@ -119,12 +119,12 @@ public class HashGenerator {
     //</editor-fold>
 
     //<editor-fold desc="Object">
-    public HashGenerator appendObj(Object obj){
+    public HashGenerator append(Object obj){
         _hashCode += obj.hashCode() * _multBase;
         return this;
     }
 
-    public HashGenerator appendObj(Object... objs){
+    public HashGenerator appendObjs(Object... objs){
         for (int i = 0; i != objs.length; ++i){
             _hashCode += objs[i].hashCode() * _multBase;
         }
@@ -132,7 +132,7 @@ public class HashGenerator {
     }
     //</editor-fold>
 
-    //<editor-fold desc="Iterable">
+    //<editor-fold desc="Iterables">
     public <T> HashGenerator appendAll(Iterable<T> iterable){
         for (T item : iterable) {
             _hashCode += item.hashCode() * _multBase;
@@ -154,7 +154,7 @@ public class HashGenerator {
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(_multBase, _hashCode)
+                .appendAll(_multBase, _hashCode)
                 .toHashCode();
     }
 }

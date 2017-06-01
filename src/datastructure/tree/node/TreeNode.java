@@ -5,7 +5,7 @@ package datastructure.tree.node;
  * @since 26.01.2017
  * @param <V> Value of the current node
  */
-public interface TreeNode<V /*, N extends TreeNode<V, N>*/>  extends TreeNodeReader<V> {
+public interface TreeNode<V>  extends TreeNodeReader<V> {
 
     void setValue(V value);
 }

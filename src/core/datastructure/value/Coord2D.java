@@ -124,7 +124,7 @@ public class Coord2D implements Tuple<Integer, Integer>{
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .append(_x, _y)
+                .appendAll(_x, _y)
                 .toHashCode();
     }
 

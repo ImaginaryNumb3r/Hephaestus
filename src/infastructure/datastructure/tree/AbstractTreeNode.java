@@ -3,6 +3,7 @@ package infastructure.datastructure.tree;
 import infastructure.datastructure.tree.container.ListCompareResult;
 import infastructure.filetype.HDirectory;
 import infastructure.filetype.HFile;
+import infastructure.filetype.interfaces.AbstractDirectory;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteFile;
@@ -12,6 +13,7 @@ import infastructure.path.DirectoryNode;
 import infastructure.path.PathFactory;
 import infastructure.path.exceptions.PathsNotMatchingException;
 
+import javax.swing.text.html.Option;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.LinkedList;
@@ -94,7 +96,10 @@ public abstract class AbstractTreeNode implements TreeNode {
         initializeDirectory();
         ListComparer<String> comparer = new ListComparer<>();
 
-        List<String> entries = _directory.getEntries(entry -> true, entry -> true, File::getName);
+        Optional<List<String>> optionalEntries = _directory.getEntries(entry -> true, entry -> true, File::getName);
+        assert optionalEntries.isPresent();
+
+        List<String> entries = optionalEntries.get();
         ListCompareResult<String> compare = comparer.compare(entries, _directories);
 
         updateDirectories(compare);
@@ -207,25 +212,25 @@ public abstract class AbstractTreeNode implements TreeNode {
     public abstract String getAbsolutePath();
 
     @Override
-    public List<HFile> getFiles(FileFilter filter) {
+    public Optional<List<HFile>> getFiles(FileFilter filter) {
         initializeDirectory();
         return _directory.getFiles(filter);
     }
 
     @Override
-    public List<HFile> getFiles() {
+    public Optional<List<HFile>> getFiles() {
         initializeDirectory();
         return _directory.getFiles();
     }
 
     @Override
-    public List<HDirectory> getDirectories(FileFilter filter) {
+    public Optional<List<HDirectory>> getDirectories(FileFilter filter) {
         initializeDirectory();
         return _directory.getDirectories();
     }
 
     @Override
-    public List<HDirectory> getDirectories() {
+    public Optional<? extends List<? extends AbstractDirectory>> getDirectories() {
         initializeDirectory();
         return _directory.getDirectories();
     }

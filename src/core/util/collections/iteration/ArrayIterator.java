@@ -1,4 +1,4 @@
-package core.util.collections.iterating;
+package core.util.collections.iteration;
 
 import com.sun.istack.internal.NotNull;
 import core.util.HashCode;
@@ -35,10 +35,9 @@ public class ArrayIterator<T> implements Iterator<T> {
      */
     @SafeVarargs
     public static <T> Iterator<T> from(@NotNull T... array) {
-        Contract.checkNull((Object[]) array);
+        Contract.checkNull(array);
         return new ArrayIterator<>(array);
     }
-
 
     @Override
     public boolean hasNext() {
@@ -53,14 +52,14 @@ public class ArrayIterator<T> implements Iterator<T> {
 
     @Override
     public boolean equals(Object obj) {
-        return HashCode.equals(this, obj);
+        return obj instanceof ArrayIterator && HashCode.equals(this, obj);
     }
 
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
-                .appendObj((Object[]) _array)
-                .append(_array.length, _pos)
+                .append(_array)
+                .appendAll(_array.length, _pos)
                 .toHashCode();
     }
 }

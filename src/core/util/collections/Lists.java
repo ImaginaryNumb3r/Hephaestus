@@ -4,7 +4,7 @@ import com.sun.istack.internal.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.exception.ParameterNullException;
 import core.util.annotations.ToTest;
-import core.util.collections.iterating.ArrayIterator;
+import core.util.collections.iteration.ArrayIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;

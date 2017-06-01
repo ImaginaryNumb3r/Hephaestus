@@ -230,6 +230,11 @@ public class HFile extends HEntry implements AbstractFile{
     }
 
     @Override
+    public boolean equals(String path) {
+        return getAbsolutePath().equals(path);
+    }
+
+    @Override
     public DirectoryNode tailNode() {
         return _absoluteFilePath.tailNode();
     }

@@ -4,7 +4,6 @@ import com.sun.istack.internal.NotNull;
 import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
 import datastructure.tree.impl.node.MultiIdTreeNodeReaderImpl;
 import graph.GraphIterator;
-import graph.search.DepthFirstSearch;
 import graph.search.GraphSearchStrategy;
 
 import java.util.Iterator;
@@ -31,17 +30,13 @@ public class MultiIdTreeImpl<I extends Comparable<I>, V>
     //</editor-fold>
 
     @Override
+    protected MultiIdTreeNodeReaderImpl<I, V> iterationStartNode() {
+        return _sentinel.toReadOnly();
+    }
+
+    @Override
     protected MultiIdTreeNodeImpl<I, V> makeNode(I identifier, V value, MultiIdTreeNodeImpl<I, V> root) {
         return new MultiIdTreeNodeImpl<>(identifier, value, root);
     }
 
-    /**
-     * Iterate the tree by a given strategy
-     * @param strategy for iteration
-     * @return InnerIterator for all nodes of the tree
-     */
-    @Override
-    public Iterator<MultiIdTreeNodeReaderImpl<I, V>> iterator(GraphSearchStrategy<MultiIdTreeNodeReaderImpl<I, V>> strategy){
-        return GraphIterator.from(_sentinel.toReadOnly(), strategy);
-    }
 }

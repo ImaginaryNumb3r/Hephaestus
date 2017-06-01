@@ -1,6 +1,7 @@
 package core.util.collections.iterating;
 
 import com.sun.istack.internal.NotNull;
+import core.util.collections.iteration.GenericIterator;
 import core.util.interfaces.Accessible;
 
 import java.util.ListIterator;
@@ -11,6 +12,7 @@ import java.util.NoSuchElementException;
  * @since 19.05.2017
  *
  * General purpose ListIterator that implements the most common traits just as next and previous.
+ * Inheriting classes must implement: remove, add, set
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractListIterator<T> extends GenericIterator<T> implements ListIterator<T>{

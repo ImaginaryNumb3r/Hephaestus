@@ -57,6 +57,11 @@ public class AbsoluteDirectoryTreeNode extends AbstractTreeNode {
     }
 
     @Override
+    public boolean equals(String path) {
+        return getAbsolutePath().equals(path);
+    }
+
+    @Override
     public String getName() {
         return getAbsolutePath();
     }
