@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  */
 public class ArrayIterator<T> implements Iterator<T> {
     protected final T[] _array;
-    protected int _pos = 0;
+    protected Integer _pos = null;
 
     /**
      * Internal Constructor.
@@ -23,7 +23,7 @@ public class ArrayIterator<T> implements Iterator<T> {
      * @param array for internal access. Must not be null
      */
     @SuppressWarnings("WeakerAccess")
-    protected ArrayIterator(T[] array) {
+    protected ArrayIterator(@NotNull T[] array) {
         _array = array;
     }
 
@@ -41,11 +41,14 @@ public class ArrayIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return _pos < _array.length;
+        return _pos != null
+                ? _pos < _array.length
+                : _array.length != 0;
     }
 
     @Override
     public T next() {
+        if (_pos == null) _pos = 0;
         if (!hasNext()) throw new NoSuchElementException();
         return _array[_pos++];
     }
@@ -59,7 +62,6 @@ public class ArrayIterator<T> implements Iterator<T> {
     public int hashCode() {
         return new HashGenerator(getClass())
                 .append(_array)
-                .appendAll(_array.length, _pos)
                 .toHashCode();
     }
 }

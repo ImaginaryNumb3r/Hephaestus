@@ -29,7 +29,6 @@ public interface AbsolutePath extends Path {
 
     AbsolutePath copy();
 
-    // TODO:
     boolean hasParent();
 
     RelativeDirectory getParent();

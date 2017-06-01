@@ -32,7 +32,6 @@ public interface Unit<A> extends Structure {
 
     @Override
     default ListIterator<Object> listIterator(){
-        // TODO: Create custom ListIterator and return that
         return Iterators.from(getA());
     }
 }

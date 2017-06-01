@@ -15,7 +15,7 @@ import infastructure.path.exceptions.PathsNotMatchingException;
  * @author Patrick
  * @created 08.07.2016
  */
-// TODO: Consider just making it a relativePath or relFile + relDir
+// TODO: Can be removed. Can be made with empty path instead
 public interface EmptyPath extends Path { // extends AbsoluteDirectory, AbsoluteFile, RelativeDirectory, RelativeFile {
 
     // Path Arithmetic

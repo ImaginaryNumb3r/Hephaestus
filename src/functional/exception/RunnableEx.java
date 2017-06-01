@@ -1,6 +1,5 @@
 package functional.exception;
 
-import core.exception.FunctionalException;
 
 /**
  * @author Patrick

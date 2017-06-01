@@ -11,7 +11,6 @@ import infastructure.path.DirectoryNode;
 import infastructure.path.FileNode;
 import infastructure.path.PathFactory;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -191,10 +190,9 @@ public class HFile extends HEntry implements AbstractFile{
     }
 
     @Override
-    // TODO: Could get problems
-    public AbsoluteFile copy() {
-        return new HFile((AbsoluteFile) this);
-}
+    public HFile copy() {
+        return new HFile(_file);
+    }
 
     @Override
     public boolean isSubPath(RelativeDirectory relDir) {
@@ -226,7 +224,7 @@ public class HFile extends HEntry implements AbstractFile{
     @Override
     // TODO
     public boolean equals(Path path) {
-        throw new NotImplementedException();
+        return _absoluteFilePath.equals(path);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package core.util.collections.iteration;
+package core.util.collections.interfaces;
 
 import java.util.ListIterator;
 
@@ -9,7 +9,7 @@ import java.util.ListIterator;
  * Internal helper Interface to unify logic and minimize code imprint.
  * Has default implementations for hasPrevious(), nextIndex() and previousIndex();
  */
-interface ListIteratorHelper<T> extends ListIterator<T> {
+public interface ListIteratorHelper<T> extends ListIterator<T> {
 
     /**
      * Returns the index of the last returned element
@@ -33,6 +33,6 @@ interface ListIteratorHelper<T> extends ListIterator<T> {
     default int previousIndex() {
         return hasPrevious()
                 ? index() - 1
-                : index();
+                : 0;
     }
 }

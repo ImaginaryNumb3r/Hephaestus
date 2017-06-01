@@ -1,7 +1,6 @@
 package core.exception;
 
 import com.sun.istack.internal.Nullable;
-import core.util.contracts.exceptions.ContractException;
 
 /**
  * @author Patrick

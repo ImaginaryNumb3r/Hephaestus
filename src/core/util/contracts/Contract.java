@@ -4,7 +4,6 @@ import com.sun.istack.internal.NotNull;
 import core.exception.ParameterNullException;
 import core.util.collections.iteration.Iterables;
 import core.util.collections.iteration.Iterators;
-import core.util.contracts.exceptions.ContractException;
 import functional.exception.SupplierEx;
 
 import java.util.function.BooleanSupplier;
@@ -19,22 +18,12 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("WeakerAccess")
 
-// TODO: Consider removing everything from Contract, other than checkNulls
-public final class Contract implements AutoCloseable {
+public final class Contract {
     private BooleanSupplier _contract;
 
-    public Contract(BooleanSupplier contract){
+    private Contract(BooleanSupplier contract){
         checkNulls(contract);
         _contract = contract;
-    }
-
-    /**
-     * Performs the contract checkNulls
-     * @throws ContractException if contract is violated
-     */
-    @Override
-    public void close() throws ContractException {
-        if (_contract.getAsBoolean()) throw new ContractException("Contract has been violated");
     }
 
 
@@ -45,9 +34,9 @@ public final class Contract implements AutoCloseable {
     /**
      * Performs a null check on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
-     * @throws ContractException if contract is violated
+     * @throws ParameterNullException if contract is violated
      */
-    public static void checkNulls(Object... objects) throws ContractException {
+    public static void checkNulls(Object... objects) throws ParameterNullException {
         checkNulls(Iterables.from(objects));
     }
 
@@ -55,9 +44,9 @@ public final class Contract implements AutoCloseable {
      * Performs a checkNulls on the given objects and throws a named ParameterNullException if it is null
      * @param object argument containing the object to be tested
      * @param name name of the parameter that was tested
-     * @throws ContractException if contract is violated
+     * @throws ParameterNullException if contract is violated
      */
-    public static void checkNull(Object object, String name) throws ContractException {
+    public static void checkNull(Object object, String name) throws ParameterNullException {
         name = name == null ? "null" : name;
         if (object == null) throw new ParameterNullException(name);
     }
@@ -65,18 +54,18 @@ public final class Contract implements AutoCloseable {
     /**
      * Performs a checkNulls on the given objects and throws a named ParameterNullException if it is null
      * @param object argument containing the object to be tested
-     * @throws ContractException if contract is violated
+     * @throws ParameterNullException if contract is violated
      */
-    public static void checkNull(Object object) throws ContractException {
+    public static void checkNull(Object object) throws ParameterNullException {
         if (object == null) throw new ParameterNullException();
     }
 
     /**
      * Performs a checkNulls on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
-     * @throws ContractException if contract is violated
+     * @throws ParameterNullException if contract is violated
      */
-    public static void checkNulls(Iterable<Object> objects) throws ContractException {
+    public static void checkNulls(Iterable<Object> objects) throws ParameterNullException {
         for (Object object : objects) {
             if (object == null) throw new ParameterNullException();
         }
@@ -85,7 +74,7 @@ public final class Contract implements AutoCloseable {
     /**
      * Performs a null check on all given objects and throws a ParameterNullException if any are null
      * @param objects arguments containing objects to be tested
-     * @throws ContractException if contract is violated
+     * @throws X if contract is violated
      */
     public static <T, X extends RuntimeException> void checkAndThrow(
             SupplierEx<T, X> supplier, Object... objects) throws X{

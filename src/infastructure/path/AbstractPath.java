@@ -225,7 +225,7 @@ public abstract class AbstractPath implements Path {
 
     // Path
 
-    // TODO: Consider changing to HashCode
+    // TODO: Consider changing to HashCode comparison
     @Override
     public boolean equals(Path path) {
         boolean equals = false;

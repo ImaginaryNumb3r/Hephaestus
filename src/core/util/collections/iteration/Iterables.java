@@ -16,4 +16,7 @@ public final class Iterables {
         return () -> Iterators.from(objects);
     }
 
+    public static <T> boolean equals(Iterable<T> iterable1, Iterable<T> iterable2){
+        return Iterators.equals(iterable1.iterator(), iterable2.iterator());
+    }
 }

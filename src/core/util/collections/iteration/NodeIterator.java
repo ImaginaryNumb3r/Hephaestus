@@ -1,7 +1,9 @@
 package core.util.collections.iteration;
 
 import com.sun.istack.internal.NotNull;
+import core.util.HashCode;
 import core.util.collections.interfaces.Linkable;
+import util.hash.HashGenerator;
 
 import java.util.Iterator;
 
@@ -32,5 +34,17 @@ public class NodeIterator<T, L extends Linkable<T, L>> implements Iterator<T> {
                 : _start.tryNext();
         _current = next;
         return next.value();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof NodeIterator && HashCode.equals(this, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(_start)
+                .toHashCode();
     }
 }

@@ -25,7 +25,6 @@ import java.util.function.Consumer;
  * @author Patrick
  * @since 28.05.2016
  */
-// TODO: Consider changing returned files and directories to optional. To signify that you might get a null as a return value
 public class HDirectory extends HEntry implements Iterable<HDirectory>, AbstractDirectory {
     private final AbsoluteDirectory _absoluteDirectory;
 

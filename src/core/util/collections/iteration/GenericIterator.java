@@ -60,14 +60,13 @@ public class GenericIterator<T> implements Iterator<T> {
 
     @Override
     public boolean equals(Object obj) {
-        return HashCode.equals(this, obj);
+        return obj instanceof GenericIterator && HashCode.equals(this, obj);
     }
 
     @Override
     public int hashCode() {
         return new HashGenerator(getClass())
                 .append(_accessible)
-                .appendAll(_length, _pos)
                 .toHashCode();
     }
 }

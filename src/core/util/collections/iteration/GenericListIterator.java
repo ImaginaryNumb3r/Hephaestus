@@ -2,6 +2,7 @@ package core.util.collections.iteration;
 
 import com.sun.istack.internal.NotNull;
 import core.util.annotations.ToTest;
+import core.util.collections.interfaces.ListIteratorHelper;
 import core.util.contracts.Contract;
 import core.util.interfaces.Accessible;
 

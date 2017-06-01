@@ -1,6 +1,5 @@
 package functional.exception;
 
-import core.exception.FunctionalException;
 import java.util.function.Supplier;
 
 /**
@@ -8,7 +7,6 @@ import java.util.function.Supplier;
  * @since 29.11.2016
  */
 @FunctionalInterface
-// TODO: Replace FunctionalException with X extends Throwable
 public interface SupplierEx<T, X extends Exception> extends Supplier<T> {
 
     /**
@@ -29,11 +27,4 @@ public interface SupplierEx<T, X extends Exception> extends Supplier<T> {
 
     T tryGet() throws X;
 
-    /*
-    /**
-     * Returns a result, but an exception may also be thrown
-     * @return a result, but an exception may also be thrown
-     * @throws FunctionalException will have an inner exception, which needs to be specified in the implementation
-     */
-    // T tryGet() throws FunctionalException;
 }

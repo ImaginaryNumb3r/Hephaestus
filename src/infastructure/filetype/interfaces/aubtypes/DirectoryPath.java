@@ -1,6 +1,7 @@
 package infastructure.filetype.interfaces.aubtypes;
 
 import infastructure.filetype.interfaces.Path;
+import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.RelativeFile;
 import infastructure.path.exceptions.PathsNotMatchingException;
@@ -22,4 +23,5 @@ public interface DirectoryPath extends Path {
     FilePath concat(RelativeFile relFile);
 
     DirectoryPath copy();
+
 }

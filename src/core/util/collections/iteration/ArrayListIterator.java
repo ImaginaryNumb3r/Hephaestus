@@ -1,17 +1,15 @@
 package core.util.collections.iteration;
 
 import core.exception.NoImplementationException;
+import core.util.collections.interfaces.ListIteratorHelper;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
  * @author Patrick
- * @description
  * @since 01.06.2017
  */
-public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIteratorHelper<T>{
+public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIteratorHelper<T> {
 
     /**
      * Internal Constructor.
@@ -30,21 +28,25 @@ public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIterat
 
     @Override
     public T previous() {
+        if (_pos == null) _pos = 0;
         if (!hasPrevious()) throw new NoSuchElementException();
         return _array[_pos--];    }
 
     @Override
     public void remove() {
+        if (_pos == null) throw new IllegalStateException();
         throw new NoImplementationException(); // TODO
     }
 
     @Override
     public void set(T t) {
+        if (_pos == null) throw new IllegalStateException();
         _array[_pos] = t;
     }
 
     @Override
     public void add(T t) {
+        if (_pos == null) throw new IllegalStateException();
         throw new NoImplementationException(); // TODO
     }
 }
