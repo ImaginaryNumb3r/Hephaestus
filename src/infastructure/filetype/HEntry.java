@@ -1,5 +1,6 @@
 package infastructure.filetype;
 
+import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.AbsolutePath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 
@@ -8,6 +9,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.OptionalLong;
 
 /**
  * @author Patrick
@@ -17,6 +21,7 @@ import java.util.Date;
 public abstract class HEntry implements AbsolutePath{
     protected File _file;
 
+    //<editor-fold desc="Constructors">
     // ======================
     //      Constructors
     // ======================
@@ -28,7 +33,9 @@ public abstract class HEntry implements AbsolutePath{
     protected HEntry(File file) {
         _file = file;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Interface Methods">
     // ======================
     //   Interface Methods
     // ======================
@@ -42,34 +49,84 @@ public abstract class HEntry implements AbsolutePath{
 
     @Override
     public boolean equals(Object object){
-        boolean equals;
-
-        if (object == this) {
-            equals = true;
-        } else if (object instanceof AbsolutePath){
-            AbsolutePath file = (AbsolutePath) object;
-            equals = file.equals(this);
-        } else {
-            equals = false;
+        boolean equals = false;
+        if (object instanceof HEntry){
+            HEntry entry = (HEntry) object;
+            equals = _file.equals(entry._file);
         }
 
         return equals;
     }
+    //</editor-fold>
 
     // ======================
     //      Methods
     // ======================
 
-    public abstract AbsoluteDirectory getParentPath();
+    /**
+     * Creates an object with the set of properties the entry has at this given moment.
+     * Because the program has no control over the file system the properties can change at any given moment.
+     * When working with the object, the file might have been deleted or changed already
+     * Therefore, this is just a momentary value object.
+     * @return  Returns FileTimeStamp of the current filesystem entry if the current HEntry really exists.
+     *          Otherwise, returns null.
+     */
+    @SuppressWarnings("OptionalGetWithoutIsPresent") // Get from CatchBlock
+    public FileTimeStamp makeTimeStamp(){
+        FileTimeStamp retVal = null;
 
-    public LocalDateTime lastModifiedDateTime(){
-        Date date = new Date(_file.lastModified());
+        try {
+            if (exists()){
+                long lastModified = lastModifiedMillies().getAsLong();
+                long length = contentSize().getAsLong();
+                String name = _file.getName();
 
-        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+                if (exists()){
+                    retVal = new FileTimeStampImpl(lastModified, length, name, this, LocalDateTime.now());
+                }
+            }
+        } catch (NoSuchElementException ignore){ }
+
+        return retVal;
     }
 
-    public long lastModifiedMillies(){
-        return _file.lastModified();
+    public abstract AbsoluteDirectory getParentPath();
+
+    /**
+     * Returns the size of the content of this directory or file.
+     * @return the size of the content of this directory or file.
+     */
+    public OptionalLong contentSize(){
+        return exists()
+                ? OptionalLong.of(_file.length())
+                : OptionalLong.empty();
+    }
+
+    /**
+     * Returns the last date of modification of this if it exists as a LocalDateTime
+     * The optional only has a value if the file really exists
+     * @return Optional of the last date of modification as LocalDateTime. Returns empty optional if file does not exist
+     */
+    public Optional<LocalDateTime> lastModifiedDateTime(){
+        Optional<LocalDateTime> optional = Optional.empty();
+        if (exists()){
+            Date date = new Date(_file.lastModified());
+            LocalDateTime time = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+            optional = Optional.of(time);
+        }
+
+        return optional;
+    }
+
+    /**
+     * Returns the last date of modification of this if it exists. Result is measured in milliseconds.
+     * The optional only has a value if the file really exists
+     * @return Optional of the last date of modification as milliseconds. Returns empty optional if file does not exist
+     */
+    public OptionalLong lastModifiedMillies(){
+        return exists()
+                ? OptionalLong.of(_file.lastModified())
+                : OptionalLong.empty();
     }
 
 
@@ -212,5 +269,10 @@ public abstract class HEntry implements AbsolutePath{
         return _file != null
                 ? null
                 : new HDirectory(parent);
+    }
+
+    @Override
+    public int hashCode() {
+        return _file.hashCode();
     }
 }

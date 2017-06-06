@@ -1,5 +1,6 @@
 package filesystem.traversing;
 
+import com.sun.istack.internal.NotNull;
 import core.util.contracts.Contract;
 import infastructure.filetype.HDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
@@ -12,11 +13,13 @@ import java.util.Stack;
 /**
  * @author Patrick
  * @since 28.05.2017
+ *
+ * Visits the given directory and all subdirectories in it as an iterator
  */
 public class DirectoryTraverser implements Iterator<HDirectory> {
     private Stack<HDirectory> _remaining;
 
-    public DirectoryTraverser(HDirectory root) {
+    public DirectoryTraverser(@NotNull HDirectory root) {
         _remaining = new Stack<>();
         _remaining.add(root);
     }

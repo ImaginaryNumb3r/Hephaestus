@@ -4,7 +4,9 @@ import datastructure.tree.impl.exception.NodeAlreadyExistsException;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNode;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Stream;
 
 /**
@@ -14,6 +16,7 @@ import java.util.stream.Stream;
  * @param <V> Value of the current node
  * @param <N> Subnodes of the current nodes
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class AbstractMultiIdTreeNode<I, V, N extends AbstractMultiIdTreeNode<I, V, N>>
         implements MultiIdTreeNode<I, V, N> {
     //<editor-fold desc="Attributes">
@@ -22,6 +25,18 @@ public abstract class AbstractMultiIdTreeNode<I, V, N extends AbstractMultiIdTre
     protected I _identifier;
     protected V _value;
     //</editor-fold>
+
+    public AbstractMultiIdTreeNode(){
+        _children = new LinkedList<>();
+    }
+
+    public AbstractMultiIdTreeNode(I identifier, V value, List<N> children, N parent){
+        this();
+        _identifier = identifier;
+        _children.addAll(children);
+        _parent = parent;
+        _value = value;
+    }
 
     @Override
     public boolean hasParent() {
@@ -123,9 +138,13 @@ public abstract class AbstractMultiIdTreeNode<I, V, N extends AbstractMultiIdTre
     }
     //</editor-fold>
 
+    @Override
+    public ListIterator<N> iterator() {
+        return _children.listIterator();
+    }
 
     @Override
-    public Iterator<N> iterator() {
-        return null;
+    public String toString() {
+        return "[ " + _identifier + " | " + _value + " | size: " + children().size() + "]";
     }
 }

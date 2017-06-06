@@ -116,7 +116,6 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
         throw new NoImplementationException();
     }
 
-
     @Override
     public boolean equals(Path path) {
         boolean equals = false;

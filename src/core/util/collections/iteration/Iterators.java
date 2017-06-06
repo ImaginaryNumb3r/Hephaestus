@@ -25,18 +25,11 @@ public final class Iterators {
         throw new InstanceNotAllowedException(getClass());
     }
 
-    @Deprecated // Use Iterables.from instead
-    public static <T> Iterable<T> asIterable(@NotNull T[] array){
-        Contract.checkNull(array, "array");
-        return () -> from(array);
+    public static <T> ListIterator<T> empty() {
+        return new EmptyIterator<>();
     }
 
-    @Deprecated // Use Iterables.from instead
-    public static <T> Iterable<T> asIterable(@NotNull Iterator<T> iterator){
-        Contract.checkNull(iterator, "iterator");
-        return () -> iterator;
-    }
-
+    //<editor-fold desc="Iterator Construction">
     /**
      * Returns an iterator from the given array
      * @param array that is to be turned into an Array. May not be null
@@ -58,10 +51,7 @@ public final class Iterators {
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericIterator<>(index -> chars[index], chars.length);
     }
-
-    public static <T> ListIterator<T> empty() {
-        return new EmptyIterator<>();
-    }
+    //</editor-fold>
 
     //<editor-fold desc="Equals">
     @SafeVarargs

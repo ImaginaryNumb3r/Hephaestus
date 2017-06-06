@@ -20,8 +20,8 @@ public class HEntryTest {
         String filePath = "D:\\Projekte\\Hephaestus\\Tests\\Files\\TestFile.txt";
         HFile file = new HFile(PathFactory.makeAbsoluteFile(filePath));
 
-        LocalDateTime fileTime = file.lastModifiedDateTime();
-        LocalDateTime dirTime = directory.lastModifiedDateTime();
+        LocalDateTime fileTime = file.lastModifiedDateTime().get();
+        LocalDateTime dirTime = directory.lastModifiedDateTime().get();
 
         boolean before = fileTime.isBefore(dirTime);
 

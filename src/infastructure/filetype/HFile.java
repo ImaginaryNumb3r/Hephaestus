@@ -15,6 +15,7 @@ import infastructure.path.exceptions.PathsNotMatchingException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.OptionalLong;
 
 /**
  * @author Patrick
@@ -76,6 +77,10 @@ public class HFile extends HEntry implements AbstractFile{
         return file.getAbsolutePath().equals(getAbsolutePath());
     }
 
+    /**
+     * Returns the name of the file
+     * @return
+     */
     @Override
     public String getName() {
         return fileNode().getNodeName();
@@ -138,6 +143,7 @@ public class HFile extends HEntry implements AbstractFile{
      * @return null, because a file cannot be a directory
      */
     @Override
+    @Deprecated
     public HDirectory toDirectory() {
         return null;
     }
@@ -147,6 +153,7 @@ public class HFile extends HEntry implements AbstractFile{
      * @return the called object
      */
     @Override
+    @Deprecated
     public HFile toFile() {
         return this;
     }
@@ -162,6 +169,17 @@ public class HFile extends HEntry implements AbstractFile{
     @Override
     public int length() {
         return _absoluteFilePath.length();
+    }
+
+    /**
+     * Returns the size of the file of this if it exists
+     * The optional only has a value if the file really exists
+     * @return Optional of the size of the file as longs. Returns empty optional if file does not exist
+     */
+    public OptionalLong fileSize(){
+        return exists()
+                ? OptionalLong.of(_file.length())
+                : OptionalLong.empty();
     }
 
     @Override

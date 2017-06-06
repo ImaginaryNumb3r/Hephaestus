@@ -54,7 +54,6 @@ public class FileFilterCollection implements FileFilter {
                 return false;
             }
         }
-
         return true;
     }
 

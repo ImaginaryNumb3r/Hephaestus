@@ -23,14 +23,15 @@ public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIterat
 
     @Override
     public int index() {
-        return _array.length;
+        return _pos;
     }
 
     @Override
     public T previous() {
         if (_pos == null) _pos = 0;
         if (!hasPrevious()) throw new NoSuchElementException();
-        return _array[_pos--];    }
+        return _array[_pos--];
+    }
 
     @Override
     public void remove() {

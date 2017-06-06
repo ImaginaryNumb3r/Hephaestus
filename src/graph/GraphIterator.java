@@ -36,7 +36,7 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
      * @return GraphIterator<T> based from the given parameters
      */
     public static <T extends Iterable<T>> GraphIterator<T> from (T source, @NotNull GraphSearchStrategy<T> strategy){
-        Contract.checkNulls(strategy);
+        Contract.checkNull(strategy);
         return new GraphIterator<>(source, strategy);
     }
 

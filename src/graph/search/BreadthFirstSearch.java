@@ -17,4 +17,9 @@ public class BreadthFirstSearch<T> implements GraphSearchStrategy<T>{
     public T dequeue(Deque<T> nodeCollection) {
         return nodeCollection.removeFirst();
     }
+
+    @Override
+    public String toString() {
+        return "Breadth First Search Strategy";
+    }
 }

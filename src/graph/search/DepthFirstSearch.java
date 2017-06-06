@@ -18,4 +18,9 @@ public class DepthFirstSearch<T> implements GraphSearchStrategy<T> {
     public T dequeue(Deque<T> nodeCollection) {
         return nodeCollection.removeFirst();
     }
+
+    @Override
+    public String toString() {
+        return "Depth First Search Strategy";
+    }
 }

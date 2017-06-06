@@ -89,4 +89,24 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
     public ListIterator<Object> listIterator() {
         return iterator();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("[ ");
+
+        int count = 0;
+        for (Iterator<Object> iter = _values.get().iterator(); iter.hasNext(); ){
+            Object cur = iter.next();
+            builder.append("Val").append(count++).append(": ").append(cur);
+
+            if (iter.hasNext()){
+                builder.append(" | ");
+            }
+            else {
+                builder.append("]");
+            }
+        }
+
+        return builder.toString();
+    }
 }

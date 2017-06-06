@@ -1,6 +1,7 @@
 package infastructure.filetype;
 
 import com.sun.istack.internal.NotNull;
+import core.tuple.Tuple;
 import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
 import infastructure.filetype.interfaces.AbstractDirectory;
@@ -26,7 +27,7 @@ import java.util.function.Consumer;
  * @since 28.05.2016
  */
 public class HDirectory extends HEntry implements Iterable<HDirectory>, AbstractDirectory {
-    private final AbsoluteDirectory _absoluteDirectory;
+    private final AbsoluteDirectory _absoluteDirectory; // TODO: Make Lazy
 
     //<editor-fold desc="Constructors">
     public HDirectory (AbsolutePath location){
@@ -79,6 +80,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * Always returns itself
      * @return the called object
      */
+    @Deprecated
     @Override
     public HDirectory toDirectory() {
         return this;
@@ -89,6 +91,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * @return null, because a directory cannot be a file
      */
     @Override
+    @Deprecated
     public HFile toFile() {
         return null;
     }
@@ -141,6 +144,31 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
 
         return Optional.ofNullable(hFiles);
     }
+
+    /**
+     * Returns all subdirectories and files of this directory.
+     * Does not check if the current directory is valid.
+     * @return  All entries, sorted into separate lists for directories and files
+     *          null if the path of this directory does not exist or an I/O error occurred
+     */
+    public Tuple<List<HDirectory>, List<HFile>> fastFiles(){
+        Tuple<List<HDirectory>, List<HFile>> retVal = null;
+        File[] entries = _file.listFiles();
+
+        if (entries != null){
+            List<HDirectory> directories = new LinkedList<>();
+            List<HFile> files = new LinkedList<>();
+            retVal = Tuple.from(directories, files);
+
+            for (File entry : entries) {
+                if (entry.isFile()) files.add(new HFile(entry));
+                else directories.add(new HDirectory(entry));
+            }
+        }
+
+        return retVal;
+    }
+
 
 
     /**
@@ -281,7 +309,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
 
     @Override
     public boolean equals(String path) {
-        return false;
+        return path != null && _absoluteDirectory.toString().equals(path);
     }
     //</editor-fold>
 
