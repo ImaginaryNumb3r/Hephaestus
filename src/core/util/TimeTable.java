@@ -7,13 +7,33 @@ import core.util.contracts.Contract;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 /**
  * @author Patrick
  * @since 29.11.2016
  */
 @Unfinished
-public class TimeTable {
+public final class TimeTable {
+
+    /**
+     * Returns a LocalDateTime from the time measured in milliseconds
+     * @param timeAsMillies the time measured in milliseconds, starting at first of 1970
+     * @return LocalDateTime from the given milliseconds
+     */
+    public static LocalDateTime toLocalDateTime(long timeAsMillies){
+        return toLocalDateTime(new Date(timeAsMillies));
+    }
+
+    /**
+     * Returns a LocalDateTime from the time measured in milliseconds
+     * @param date the default java date
+     * @return LocalDateTime from the given milliseconds
+     */
+    public static LocalDateTime toLocalDateTime(Date date){
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
 
     public LocalTime minus(@NotNull LocalTime time1, @NotNull LocalTime time2){
         return minusTime(TimeProxy.toProxy(time1), TimeProxy.toProxy(time2)).toTime();

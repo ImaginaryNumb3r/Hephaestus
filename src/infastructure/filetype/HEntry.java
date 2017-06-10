@@ -82,7 +82,7 @@ public abstract class HEntry implements AbsolutePath{
                 String name = _file.getName();
 
                 if (exists()){
-                    retVal = new FileTimeStampImpl(lastModified, length, name, this, LocalDateTime.now());
+                    retVal = new FileTimeStampImpl(lastModified, length, this, LocalDateTime.now());
                 }
             }
         } catch (NoSuchElementException ignore){ }
