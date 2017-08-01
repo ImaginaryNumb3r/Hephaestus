@@ -41,6 +41,7 @@ public class GenericIterator<T> implements Iterator<T> {
      * @param items providing access to the collection or array. May not be null
      * @return GenericIterator<T> based on parameters
      */
+    @SafeVarargs
     public static <T> GenericIterator<T> from(@NotNull T... items) {
         Contract.checkNull(items, "items");
         return new GenericIterator<>(i -> items[i], items.length);

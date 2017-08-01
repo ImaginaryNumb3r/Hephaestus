@@ -30,12 +30,12 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
     // ====================
 
     /**
-     * Removes the path to an absolute file and returns the difference as relative directory {@link AbsoluteFile}
-     * @param absFile the absolute Directory that is being removed from this path
-     * @return  Relative Directory, being the difference between current path and parameter {@link AbsoluteFile}
+     * Removes the file to an absolute file and returns the difference as relative directory {@link AbsoluteFile}
+     * @param absFile the absolute Directory that is being removed from this file
+     * @return  Relative Directory, being the difference between current file and parameter {@link AbsoluteFile}
      *          EmptyPath is EmptyPath is given as parameter
-     * @throws  PathsNotMatchingException if the absolute directory is not a subset of current path
-     *          IllegalArgumentException if empty path was given as argument
+     * @throws  PathsNotMatchingException if the absolute directory is not a subset of current file
+     *          IllegalArgumentException if empty file was given as argument
      */
     public RelativeDirectory remove(AbsoluteFile absFile) throws PathsNotMatchingException {
         if (!fileNode().equals(absFile.fileNode())) throw new PathsNotMatchingException();

@@ -30,7 +30,7 @@ public class PathTest {
     @Test
     public void testIsAbsolute() throws Exception {
         Path path = PathFactory.makeAbsoluteFile(_testFilePath);
-        boolean isAbsolute = path instanceof AbsolutePath; // path.isAbsolutePath();
+        boolean isAbsolute = path instanceof AbsolutePath; // file.isAbsolutePath();
 
         assert(isAbsolute);
     }

@@ -77,9 +77,9 @@ public abstract class HEntry implements AbsolutePath{
 
         try {
             if (exists()){
+                // Optional Longs should always be valid, since they are only empty if this entry does not exist
                 long lastModified = lastModifiedMillies().getAsLong();
                 long length = contentSize().getAsLong();
-                String name = _file.getName();
 
                 if (exists()){
                     retVal = new FileTimeStampImpl(lastModified, length, this, LocalDateTime.now());

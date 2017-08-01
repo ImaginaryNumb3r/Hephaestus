@@ -14,14 +14,14 @@ import java.net.URLDecoder;
 public class AppUtil {
 
     /**
-     * Returns the decoded root path of the application's JAR-file.
+     * Returns the decoded root file of the application's JAR-file.
      *
-     * @param clazz The class of which to receive the root path.
-     * @return The decoded root path of the JAR-file.
+     * @param clazz The class of which to receive the root file.
+     * @return The decoded root file of the JAR-file.
      * @throws UnsupportedEncodingException
      */
     public static String getDecodedRootPath(Class<?> clazz) throws UnsupportedEncodingException {
-        String decPath; //to hold decoded path of JAR-file
+        String decPath; //to hold decoded file of JAR-file
         String path = clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
 
         final File jarFile = new File(path);

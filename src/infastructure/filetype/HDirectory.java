@@ -149,7 +149,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * Returns all subdirectories and files of this directory.
      * Does not check if the current directory is valid.
      * @return  All entries, sorted into separate lists for directories and files
-     *          null if the path of this directory does not exist or an I/O error occurred
+     *          null if the file of this directory does not exist or an I/O error occurred
      */
     public Tuple<List<HDirectory>, List<HFile>> fastFiles(){
         Tuple<List<HDirectory>, List<HFile>> retVal = null;

@@ -29,17 +29,17 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
     abstract public AbsoluteDirectory getParentPath();
 
     /**
-     * Copies this and all prior nodes in order to create a new path
-     * @return new path based on the last node
+     * Copies this and all prior nodes in order to create a new file
+     * @return new file based on the last node
      */
     public AbsolutePath copy() {
         return copy(tailNode());
     }
 
     /**
-     * Copies this and all prior nodes to the parameter in order to create a new path
+     * Copies this and all prior nodes to the parameter in order to create a new file
      * @param tail the last node in the sequence
-     * @return new path based on the last node
+     * @return new file based on the last node
      */
     protected AbsoluteDirectory copy(PathNode tail) {
         PathNodeList nodeList = tail.copy();
@@ -78,12 +78,12 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
 
     /**
      * Base function of remove AbsoluteDirectory
-     * @param absDir the absolute Directory that is being removed from this path
+     * @param absDir the absolute Directory that is being removed from this file
      * @param constructor constructor of return value as lambda parameter
      * @param <P> the specified return type, either a File or Directory
-     * @return  Relative Path, being the difference between current path and parameter {@link AbsoluteDirectory}
+     * @return  Relative Path, being the difference between current file and parameter {@link AbsoluteDirectory}
      *          EmptyPath if EmptyPath is given as parameter
-     * @throws  PathsNotMatchingException if the absolute directory is not a subset of current path
+     * @throws  PathsNotMatchingException if the absolute directory is not a subset of current file
      */
     protected <P extends RelativePathImpl<P>> P removeImpl(AbsolutePath  absDir, PathSupplier<P> constructor) throws PathsNotMatchingException{
         if (absDir == null) throw new IllegalArgumentException("Path may not be null!");
@@ -93,7 +93,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
         DirectoryNode newHead = getNewHead(tailNode(), absDir.tailNode());
 
         if (newHead != null) {
-            // Cut off the start of the new relative path, copy what was cut off and merge it to absolute path again
+            // Cut off the start of the new relative file, copy what was cut off and merge it to absolute file again
             DirectoryNode temp = newHead.getPrev();
             newHead.setPrev(null);
             PathNodeList nodeList = tailNode().copy();
@@ -102,7 +102,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
 
             relDir = constructor.get(nodeList.getHead(), nodeList.getTail(), null, nodeList.length());
         } else {
-            // null = empty path = still empty path when copies
+            // null = empty file = still empty file when copies
             relDir = constructor.get(null, null, null, 0);
         }
 
@@ -117,11 +117,11 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
 
     /**
      * Base function of remove RelativeDirectory
-     * @param removal the relative directory {@link RelativeDirectory}that is being removed from this path
+     * @param removal the relative directory {@link RelativeDirectory}that is being removed from this file
      * @param constructor constructor of return value as lambda parameter.
-     *                    Needs to return an empty path if arguments are null
+     *                    Needs to return an empty file if arguments are null
      * @param <P> the specified return type, either a File or Directory
-     * @return  Absolute path {@link AbsolutePath}, being the difference between current path and parameter {@link RelativeDirectory}.
+     * @return  Absolute file {@link AbsolutePath}, being the difference between current file and parameter {@link RelativeDirectory}.
      *          EmptyPath if EmptyPath is given as parameter
      * @throws PathsNotMatchingException
      */
@@ -139,7 +139,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
         } else {
             DirectoryNode curBase = getNewTail(tailNode().iterator(), removal.tailNode().iterator());
 
-            // is not empty path
+            // is not empty file
             if (curBase != null){
                 PathNodeList newNodes = curBase.copy();
                 // If base class is a file, simply add it to the end
@@ -148,7 +148,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
                 retVal = constructor.get(newNodes.getHead(), newNodes.getTail(), file, newNodes.length());
                 // retVal = new AbsoluteDirectoryPath(newNodes.getHead(), newNodes.getTail(), newNodes.length());
 
-            // is empty path
+            // is empty file
             } else {
                 // Make complete copy of list
                 PathNodeList newNodes = tailNode().copy();

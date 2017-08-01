@@ -15,12 +15,12 @@ public interface TreeTraverser<T> extends HIterator<T> {
     /**
      * enters the current node and moves down one level in the node hierarchy
      */
-    public void enter();
+    void enter();
 
     /**
      * backs off from the current node and moves up one level in the node hierarchy
      */
-    public void back();
+    void back();
 
 
     /**
@@ -29,7 +29,7 @@ public interface TreeTraverser<T> extends HIterator<T> {
      * @return the last element that was being iterated through
      */
 
-    public T current();
+    T current();
 
     /**
      * Returns the tryNext element in the iteration.
@@ -37,7 +37,7 @@ public interface TreeTraverser<T> extends HIterator<T> {
      * @return the tryNext element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
-    public T next();
+    T next();
 
 
 
@@ -47,7 +47,7 @@ public interface TreeTraverser<T> extends HIterator<T> {
      * @return the tryPrevious element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
-    public T previous();
+    T previous();
 
     /**
      * Returns {@code true} if the iteration has more elements.
@@ -56,7 +56,7 @@ public interface TreeTraverser<T> extends HIterator<T> {
      *
      * @return {@code true} if the iteration has more elements
      */
-    public boolean hasNext();
+    boolean hasNext();
 
 
     /**
@@ -66,6 +66,6 @@ public interface TreeTraverser<T> extends HIterator<T> {
      *
      * @return {@code true} if the iteration has prior elements
      */
-    public boolean hasPrevious();
+    boolean hasPrevious();
 
 }

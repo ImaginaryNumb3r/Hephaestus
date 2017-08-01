@@ -58,8 +58,8 @@ public abstract class AbstractPath implements Path {
 
 
     /**
-     * Prints this path as string
-     * @return path as string
+     * Prints this file as string
+     * @return file as string
      */
     protected final String toPath() {
          if (_path == null || _path.isEmpty()){
@@ -81,9 +81,9 @@ public abstract class AbstractPath implements Path {
 
     /**
      * Merges two paths together by concatenating their nodes
-     * @param rel relative path or empty path
+     * @param rel relative file or empty file
      * @return PathNodeList, granting immediate access to the first and last node, as well as the file and the total length.
-     *         copy of "this" path if "rel" is an empty path
+     *         copy of "this" file if "rel" is an empty file
      */
     protected PathNodeList concatNodes(RelativePath rel) {
         if (rel == null) throw new IllegalArgumentException("Path may not be null!");
@@ -113,13 +113,13 @@ public abstract class AbstractPath implements Path {
     }
 
     /**
-     * Returns tail node of the new absolute path.
-     * Used when an absolute path is subtracted by another absolute path
+     * Returns tail node of the new absolute file.
+     * Used when an absolute file is subtracted by another absolute file
      *
      * @param baseNode base node
      * @param removalNode node serving as marker for removing
-     * @return null           if an empty path was given as removal parameter
-     *         null           if both path are equal
+     * @return null           if an empty file was given as removal parameter
+     *         null           if both file are equal
      *         DirectoryNode  for the tail of the new absolute Path
      *
      * @throws PathsNotMatchingException if removalPath is no subset of basePath
@@ -180,12 +180,12 @@ public abstract class AbstractPath implements Path {
     }
 
     /**
-     * Returns tail node of the new absolute path.
-     * Used when an absolute path is subtracted by a relative path
+     * Returns tail node of the new absolute file.
+     * Used when an absolute file is subtracted by a relative file
      *
-     * @param baseIterator iterator at the last position from an absolute path
-     * @param removalIterator iterator at the last position of a relative path
-     * @return null           if an empty path was given as removal parameter
+     * @param baseIterator iterator at the last position from an absolute file
+     * @param removalIterator iterator at the last position of a relative file
+     * @return null           if an empty file was given as removal parameter
      *         DirectoryNode  for the tail of the new absolute Path
      *
      * @throws PathsNotMatchingException if removalPath is no subset of basePath

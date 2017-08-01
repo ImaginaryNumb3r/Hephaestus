@@ -65,11 +65,11 @@ public abstract class AbstractMultiIdTree
     //<editor-fold desc="Access Methods">
 
     /**
-     * Adds a new node to the following path inside the tree
-     * @param sequence path to the parent that has a node to be added
+     * Adds a new node to the following file inside the tree
+     * @param sequence file to the parent that has a node to be added
      * @param identifier identifier of the new node
      * @param value value of the new node
-     * @throws NoSuchElementException if the path is not valid
+     * @throws NoSuchElementException if the file is not valid
      * @throws NodeAlreadyExistsException if the node already exists
      */
     public void add(List<I> sequence,I identifier, V value){
@@ -115,7 +115,7 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     * Deletes the node with the specified identifier in the specified path
+     * Deletes the node with the specified identifier in the specified file
      * and adds a new node with a new value and identifier
      * @param sequence of where to find the node
      * @param identifier of the old and new node
@@ -153,9 +153,9 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     * Searches for a node at the end of the given path
+     * Searches for a node at the end of the given file
      *
-     * @param sequence The path to the searched node
+     * @param sequence The file to the searched node
      * @return Null if no such node is present. Otherwise, the node that was searched for
      */
     protected N searchNode(Iterable<I> sequence){
@@ -176,7 +176,7 @@ public abstract class AbstractMultiIdTree
 
         } while (!finished && iter.hasNext());
 
-        // If the iteration was interrupted before the end of the path was reached,
+        // If the iteration was interrupted before the end of the file was reached,
         // the node could not be found. In this case, return null, otherwise the last node.
         return iter.hasNext()
                 ? null

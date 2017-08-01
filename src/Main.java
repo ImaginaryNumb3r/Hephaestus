@@ -7,14 +7,14 @@ import java.util.*;
 public class Main {
 /*
     public static void main(String[] args) {
-        final String path = "D:";
-        AbsoluteDirectory absDir = PathFactory.makeAbsoluteDirectory(path);
-        AbsoluteDirectory absDir2 = PathFactory.makeAbsoluteDirectory2(path);
+        final String file = "D:";
+        AbsoluteDirectory absDir = PathFactory.makeAbsoluteDirectory(file);
+        AbsoluteDirectory absDir2 = PathFactory.makeAbsoluteDirectory2(file);
         infastructure.datastructure.tree.DirectoryTree tree = new infastructure.datastructure.tree.DirectoryTree(absDir);
         TreeNode root = tree.getRoot();
 
         String string = root.toString();
-        assert path.equals(string);
+        assert file.equals(string);
     }*/
 
 
@@ -62,13 +62,13 @@ public class Main {
 //
 //            String root = "D:\\KW SDK\\Mods\\One Vision";
 //            String data = "D:\\KW SDK\\Mods\\One Vision\\Data";
-//            String path = "D:\\KW SDK\\Mods\\One Vision\\Data\\Static.xml";
+//            String file = "D:\\KW SDK\\Mods\\One Vision\\Data\\Static.xml";
 //            String path2 = "D:\\KW SDK\\Mods\\One Vision\\Data\\Static.xml";
 //            String path3 = "D:\\KW SDK\\Mods\\One Vision\\Data\\AdditionalMaps\\Global Conquest\\StrikeForceBuildTemplate.xml";
 //
 //            DirectoryTree fileDirectoryTree = new DirectoryTreeFactory().makeDirectoryTree(root);
 //
-//            HFile file = new HFile(path);
+//            HFile file = new HFile(file);
 //            HFile file2 = new HFile(path2);
 //            HFile file3 = new HFile(path3);
 //

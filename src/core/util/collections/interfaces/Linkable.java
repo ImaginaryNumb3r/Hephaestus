@@ -3,6 +3,7 @@ package core.util.collections.interfaces;
 import core.util.contracts.Contract;
 
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
@@ -14,10 +15,14 @@ import java.util.function.Supplier;
  */
 public interface Linkable<T, L extends Linkable<T, L>> {
 
+    /**
+     * Returns The value of this node
+     * @return the value of this node
+     */
     T value();
 
     /**
-     * @return  The next node to the current one.
+     * @return  The next node to the current one. <br>
      *          null if no element beyond this node exists.
      */
     L next();
@@ -34,6 +39,16 @@ public interface Linkable<T, L extends Linkable<T, L>> {
 
     default boolean hasNext(){
         return next() != null;
+    }
+
+    /**
+     * Performs the action of the given consumer of all uniterated elements
+     * @param consumer the action that is to be performed by each given element
+     */
+    default void forEachRemaining(Consumer<T> consumer){
+        while (hasNext()){
+            consumer.accept(next().value());
+        }
     }
 
     static <T, L extends Linkable<T,L>> Linkable<T, L> from

@@ -20,9 +20,9 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
 
     /**
      * Protected Constructor, use PathFactory for construction
-     * @param head node, start of the path
-     * @param tail node, end of the path
-     * @param nodeCount amount of nodes in the path
+     * @param head node, start of the file
+     * @param tail node, end of the file
+     * @param nodeCount amount of nodes in the file
      */
     public AbsoluteDirectoryPath(DirectoryNode head,DirectoryNode tail, int nodeCount){
         super(head, tail, nodeCount);

@@ -33,38 +33,38 @@ package infastructure.datastructure;
 //        return new DirTraverser(ROOT);
 //    }
 //
-//    public boolean addToRoot(HDirectory path, HFile file){
+//    public boolean addToRoot(HDirectory file, HFile file){
 //        List<HFile> files = new ArrayList<>();
 //        files.addToRoot(file);
 //
-//        return addToRoot(path, files);
+//        return addToRoot(file, files);
 //    }
-//    public boolean addToRoot(HDirectory path, List<HFile> files){
-//        return insert(path, files);
+//    public boolean addToRoot(HDirectory file, List<HFile> files){
+//        return insert(file, files);
 //    }
 //
 //    /**
 //     * Inserts a list of files at the following destination
-//     * @param path the destination of the files
+//     * @param file the destination of the files
 //     * @param files the files which are to be added
 //     * @return true if files could be added
 //     */
-//    public boolean insert(HDirectory path, List<HFile> files){
-//        List<HDirectory> directories = breakDownPath(path);
+//    public boolean insert(HDirectory file, List<HFile> files){
+//        List<HDirectory> directories = breakDownPath(file);
 //
 //        return insert(ROOT, directories, files);
 //    }
 //
 //    /**
-//     * Inserts the files at the specified path
+//     * Inserts the files at the specified file
 //     * @param root the relative root from where new nodes will be added
-//     * @param path list of nodes representing a path to the destination
+//     * @param file list of nodes representing a file to the destination
 //     * @param files that are to be inserted at the destination
 //     * @return true if entries could be added
 //     */
-//    private boolean insert(DirectoryNode root, List<HDirectory> path, List<HFile> files){
+//    private boolean insert(DirectoryNode root, List<HDirectory> file, List<HFile> files){
 //        boolean canInsert = true;
-//        HDirectory curDir = path.remove(0);
+//        HDirectory curDir = file.remove(0);
 //
 //        DirectoryNode nextNode = root.containsDirectory(curDir);
 //        if (nextNode == null){
@@ -72,9 +72,9 @@ package infastructure.datastructure;
 //            root.addRaw(nextNode);
 //        }
 //
-//        if (!path.isEmpty()){
+//        if (!file.isEmpty()){
 //            // recursive call until it is done
-//            insert(nextNode, path, files);
+//            insert(nextNode, file, files);
 //
 //        } else {
 //            files.stream().forEach(nextNode::addToRoot);
@@ -84,11 +84,11 @@ package infastructure.datastructure;
 //        return canInsert;
 //    }
 //
-//    private List<HDirectory> breakDownPath(HDirectory path){
+//    private List<HDirectory> breakDownPath(HDirectory file){
 //        List<HDirectory> directoryPath = new LinkedList<>();
 //
-//        // turn path into directories
-//        for (HEntry file : breakDownFile(path)){
+//        // turn file into directories
+//        for (HEntry file : breakDownFile(file)){
 //            HDirectory dir;
 //            if ((dir = file.toDirectory()) != null){
 //                directoryPath.addToRoot(dir);
@@ -110,7 +110,7 @@ package infastructure.datastructure;
 //        LinkedList<HEntry> parents = new LinkedList<>();
 //        while (!rootReached && cur != null){
 //
-//            // checkNulls if current CnCFile is inside the path
+//            // checkNulls if current CnCFile is inside the file
 //            rootReached = ROOT.getDirectory().getAbsolutePath().equals(cur.getAbsolutePath());
 //
 //            if (!rootReached){
@@ -129,14 +129,14 @@ package infastructure.datastructure;
 //    }
 //
 //
-//    private boolean exists(List<HEntry> path){
+//    private boolean exists(List<HEntry> file){
 //        boolean exists;
-//        if (path != null){
+//        if (file != null){
 //            exists = true;
 //
 //            DirectoryNode pos = ROOT;
-//            while (exists && !path.isEmpty()){
-//                HEntry file = path.remove(0);
+//            while (exists && !file.isEmpty()){
+//                HEntry file = file.remove(0);
 //
 //                if (file.isDirectory()){
 //                    HDirectory dir = file.toDirectory();

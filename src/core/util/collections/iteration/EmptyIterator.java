@@ -5,6 +5,8 @@ import core.util.collections.interfaces.BiLinkable;
 /**
  * @author Patrick
  * @since 01.06.2017
+ *
+ * Corner case iterator for when you need to return an iterator but internally have nothing to iterate
  */
 public class EmptyIterator<T> extends NodeListIterator<T, EmptyIterator.EmptyLinkable<T>> {
 
@@ -18,12 +20,12 @@ public class EmptyIterator<T> extends NodeListIterator<T, EmptyIterator.EmptyLin
     }
 
     @Override
-    public void add(Object o) {
+    public void add(T o) {
         throw new IllegalStateException();
     }
 
     @Override
-    public void set(Object o) {
+    public void set(T o) {
         throw new IllegalStateException();
     }
 

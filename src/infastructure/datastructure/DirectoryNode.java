@@ -5,7 +5,7 @@ package infastructure.datastructure;
 //import infastructure.filetype.HDirectory;
 //import infastructure.filetype.HEntry;
 //import infastructure.filetype.HFile;
-//import infastructure.filetype.interfaces.aubtypes.AbsolutePath;
+//import infastructure.filetype.interfaces.aubtypes.AbsolutePathImpl;
 //
 //import java.util.InnerIterator;
 //import java.util.LinkedList;
@@ -137,7 +137,7 @@ package infastructure.datastructure;
 //        return isSubPath(_children.iterator(), file);
 //    }
 //
-//    public <T extends AbsolutePath> T isSubPath(InnerIterator<T> iter, HEntry file) {
+//    public <T extends AbsolutePathImpl> T isSubPath(InnerIterator<T> iter, HEntry file) {
 //        boolean isSubPath = false;
 //        T cur = null;
 //        while (iter.hasNextChild() && !isSubPath){

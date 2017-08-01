@@ -36,27 +36,27 @@ public interface Path{
 
     /**
      * Compares both paths
-     * @param path the path that is to be compared
+     * @param path the file that is to be compared
      * @return true if both pats are functionally the same
      */
     boolean equals(Path path);
 
     /**
-     * Compares the path with the given string
-     * @param path the path that is to be compared
+     * Compares the file with the given string
+     * @param path the file that is to be compared
      * @return true if both pats are functionally the same
      */
     boolean equals(String path);
 
     /**
-     * Returns the first element of a path, pointing to the next node and subsequently every other node in the path
-     * @return Starting node of the path
+     * Returns the first element of a file, pointing to the next node and subsequently every other node in the file
+     * @return Starting node of the file
      */
     DirectoryNode headNode();
 
     /**
-     * Returns the last node in the path
-     * @return the last node in the path
+     * Returns the last node in the file
+     * @return the last node in the file
      */
     DirectoryNode tailNode();
 
@@ -67,14 +67,14 @@ public interface Path{
     String getName();
 
     /**
-     * Returns an exact copy of this path
-     * @return an exact copy of this path
+     * Returns an exact copy of this file
+     * @return an exact copy of this file
      */
     Path copy();
 
     /**
-     * Performs a checkNulls whether this is an empty path
-     * @return true if the path can be used safely in arithmetic concatenation and removal of paths
+     * Performs a checkNulls whether this is an empty file
+     * @return true if the file can be used safely in arithmetic concatenation and removal of paths
      */
     default boolean isEmpty(){
         return false;

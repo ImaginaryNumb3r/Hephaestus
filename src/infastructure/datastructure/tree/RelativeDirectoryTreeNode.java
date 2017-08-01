@@ -21,7 +21,7 @@ public class RelativeDirectoryTreeNode extends AbstractTreeNode {
 
     /**
      * @param parent Previous directory in the file hierarchy
-     * @param name MUST not be an absolute path
+     * @param name MUST not be an absolute file
      */
     protected RelativeDirectoryTreeNode(AbstractTreeNode parent, RelativeDirectory name) {
         super();

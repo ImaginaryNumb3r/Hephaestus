@@ -12,7 +12,7 @@ import static core.datastructure.Lazy.lazily;
  * @author Patrick
  * @since 06.06.2017
  */
-class FileTimeStampImpl implements FileTimeStamp {
+final class FileTimeStampImpl implements FileTimeStamp {
     private final long _lastModified;
     private final Lazy<LocalDateTime> _localDateTime;
     private final long _contentSize;

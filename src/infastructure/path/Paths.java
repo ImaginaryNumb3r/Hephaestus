@@ -103,7 +103,7 @@ public class Paths {
 
     /**
      * Returns a
-     * @return a path relative to the lastModified files directory
+     * @return a file relative to the lastModified files directory
      */
     protected String toTestPath(String path){
         LinkedList<String> strings = splitPath(_testFilesPath);
@@ -125,7 +125,7 @@ public class Paths {
     /**
      * Checks if a file can be found at the location
      * @param path location of the file
-     * @return true if path references a File
+     * @return true if file references a File
      */
     public boolean isFile(String path){
         return new File(path).exists();

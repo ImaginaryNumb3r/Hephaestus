@@ -2,6 +2,8 @@ package core.util.collections.iteration;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 /**
  * @author Patrick
  * @since 01.06.2017
@@ -17,6 +19,52 @@ class ArrayListIteratorTest {
     void testIteration() {
         ArrayListIterator<String> iterator = get();
         assert Iterators.equals(iterator, STRINGS);
+    }
+
+
+
+    @Test
+    void testEmptyArray() {
+        Integer[] emptyArray = new Integer[0];
+        ArrayListIterator<Integer> iterator = new ArrayListIterator<>(emptyArray);
+        assert !iterator.hasNext();
+        assert !iterator.hasPrevious();
+
+        try {
+            iterator.next();
+            assert false; // Must throw NoSuchElementException
+        } catch (NoSuchElementException ignored){ }
+
+        try {
+            iterator.previous();
+            assert false; // Must throw NoSuchElementException
+        } catch (NoSuchElementException ignored){ }
+    }
+
+    @Test
+    void testSingletonArray() {
+        final int element = 1;
+
+        ArrayListIterator<Integer> iterator = new ArrayListIterator<>(new Integer[]{element});
+        assert iterator.hasNext();
+
+        boolean equals = iterator.next() == element;
+        assert equals;
+
+        assert iterator.hasPrevious();
+
+        try {
+            iterator.next();
+            assert false; // Must throw NoSuchElementException
+        } catch (NoSuchElementException ignored){ }
+
+        equals = iterator.previous() == element;
+        assert equals;
+
+        try {
+            iterator.previous();
+            assert false; // Must throw NoSuchElementException
+        } catch (NoSuchElementException ignored){ }
     }
 
     @Test

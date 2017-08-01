@@ -74,16 +74,16 @@ public final class PathFactory {
         return makePath(path, command, PathType.ABSOLUTE_FILE);
     }
 
-    // TODO: Use isAbsolute to lastModified whether this really is an absolute path
+    // TODO: Use isAbsolute to lastModified whether this really is an absolute file
 
     public static boolean isAbsoluteDirectory(String path){
         return makeAbsoluteDirectory(path) != null;
     }
 
     /**
-     * Creates the path from a given string
-     * @param path given path in string form
-     * @return null if the given path is invalid. Otherwise, return the path
+     * Creates the file from a given string
+     * @param path given file in string form
+     * @return null if the given file is invalid. Otherwise, return the file
      */
     public static AbsoluteDirectory makeAbsoluteDirectory (String path){
         PathCommand<AbsoluteDirectory, PathNode, PathNode> command = (head, tail, length) -> {
@@ -99,8 +99,8 @@ public final class PathFactory {
         return makePath(path, command, PathType.ABSOLUTE_DIRECTORY);
     } /*
 
-    // TODO: Use isAbsolute to lastModified whether this really is an absolute path
-    public static AbsoluteDirectory makeAbsoluteDirectory2 (String path){
+    // TODO: Use isAbsolute to lastModified whether this really is an absolute file
+    public static AbsoluteDirectory makeAbsoluteDirectory2 (String file){
         PathCommand<AbsoluteDirectory, PathNode, PathNode> command = (head, tail, length) -> {
             if (head instanceof DirectoryNode && tail instanceof DirectoryNode){
                 return new AbsoluteDirectoryPath((DirectoryNode) head,(DirectoryNode) tail, length);
@@ -110,14 +110,14 @@ public final class PathFactory {
             }
         };
 
-        return makePath(path, command, PathType.ABSOLUTE_DIRECTORY);
+        return makePath(file, command, PathType.ABSOLUTE_DIRECTORY);
     } */
 
     public static boolean isAbsoluteFile(String path){
         return makeAbsoluteFile(path) != null;
     }
 
-    // TODO: Use isAbsolute to lastModified whether this really is an absolute path
+    // TODO: Use isAbsolute to lastModified whether this really is an absolute file
     public static AbsoluteFile makeAbsoluteFile (String path){
         PathCommand<AbsoluteFile, PathNode, PathNode> command =
                 ( (PathNode head, PathNode file, int length) -> {
@@ -171,8 +171,8 @@ public final class PathFactory {
 
     /**
      *
-     * @param path path
-     * @return EmptyRelativeFile if a file is added without a path
+     * @param path file
+     * @return EmptyRelativeFile if a file is added without a file
      */
     public static RelativeFile makeRelativeFile (String path){
         PathCommand<RelativeFile, PathNode, PathNode> command =
@@ -197,10 +197,10 @@ public final class PathFactory {
     // ===================
 
     /**
-     * Returns true if the given path is absolute
+     * Returns true if the given file is absolute
      * Basically searches for a semicolon.
-     * @param path path
-     * @return true if given path is absolute
+     * @param path file
+     * @return true if given file is absolute
      */
     public static boolean isAbsolute(@NotNull String path){
         if (path == null) throw new IllegalArgumentException("Path may not be null");
@@ -251,7 +251,7 @@ public final class PathFactory {
                 newPath = command.execute(null, new FileNode(null, split[split.length - 1]), 1);
 
             } else {
-                throw new IllegalArgumentException("Given type of path is neither file nor directory");
+                throw new IllegalArgumentException("Given type of file is neither file nor directory");
             }
         }
 
@@ -262,8 +262,8 @@ public final class PathFactory {
      *
      * @param path
      * @param type
-     * @return LinkedList<PathNode> if path is valid
-     *         null if path is not valid
+     * @return LinkedList<PathNode> if file is valid
+     *         null if file is not valid
      */
     private static LinkedList<PathNode> makePath(String path, PathType type) { // throws IncorrectPathException
         boolean isAbsolute = false;
@@ -317,7 +317,7 @@ public final class PathFactory {
         if (entries == null) { throw new IllegalArgumentException("Parameter \"entries\" may not be null"); }
         if (entries.length == 0) { throw new IllegalArgumentException("Parameter \"entries\" may not be empty"); }
 
-        // Iterates the array backwards and creates the nodes of the path from tail to head
+        // Iterates the array backwards and creates the nodes of the file from tail to head
         LinkedList<PathNode> nodes = new LinkedList<>();
         PathNode tail;
 
@@ -348,7 +348,7 @@ public final class PathFactory {
 
     /**
      * Confirms the name of the name of a node as a valid directory name
-     * @param name of the path
+     * @param name of the file
      * @param isAbsolute makes it required for this name to be absolute
      * @return true if it is safe to take this is generally safe as a name
      */

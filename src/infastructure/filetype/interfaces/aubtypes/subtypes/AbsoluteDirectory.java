@@ -23,7 +23,7 @@ public interface AbsoluteDirectory extends AbsolutePath, DirectoryPath {
     // Absolute Path + Directory Path
 
     AbsoluteDirectory concat (RelativeDirectory rel);
-    AbsoluteDirectory add (String rel); // TOOD: Remove
+    AbsoluteDirectory add (String rel); // TODO: Remove
 
     AbsoluteDirectory remove (RelativeDirectory removal) throws PathsNotMatchingException;
     AbsoluteDirectory copy();

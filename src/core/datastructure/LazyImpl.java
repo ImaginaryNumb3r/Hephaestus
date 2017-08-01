@@ -18,6 +18,7 @@ import java.util.function.Supplier;
  * An assigned value to this class is permanent and will never change.
  * Accessing this class is thread safe. However, the overhead of synchronization is gone once the value is instantiated.
  */
+@SuppressWarnings("WeakerAccess")
 class LazyImpl<T> implements Lazy<T>, Serializable {
     private Supplier<T> _supplier;
     private T _value;
@@ -65,7 +66,6 @@ class LazyImpl<T> implements Lazy<T>, Serializable {
     public boolean isInstantiated(){
         return _isInstantiated;
     }
-
 
     /**
      * Returns true if the given object is also a Lazy type with an equal internal value

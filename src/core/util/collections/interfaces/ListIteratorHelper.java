@@ -8,6 +8,7 @@ import java.util.ListIterator;
  *
  * Internal helper Interface to unify logic and minimize code imprint.
  * Has default implementations for hasPrevious(), nextIndex() and previousIndex();
+ * @implSpec It is required that the index stands for the last successful iteration
  */
 public interface ListIteratorHelper<T> extends ListIterator<T> {
 
@@ -19,7 +20,7 @@ public interface ListIteratorHelper<T> extends ListIterator<T> {
 
     @Override
     default boolean hasPrevious() {
-        return index() > 0;
+        return index() != -1;
     }
 
     @Override

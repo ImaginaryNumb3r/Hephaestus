@@ -1,7 +1,7 @@
 package util.hash;
 
 import com.sun.istack.internal.NotNull;
-import core.util.HashCode;
+import com.sun.istack.internal.Nullable;
 
 import java.util.HashMap;
 
@@ -146,9 +146,14 @@ public class HashGenerator {
         return _hashCode;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return HashCode.equals(this, obj);
+    /**
+     * Compares the two objects by reference and their hash code.
+     * @param primary non-nullable object for the comparison
+     * @param secondary nullable object for the comparison
+     * @return true if both objects are equal in terms of reference or hash code
+     */
+    public static boolean equals(@NotNull Object primary, @Nullable Object secondary){
+        return primary == secondary || (secondary != null && primary.hashCode() == secondary.hashCode());
     }
 
     @Override

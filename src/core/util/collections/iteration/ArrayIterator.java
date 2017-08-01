@@ -14,8 +14,10 @@ import java.util.NoSuchElementException;
  * @param <T> Generic Value of the array
  */
 public class ArrayIterator<T> implements Iterator<T> {
+    protected static final int NOT_INITIALIZED = -1;
     protected final T[] _array;
-    protected Integer _pos = null;
+    protected int _pos = -1;
+
 
     /**
      * Internal Constructor.
@@ -39,19 +41,33 @@ public class ArrayIterator<T> implements Iterator<T> {
         return new ArrayIterator<>(array);
     }
 
+
+    /**
+     * Returns {@code true} if the iteration has more elements.
+     * (In other words, returns {@code true} if {@link #next} would
+     * return an element rather than throwing an exception.)
+     *
+     * @return {@code true} if the iteration has more elements
+     */
     @Override
     public boolean hasNext() {
-        return _pos != null
-                ? _pos < _array.length
+        return _pos != NOT_INITIALIZED
+                ? _pos + 1 != _array.length
                 : _array.length != 0;
     }
 
+    /**
+     * Returns the next element in the iteration.
+     *
+     * @return the next element in the iteration
+     * @throws NoSuchElementException if the iteration has no more elements
+     */
     @Override
     public T next() {
-        if (_pos == null) _pos = 0;
         if (!hasNext()) throw new NoSuchElementException();
-        return _array[_pos++];
+        return _array[++_pos];
     }
+
 
     @Override
     public boolean equals(Object obj) {

@@ -20,7 +20,7 @@ public abstract class RelativePathImpl<R> extends AbstractPath implements Relati
     //   Absolute Path
     // ====================
 
-    // AbsolutePath
+    // AbsolutePathImpl
 
     @Override
     public abstract RelativePath concat (RelativeDirectory rel);
@@ -42,7 +42,7 @@ public abstract class RelativePathImpl<R> extends AbstractPath implements Relati
             }
         }
 
-        // If nodeList could not be initialized, get copy of current path
+        // If nodeList could not be initialized, get copy of current file
         if (nodeList == null){
             nodeList = tailNode().copy();
         }

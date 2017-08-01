@@ -15,7 +15,7 @@ import infastructure.path.exceptions.PathsNotMatchingException;
  * @author Patrick
  * @created 08.07.2016
  */
-// TODO: Can be removed. Can be made with empty path instead
+// TODO: Can be removed. Can be made with empty file instead
 public interface EmptyPath extends Path { // extends AbsoluteDirectory, AbsoluteFile, RelativeDirectory, RelativeFile {
 
     // Path Arithmetic

@@ -29,7 +29,7 @@ public class DirectoryTree {
     }
 
     /**
-     * Retrieves the individual nodes from a path
+     * Retrieves the individual nodes from a file
      * @param directory The source directory
      * @return List of nodes in ascending order
      */
