@@ -29,7 +29,7 @@ public class EmptyIterator<T> extends NodeListIterator<T, EmptyIterator.EmptyLin
         throw new IllegalStateException();
     }
 
-    public static <T> EmptyIterator<T> from(){
+    public static <T> EmptyIterator<T> get(){
         return new EmptyIterator<>();
     }
 

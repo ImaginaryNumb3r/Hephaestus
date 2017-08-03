@@ -53,7 +53,7 @@ public final class HashCode {
     }
     //</editor-fold>
 
-    // Hard Coded from Stackoverflow
+    // Hard Coded get Stackoverflow
     public static int makeHashCode(@NotNull Integer a, @NotNull Integer b) {
         if (a == null || b == null) throw new ParameterNullException();
         return a.hashCode() ^ rotateLeft(b.hashCode(), 13);

@@ -17,7 +17,6 @@ public class Main {
         assert file.equals(string);
     }*/
 
-
     private static Tuple<Double, String> tupleTest(){
         return Tuple.from(10d, "text");
     }
@@ -37,7 +36,7 @@ public class Main {
         Iterator<MultiIdTreeNodeReader<I, V, T>> iter = null;
 
         Iterable<T> source = null;
-        // iter = GraphIterator.from((T) null, GraphSearchStrategy.BREADTH_FIRST);
+        // iter = GraphIterator.get((T) null, GraphSearchStrategy.BREADTH_FIRST);
     }
 
     // TODO: Delete Me

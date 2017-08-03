@@ -5,17 +5,19 @@ import core.util.collections.interfaces.BiLinkable;
 import core.util.collections.interfaces.ListIteratorHelper;
 import core.util.contracts.Contract;
 
+import static core.util.collections.iteration.Iterators.NOT_INITIALIZED;
+
 /**
  * @author Patrick
  * @since 01.06.2017
  */
-public abstract class NodeListIterator<T, L extends BiLinkable<T, L>>
-        extends NodeIterator<T, L> implements ListIteratorHelper<T> {
+public abstract class NodeListIterator<T, L extends BiLinkable<T>>
+        extends NodeIterator<T, BiLinkable<T>> implements ListIteratorHelper<T> {
     protected int _index;
 
     protected NodeListIterator(@NotNull L startNode) {
         super(startNode);
-        _index = 0;
+        _index = NOT_INITIALIZED;
     }
 
     @Override
@@ -27,7 +29,7 @@ public abstract class NodeListIterator<T, L extends BiLinkable<T, L>>
     @Override
     public T previous() {
         --_index;
-        L previous = _current != null
+        BiLinkable<T> previous = _current != null
                 ? _current.tryPrevious()
                 : _start.tryPrevious();
         _current = previous;
@@ -39,13 +41,13 @@ public abstract class NodeListIterator<T, L extends BiLinkable<T, L>>
         return _index;
     }
 
-    public static <T, L extends BiLinkable<T, L>> NodeListIterator<T, L> from(L startNode) {
+    public static <T, L extends BiLinkable<T>> NodeListIterator<T, L> from(L startNode) {
         Contract.checkNull(startNode, "startNode");
         return new NodeListIteratorImpl<>(startNode);
     }
 
     //<editor-fold desc="Inner Impl Class">
-    protected static class NodeListIteratorImpl<TI, LI extends BiLinkable<TI, LI>>
+    protected static class NodeListIteratorImpl<TI, LI extends BiLinkable<TI>>
             extends NodeListIterator<TI, LI> {
 
         protected NodeListIteratorImpl(@NotNull LI startNode) {

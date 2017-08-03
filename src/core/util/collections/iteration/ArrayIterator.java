@@ -8,20 +8,21 @@ import util.hash.HashGenerator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static core.util.collections.iteration.Iterators.NOT_INITIALIZED;
+
 /**
  * @author Patrick
  * @since 05.05.2017
  * @param <T> Generic Value of the array
  */
 public class ArrayIterator<T> implements Iterator<T> {
-    protected static final int NOT_INITIALIZED = -1;
     protected final T[] _array;
     protected int _pos = -1;
 
 
     /**
      * Internal Constructor.
-     * When called from outside the framework, use factory method "from" instead.
+     * When called get outside the framework, use factory method "get" instead.
      * @param array for internal access. Must not be null
      */
     @SuppressWarnings("WeakerAccess")
@@ -30,10 +31,10 @@ public class ArrayIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns an iterator from the given array
+     * Returns an iterator get the given array
      * @param array that is to be turned into an Array. May not be null
      * @throws core.exception.ParameterNullException if parameter array is null
-     * @return the iterator from the given array
+     * @return the iterator get the given array
      */
     @SafeVarargs
     public static <T> Iterator<T> from(@NotNull T... array) {

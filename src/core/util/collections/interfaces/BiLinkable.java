@@ -1,6 +1,7 @@
 package core.util.collections.interfaces;
 
 import java.util.NoSuchElementException;
+import java.util.function.Function;
 
 /**
  * @author Patrick
@@ -8,25 +9,48 @@ import java.util.NoSuchElementException;
  *
  * Interface for bidirectional nodes inside of a ListIterator
  */
-public interface BiLinkable<T, L extends BiLinkable<T, L>> extends Linkable<T, L> {
+public interface BiLinkable<T> extends Linkable<T, BiLinkable<T>> {
 
     /**
      * @return  The tryPrevious node to the current one
      *          null if no element beyond this node exists previously.
      */
-    L previous();
+    BiLinkable<T> previous();
 
     /**
      * @return The tryPrevious element in the iteration that was returned
      * @throws NoSuchElementException if the iteration has no more elements
      */
-    default L tryPrevious() throws NoSuchElementException{
-        L previous = previous();
-        if (previous == null) throw new NoSuchElementException();
+    default BiLinkable<T> tryPrevious() throws NoSuchElementException{
+        BiLinkable<T> previous = previous();
+        if (previous.value() == null) throw new NoSuchElementException();
         return previous;
     }
 
     default boolean hasPrevious(){
         return tryPrevious() != null;
+    }
+
+    static <T> BiLinkable<T> from(T value, Function<T, T> advanceFunc){
+        return from(value, advanceFunc, null);
+    }
+
+    static <T> BiLinkable<T> from(T value, Function<T, T> advanceFunc, BiLinkable<T> previous){
+        return new BiLinkable<T>() {
+            @Override
+            public BiLinkable<T> previous() {
+                return previous;
+            }
+
+            @Override
+            public T value() {
+                return value;
+            }
+
+            @Override
+            public BiLinkable<T> next() {
+                return BiLinkable.from(advanceFunc.apply(value), advanceFunc);
+            }
+        };
     }
 }

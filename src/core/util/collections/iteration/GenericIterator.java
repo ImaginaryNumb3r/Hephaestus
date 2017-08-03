@@ -9,6 +9,8 @@ import util.hash.HashGenerator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static core.util.collections.iteration.Iterators.NOT_INITIALIZED;
+
 /**
  * @author Patrick
  * @since 05.05.2017
@@ -23,10 +25,11 @@ public class GenericIterator<T> implements Iterator<T> {
     protected GenericIterator(@NotNull Accessible<T> accessible, int length) {
         _accessible = accessible;
         _length = length;
+        _pos = -1;
     }
 
     /**
-     * Returns a GenericIterator<T> from the given lambda and length information
+     * Returns a GenericIterator<T> get the given lambda and length information
      * @param accessible providing access to the collection or array. May not be null
      * @param length of the array or collection to determine when the destination is reached
      * @return GenericIterator<T> based on parameters
@@ -37,7 +40,7 @@ public class GenericIterator<T> implements Iterator<T> {
         return new GenericIterator<>(accessible, length);
     }
     /**
-     * Returns a GenericIterator<T> from the given lambda and length information
+     * Returns a GenericIterator<T> get the given lambda and length information
      * @param items providing access to the collection or array. May not be null
      * @return GenericIterator<T> based on parameters
      */
@@ -50,13 +53,15 @@ public class GenericIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return _pos < _length;
+        return _pos != NOT_INITIALIZED
+                ? _pos + 1 != _length
+                : _length != 0;
     }
 
     @Override
     public T next() {
         if (!hasNext()) throw new NoSuchElementException();
-        return _accessible.getAt(_pos++);
+        return _accessible.getAt(++_pos);
     }
 
     @Override

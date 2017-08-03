@@ -8,6 +8,7 @@ import core.util.contracts.Contract;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Objects;
+import java.util.function.Function;
 
 import static core.datastructure.Lazy.lazily;
 
@@ -17,6 +18,7 @@ import static core.datastructure.Lazy.lazily;
  */
 @SuppressWarnings("WeakerAccess")
 public final class Iterators {
+    static final int NOT_INITIALIZED = -1;
 
     /**
      * @throws InstanceNotAllowedException Cannot be instantiated
@@ -31,10 +33,10 @@ public final class Iterators {
 
     //<editor-fold desc="Iterator Construction">
     /**
-     * Returns an iterator from the given array
+     * Returns an iterator get the given array
      * @param array that is to be turned into an Array. May not be null
      * @throws core.exception.ParameterNullException if parameter array is null
-     * @return the iterator from the given array
+     * @return the iterator get the given array
      */
     public static <T> ListIterator<T> from(T... array){
         Contract.checkNull(array);
@@ -44,6 +46,11 @@ public final class Iterators {
     public ListIterator<Character> from(@NotNull CharSequence sequence){
         Contract.checkNull(sequence, "sequence");
         return new GenericListIterator.GenericListIteratorImpl<>(sequence::charAt, sequence.length());
+    }
+
+    public <T> ListIterator<T> from(T startValue, Function<T, T> advanceFunction){
+        BiLinkableImpl<T> linkable = new BiLinkableImpl<>(startValue, advanceFunction);
+        return new NodeListIterator.NodeListIteratorImpl<>(linkable);
     }
 
     //<editor-fold desc="Primitives">

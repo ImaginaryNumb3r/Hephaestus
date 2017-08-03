@@ -33,7 +33,7 @@ public interface Linkable<T, L extends Linkable<T, L>> {
      */
     default L tryNext(){
         L next = next();
-        if (next == null) throw new NoSuchElementException();
+        if (next.value() == null) throw new NoSuchElementException();
         return next;
     }
 
@@ -49,21 +49,5 @@ public interface Linkable<T, L extends Linkable<T, L>> {
         while (hasNext()){
             consumer.accept(next().value());
         }
-    }
-
-    static <T, L extends Linkable<T,L>> Linkable<T, L> from
-            (Supplier<T> valueSupplier, Supplier<L> advanceSupplier){
-        Contract.checkNulls(valueSupplier, advanceSupplier);
-        return new Linkable<T, L>() {
-            @Override
-            public T value() {
-                return valueSupplier.get();
-            }
-
-            @Override
-            public L next() {
-                return advanceSupplier.get();
-            }
-        };
     }
 }

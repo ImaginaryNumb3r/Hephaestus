@@ -5,6 +5,8 @@ import core.util.collections.interfaces.ListIteratorHelper;
 
 import java.util.NoSuchElementException;
 
+import static core.util.collections.iteration.Iterators.NOT_INITIALIZED;
+
 /**
  * @author Patrick
  * @since 01.06.2017
@@ -13,7 +15,7 @@ public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIterat
 
     /**
      * Internal Constructor.
-     * When called from outside the framework, use factory method "from" instead.
+     * When called get outside the framework, use factory method "get" instead.
      *
      * @param array for internal access. Must not be null
      */

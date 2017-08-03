@@ -5,27 +5,27 @@ import org.junit.jupiter.api.Test;
 import java.util.NoSuchElementException;
 
 /**
- * @author Patrick
- * @since 01.06.2017
+ * Creator: Patrick
+ * Created: 02.08.2017
+ * Purpose:
  */
-class ArrayListIteratorTest {
+class GenericListIteratorTest {
     private static final String[] STRINGS = {"Item1", "Item2", "Item3", "Item4", "Item5"};
 
-    private static ArrayListIterator<String> get(){
-        return new ArrayListIterator<>(STRINGS);
+    private static GenericListIterator<String> get(){
+        return new GenericListIterator.GenericListIteratorImpl<>(i -> STRINGS[i], STRINGS.length);
     }
 
     @Test
     void testIteration() {
-        ArrayListIterator<String> iterator = get();
+        GenericListIterator<String> iterator = get();
         assert Iterators.equals(iterator, STRINGS);
     }
 
-
     @Test
-    void testEmptyArray() {
+    void testEmptyArray() { //noinspection MismatchedReadAndWriteOfArray
         Integer[] emptyArray = new Integer[0];
-        ArrayListIterator<Integer> iterator = new ArrayListIterator<>(emptyArray);
+        GenericListIterator<Integer> iterator = new GenericListIterator.GenericListIteratorImpl<>(i -> emptyArray[i], emptyArray.length);
         assert !iterator.hasNext();
         assert !iterator.hasPrevious();
 
@@ -40,12 +40,12 @@ class ArrayListIteratorTest {
         } catch (NoSuchElementException ignored){ }
     }
 
-
     @Test
     void testSingletonArray() {
         final int element = 1;
+        Integer[] integers = {element};
 
-        ArrayListIterator<Integer> iterator = new ArrayListIterator<>(new Integer[]{element});
+        GenericListIterator<Integer> iterator = new GenericListIterator.GenericListIteratorImpl<>(i -> integers[i], integers.length);
         assert iterator.hasNext();
 
         boolean equals = iterator.next() == element;
@@ -69,7 +69,7 @@ class ArrayListIteratorTest {
 
     @Test
     void testIllegalStateException() {
-        ArrayListIterator<String> iterator = get();
+        GenericListIterator<String> iterator = get();
 
         try{
             iterator.set(null);
@@ -86,4 +86,5 @@ class ArrayListIteratorTest {
             assert false;
         } catch (IllegalStateException ignore){ }
     }
+
 }

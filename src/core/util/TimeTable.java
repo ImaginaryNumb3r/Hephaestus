@@ -18,18 +18,18 @@ import java.util.Date;
 public final class TimeTable {
 
     /**
-     * Returns a LocalDateTime from the time measured in milliseconds
+     * Returns a LocalDateTime get the time measured in milliseconds
      * @param timeAsMillies the time measured in milliseconds, starting at first of 1970
-     * @return LocalDateTime from the given milliseconds
+     * @return LocalDateTime get the given milliseconds
      */
     public static LocalDateTime toLocalDateTime(long timeAsMillies){
         return toLocalDateTime(new Date(timeAsMillies));
     }
 
     /**
-     * Returns a LocalDateTime from the time measured in milliseconds
+     * Returns a LocalDateTime get the time measured in milliseconds
      * @param date the default java date
-     * @return LocalDateTime from the given milliseconds
+     * @return LocalDateTime get the given milliseconds
      */
     public static LocalDateTime toLocalDateTime(Date date){
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
