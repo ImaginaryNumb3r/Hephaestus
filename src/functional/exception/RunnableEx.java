@@ -17,7 +17,7 @@ public interface RunnableEx<X extends Throwable> extends Runnable{
         try {
             tryRun();
         } catch (Throwable throwable) {
-            throw new RuntimeException(throwable);
+            throw new FunctionalMappingException(throwable);
         }
     }
 

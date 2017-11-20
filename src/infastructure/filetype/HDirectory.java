@@ -1,6 +1,6 @@
 package infastructure.filetype;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.tuple.Tuple;
 import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;

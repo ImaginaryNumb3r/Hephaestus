@@ -1,7 +1,7 @@
 package util.hash;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
@@ -70,7 +70,7 @@ public class HashGenerator {
 
     public HashGenerator appendAll(int... ints){
         for (int i = 0; i != ints.length; ++i){
-            _hashCode += ints[i] * _multBase;
+            _hashCode += ints[i] * _multBase * (i + 1);
         }
         return this;
     }

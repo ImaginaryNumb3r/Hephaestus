@@ -1,6 +1,6 @@
 package core.util.collections.iteration;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.exception.NoImplementationException;
 import core.util.annotations.ToTest;
 import core.util.collections.interfaces.ListIteratorHelper;

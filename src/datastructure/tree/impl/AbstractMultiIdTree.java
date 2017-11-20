@@ -1,13 +1,12 @@
 package datastructure.tree.impl;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import core.exception.ParameterNullException;
 import core.tuple.Tuple;
 import core.util.collections.Lists;
 import core.util.contracts.Contract;
 import datastructure.traverser.IdTraverser;
-import datastructure.tree.impl.node.MultiIdTreeNodeReaderImpl;
 import datastructure.tree.interfaces.ReadableTree;
 import datastructure.tree.impl.exception.NodeAlreadyExistsException;
 import datastructure.tree.node.subtype.IdTreeNodeReader;

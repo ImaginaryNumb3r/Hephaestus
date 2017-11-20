@@ -1,6 +1,6 @@
 package core.util;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.util.annotations.Unfinished;
 import core.util.contracts.Contract;
 

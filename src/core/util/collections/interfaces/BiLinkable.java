@@ -31,26 +31,26 @@ public interface BiLinkable<T> extends Linkable<T, BiLinkable<T>> {
         return tryPrevious() != null;
     }
 
-    static <T> BiLinkable<T> from(T value, Function<T, T> advanceFunc){
+/*    static <T> BiLinkable<T> from(T value, Function<T, T> advanceFunc){
         return from(value, advanceFunc, null);
     }
 
-    static <T> BiLinkable<T> from(T value, Function<T, T> advanceFunc, BiLinkable<T> previous){
-        return new BiLinkable<T>() {
+    static <TI> BiLinkable<TI> from(TI value, Function<TI, TI> advanceFunc, BiLinkable<TI> previous){
+        return new BiLinkable<TI>() {
             @Override
-            public BiLinkable<T> previous() {
+            public BiLinkable<TI> previous() {
                 return previous;
             }
 
             @Override
-            public T value() {
+            public TI value() {
                 return value;
             }
 
             @Override
-            public BiLinkable<T> next() {
-                return BiLinkable.from(advanceFunc.apply(value), advanceFunc);
+            public BiLinkable<TI> next() {
+                return BiLinkable.from(advanceFunc.apply(value), advanceFunc, value);
             }
         };
-    }
+    } */
 }

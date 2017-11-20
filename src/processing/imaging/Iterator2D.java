@@ -57,7 +57,7 @@ public class Iterator2D<T> implements Iterator<T> {
             ++_curX;
         }
 
-        return _matrix.getAt(x, y);
+        return _matrix.getAt(y, x);
     }
 
     @Override

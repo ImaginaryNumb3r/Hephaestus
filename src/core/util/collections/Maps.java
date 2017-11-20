@@ -1,6 +1,6 @@
 package core.util.collections;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.tuple.Tuple;
 

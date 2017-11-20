@@ -1,6 +1,9 @@
 package core.datastructure;
 
-import com.sun.istack.internal.NotNull;
+import core.datastructure.value.Coord2D;
+import core.util.collections.iteration.Iterables;
+import core.util.collections.iteration.Iterators;
+import org.jetbrains.annotations.NotNull;
 import core.datastructure.value.Bounds;
 import core.exception.NoImplementationException;
 import core.util.HashCode;
@@ -83,12 +86,13 @@ public class Matrix<T> implements Collection2D<T> {
      * @throws InvalidParameterException when width or height are initialized with zero, but not both
      */
     private boolean areValidParameters(int width, int height, boolean suppressExceptions){
-        boolean isValid = width < 0 || height < 0;
-        if (!isValid && !suppressExceptions) throw new NegativeArraySizeException();
-        isValid &= width == 0 && width != height;
-        if (isValid && !suppressExceptions) throw new InvalidParameterException("Matrix can only be empty if it is initialized with both, width and height at 0");
+        boolean isNegative = width < 0 && height < 0;
+        if (isNegative && !suppressExceptions) throw new NegativeArraySizeException();
 
-        return isValid;
+        boolean isZero = width == 0 && width != height;
+        if (isZero && !suppressExceptions) throw new InvalidParameterException("Matrix can only be empty if it is initialized with both, width and height at 0");
+
+        return isZero;
     }
     //</editor-fold>
 
@@ -199,9 +203,52 @@ public class Matrix<T> implements Collection2D<T> {
     }
 
     @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        ListIterator<T[]> iterator = iterateLines();
+        for (T[] line : Iterables.from(iterator)) {
+            builder.append("[ ");
+
+            for (T value : line) {
+                builder.append(value).append(" ");
+            }
+
+            builder.append("]");
+
+            // Make line breaks between each line
+            if (iterator.hasNext()){
+                builder.append("\n");
+            }
+        }
+
+        return builder.toString();
+    }
+
+    public ListIterator<T[]> iterateLines(){
+        ArrayList<T[]> list = new ArrayList<>(_matrix.length);
+        list.addAll(Arrays.asList(_matrix));
+
+        return list.listIterator();
+    }
+
+    @Override
     public int hashCode() {
         return new HashGenerator(getClass())
                 .append(iterator())
                 .toHashCode();
+    }
+
+    public Iterator<Coord2D> coordIterator() {
+        Coord2D[] coordinates = new Coord2D[size()];
+
+        int index = 0;
+        for (int i = 0; i != _matrix.length; ++i){
+            for (int j = 0; j != _matrix[i].length; ++j){
+                coordinates[index++] = new Coord2D(i, j);
+            }
+        }
+
+        return Iterators.from(coordinates);
     }
 }

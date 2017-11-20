@@ -1,7 +1,7 @@
 package core.util;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import core.exception.InstanceNotAllowedException;
 import core.exception.ParameterNullException;
 import util.hash.HashGenerator;

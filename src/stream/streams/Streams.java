@@ -1,8 +1,8 @@
 package stream.streams;
 
-import com.sun.istack.internal.NotNull;
 import core.exception.ParameterNullException;
 import core.util.contracts.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.List;

@@ -19,7 +19,7 @@ public interface SupplierEx<T, X extends Exception> extends Supplier<T> {
         try {
             value = tryGet();
         } catch (Throwable throwable) {
-            throw new RuntimeException(throwable);
+            throw new FunctionalMappingException(throwable);
         }
 
         return value;

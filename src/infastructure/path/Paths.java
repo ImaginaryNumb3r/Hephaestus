@@ -1,8 +1,8 @@
 package infastructure.path;
 
 import core.datastructure.Lazy;
+import core.exception.NoImplementationException;
 import infastructure.path.enums.PathType;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -63,7 +63,7 @@ public class Paths {
 
     // TODO
     private boolean isRelativePath(String path) {
-        throw new NotImplementedException();
+        throw new NoImplementationException();
     }
 
     public boolean isAbsolutePath(String path){

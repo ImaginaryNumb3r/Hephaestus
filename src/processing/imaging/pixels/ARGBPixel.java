@@ -1,6 +1,6 @@
 package processing.imaging.pixels;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.tuple.Quartet;
 import util.hash.HashGenerator;
 

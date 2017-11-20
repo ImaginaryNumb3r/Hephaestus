@@ -1,6 +1,6 @@
 package infastructure.path;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.util.collections.Maps;
 import infastructure.filetype.interfaces.Path;

@@ -1,5 +1,6 @@
 package infastructure.path.empty;
 
+import core.exception.NoImplementationException;
 import infastructure.filetype.interfaces.EmptyPath;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteDirectory;
 import infastructure.filetype.interfaces.aubtypes.subtypes.AbsoluteFile;
@@ -9,7 +10,6 @@ import infastructure.path.FileNode;
 import infastructure.path.RelativeFilePath;
 import infastructure.path.exceptions.EmptyPathException;
 import infastructure.path.exceptions.PathsNotMatchingException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * @author Patrick
@@ -71,7 +71,7 @@ public class EmptyRelativeFilePath extends RelativeFilePath implements EmptyPath
 
     @Override
     public EmptyRelativeFilePath copy() {
-        throw new NotImplementedException();
+        throw new NoImplementationException();
     }
 
     @Override

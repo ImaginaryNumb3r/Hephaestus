@@ -1,6 +1,6 @@
 package core.tuple;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
 import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
 

@@ -1,6 +1,6 @@
 package core.util.interfaces;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.tuple.Tuple;
 import core.util.contracts.Contract;
 

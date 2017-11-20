@@ -1,10 +1,9 @@
 package core.util.collections.interfaces;
 
-import core.util.contracts.Contract;
 
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 /**
  * @author Patrick
@@ -38,7 +37,7 @@ public interface Linkable<T, L extends Linkable<T, L>> {
     }
 
     default boolean hasNext(){
-        return next() != null;
+        return next().value() != null;
     }
 
     /**
@@ -49,5 +48,9 @@ public interface Linkable<T, L extends Linkable<T, L>> {
         while (hasNext()){
             consumer.accept(next().value());
         }
+    }
+
+    static <TI> LinkableImpl<TI> of(TI value, Function<TI, TI> advanceFunc){
+        return new LinkableImpl<>(value, advanceFunc);
     }
 }

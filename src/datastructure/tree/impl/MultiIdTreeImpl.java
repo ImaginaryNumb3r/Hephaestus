@@ -1,6 +1,6 @@
 package datastructure.tree.impl;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
 import datastructure.tree.impl.node.MultiIdTreeNodeReaderImpl;
 import graph.GraphIterator;

@@ -1,6 +1,6 @@
 package core.util.collections.iteration;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * Created: 02.08.2017
  * Purpose:
  */
-class GenericListIteratorTest {
+public class GenericListIteratorTest {
     private static final String[] STRINGS = {"Item1", "Item2", "Item3", "Item4", "Item5"};
 
     private static GenericListIterator<String> get(){
@@ -17,13 +17,13 @@ class GenericListIteratorTest {
     }
 
     @Test
-    void testIteration() {
+    public void testIteration() {
         GenericListIterator<String> iterator = get();
         assert Iterators.equals(iterator, STRINGS);
     }
 
     @Test
-    void testEmptyArray() { //noinspection MismatchedReadAndWriteOfArray
+    public void testEmptyArray() { //noinspection MismatchedReadAndWriteOfArray
         Integer[] emptyArray = new Integer[0];
         GenericListIterator<Integer> iterator = new GenericListIterator.GenericListIteratorImpl<>(i -> emptyArray[i], emptyArray.length);
         assert !iterator.hasNext();
@@ -41,7 +41,7 @@ class GenericListIteratorTest {
     }
 
     @Test
-    void testSingletonArray() {
+    public void testSingletonArray() {
         final int element = 1;
         Integer[] integers = {element};
 
@@ -68,7 +68,7 @@ class GenericListIteratorTest {
     }
 
     @Test
-    void testIllegalStateException() {
+    public void testIllegalStateException() {
         GenericListIterator<String> iterator = get();
 
         try{

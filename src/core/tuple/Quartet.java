@@ -1,7 +1,7 @@
 package core.tuple;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import core.util.collections.iteration.GenericListIterator;
 import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;

@@ -1,6 +1,6 @@
 package core.datastructure.value;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.tuple.Tuple;
 import core.util.HashCode;
 import core.util.contracts.Contract;

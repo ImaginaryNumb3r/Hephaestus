@@ -1,11 +1,13 @@
 package core.datastructure.value;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.tuple.Tuple;
 import core.util.HashCode;
 import util.hash.HashGenerator;
 
 import java.awt.*;
+
+import static core.util.HashCode.permutate;
 
 /**
  * @author Patrick Plieschnegger
@@ -123,9 +125,7 @@ public class Coord2D implements Tuple<Integer, Integer>{
 
     @Override
     public int hashCode() {
-        return new HashGenerator(getClass())
-                .appendAll(_x, _y)
-                .toHashCode();
+        return HashCode.makeHashCode(_x, _y);
     }
 
 }

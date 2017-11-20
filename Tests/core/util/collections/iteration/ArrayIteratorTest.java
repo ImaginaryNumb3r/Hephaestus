@@ -1,6 +1,7 @@
 package core.util.collections.iteration;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
@@ -9,10 +10,10 @@ import java.util.NoSuchElementException;
  * Created: 02.08.2017
  * Purpose:
  */
-class ArrayIteratorTest {
+public class ArrayIteratorTest {
 
     @Test
-    void testEmptyArray() {
+    public void testEmptyArray() {
         Integer[] emptyArray = new Integer[0];
         ArrayIterator<Integer> iterator = new ArrayIterator<>(emptyArray);
         assert !iterator.hasNext();
@@ -24,7 +25,7 @@ class ArrayIteratorTest {
     }
 
     @Test
-    void testSingletonArray() {
+    public void testSingletonArray() {
         final int element = 1;
 
         ArrayIterator<Integer> iterator = new ArrayIterator<>(new Integer[]{element});

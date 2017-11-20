@@ -1,6 +1,7 @@
 package core.util.collections.iteration;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import java.util.NoSuchElementException;
 
@@ -8,7 +9,7 @@ import java.util.NoSuchElementException;
  * @author Patrick
  * @since 01.06.2017
  */
-class ArrayListIteratorTest {
+public class ArrayListIteratorTest {
     private static final String[] STRINGS = {"Item1", "Item2", "Item3", "Item4", "Item5"};
 
     private static ArrayListIterator<String> get(){
@@ -16,14 +17,14 @@ class ArrayListIteratorTest {
     }
 
     @Test
-    void testIteration() {
+    public void testIteration() {
         ArrayListIterator<String> iterator = get();
         assert Iterators.equals(iterator, STRINGS);
     }
 
 
     @Test
-    void testEmptyArray() {
+    public void testEmptyArray() {
         Integer[] emptyArray = new Integer[0];
         ArrayListIterator<Integer> iterator = new ArrayListIterator<>(emptyArray);
         assert !iterator.hasNext();
@@ -42,7 +43,7 @@ class ArrayListIteratorTest {
 
 
     @Test
-    void testSingletonArray() {
+    public void testSingletonArray() {
         final int element = 1;
 
         ArrayListIterator<Integer> iterator = new ArrayListIterator<>(new Integer[]{element});
@@ -61,6 +62,7 @@ class ArrayListIteratorTest {
         equals = iterator.previous() == element;
         assert equals;
 
+        assert !iterator.hasPrevious();
         try {
             iterator.previous();
             assert false; // Must throw NoSuchElementException
@@ -68,7 +70,7 @@ class ArrayListIteratorTest {
     }
 
     @Test
-    void testIllegalStateException() {
+    public void testIllegalStateException() {
         ArrayListIterator<String> iterator = get();
 
         try{

@@ -1,15 +1,13 @@
 package core.util.collections;
 
-import com.sun.istack.internal.NotNull;
+import functional.BiSupplier;
+import org.jetbrains.annotations.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.exception.ParameterNullException;
 import core.util.annotations.ToTest;
 import core.util.collections.iteration.ArrayIterator;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -89,10 +87,15 @@ public final class Lists {
         return list;
     }
 
-    public static <T> ArrayList<T> toSingleArrayList(T item){
-        ArrayList<T> list = new ArrayList<>();
-        list.add(item);
-        return list;
+    public static <T> T[] toArray(Collection<T> collection, BiSupplier<T[], Integer> arrayConstructor) {
+        T[] array = arrayConstructor.make(collection.size());
+
+        int i = 0;
+        for (T item : collection) {
+            array[i++] = item;
+        }
+
+        return array;
     }
     //</editor-fold>
 }

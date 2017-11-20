@@ -1,6 +1,6 @@
 package core.util.collections.iteration;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -10,11 +10,10 @@ import java.util.NoSuchElementException;
  * Created: 02.08.2017
  * Purpose:
  */
-class EmptyIteratorTest {
-
+public class EmptyIteratorTest {
 
     @Test
-    void testNext() {
+    public void testNext() {
         ListIterator<Object> iter = new EmptyIterator<>();
         assert !iter.hasNext();
         try {
@@ -24,7 +23,7 @@ class EmptyIteratorTest {
     }
 
     @Test
-    void testPrevious() {
+    public void testPrevious() {
         ListIterator<Object> iter = new EmptyIterator<>();
         assert !iter.hasPrevious();
         try {
@@ -34,7 +33,7 @@ class EmptyIteratorTest {
     }
 
     @Test
-    void testIllegalStateException() {
+    public void testIllegalStateException() {
         ListIterator<String> iterator = EmptyIterator.get();
 
         try{

@@ -1,6 +1,8 @@
 package core.util.collections.iteration;
 
-import com.sun.istack.internal.NotNull;
+import core.util.collections.interfaces.BiLinkable;
+import core.util.collections.interfaces.BiLinkableImpl;
+import org.jetbrains.annotations.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.util.annotations.ToTest;
 import core.util.contracts.Contract;
@@ -43,54 +45,55 @@ public final class Iterators {
         return new ArrayListIterator<>(array);
     }
 
-    public ListIterator<Character> from(@NotNull CharSequence sequence){
+    public static ListIterator<Character> from(@NotNull CharSequence sequence){
         Contract.checkNull(sequence, "sequence");
         return new GenericListIterator.GenericListIteratorImpl<>(sequence::charAt, sequence.length());
     }
 
-    public <T> ListIterator<T> from(T startValue, Function<T, T> advanceFunction){
-        BiLinkableImpl<T> linkable = new BiLinkableImpl<>(startValue, advanceFunction);
+    public static <T> ListIterator<T> from(T startValue, Function<T, T> advanceFunction){
+//        BiLinkable<T> linkable = BiLinkable.from(startValue, advanceFunction, null);
+        BiLinkableImpl<T> linkable = new BiLinkableImpl<>(startValue, advanceFunction, null);
         return new NodeListIterator.NodeListIteratorImpl<>(linkable);
     }
 
     //<editor-fold desc="Primitives">
-    public ListIterator<Short> from(@NotNull short[] shorts){
+    public static ListIterator<Short> from(@NotNull short[] shorts){
         Contract.checkNull(shorts);
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericListIterator.GenericListIteratorImpl<>(index -> shorts[index], shorts.length);
     }
 
-    public ListIterator<Integer> from(@NotNull int[] ints){
+    public static ListIterator<Integer> from(@NotNull int[] ints){
         Contract.checkNull(ints);
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericListIterator.GenericListIteratorImpl<>(index -> ints[index], ints.length);
     }
 
-    public ListIterator<Long> from(@NotNull long[] longs){
+    public static ListIterator<Long> from(@NotNull long[] longs){
         Contract.checkNull(longs);
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericListIterator.GenericListIteratorImpl<>(index -> longs[index], longs.length);
     }
 
-    public ListIterator<Float> from(@NotNull float[] floats){
+    public static ListIterator<Float> from(@NotNull float[] floats){
         Contract.checkNull(floats);
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericListIterator.GenericListIteratorImpl<>(index -> floats[index], floats.length);
     }
 
-    public ListIterator<Double> from(@NotNull double[] doubles){
+    public static ListIterator<Double> from(@NotNull double[] doubles){
         Contract.checkNull(doubles);
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericListIterator.GenericListIteratorImpl<>(index -> doubles[index], doubles.length);
     }
 
-    public ListIterator<Byte> from(@NotNull byte[] bytes){
+    public static ListIterator<Byte> from(@NotNull byte[] bytes){
         Contract.checkNull(bytes);
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericListIterator.GenericListIteratorImpl<>(index -> bytes[index], bytes.length);
     }
 
-    public ListIterator<Boolean> from(@NotNull boolean[] booleans){
+    public static ListIterator<Boolean> from(@NotNull boolean[] booleans){
         Contract.checkNull(booleans);
         // Cannot access array iterator because of mismatch of primitives and generics
         return new GenericListIterator.GenericListIteratorImpl<>(index -> booleans[index], booleans.length);

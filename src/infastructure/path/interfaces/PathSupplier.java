@@ -1,6 +1,6 @@
 package infastructure.path.interfaces;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
 import functional.QuintSupplier;
 import infastructure.filetype.interfaces.Path;
 import infastructure.path.DirectoryNode;

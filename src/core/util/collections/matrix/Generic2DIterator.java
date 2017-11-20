@@ -1,6 +1,6 @@
 package core.util.collections.matrix;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.datastructure.Matrix;
 import core.tuple.Tuple;
 import core.util.HashCode;

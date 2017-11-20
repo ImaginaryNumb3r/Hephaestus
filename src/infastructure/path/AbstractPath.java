@@ -1,6 +1,6 @@
 package infastructure.path;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import infastructure.filetype.interfaces.Path;
 import infastructure.filetype.interfaces.aubtypes.RelativePath;
 import infastructure.path.exceptions.PathsNotMatchingException;

@@ -1,6 +1,6 @@
 package core.util.collections.iteration;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -11,11 +11,11 @@ import java.util.NoSuchElementException;
  * Created: 02.08.2017
  * Purpose:
  */
-class GenericIteratorTest {
+public class GenericIteratorTest {
 
 
     @Test
-    void testEmptyArray() {
+    public void testEmptyArray() {
         final String str = "";
 
         Iterator<Character> iterator = new GenericIterator<>(str::charAt, str.length());
@@ -28,7 +28,7 @@ class GenericIteratorTest {
     }
 
     @Test
-    void testSingletonArray() {
+    public void testSingletonArray() {
         final Character character = 'c';
         final String str = character.toString();
 

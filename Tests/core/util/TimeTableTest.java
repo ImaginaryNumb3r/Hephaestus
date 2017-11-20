@@ -25,7 +25,7 @@ public class TimeTableTest {
             // Successfully catched the exception
         }
     }
-
+/*
     @Test
     public void testMinusLocalDateTimes() throws Exception {
         LocalDateTime currentDate  = LocalDateTime.now();
@@ -33,5 +33,5 @@ public class TimeTableTest {
         previousDate = previousDate.minusHours(1);
 
         LocalDateTime minus = new TimeTable().minus(previousDate, currentDate);
-    }
+    }*/
 }

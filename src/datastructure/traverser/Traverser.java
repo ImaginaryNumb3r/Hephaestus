@@ -61,4 +61,9 @@ public interface Traverser<T> {
     default boolean hasValue(){
         return value() != null;
     }
+
+    static <T extends Iterable<T>> Traverser<T> of(T root){
+        return new TraverserImpl<>(root);
+    }
+
 }

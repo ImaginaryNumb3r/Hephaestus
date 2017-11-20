@@ -33,7 +33,7 @@ public class EmptyIterator<T> extends NodeListIterator<T, EmptyIterator.EmptyLin
         return new EmptyIterator<>();
     }
 
-    public static class EmptyLinkable<T> implements BiLinkable<T, EmptyLinkable<T>>{
+    public static class EmptyLinkable<T> implements BiLinkable<T>{
 
         @Override
         public T value() {
@@ -42,12 +42,14 @@ public class EmptyIterator<T> extends NodeListIterator<T, EmptyIterator.EmptyLin
 
         @Override
         public EmptyLinkable<T> next() {
-            return null;
+            // As an empty Linkable does not have a state, all nodes are equal.
+            return this;
         }
 
         @Override
         public EmptyLinkable<T> previous() {
-            return null;
+            // As an empty Linkable does not have a state, all nodes are equal.
+            return this;
         }
     }
 }

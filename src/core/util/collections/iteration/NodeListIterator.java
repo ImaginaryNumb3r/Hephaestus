@@ -1,6 +1,6 @@
 package core.util.collections.iteration;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.util.collections.interfaces.BiLinkable;
 import core.util.collections.interfaces.ListIteratorHelper;
 import core.util.contracts.Contract;

@@ -1,10 +1,11 @@
 package core.util.contracts;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import core.exception.ParameterNullException;
 import core.util.collections.iteration.Iterables;
 import core.util.collections.iteration.Iterators;
 import functional.exception.SupplierEx;
+import processing.math.digits.Digit;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.Predicate;
@@ -192,6 +193,14 @@ public final class Contract {
     public static <X extends Throwable> void check(BooleanSupplier verifier, Supplier<X> exception) throws X {
         if (!verifier.getAsBoolean()) throw exception.get();
     }
+
+    public static void checkNegatives(Number... numbers) {
+        for (Number number : numbers) {
+            // Expect that int values are most common.
+            checkNegative(number.intValue());
+        }
+    }
+
     //</editor-fold>
 
 }

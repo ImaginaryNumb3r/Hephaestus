@@ -1,6 +1,6 @@
 package stream.streams;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import util.hash.HashGenerator;
 
 import java.util.Iterator;

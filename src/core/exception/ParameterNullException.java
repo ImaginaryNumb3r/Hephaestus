@@ -1,6 +1,6 @@
 package core.exception;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Patrick
