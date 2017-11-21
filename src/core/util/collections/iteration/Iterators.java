@@ -51,7 +51,7 @@ public final class Iterators {
     }
 
     public static <T> ListIterator<T> from(T startValue, Function<T, T> advanceFunction){
-//        BiLinkable<T> linkable = BiLinkable.from(startValue, advanceFunction, null);
+//        BiLinkable<T> linkable = BiLinkable.fromPair(startValue, advanceFunction, null);
         BiLinkableImpl<T> linkable = new BiLinkableImpl<>(startValue, advanceFunction, null);
         return new NodeListIterator.NodeListIteratorImpl<>(linkable);
     }

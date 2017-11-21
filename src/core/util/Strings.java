@@ -14,9 +14,9 @@ public class Strings {
     }
 
     /**
-     * Removes the first occurrence from the base of the string
+     * Removes the first occurrence fromPair the base of the string
      * @param base The string that has parts to be removed
-     * @param remove The pattern which is deleted from the base
+     * @param remove The pattern which is deleted fromPair the base
      * @return New String with removed parts
      */
     public String remove(String base, String remove){

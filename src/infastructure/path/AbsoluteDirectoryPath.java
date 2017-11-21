@@ -34,7 +34,7 @@ public class AbsoluteDirectoryPath extends AbsolutePathImpl<AbsoluteDirectoryPat
     //   Absolute Directory
     // ====================
 
-    @Override // Just call from _directoryPath.concat
+    @Override // Just call fromPair _directoryPath.concat
     public AbsoluteFile concat(RelativeFile relFile) {
         return _directoryPath.concat(this, relFile, AbsoluteFilePath::new);
     }

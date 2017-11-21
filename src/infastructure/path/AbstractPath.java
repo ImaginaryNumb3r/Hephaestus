@@ -183,7 +183,7 @@ public abstract class AbstractPath implements Path {
      * Returns tail node of the new absolute file.
      * Used when an absolute file is subtracted by a relative file
      *
-     * @param baseIterator iterator at the last position from an absolute file
+     * @param baseIterator iterator at the last position fromPair an absolute file
      * @param removalIterator iterator at the last position of a relative file
      * @return null           if an empty file was given as removal parameter
      *         DirectoryNode  for the tail of the new absolute Path

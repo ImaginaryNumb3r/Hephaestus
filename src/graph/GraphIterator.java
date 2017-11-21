@@ -29,11 +29,11 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
     }
 
     /**
-     * Creates a GraphIterator from the given root of a tree
+     * Creates a GraphIterator fromPair the given root of a tree
      * @param source root of the tree
-     * @param strategy to create a list based from the branching nodes of the root
+     * @param strategy to create a list based fromPair the branching nodes of the root
      * @param <T> Type of root. Must be iterable to have access its children
-     * @return GraphIterator<T> based from the given parameters
+     * @return GraphIterator<T> based fromPair the given parameters
      */
     public static <T extends Iterable<T>> GraphIterator<T> from (T source, @NotNull GraphSearchStrategy<T> strategy){
         Contract.checkNull(strategy);

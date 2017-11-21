@@ -59,7 +59,7 @@ public interface Collection2D<T> extends Iterable<T>, Accessible2D<T> {
                 .mapToInt(Collection::size)
                 .max();
 
-        // Make matrix from collection sizes.
+        // Make matrix fromPair collection sizes.
         int index2Size = maxSize.orElse(0); // Matrix of size 0 if no sub collections exist
         matrix = matrixConstructor.apply(collection2D.size(), index2Size);
 

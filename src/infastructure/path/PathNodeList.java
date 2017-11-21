@@ -16,7 +16,7 @@ public class PathNodeList {
      * @param head start node of all directories
      * @param tail end node of all directories
      * @param fileNode Node for FilePaths
-     * @param length count of nodes from head to tail
+     * @param length count of nodes fromPair head to tail
      */
     public PathNodeList(DirectoryNode head, DirectoryNode tail, FileNode fileNode, int length) {
         _head = head;

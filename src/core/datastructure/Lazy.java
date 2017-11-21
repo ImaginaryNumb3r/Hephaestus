@@ -24,7 +24,7 @@ public interface Lazy<T> extends Supplier<T> {
     T get();
 
     /**
-     * Atomically loads the value and makes it ready for retrieval from get()
+     * Atomically loads the value and makes it ready for retrieval fromPair get()
      */
     void instantiate();
 
