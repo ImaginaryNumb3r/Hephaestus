@@ -1,8 +1,8 @@
 package processing.imaging;
 
-import core.datastructure.Matrix;
+import core.util.collections.matrix.MutatingMatrix;
 import core.util.HashCode;
-import core.util.interfaces.Collection2D;
+import core.util.interfaces.ReadCollection2D;
 import util.hash.HashGenerator;
 
 import java.util.Iterator;
@@ -16,16 +16,16 @@ import java.util.Iterator;
  */
 // TODO: Different iteration strategies
 public class Iterator2D<T> implements Iterator<T> {
-    protected Collection2D<T> _matrix;
+    protected ReadCollection2D<T> _matrix;
     protected int _curX;
     protected int _curY;
 
     //<editor-fold desc="Constructors">
     public Iterator2D(T[][] matrix) {
-        _matrix = new Matrix<>(matrix);
+        _matrix = new MutatingMatrix<T>(matrix);
     }
 
-    public Iterator2D(Matrix<T> matrix) {
+    public Iterator2D(ReadCollection2D<T> matrix) {
         _matrix = matrix;
     }
     //</editor-fold>

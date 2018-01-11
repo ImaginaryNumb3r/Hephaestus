@@ -18,6 +18,9 @@ public class Bounds implements Tuple<Integer, Integer> {
     private final int HEIGHT;
 
     public Bounds(int width, int height) {
+        Contract.checkNegative(width, "width");
+        Contract.checkNegative(height, "height");
+
         WIDTH = width;
         HEIGHT = height;
     }
@@ -38,6 +41,14 @@ public class Bounds implements Tuple<Integer, Integer> {
 
     public int getHeight() {
         return HEIGHT;
+    }
+
+    public Bounds invert(){
+        return new Bounds(HEIGHT, WIDTH);
+    }
+
+    public <T> T[][] makeMatrix(Class<T> type){
+        return (T[][]) new Object[getWidth()][getHeight()];
     }
 
     /**
@@ -62,7 +73,12 @@ public class Bounds implements Tuple<Integer, Integer> {
 
     @Override
     public boolean equals(Object obj) {
-        return HashCode.equals(this, obj);
+        return obj instanceof Bounds
+                && equals((Bounds) obj);
+    }
+
+    public boolean equals(Bounds other) {
+        return WIDTH == other.WIDTH && HEIGHT == other.HEIGHT;
     }
 
     @Override

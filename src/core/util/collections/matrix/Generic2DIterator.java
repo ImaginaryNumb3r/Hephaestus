@@ -1,7 +1,6 @@
 package core.util.collections.matrix;
 
 import org.jetbrains.annotations.NotNull;
-import core.datastructure.Matrix;
 import core.tuple.Tuple;
 import core.util.HashCode;
 import core.util.contracts.Contract;
@@ -26,7 +25,7 @@ public class Generic2DIterator<T> implements Iterator<T> {
         _heigth = height;
     }
 
-    public <I> Generic2DIterator<I> from (@NotNull Matrix<I> matrix){
+    public <I> Generic2DIterator<I> from (@NotNull MutatingMatrix<I> matrix){
         Contract.checkNull(matrix, "matrix");
         return from(matrix, matrix.getWidth(), matrix.getHeight());
     }

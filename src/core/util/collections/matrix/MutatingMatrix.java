@@ -1,36 +1,35 @@
-package core.datastructure;
+package core.util.collections.matrix;
 
-import core.datastructure.value.Coord2D;
-import core.util.collections.iteration.Iterables;
-import core.util.collections.iteration.Iterators;
-import org.jetbrains.annotations.NotNull;
 import core.datastructure.value.Bounds;
+import core.datastructure.value.Coord2D;
 import core.exception.NoImplementationException;
+import core.tuple.Tuple;
 import core.util.HashCode;
 import core.util.annotations.ToTest;
+import core.util.collections.iteration.Iterables;
+import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
 import core.util.interfaces.Accessible2D;
 import core.util.interfaces.Collection2D;
+import core.util.interfaces.ReadCollection2D;
 import functional.TriFunction;
+import org.jetbrains.annotations.NotNull;
 import processing.imaging.Iterator2D;
 import util.hash.HashGenerator;
 
 import java.security.InvalidParameterException;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
- * Representation of a 2D data structure
- *
- * Creator: Patrick
- * Created: 13.12.2016
- * TODO: ToString
- * TODO: Matrix operations
- * TODO: 2D Iterator Strategy, like with Trees
+ * @author Patrick
+ * @since 09.12.2017
+ * A mutating matrix class. For a non-mutating, return the Matrix interface.
  */
-@ToTest
-public class Matrix<T> implements Collection2D<T> {
-    private final T[][] _matrix;
-    private final int _size; // Calculate size only once
+public class MutatingMatrix<T> implements Matrix<T> {
+    protected final T[][] _matrix;
+    protected final int _size; // Calculate size only once
 
     //<editor-fold desc="Constructors">
     /**
@@ -40,17 +39,22 @@ public class Matrix<T> implements Collection2D<T> {
      * @throws NegativeArraySizeException if one of the indices is negative
      * @throws InvalidParameterException when width or height are initialized with zero, but not both
      */ @SuppressWarnings("unchecked")
-    public Matrix(int width, int height) {
+    public MutatingMatrix(int width, int height) {
         areValidParameters(width, height, false);
         _matrix = (T[][])new Object[width][height];
         _size = width * height;
     }
 
-    public Matrix(@NotNull T[][] matrix) {
+    public MutatingMatrix(@NotNull T[][] matrix) {
         Contract.checkNull(matrix, "matrix");
         _matrix = matrix;
         _size = getHeight() * getWidth();
     }
+
+    public MutatingMatrix(Tuple<Integer, Integer> bounds) {
+        this(bounds.getA(), bounds.getB());
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="Construction Validation">
@@ -108,8 +112,8 @@ public class Matrix<T> implements Collection2D<T> {
         return _matrix[width][heigth];
     }
 
-    public void setAt(int width, int heigth, T value){
-        _matrix[width][heigth] = value;
+    public void setAt(int width, int height, T value){
+        _matrix[width][height] = value;
     }
     //</editor-fold>
 
@@ -133,6 +137,22 @@ public class Matrix<T> implements Collection2D<T> {
     }
     //</editor-fold>
 
+    protected void checkBounds(ReadCollection2D<T> other){
+        if (!bounds().equals(other.bounds())) {
+            throw new IllegalArgumentException("Matrices must not have different sizes when multiplying");
+        }
+    }
+
+    /**
+     * Changes the values of the matrix based on the given computation.
+     * @param other
+     * @param computation
+     */
+    public void mutate(ReadCollection2D<T> other, BiFunction<T, T, T> computation){
+        computeResult(other, computation, _matrix);
+    }
+
+
     public void add(Accessible2D<T> accssor){
         throw new NoImplementationException();
     }
@@ -143,12 +163,6 @@ public class Matrix<T> implements Collection2D<T> {
 
     public void multiply(Number factor){
         throw new NoImplementationException();
-    }
-
-    private void manipulate(){
-        for (T t : this) {
-
-        }
     }
 
     @Override
@@ -184,9 +198,52 @@ public class Matrix<T> implements Collection2D<T> {
         }
     }
 
-    @Override
-    public Iterator2D<T> iterator() {
-        return new Iterator2D<>(this);
+    public MutatingMatrix<T> compute(MutatingMatrix<T> other, BiFunction<T, T, T> computation){
+        T[][] matrix = computeResult(other, computation);
+        return new MutatingMatrix<>(matrix);
+    }
+
+    protected T[][] computeResult(ReadCollection2D<T> other, BiFunction<T, T, T> computation){
+        T[][] matrix = Collection2D.toMatrix(bounds());
+        computeResult(other, computation, matrix);
+
+        return matrix;
+    }
+
+    /**
+     * Returns a matrix based on the computation and the values of this and the other matrix.^
+     * @param other values of the other matrix
+     * @param computation the computation taking the two matrices and returns according values
+     * @param matrix the out-parameter in which the values will be saved into
+     */
+    protected void computeResult(ReadCollection2D<T> other, BiFunction<T, T, T> computation, T[][] matrix){
+
+        for (Coord2D coord : Iterables.from(coordIterator())) {
+            T thisVal = getAt(coord);
+            T otherVal = other.getAt(coord);
+
+            T resultValue = computation.apply(thisVal, otherVal);
+            coord.setAt(matrix, resultValue);
+        }
+    }
+
+    /**
+     *  (A B) * (E F) = (A+E B+F)
+     *  (C D)   (G H)   (C+G D+H)
+     * @param other matrix
+     * @return
+     */
+    public MutatingMatrix<T> multiply(MutatingMatrix<T> other){
+        checkBounds(other);
+        MutatingMatrix<T> result = new MutatingMatrix<>(getWidth(), getHeight());
+
+        for (Coord2D coord : Iterables.from(coordIterator())) {
+            int y = coord.getY();
+            int x = coord.getX();
+
+        }
+
+        return result;
     }
 
     /**
@@ -197,6 +254,7 @@ public class Matrix<T> implements Collection2D<T> {
         return _matrix.clone();
     }
 
+    //<editor-fold desc="java.lang.Object">
     @Override
     public boolean equals(Object obj) {
         return HashCode.equals(this, obj);
@@ -204,6 +262,10 @@ public class Matrix<T> implements Collection2D<T> {
 
     @Override
     public String toString() {
+        return toString(Object::toString);
+    }
+
+    public String toString(Function<T, String> mapper) {
         StringBuilder builder = new StringBuilder();
 
         ListIterator<T[]> iterator = iterateLines();
@@ -211,7 +273,7 @@ public class Matrix<T> implements Collection2D<T> {
             builder.append("[ ");
 
             for (T value : line) {
-                builder.append(value).append(" ");
+                builder.append(mapper.apply(value)).append(" ");
             }
 
             builder.append("]");
@@ -224,7 +286,15 @@ public class Matrix<T> implements Collection2D<T> {
 
         return builder.toString();
     }
+    @Override
+    public int hashCode() {
+        return new HashGenerator(getClass())
+                .append(iterator())
+                .toHashCode();
+    }
+    //</editor-fold>
 
+    //<editor-fold desc="Iteration">
     public ListIterator<T[]> iterateLines(){
         ArrayList<T[]> list = new ArrayList<>(_matrix.length);
         list.addAll(Arrays.asList(_matrix));
@@ -232,12 +302,6 @@ public class Matrix<T> implements Collection2D<T> {
         return list.listIterator();
     }
 
-    @Override
-    public int hashCode() {
-        return new HashGenerator(getClass())
-                .append(iterator())
-                .toHashCode();
-    }
 
     public Iterator<Coord2D> coordIterator() {
         Coord2D[] coordinates = new Coord2D[size()];
@@ -251,4 +315,11 @@ public class Matrix<T> implements Collection2D<T> {
 
         return Iterators.from(coordinates);
     }
+
+    @Override
+    public Iterator2D<T> iterator() {
+        return new Iterator2D<>(this);
+    }
+    //</editor-fold>
+
 }

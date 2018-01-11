@@ -1,6 +1,8 @@
 package core.util.interfaces;
 
 import functional.BiSupplier;
+import functional.constructors.ArrayConstructor;
+import functional.constructors.MatrixConstructor;
 import org.jetbrains.annotations.NotNull;
 import core.datastructure.value.Bounds;
 import core.tuple.Tuple;
@@ -9,6 +11,7 @@ import processing.imaging.Iterator2D;
 
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -16,21 +19,7 @@ import java.util.stream.StreamSupport;
  * @author Patrick
  * @since 21.05.2017
  */
-public interface Collection2D<T> extends Iterable<T>, Accessible2D<T> {
-
-    boolean contains(T element);
-
-    boolean containsAll(Collection<T> elements);
-
-    int getWidth();
-
-    int getHeight();
-
-    Bounds bounds();
-
-    Iterator2D<T> iterator();
-
-    T[][] toArray();
+public interface Collection2D<T> extends ReadCollection2D<T> {
 
     void setAt(int width, int heigth, T value);
 
@@ -39,21 +28,8 @@ public interface Collection2D<T> extends Iterable<T>, Accessible2D<T> {
         setAt(tuple.getA(), tuple.getB(), value);
     }
 
-    default int size(){
-        return getWidth() * getHeight();
-    }
-
-    default boolean isEmpty(){
-        return size() == 0;
-    }
-
-    default Stream<T> stream(){
-        Spliterator<T> spliterator = Spliterators.spliterator(iterator(), 0, size());
-        return StreamSupport.stream(spliterator, false);
-    }
-
     static <T, C extends Collection<T>> T[][] toMatrix(Collection<C> collection2D,
-            BiFunction<Integer, Integer, T[][]> matrixConstructor, BiSupplier<T[], Integer> arrayConstructor){
+               MatrixConstructor<T> matrixConstructor, ArrayConstructor<T> arrayConstructor){
         T[][] matrix;
         OptionalInt maxSize = collection2D.stream()
                 .mapToInt(Collection::size)
@@ -77,6 +53,10 @@ public interface Collection2D<T> extends Iterable<T>, Accessible2D<T> {
         }
 
         return matrix;
+    }
+
+    static <T> T[][] toMatrix(Bounds bounds){
+        return (T[][]) new Object[bounds.getWidth()][bounds.getHeight()];
     }
 
 }

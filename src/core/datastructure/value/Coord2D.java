@@ -40,18 +40,34 @@ public class Coord2D implements Tuple<Integer, Integer>{
         this(0,0);
     }
 
+    /**
+     * Returns the X coordinate.
+     * The X coordinate aligns itself with the width of a 2D collection.
+     * @return the X coordinate.
+     */
     public int getX() {
         return _x;
     }
 
-    public void setX(int x) {
-        _x = x;
+    public <T> void setAt(T[][] matrix, T value){
+        matrix[_x][_y] = value;
     }
 
+    /*
+    public void setX(int x) {
+        _x = x;
+    } */
+
+    /**
+     * Returns the Y coordinate.
+     * The Y coordinate aligns itself with the height of a 2D collection.
+     * @return the Y coordinate.
+     */
     public int getY() {
         return _y;
     }
 
+    /*
     public void setY(int y) {
         _y = y;
     }
@@ -66,13 +82,14 @@ public class Coord2D implements Tuple<Integer, Integer>{
 
     public void incX(){
         ++_x;
-    }
+    } */
 
     @Override
     public String toString() {
         return "X: " + _x + " | Y: " + _y;
     }
 
+    /*
     public void mult(int mult){
         _x *= mult;
         _y *= mult;
@@ -86,7 +103,7 @@ public class Coord2D implements Tuple<Integer, Integer>{
     public void add(@NotNull Coord2D add){
         _x += add._x;
         _y += add._y;
-    }
+    } */
 
     /**
      * Switches value of X with Y and vice versa

@@ -1,6 +1,6 @@
 package stream.streams;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class StringCollectorTest {
 
     @Test
-    void testCollect() {
+    public void testCollect() {
         String string = "test string";
 
         String collected = new CharStream(string)
