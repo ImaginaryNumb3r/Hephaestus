@@ -58,8 +58,8 @@ public class FileFilterCollection implements FileFilter {
     }
 
     /**
-     * Adds another filter to the list of filters
-     * @param filter filter
+     * Adds another doWhile to the list of filters
+     * @param filter doWhile
      */
     public void addFilter(FileFilter filter){
         _filters.add(filter);

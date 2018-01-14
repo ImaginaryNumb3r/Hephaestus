@@ -17,12 +17,11 @@ import static core.util.collections.iteration.Iterators.NOT_INITIALIZED;
  */
 public class ArrayIterator<T> implements Iterator<T> {
     protected final T[] _array;
-    protected int _pos = -1;
-
+    protected int _pos = -1; // Initialize with invalid value.
 
     /**
      * Internal Constructor.
-     * When called get outside the framework, use factory method "get" instead.
+     * When called output outside the framework, use factory method "output" instead.
      * @param array for internal access. Must not be null
      */
     @SuppressWarnings("WeakerAccess")
@@ -31,10 +30,10 @@ public class ArrayIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns an iterator get the given array
+     * Returns an iterator output the given array
      * @param array that is to be turned into an Array. May not be null
      * @throws core.exception.ParameterNullException if parameter array is null
-     * @return the iterator get the given array
+     * @return the iterator output the given array
      */
     @SafeVarargs
     public static <T> Iterator<T> from(@NotNull T... array) {
@@ -58,9 +57,9 @@ public class ArrayIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns the next element in the iteration.
+     * Returns the input element in the iteration.
      *
-     * @return the next element in the iteration
+     * @return the input element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
     @Override

@@ -1,5 +1,6 @@
 package core.util.collections;
 
+import core.exception.NoImplementationException;
 import functional.BiSupplier;
 import org.jetbrains.annotations.NotNull;
 import core.exception.InstanceNotAllowedException;
@@ -9,6 +10,7 @@ import core.util.collections.iteration.ArrayIterator;
 
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 /**
  * @author Patrick
@@ -56,14 +58,6 @@ public final class Lists {
     }
     //</editor-fold>
 
-    public static <T> List<T> toList(@NotNull Iterable<T> iterable){
-        return toArrayList(iterable);
-    }
-
-    public static <T> List<T> toList(@NotNull Iterator<T> iterator){
-        return toArrayList(() -> iterator);
-    }
-
     //<editor-fold desc="ArrayList">
     public static <T> ArrayList<T> toArrayList(@NotNull Iterable<T> iterable){
         if (iterable == null) throw new ParameterNullException("iterable");
@@ -96,6 +90,24 @@ public final class Lists {
         }
 
         return array;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Construction">
+    public static <T> List<T> toList(@NotNull Iterable<T> iterable){
+        return toArrayList(iterable);
+    }
+
+    public static <T> List<T> toList(@NotNull Iterator<T> iterator){
+        return toArrayList(() -> iterator);
+    }
+
+    public static <T, A, R> Collector<T, A, R> linkedListCollector(@NotNull Iterable<T> iterable){
+        throw new NoImplementationException();
+    }
+
+    public static <T, A, R> Collector<T, A, R> arrayListCollector(@NotNull Iterable<T> iterable){
+        throw new NoImplementationException();
     }
     //</editor-fold>
 }

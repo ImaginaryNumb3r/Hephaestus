@@ -12,6 +12,7 @@ import static core.util.HashCode.DEFAULT_MULTIPLIER_BASE;
  * @author Patrick
  * @since 24.05.2017
  */
+// TODO: Consider removal or rework so it works more intuitively.
 public class HashGenerator {
     //<editor-fold desc="Attributes">
     private static final HashMap<Class, Integer> CLASS_MAP = new HashMap<>(100);

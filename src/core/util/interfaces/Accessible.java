@@ -7,6 +7,7 @@ import java.util.function.Function;
  * @since 05.05.2017
  * Interface for accessing Arrays or other linear collections.
  */
+// TODO: Move to Collections Framework
 @FunctionalInterface
 public interface Accessible<T> extends Function<Integer, T> {
 

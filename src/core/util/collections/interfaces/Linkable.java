@@ -21,13 +21,13 @@ public interface Linkable<T, L extends Linkable<T, L>> {
     T value();
 
     /**
-     * @return  The next node to the current one. <br>
+     * @return  The input node to the current one. <br>
      *          null if no element beyond this node exists.
      */
     L next();
 
     /**
-     * @return The next element in the iteration. Throws an exception if no more elements exist
+     * @return The input element in the iteration. Throws an exception if no more elements exist
      * @throws NoSuchElementException if the iteration has no more elements
      */
     default L tryNext(){

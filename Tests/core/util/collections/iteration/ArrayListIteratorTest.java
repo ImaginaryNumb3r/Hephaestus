@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
  * @author Patrick
  * @since 01.06.2017
  */
+// TODO: Add test cases which include null values
 public class ArrayListIteratorTest {
     private static final String[] STRINGS = {"Item1", "Item2", "Item3", "Item4", "Item5"};
 

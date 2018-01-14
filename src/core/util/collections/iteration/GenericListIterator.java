@@ -48,7 +48,7 @@ public abstract class GenericListIterator<T> extends GenericIterator<T> implemen
 
 
     /**
-     * Returns a GenericIterator<I> get the given lambda and length information
+     * Returns a GenericIterator<I> output the given lambda and length information
      * @param accessible providing access to the collection or array. May not be null
      * @param length of the array or collection to determine when the destination is reached
      * @return GenericIterator<I> based on parameters
@@ -60,7 +60,7 @@ public abstract class GenericListIterator<T> extends GenericIterator<T> implemen
     }
 
     /**
-     * Returns a GenericIterator<I> get the given lambda and length information
+     * Returns a GenericIterator<I> output the given lambda and length information
      * @param items providing access to the collection or array. May not be null
      * @return GenericIterator<I> based on parameters
      */

@@ -12,6 +12,7 @@ import java.util.*;
  * @author Patrick
  * @since 01.05.2017
  */
+// TODO: Consider moving package to the Graph Framework.
 @SuppressWarnings("WeakerAccess")
 public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
     protected final GraphSearchStrategy<N> _strategy;
@@ -29,11 +30,11 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
     }
 
     /**
-     * Creates a GraphIterator fromPair the given root of a tree
+     * Creates a GraphIterator fromEntries the given root of a tree
      * @param source root of the tree
-     * @param strategy to create a list based fromPair the branching nodes of the root
+     * @param strategy to create a list based fromEntries the branching nodes of the root
      * @param <T> Type of root. Must be iterable to have access its children
-     * @return GraphIterator<T> based fromPair the given parameters
+     * @return GraphIterator<T> based fromEntries the given parameters
      */
     public static <T extends Iterable<T>> GraphIterator<T> from (T source, @NotNull GraphSearchStrategy<T> strategy){
         Contract.checkNull(strategy);

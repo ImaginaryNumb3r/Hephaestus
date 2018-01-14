@@ -6,6 +6,7 @@ import datastructure.tree.impl.AbstractMultiIdTree;
  * @author Patrick
  * @since 26.05.2017
  */
+// TODO: Move the whole package to the Graph Framework
 public class Trees {
 
     public int count(AbstractMultiIdTree tree){

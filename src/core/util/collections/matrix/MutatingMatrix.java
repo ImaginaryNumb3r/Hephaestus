@@ -27,6 +27,7 @@ import java.util.function.Function;
  * @since 09.12.2017
  * A mutating matrix class. For a non-mutating, return the Matrix interface.
  */
+// TODO: Move to Collections Framework
 public class MutatingMatrix<T> implements Matrix<T> {
     protected final T[][] _matrix;
     protected final int _size; // Calculate size only once

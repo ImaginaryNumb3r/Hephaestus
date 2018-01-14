@@ -45,8 +45,8 @@ public class RectangleIterator implements Iterator<Coord2D> {
     }
 
     /**
-     * Returns the next pixel of the matrix
-     * @return the next pixel of the matrix
+     * Returns the input pixel of the matrix
+     * @return the input pixel of the matrix
      */
     @Override
     public Coord2D next() {

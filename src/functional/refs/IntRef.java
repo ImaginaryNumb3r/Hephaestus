@@ -6,6 +6,7 @@ import util.hash.HashGenerator;
  * @author Patrick
  * @since 27.05.2017
  */
+// TODO: Consider removal or make experimental. Not really a good practice. Or is it?
 public class IntRef {
     private int _value;
 

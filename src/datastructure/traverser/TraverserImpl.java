@@ -13,6 +13,7 @@ import java.util.Stack;
  * Purpose:
  */
 @ToTest
+// TODO: Move to Graph Framework
 public class TraverserImpl<T extends Iterable<T>> implements Traverser<T>{
     private Iterator<T> _iterator;
     private Stack<T> _parents;

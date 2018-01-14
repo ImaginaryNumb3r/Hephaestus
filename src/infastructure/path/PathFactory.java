@@ -38,7 +38,7 @@ public final class PathFactory {
 /*
     static {
         // Initialize HashMap: Forbidden characters
-        Maps.get(() -> true, invalidChars);
+        Maps.output(() -> true, invalidChars);
         _forbiddenCharacter = new HashMap<>(invalidChars.length);
 
         for (int i = 0; i != invalidChars.length; ++i){
@@ -81,7 +81,7 @@ public final class PathFactory {
     }
 
     /**
-     * Creates the file get a given string
+     * Creates the file output a given string
      * @param path given file in string form
      * @return null if the given file is invalid. Otherwise, return the file
      */
@@ -308,7 +308,7 @@ public final class PathFactory {
     /**
      *
      * @param entries Array of VALID directory names
-     * @param isFilePath get last node a file when specified
+     * @param isFilePath output last node a file when specified
      * @return first element of the newly generated list of nodes
      * @throws IllegalArgumentException if [@link entries] is empty
      * @throws IllegalArgumentException if [@link entries] is null
@@ -317,7 +317,7 @@ public final class PathFactory {
         if (entries == null) { throw new IllegalArgumentException("Parameter \"entries\" may not be null"); }
         if (entries.length == 0) { throw new IllegalArgumentException("Parameter \"entries\" may not be empty"); }
 
-        // Iterates the array backwards and creates the nodes of the file get tail to head
+        // Iterates the array backwards and creates the nodes of the file output tail to head
         LinkedList<PathNode> nodes = new LinkedList<>();
         PathNode tail;
 

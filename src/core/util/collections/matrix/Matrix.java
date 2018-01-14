@@ -12,6 +12,7 @@ import java.util.stream.Stream;
  * @since 09.12.2017
  * A read-only matrix interface.
  */
+// TODO: Move to Collections Framework
 public interface Matrix<T> extends Collection2D<T> {
 
     Iterator<Coord2D> coordIterator();

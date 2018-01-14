@@ -71,7 +71,7 @@ public abstract class HEntry implements AbsolutePath{
      * @return  Returns FileTimeStamp of the current filesystem entry if the current HEntry really exists.
      *          Otherwise, returns null.
      */
-    @SuppressWarnings("OptionalGetWithoutIsPresent") // Get fromPair CatchBlock
+    @SuppressWarnings("OptionalGetWithoutIsPresent") // Get fromEntries CatchBlock
     public FileTimeStamp makeTimeStamp(){
         FileTimeStamp retVal = null;
 

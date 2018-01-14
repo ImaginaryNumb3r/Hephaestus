@@ -11,6 +11,7 @@ import java.util.function.BiFunction;
  * @since 21.05.2017
  * Interface for accessing 2D Arrays or other 2D datastructures like a Matrix.
  */
+// TODO: Move to Collections Framework
 @FunctionalInterface
 public interface Accessible2D<T> extends BiFunction<Integer, Integer, T>{
 

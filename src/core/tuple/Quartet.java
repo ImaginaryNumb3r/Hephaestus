@@ -45,6 +45,7 @@ public interface Quartet<A, B, C, D> extends Triplet<A, B, C> {
      */
     D getD();
 
+    @NotNull
     @Override
     default ListIterator<Object> listIterator(){
         return Iterators.from(getA(), getB(), getC(), getD());

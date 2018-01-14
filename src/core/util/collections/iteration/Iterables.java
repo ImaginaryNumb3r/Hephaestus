@@ -1,6 +1,9 @@
 package core.util.collections.iteration;
 
+import core.util.interfaces.IterableList;
+
 import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  * @author Patrick
@@ -12,8 +15,13 @@ public final class Iterables {
         return () -> iterator;
     }
 
+    @SafeVarargs
     public static <T> Iterable<T> from(T... objects){
         return () -> Iterators.from(objects);
+    }
+
+    public static <T> IterableList<T> fromReverse(ListIterator<T> objects){
+        return Iterables.fromReverse(objects);
     }
 
     public static <T> boolean equals(Iterable<T> iterable1, Iterable<T> iterable2){

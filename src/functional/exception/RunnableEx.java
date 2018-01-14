@@ -5,6 +5,7 @@ package functional.exception;
  * @author Patrick
  * @since 23.01.2017
  */
+// TODO: Consider removal or make experimental
 @FunctionalInterface
 public interface RunnableEx<X extends Throwable> extends Runnable{
 

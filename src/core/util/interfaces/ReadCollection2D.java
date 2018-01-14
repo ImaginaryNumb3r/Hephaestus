@@ -20,6 +20,7 @@ import java.util.stream.StreamSupport;
  * Created: 09.12.2017
  * Purpose:
  */
+// TODO: Move to Collections Framework
 public interface ReadCollection2D<T> extends Iterable<T>, Accessible2D<T> {
 
     boolean contains(T element);

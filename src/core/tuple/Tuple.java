@@ -1,5 +1,6 @@
 package core.tuple;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
@@ -10,7 +11,7 @@ import java.util.ListIterator;
  * @author Patrick
  * @since 16.11.2016
  *
- * A simple generic value pair
+ * A iteration generic value pair
  */
 public interface Tuple<A, B> extends Unit<A>{
 
@@ -35,6 +36,7 @@ public interface Tuple<A, B> extends Unit<A>{
      */
     B getB();
 
+    @NotNull
     @Override
     default ListIterator<Object> listIterator(){
         return Iterators.from(getA(), getB());

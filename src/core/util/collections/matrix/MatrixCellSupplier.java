@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
  * Created: 08.01.2018
  * Purpose:
  */
+// TODO: Move to Collections Framework
 @FunctionalInterface
 public interface MatrixCellSupplier<T> extends BiFunction<Integer, Integer, T> {
 

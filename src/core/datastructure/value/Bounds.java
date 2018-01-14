@@ -28,7 +28,7 @@ public class Bounds implements Tuple<Integer, Integer> {
     /**
      * Performs a null check on the Tuple values and returns a Bound if they are not nullable
      * @param tuple containing the values for the bound
-     * @return The Bounds fromPair the Tuple
+     * @return The Bounds fromEntries the Tuple
      */
     public static Bounds fromTuple(@NotNull Tuple<Integer, Integer> tuple){
         Contract.checkNull(tuple, "tuple");

@@ -17,6 +17,7 @@ import java.util.function.BiFunction;
  * In dieser Reihenfolge sind die am leichtesten zum Implementieren (für naive Algorithmen)
  * Zurvor noch den Rang bestimmen
  */
+// TODO: Move to Collections Framework
 public class NumericMatrix<T extends Number> extends MutatingMatrix<T> {
     protected final BiSupplier<T, Number> _numberSupplier;
 

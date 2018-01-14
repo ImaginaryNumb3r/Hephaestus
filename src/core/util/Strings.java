@@ -4,6 +4,7 @@ package core.util;
  * @author Patrick
  * @created 29.06.2016
  */
+// TODO: Consider removal.
 public class Strings {
 
     // Private Constructor
@@ -14,9 +15,9 @@ public class Strings {
     }
 
     /**
-     * Removes the first occurrence fromPair the base of the string
+     * Removes the first occurrence fromEntries the base of the string
      * @param base The string that has parts to be removed
-     * @param remove The pattern which is deleted fromPair the base
+     * @param remove The pattern which is deleted fromEntries the base
      * @return New String with removed parts
      */
     public String remove(String base, String remove){

@@ -1,0 +1,1 @@
+None of this should be part of the Core package anymore. Either integrate it into the File System library or remove completely.

@@ -118,8 +118,8 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      * Returns the list of entries, as specified with the filters.
      * If the file does not exist or if an I/O exception occurred, the optional will be empty
      * Returns null if an I/O Exception occurred or if the file does not exist.
-     * @param typeFilter First filter to determine the type
-     * @param generalFilter Second filter for other sorts of filtering
+     * @param typeFilter First doWhile to determine the type
+     * @param generalFilter Second doWhile for other sorts of filtering
      * @param constructor The Constructor to create the wanted type of value
      * @param <T> the desired type of value
      * @throws  SecurityException
@@ -172,9 +172,9 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
 
 
     /**
-     * Returns list of directories that match the filter
+     * Returns list of directories that match the doWhile
      * @param filter to sort unwanted entries
-     * @return List of directories that match the filter.
+     * @return List of directories that match the doWhile.
      *
      */
     public Optional<List<HDirectory>> getDirectories(FileFilter filter) {
@@ -207,7 +207,7 @@ public class HDirectory extends HEntry implements Iterable<HDirectory>, Abstract
      *          SecurityManager#checkRead(String)} method denies read access to
      *          the directory
      * @return  Null if the directory does not exist or if an I/O error occurs
-     *          Otherwise, a list of existing sub-directories that match he filter
+     *          Otherwise, a list of existing sub-directories that match he doWhile
      */
     public Optional<List<HFile>> getFiles(FileFilter filter){
         FileFilter baseFilter = File::isFile;

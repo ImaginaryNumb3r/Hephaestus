@@ -19,6 +19,7 @@ import java.util.stream.StreamSupport;
  * @author Patrick
  * @since 21.05.2017
  */
+// TODO: Move to Collections Framework
 public interface Collection2D<T> extends ReadCollection2D<T> {
 
     void setAt(int width, int heigth, T value);
@@ -35,7 +36,7 @@ public interface Collection2D<T> extends ReadCollection2D<T> {
                 .mapToInt(Collection::size)
                 .max();
 
-        // Make matrix fromPair collection sizes.
+        // Make matrix fromEntries collection sizes.
         int index2Size = maxSize.orElse(0); // Matrix of size 0 if no sub collections exist
         matrix = matrixConstructor.apply(collection2D.size(), index2Size);
 

@@ -7,6 +7,7 @@ import java.util.function.BiConsumer;
  * Created: 08.01.2018
  * Purpose:
  */
+// TODO: Move to Collections Framework
 @FunctionalInterface
 public interface MatrixCellConsumer extends BiConsumer<Integer, Integer> {
 

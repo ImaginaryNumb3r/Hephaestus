@@ -6,6 +6,7 @@ package functional;
  * @author Patrick
  * @created 16.07.2016
  */
+// TODO: Consider removal. You should really use the Function interface instead.
 @FunctionalInterface
 public interface BiSupplier<Return, P1> {
 

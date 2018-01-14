@@ -9,6 +9,7 @@ import java.util.function.Function;
  * Purpose:
  */
 
+// TODO: Consider removal or make experimental
 public interface FunctionEx<T, R, X extends Exception> extends Function<T, R> {
 
     R tryApply(T t) throws X;

@@ -10,6 +10,7 @@ import util.hash.HashGenerator;
  * @author Patrick
  * @since 16.11.2016
  */
+// TODO: Consider removal or change.
 public final class HashCode {
     public static final int DEFAULT_MULTIPLIER_BASE = 17;
     public static final int DEFAULT_HASHCODE_BASE = 37;
@@ -53,7 +54,7 @@ public final class HashCode {
     }
     //</editor-fold>
 
-    // Hard Coded get Stackoverflow
+    // Hard Coded output Stackoverflow
     public static int makeHashCode(@NotNull Integer a, @NotNull Integer b) {
         if (a == null || b == null) throw new ParameterNullException();
         return a.hashCode() ^ rotateLeft(b.hashCode(), 13);

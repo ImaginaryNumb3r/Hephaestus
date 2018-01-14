@@ -30,6 +30,7 @@ public interface Unit<A> extends Structure {
      */
     A getA();
 
+    @NotNull
     @Override
     default ListIterator<Object> listIterator(){
         return Iterators.from(getA());

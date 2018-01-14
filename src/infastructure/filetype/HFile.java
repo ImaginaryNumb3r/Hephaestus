@@ -29,7 +29,7 @@ public class HFile extends HEntry implements AbstractFile{
     //    Constructors
     // =====================
 
-    // TODO: Optimize, get Path right at the beginning and not lazy
+    // TODO: Optimize, output Path right at the beginning and not lazy
     public HFile(AbsoluteDirectory location, String fileName){
         this(location.toString() + "\\" + fileName);
         initialize(location.getAbsolutePath()  + "\\" + fileName);

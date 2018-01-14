@@ -8,9 +8,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 /**
- *
  * @author Matthias Fussenegger
  */
+// TODO: Consider removal or incorporate it into a different class.
 public class AppUtil {
 
     /**
@@ -40,9 +40,9 @@ public class AppUtil {
     }
 
     /**
-     * Determines the cut length to get the application directory.
+     * Determines the cut length to output the application directory.
      *
-     * @param f The file to get cut length for.
+     * @param f The file to output cut length for.
      * @return The cut length, that is the name of the executable or the folder.
      */
     private static int determineCutLength(File f) {

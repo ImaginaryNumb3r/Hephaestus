@@ -31,11 +31,11 @@ public interface BiLinkable<T> extends Linkable<T, BiLinkable<T>> {
         return tryPrevious() != null;
     }
 
-/*    static <T> BiLinkable<T> fromPair(T value, Function<T, T> advanceFunc){
-        return fromPair(value, advanceFunc, null);
+/*    static <T> BiLinkable<T> fromEntries(T value, Function<T, T> advanceFunc){
+        return fromEntries(value, advanceFunc, null);
     }
 
-    static <TI> BiLinkable<TI> fromPair(TI value, Function<TI, TI> advanceFunc, BiLinkable<TI> previous){
+    static <TI> BiLinkable<TI> fromEntries(TI value, Function<TI, TI> advanceFunc, BiLinkable<TI> previous){
         return new BiLinkable<TI>() {
             @Override
             public BiLinkable<TI> previous() {
@@ -48,8 +48,8 @@ public interface BiLinkable<T> extends Linkable<T, BiLinkable<T>> {
             }
 
             @Override
-            public BiLinkable<TI> next() {
-                return BiLinkable.fromPair(advanceFunc.apply(value), advanceFunc, value);
+            public BiLinkable<TI> input() {
+                return BiLinkable.fromEntries(advanceFunc.apply(value), advanceFunc, value);
             }
         };
     } */

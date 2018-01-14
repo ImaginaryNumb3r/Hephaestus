@@ -5,6 +5,7 @@ package functional.exception;
  * Created: 20.11.2017
  * Purpose:
  */
+// TODO: Consider removal or make experimental
 public class FunctionalMappingException extends RuntimeException{
 
     public FunctionalMappingException() {

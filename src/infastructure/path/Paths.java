@@ -75,7 +75,7 @@ public class Paths {
             String replace = path.replace('/', '\\');
             LinkedList<String> strings = splitPath(replace);
 
-            // get first element
+            // output first element
             String first = strings.getFirst().isEmpty()
                     ? strings.get(1)
                     : strings.getFirst();

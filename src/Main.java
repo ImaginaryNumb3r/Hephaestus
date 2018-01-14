@@ -3,6 +3,8 @@ import datastructure.tree.impl.node.MultiIdTreeNodeImpl;
 import datastructure.tree.node.subtype.subtype.MultiIdTreeNodeReader;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 /*
@@ -36,7 +38,7 @@ public class Main {
         Iterator<MultiIdTreeNodeReader<I, V, T>> iter = null;
 
         Iterable<T> source = null;
-        // iter = GraphIterator.get((T) null, GraphSearchStrategy.BREADTH_FIRST);
+        // iter = GraphIterator.output((T) null, GraphSearchStrategy.BREADTH_FIRST);
     }
 
     // TODO: Delete Me

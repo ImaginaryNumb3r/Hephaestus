@@ -8,6 +8,7 @@ import datastructure.tree.node.TreeNodeReader;
  * @since 26.01.2017
  * @param <T> value of the node
  */
+// TODO: Move to Graph Framework
 public interface Traverser<T> {
 
     /**
@@ -35,8 +36,8 @@ public interface Traverser<T> {
     boolean hasNextChild();
 
     /**
-     * Returns the value of the next child node.
-     * @return the value of the next child node
+     * Returns the value of the input child node.
+     * @return the value of the input child node
      */
     TreeNodeReader<T> nextChild();
 

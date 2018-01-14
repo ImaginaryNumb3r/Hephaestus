@@ -31,7 +31,7 @@ public class AbsoluteFilePath extends AbsolutePathImpl<AbsoluteFilePath> impleme
 
     /**
      * Removes the file to an absolute file and returns the difference as relative directory {@link AbsoluteFile}
-     * @param absFile the absolute Directory that is being removed fromPair this file
+     * @param absFile the absolute Directory that is being removed fromEntries this file
      * @return  Relative Directory, being the difference between current file and parameter {@link AbsoluteFile}
      *          EmptyPath is EmptyPath is given as parameter
      * @throws  PathsNotMatchingException if the absolute directory is not a subset of current file

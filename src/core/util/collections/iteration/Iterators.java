@@ -1,18 +1,15 @@
 package core.util.collections.iteration;
 
-import core.util.collections.interfaces.BiLinkable;
-import core.util.collections.interfaces.BiLinkableImpl;
-import org.jetbrains.annotations.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.util.annotations.ToTest;
+import core.util.collections.interfaces.BiLinkableImpl;
 import core.util.contracts.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.function.Function;
-
-import static core.datastructure.Lazy.lazily;
 
 /**
  * @author Patrick
@@ -20,7 +17,7 @@ import static core.datastructure.Lazy.lazily;
  */
 @SuppressWarnings("WeakerAccess")
 public final class Iterators {
-    static final int NOT_INITIALIZED = -1;
+    static final int NOT_INITIALIZED = -1; // Package wide private constant for the implementation of iterators.
 
     /**
      * @throws InstanceNotAllowedException Cannot be instantiated
@@ -29,16 +26,36 @@ public final class Iterators {
         throw new InstanceNotAllowedException(getClass());
     }
 
+    //<editor-fold desc="Utility">
     public static <T> ListIterator<T> empty() {
         return new EmptyIterator<>();
     }
 
+    public static <T> ListIterator<T> reverse(@NotNull ListIterator<T> listIterator) {
+        return new ReverseListIterator<>(listIterator);
+    }
+    //</editor-fold>
+
     //<editor-fold desc="Iterator Construction">
+
+    public static <T, R> Iterator<R> map(Iterator<T> iterator, Function<T, R> mapper){
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return iterator.hasNext();
+            }
+
+            @Override
+            public R next() {
+                return mapper.apply(iterator.next());
+            }
+        };
+    }
     /**
-     * Returns an iterator get the given array
+     * Returns an iterator output the given array
      * @param array that is to be turned into an Array. May not be null
      * @throws core.exception.ParameterNullException if parameter array is null
-     * @return the iterator get the given array
+     * @return the iterator output the given array
      */
     public static <T> ListIterator<T> from(T... array){
         Contract.checkNull(array);
@@ -51,7 +68,7 @@ public final class Iterators {
     }
 
     public static <T> ListIterator<T> from(T startValue, Function<T, T> advanceFunction){
-//        BiLinkable<T> linkable = BiLinkable.fromPair(startValue, advanceFunction, null);
+//        BiLinkable<T> linkable = BiLinkable.fromEntries(startValue, advanceFunction, null);
         BiLinkableImpl<T> linkable = new BiLinkableImpl<>(startValue, advanceFunction, null);
         return new NodeListIterator.NodeListIteratorImpl<>(linkable);
     }
@@ -127,7 +144,7 @@ public final class Iterators {
         }
         else {
             do {
-                // Both iterators must have next elements, otherwise NoSuchElement Ex would be thrown.
+                // Both iterators must have input elements, otherwise NoSuchElement Ex would be thrown.
                 equals = iter1.hasNext() == iter2.hasNext();
 
                 // Fails if iterators are of uneven length or if comparison fails

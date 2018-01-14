@@ -15,6 +15,7 @@ import static core.util.HashCode.permutate;
  *
  * Mutable Coordination class for 2D surfaces
  */
+// TODO: Move to Collections Framework
 public class Coord2D implements Tuple<Integer, Integer>{
     private int _x;
     private int _y;

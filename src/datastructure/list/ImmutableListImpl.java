@@ -1,11 +1,14 @@
 package datastructure.list;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
 /**
  * @author Patrick
  * @since 26.05.2017
  */
+// TODO: Move to Collections Framework
 public class ImmutableListImpl<T> implements ImmutableList<T> {
     private final List<T> _collection;
 
@@ -42,6 +45,7 @@ public class ImmutableListImpl<T> implements ImmutableList<T> {
         return _collection.get(index);
     }
 
+    @NotNull
     @Override
     public ListIterator<T> listIterator() {
         return _collection.listIterator();

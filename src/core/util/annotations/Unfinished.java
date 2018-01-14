@@ -1,7 +1,8 @@
 package core.util.annotations;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.*;
 
 /**
  * @author Patrick
@@ -9,6 +10,6 @@ import java.lang.annotation.Target;
  *
  * This class is not yet finished and should not be used in productive systems!
  */
-@Target(ElementType.TYPE)
+@Target(value={CONSTRUCTOR, METHOD, TYPE})
 public @interface Unfinished {
 }

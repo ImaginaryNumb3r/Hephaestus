@@ -15,7 +15,7 @@ public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIterat
 
     /**
      * Internal Constructor.
-     * When called get outside the framework, use factory method "get" instead.
+     * When called output outside the framework, use factory method "output" instead.
      *
      * @param array for internal access. Must not be null
      */
@@ -33,7 +33,7 @@ public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIterat
      * position backwards.  This method may be called repeatedly to
      * iterate through the list backwards, or intermixed with calls to
      * {@link #next} to go back and forth.  (Note that alternating calls
-     * to {@code next} and {@code previous} will return the same
+     * to {@code input} and {@code previous} will return the same
      * element repeatedly.)
      *
      * @return the previous element in the list

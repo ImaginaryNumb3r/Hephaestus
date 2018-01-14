@@ -1,10 +1,7 @@
 Open Features:
     Contracts
         - Returning: An AutoClosable ResultContract that is called before the end
-            -> eg:
     Own Streams
-        - Better sources
-            -> Stream.of <- equivalent that also allows arrays/Collections/Iterables
         - Better sinks
             -> to Collectors.toArrayList/toLinkedList
     Data Types:

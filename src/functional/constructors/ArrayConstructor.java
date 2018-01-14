@@ -8,6 +8,7 @@ import functional.BiSupplier;
  * Purpose:
  */
 
+// TODO: Move to Collection Framework
 @FunctionalInterface
 public interface ArrayConstructor<T> extends BiSupplier<T[], Integer> {
 

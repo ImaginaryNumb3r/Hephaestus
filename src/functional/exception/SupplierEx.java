@@ -6,6 +6,7 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 29.11.2016
  */
+// TODO: Consider removal or make experimental
 @FunctionalInterface
 public interface SupplierEx<T, X extends Exception> extends Supplier<T> {
 

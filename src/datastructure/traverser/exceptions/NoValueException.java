@@ -6,6 +6,7 @@ package datastructure.traverser.exceptions;
  *
  * Is thrown if a value in a tree does not exist
  */
+// TODO: Move to Collections Framework
 public class NoValueException extends RuntimeException {
 
     public NoValueException() {

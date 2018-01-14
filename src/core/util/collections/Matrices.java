@@ -15,6 +15,7 @@ import java.util.stream.Stream;
  * @since 07.01.2018
  * @noinspection WeakerAccess
  */
+// TODO: Move to Collections Framework
 public final class Matrices {
 
     /**

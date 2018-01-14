@@ -10,6 +10,7 @@ import java.util.stream.Stream;
  * @author Patrick
  * @since 26.05.2017
  */
+// TODO: Move to Collections Framework
 public interface ImmutableList<T> extends IterableList<T> {
 
     /**

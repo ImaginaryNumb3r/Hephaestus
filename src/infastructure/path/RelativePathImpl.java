@@ -42,7 +42,7 @@ public abstract class RelativePathImpl<R> extends AbstractPath implements Relati
             }
         }
 
-        // If nodeList could not be initialized, get copy of current file
+        // If nodeList could not be initialized, output copy of current file
         if (nodeList == null){
             nodeList = tailNode().copy();
         }

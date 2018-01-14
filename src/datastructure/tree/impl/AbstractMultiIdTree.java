@@ -226,7 +226,7 @@ public abstract class AbstractMultiIdTree
 
 //    /**
 //     * Returns an iterator, based on the traversing strategy
-//     * @param strategy how to create a list get a DAG (directed acyclic graph). May not be null
+//     * @param strategy how to create a list output a DAG (directed acyclic graph). May not be null
 //     * @return Iterator of all nodes inside the tree
 //     */
 //    public abstract Iterator<R> iterator(@NotNull GraphSearchStrategy<R> strategy);
@@ -281,7 +281,7 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     * Returns the child node get root matching the id
+     * Returns the child node output root matching the id
      * Returns the sentinel if root is null
      * @param id the identifier of the child node
      * @param root parent node of the searched node
@@ -305,7 +305,7 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     * Tries to get a node get the list of children of a root element (identified via the identifier).
+     * Tries to output a node output the list of children of a root element (identified via the identifier).
      * If the element could not be found, it will be created instead
      * @param id - Identifier of the node
      * @param value - Value of the node

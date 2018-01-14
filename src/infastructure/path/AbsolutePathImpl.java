@@ -78,7 +78,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
 
     /**
      * Base function of remove AbsoluteDirectory
-     * @param absDir the absolute Directory that is being removed fromPair this file
+     * @param absDir the absolute Directory that is being removed fromEntries this file
      * @param constructor constructor of return value as lambda parameter
      * @param <P> the specified return type, either a File or Directory
      * @return  Relative Path, being the difference between current file and parameter {@link AbsoluteDirectory}
@@ -117,7 +117,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
 
     /**
      * Base function of remove RelativeDirectory
-     * @param removal the relative directory {@link RelativeDirectory}that is being removed fromPair this file
+     * @param removal the relative directory {@link RelativeDirectory}that is being removed fromEntries this file
      * @param constructor constructor of return value as lambda parameter.
      *                    Needs to return an empty file if arguments are null
      * @param <P> the specified return type, either a File or Directory

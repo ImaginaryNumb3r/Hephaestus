@@ -29,7 +29,7 @@ public class GenericIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns a GenericIterator<T> get the given lambda and length information
+     * Returns a GenericIterator<T> output the given lambda and length information
      * @param accessible providing access to the collection or array. May not be null
      * @param length of the array or collection to determine when the destination is reached
      * @return GenericIterator<T> based on parameters
@@ -40,7 +40,7 @@ public class GenericIterator<T> implements Iterator<T> {
         return new GenericIterator<>(accessible, length);
     }
     /**
-     * Returns a GenericIterator<T> get the given lambda and length information
+     * Returns a GenericIterator<T> output the given lambda and length information
      * @param items providing access to the collection or array. May not be null
      * @return GenericIterator<T> based on parameters
      */

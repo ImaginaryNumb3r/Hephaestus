@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Patrick
  * @since 19.11.2016
  */
-public interface KeyPair<Key, Val> extends Tuple<Key, Val> {
+public interface KeyPair<Key, Val> extends Tuple<Key, Val>{
 
     static <Key, Val> KeyPair from (@NotNull Tuple<Key, Val> tuple) {
         Contract.checkNull(tuple, "tuple");
@@ -22,7 +22,6 @@ public interface KeyPair<Key, Val> extends Tuple<Key, Val> {
     }
 
     /**
-     * Returns the key of the KeyPair
      * @return the key of the KeyPair
      */
     default Key getKey(){
@@ -30,7 +29,6 @@ public interface KeyPair<Key, Val> extends Tuple<Key, Val> {
     }
 
     /**
-     * Returns the value of the KeyPair
      * @return the value of the KeyPair
      */
     default Val getValue(){
@@ -39,7 +37,7 @@ public interface KeyPair<Key, Val> extends Tuple<Key, Val> {
 
     /**
      * Puts the value into the map, at the position of the given key.
-     * @param map that has the key-value pair to be inserted
+     * @param map that has the key-value pair to be inserted.
      */
     void putInto(@NotNull Map<Key, Val> map);
 
@@ -58,4 +56,6 @@ public interface KeyPair<Key, Val> extends Tuple<Key, Val> {
     @Deprecated
     @Override
     Val getB();
+
+
 }

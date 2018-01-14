@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 /**
  * @author Patrick
  * @since 05.05.2017
- * @param <R> The readable class, accessed fromPair outside
- * A tree that provides access fromPair outside the class
+ * @param <R> The readable class, accessed fromEntries outside
+ * A tree that provides access fromEntries outside the class
  *
  */
 public interface ReadableTree<R> {

@@ -13,6 +13,7 @@ import java.util.Iterator;
  * @author Patrick
  * @since 21.05.2017
  */
+// TODO: Move to Collections Framework
 public class Generic2DIterator<T> implements Iterator<T> {
     private final Accessible2D<T> _accessible;
     private final int _width;

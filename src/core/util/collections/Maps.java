@@ -2,6 +2,7 @@ package core.util.collections;
 
 import core.exception.NoImplementationException;
 import core.util.annotations.ToTest;
+import core.util.collections.iteration.Iterables;
 import org.jetbrains.annotations.NotNull;
 import core.exception.InstanceNotAllowedException;
 import core.tuple.Tuple;
@@ -101,6 +102,26 @@ public final class Maps {
         return map;
     }
     //</editor-fold>
+
+
+    //<editor-fold desc="Map Entries">
+    public static <K, V, T extends Map.Entry<K, V>> HashMap<K, V> fromEntries(@NotNull Iterable<T> iterable){
+        return fromEntries(iterable, 16 /* Default load factor */);
+    }
+
+    public static <K, V, T extends Map.Entry<K, V>> HashMap<K, V> fromEntries(@NotNull Collection<T> collection){
+        return fromEntries(collection, collection.size());
+    }
+
+    public static <K, V, T extends Map.Entry<K, V>> HashMap<K, V> fromEntries(@NotNull Iterable<T> iterable, int size){
+        HashMap<K, V> map = new HashMap<>(size);
+        for (T entry : iterable) {
+            K key = entry.getKey();
+            V value = entry.getValue();
+            map.put(key, value);
+        }
+        return map;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Set Oriented Joins">
@@ -168,31 +189,59 @@ public final class Maps {
         return disjoint;
     }
 
-    public static <K, V> Map<K, V> mappedInnerJoin(Map<K, V> primary, Map<K, V> secondary){
-        HashMap<K, V> intersection = new HashMap<>();
-
-        // Add all secondary values so they get overridden by equal values from the primary map.
-        customJoin(secondary, primary, value -> !secondary.containsKey(value), intersection::put);
-        customJoin(primary, secondary, value -> !primary.containsKey(value), intersection::put);
-
-        return intersection;
+    @SafeVarargs
+    public static <K, V> Set<V> innerJoinAll(Map<K, V>... maps){
+        return innerJoinAll(Iterables.from(maps));
     }
 
-    public static <K, V> Map<K, V> mappedFullJoin(Map<K, V> primary, Map<K, V> secondary){
-        HashMap<K, V> combined = new HashMap<>(Math.max(primary.size(), secondary.size()));
-
-        // Add all secondary values so they get overridden by equal values from the primary map.
-        combined.putAll(secondary);
-        combined.putAll(primary);
-
-        return combined;
-    }
-
-    public static <K, V> Map<K, V> innerJoinAll(Map<K, V>... maps){
+    @ToTest // TODO: Test
+    public static <K, V> Set<V> innerJoinAll(Iterable<Map<K, V>> maps){
         throw new NoImplementationException();
     }
 
+    @ToTest // TODO: Test
+    public static <K, V> Set<V> innerJoinAll(ListIterator<Map<K, V>> keyIterator){
+        if (!keyIterator.hasNext()){
+            return Collections.emptySet();
+        }
+
+        // Step 1: create a set of all keys shared among all maps.
+        Set<K> keySet = new HashSet<>(keyIterator.next().keySet());
+        while (keyIterator.hasNext() && !keySet.isEmpty()) {
+            Map<K, V> cur = keyIterator.next();
+            keySet = Sets.intersect(keySet, cur.keySet());
+        }
+
+        // Step 2: For each shared key, add the values of the maps sharing the key.
+        Set<V> valueSet = new HashSet<>(keySet.size());
+
+        for (K key : keySet) {
+            for (Map<K, V> map : Iterables.fromReverse(keyIterator)) {
+                if (map.containsKey(key)){
+                    valueSet.add(map.get(key));
+                }
+            }
+        }
+
+        return valueSet;
+    }
+
+    /**
+     * @param maps the list of maps whose values with common keys will be returned.
+     * @return All values that are mapped to the set of shared keys among all maps.
+     */
+    @SafeVarargs
     public static <K, V> Map<K, V> outerJoinAll(Map<K, V>... maps){
+        throw new NoImplementationException();
+    }
+
+    /**
+     * @apiNote This method is not thread safe!<br>
+     *          It must be ensured that the list of maps is not modified until the method has finished.
+     * @param maps the list of maps whose values with common keys will be returned.
+     * @return All values that are mapped to the set of shared keys among all maps.
+     */
+    public static <K, V> Map<K, V> outerJoinAll(Iterable<Map<K, V>> maps){
         throw new NoImplementationException();
     }
 

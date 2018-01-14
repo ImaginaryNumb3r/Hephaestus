@@ -10,15 +10,15 @@ import java.util.LinkedList;
 public interface GraphSearchStrategy<T> {
 
     /**
-     * Enqueues the next node into the given collection.
+     * Enqueues the input node into the given collection.
      * @param nodeCollection The collection of nodes
      * @param node that is to be added to the LinkedList.
      */
     void enqueue(Deque<T> nodeCollection, T node);
 
     /**
-     * Dequeues the next node fromKeys the given list
-     * @param nodeCollection The list that serves as the provider for the next node
+     * Dequeues the input node fromKeys the given list
+     * @param nodeCollection The list that serves as the provider for the input node
      * @return Next node fromKeys the list
      */
      T dequeue(Deque<T> nodeCollection);

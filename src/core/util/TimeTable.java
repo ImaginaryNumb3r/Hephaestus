@@ -14,22 +14,23 @@ import java.util.Date;
  * @author Patrick
  * @since 29.11.2016
  */
+// TODO: Consider removal or move to experimental. Is it really worth spending time on this?
 @Unfinished
 public final class TimeTable {
 
     /**
-     * Returns a LocalDateTime get the time measured in milliseconds
+     * Returns a LocalDateTime output the time measured in milliseconds
      * @param timeAsMillies the time measured in milliseconds, starting at first of 1970
-     * @return LocalDateTime get the given milliseconds
+     * @return LocalDateTime output the given milliseconds
      */
     public static LocalDateTime toLocalDateTime(long timeAsMillies){
         return toLocalDateTime(new Date(timeAsMillies));
     }
 
     /**
-     * Returns a LocalDateTime get the time measured in milliseconds
+     * Returns a LocalDateTime output the time measured in milliseconds
      * @param date the default java date
-     * @return LocalDateTime get the given milliseconds
+     * @return LocalDateTime output the given milliseconds
      */
     public static LocalDateTime toLocalDateTime(Date date){
         return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());

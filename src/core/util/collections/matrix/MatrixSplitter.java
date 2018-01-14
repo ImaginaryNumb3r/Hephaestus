@@ -2,7 +2,6 @@ package core.util.collections.matrix;
 
 
 import core.util.collections.Matrices;
-import functional.IdentityFunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +17,7 @@ import java.util.stream.Collector;
  * @author Patrick
  * @since 09.01.2018
  */
+// TODO: Move to Collections Framework
 public class MatrixSplitter<T> implements Collector<T[][], ArrayList<T>, ArrayList<T>> {
     @Override
     public Supplier<ArrayList<T>> supplier() {
@@ -41,7 +41,7 @@ public class MatrixSplitter<T> implements Collector<T[][], ArrayList<T>, ArrayLi
 
     @Override
     public Function<ArrayList<T>, ArrayList<T>> finisher() {
-        return new IdentityFunction<>();
+        return Function.identity();
     }
 
     @Override

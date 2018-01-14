@@ -12,11 +12,12 @@ import datastructure.tree.node.subtype.IdTreeNodeReader;
  *
  * A Traverser for nodes of a Tree where each node has its own identifier on top of a value
  */
+// TODO: Move to Graph Framework
 public interface IdTraverser<I, V> extends Traverser<V>  {
 
     /**
-     * Returns the value of the next child node.
-     * @return the value of the next child node
+     * Returns the value of the input child node.
+     * @return the value of the input child node
      */
     IdTreeNodeReader<I, V> nextChild();
 

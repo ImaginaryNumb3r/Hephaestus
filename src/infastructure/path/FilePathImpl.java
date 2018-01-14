@@ -59,10 +59,10 @@ class FilePathImpl  {
     /**
      * Removes the last part of the base matching the removal string
      * @param base full base string
-     * @param removal the appendix to be removed fromPair the base string
+     * @param removal the appendix to be removed fromEntries the base string
      * @param constructor the instance creating the return value
      * @param <T> Either a relative file file or an absolute file file
-     * @return New shortened file, consisting of the base file without the part fromPair the removal file
+     * @return New shortened file, consisting of the base file without the part fromEntries the removal file
      * @throws PathsNotMatchingException
      * @throws EmptyPathException
      */

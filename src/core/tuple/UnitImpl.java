@@ -3,6 +3,7 @@ package core.tuple;
 import core.datastructure.Lazy;
 import core.util.HashCode;
 import core.util.interfaces.IterableList;
+import org.jetbrains.annotations.NotNull;
 import util.hash.HashGenerator;
 
 import java.io.Serializable;
@@ -80,11 +81,13 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
                 .toHashCode();
     }
 
+    @NotNull
     @Override
     public ListIterator<Object> iterator() {
         return _values.get().listIterator();
     }
 
+    @NotNull
     @Override
     public ListIterator<Object> listIterator() {
         return iterator();
