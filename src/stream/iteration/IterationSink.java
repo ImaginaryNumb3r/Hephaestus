@@ -9,7 +9,7 @@ import java.util.function.Consumer;
  * @author Patrick
  * @since 14.01.2018
  */
-public abstract class IterationSink<T> implements Consumer<T>, Runnable {
+abstract class IterationSink<T> implements Consumer<T>, Runnable {
     private final Iterator<T> _aggregator;
 
     public IterationSink(Iterator<T> aggregator) {

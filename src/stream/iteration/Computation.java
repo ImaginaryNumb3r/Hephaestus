@@ -4,7 +4,6 @@ import functional.IterationPredicate;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 /**
@@ -15,7 +14,7 @@ import java.util.function.Predicate;
  * @param <T> The output of the computation.
  *              Note that the Computation has no "in" type parameter because that will be user defined behaviour.
  */
-public interface Computation<T> {
+interface Computation<T> {
 
     <R> Iteration<R> map(Function<T, R> mapper);
 
@@ -36,8 +35,22 @@ public interface Computation<T> {
      */
     Iteration<T> doWhile(IterationPredicate<T> filter);
 
+    /**
+     * Stops the iteration until it has reached the index of the provided parameter.
+     * For example, an index of 1 would only return the first element (with index 0)
+     * @param end Index of the item where the iteration will stop.
+     */
     Iteration<T> start(int end);
 
+    /**
+     * Drops items of the iteration until it has reached the index of the provided parameter.
+     * For example, an index of 1 would only return the first element (with index 0)
+     * @param end Index of the item where the iteration will stop.
+     * @throws
+     */
     Iteration<T> limit(int end);
 
+    Iteration<T> filter(Predicate<T> predicate);
+
+    Iteration<T> filter(IterationPredicate<T> predicate);
 }

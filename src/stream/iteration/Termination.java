@@ -36,6 +36,8 @@ public interface Termination<T> {
 
     <R, A> R collect(Collector<? super T, A, R> collector);
 
+    <R> R collect(LinearCollector<T, R> collector);
+
     T min(Comparator<? super T> comparator);
 
     T max(Comparator<? super T> comparator);

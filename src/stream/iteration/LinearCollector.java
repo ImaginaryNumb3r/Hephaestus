@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.function.*;
 import java.util.stream.Collector;
 
+import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
+
 /**
  * @author Patrick
  * @since 14.01.2018
@@ -30,7 +32,7 @@ public interface LinearCollector<T, R> extends Collector<T, R, R> {
 
     @Override
     default Set<Characteristics> characteristics() {
-        return Set.of(Characteristics.IDENTITY_FINISH);
+        return Set.of(IDENTITY_FINISH);
     }
 
     static <T> LinearCollector<T, ArrayList<T>> arrayList(){
@@ -51,6 +53,34 @@ public interface LinearCollector<T, R> extends Collector<T, R, R> {
                     left.addAll(right);
                     return left;
                 };
+            }
+        };
+    }
+
+    static <T, R> LinearCollector<T, R> of(Collector<? super T, R, R> collector) {
+        if (!collector.characteristics().contains(IDENTITY_FINISH)){
+            throw new IllegalArgumentException("For Iteration API, collectors are required to be identity finisher!");
+        }
+
+        return new LinearCollector<>() {
+            @Override
+            public Supplier<R> supplier() {
+                return collector.supplier();
+            }
+
+            @Override
+            public BiConsumer<R, T> accumulator() {
+                return (left, right) -> collector.accumulator().accept(left, right);
+            }
+
+            @Override
+            public BinaryOperator<R> combiner() {
+                return collector.combiner();
+            }
+
+            @Override
+            public Function<R, R> finisher() {
+                return last -> collector.finisher().apply(last);
             }
         };
     }

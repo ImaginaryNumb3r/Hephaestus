@@ -6,7 +6,7 @@ import java.util.function.Predicate;
  * @author Patrick
  * @since 14.01.2018
  */
-public interface IterationPredicate<T> extends Predicate<T> {
+public interface IterationPredicate<T> {
 
     /**
      * Evaluates this predicate on the given argument.
@@ -17,4 +17,16 @@ public interface IterationPredicate<T> extends Predicate<T> {
      * otherwise {@code false}
      */
     boolean test(T element, long index);
+
+    /**
+     * Returns a predicate that represents the logical negation of this
+     * predicate.
+     *
+     * @return a predicate that represents the logical negation of this
+     * predicate
+     */
+    default IterationPredicate<T> negate() {
+        return (element, index) -> !test(element, index);
+    }
+
 }

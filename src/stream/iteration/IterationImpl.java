@@ -1,42 +1,92 @@
 package stream.iteration;
 
+import core.util.contracts.Contract;
 import functional.IterationPredicate;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.*;
 import java.util.stream.Collector;
 
+import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
+
 /**
  * @author Patrick
  * @since 14.01.2018
  */
-public class IterationImpl<T> implements Iteration<T> {
+class IterationImpl<T> implements Iteration<T> {
     private final Iterator<T> _aggregator;
 
     public IterationImpl(Iterator<T> aggregator) {
         _aggregator = aggregator;
     }
 
+    //<editor-fold desc="Computation Method">
     @Override
     public <R> Iteration<R> map(Function<T, R> mapper) {
-        IterationSource<T, R> source = IterationSource.of(_aggregator, mapper);
-        return new IterationImpl<>(source.sinkIterator());
+        MappingOps<T, R> mappingOps = new MappingOps<>(_aggregator, mapper);
+        return Iteration.of(mappingOps.sinkIterator());
     }
 
     @Override
     public <R> Iteration<R> mapIndices(BiFunction<T, Integer, R> mapper) {
-        // TODO: Make own object for every iteration. Otherwise it won't end well...
-        IterationSource<T, R> source = IterationSource.of(_aggregator, mapper);
-        return new IterationImpl<>(source.sinkIterator());
+        MappingOps<T, R> mappingOps = new MappingOps<>(_aggregator, mapper);
+        return Iteration.of(mappingOps.sinkIterator());
     }
 
     @Override
-    public boolean executed() {
-        return false;
+    public Iteration<T> start(int start) {
+        Contract.checkNegative(start, "start");
+
+        LongPredicate predicate = index -> index >= start;
+        FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
+        return Iteration.of(filterOps.sinkIterator());
     }
 
+    @Override
+    public Iteration<T> limit(int end) {
+        Contract.checkNegative(end, "end");
+
+        LongPredicate predicate = index -> index <= end;
+        FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
+        return Iteration.of(filterOps.sinkIterator());
+    }
+
+    @Override
+    public Iteration<T> doWhile(IterationPredicate<T> filter) {
+        Contract.checkNull(filter, "filter");
+
+        WhileOps<T> filterOps = new WhileOps<>(_aggregator, filter, true);
+        return Iteration.of(filterOps.sinkIterator());    }
+
+    @Override
+    public Iteration<T> doWhile(Predicate<T> filter) {
+        Contract.checkNull(filter, "filter");
+
+        WhileOps<T> filterOps = new WhileOps<>(_aggregator, filter, true);
+        return Iteration.of(filterOps.sinkIterator());
+    }
+
+    @Override
+    public Iteration<T> filter(Predicate<T> predicate) {
+        Contract.checkNull(predicate, "end");
+
+        FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
+        return Iteration.of(filterOps.sinkIterator());
+    }
+
+    @Override
+    public Iteration<T> filter(IterationPredicate<T> predicate) {
+        Contract.checkNull(predicate, "end");
+
+        FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
+        return Iteration.of(filterOps.sinkIterator());
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Termination Operation">
     @Override
     public Iteration<T> toDistinct() {
         return null;
@@ -74,7 +124,21 @@ public class IterationImpl<T> implements Iteration<T> {
 
     @Override
     public <R, A> R collect(Collector<? super T, A, R> collector) {
-        return null;
+        // Get collection from collector.
+        A intermediate = collector.supplier().get();
+
+        // Add all values to collection.
+        _aggregator.forEachRemaining(item -> collector.accumulator().accept(intermediate, item));
+
+        // If the intermediate collection is the expected end result, cast intermediate. Otherwise call finisher.
+        return !collector.characteristics().contains(IDENTITY_FINISH)
+                ? collector.finisher().apply(intermediate)
+                : (R) intermediate;
+
+    }
+
+    public <R> R collect(LinearCollector<T, R> collector) {
+        return collect((Collector<T, R, R>) collector);
     }
 
     @Override
@@ -111,24 +175,10 @@ public class IterationImpl<T> implements Iteration<T> {
     public Optional<T> first() {
         return null;
     }
+    //</editor-fold>
 
     @Override
-    public Iteration<T> doWhile(Predicate<T> filter) {
-        return null;
-    }
-
-    @Override
-    public Iteration<T> doWhile(IterationPredicate<T> filter) {
-        return null;
-    }
-
-    @Override
-    public Iteration<T> start(int end) {
-        return null;
-    }
-
-    @Override
-    public Iteration<T> limit(int end) {
-        return null;
+    public boolean executed() {
+        return !_aggregator.hasNext();
     }
 }
