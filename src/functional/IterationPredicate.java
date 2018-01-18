@@ -13,7 +13,7 @@ public interface IterationPredicate<T> {
      *
      * @param element the element in the iteration
      * @param index the index of the element
-     * @return {@code true} if the input argument matches the predicate,
+     * @return {@code true} if the aggregate argument matches the predicate,
      * otherwise {@code false}
      */
     boolean test(T element, long index);

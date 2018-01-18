@@ -1,5 +1,6 @@
 package stream.iteration;
 
+import core.util.collections.iteration.Iterators;
 import functional.IterationPredicate;
 
 import java.util.Iterator;
@@ -30,18 +31,13 @@ final class WhileOps<T> extends FilterOps<T> {
 
     @Override
     protected boolean test(T item) {
-        // Take item by default until a condition is satisfied.
-        boolean takeItem = _startAccepting;
-
         // If iteration is ongoing, check if the predicate is violated.
         if (!_stopIteration) {
             // Predicate must conform to the initial boolean acceptance value.
-            _stopIteration = takeItem != _predicate.test(item, _index);
-        } else {
-            // Once the iteration is stopped no more values may pass this the test.
-            takeItem = false;
+            _stopIteration = _startAccepting != _predicate.test(item, _cursorPos);
         }
 
-        return takeItem;
+        // Take all items as long as the iteration is running.
+        return !_stopIteration;
     }
 }

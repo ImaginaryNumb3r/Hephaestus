@@ -48,7 +48,7 @@ public interface BiLinkable<T> extends Linkable<T, BiLinkable<T>> {
             }
 
             @Override
-            public BiLinkable<TI> input() {
+            public BiLinkable<TI> aggregate() {
                 return BiLinkable.fromEntries(advanceFunc.apply(value), advanceFunc, value);
             }
         };

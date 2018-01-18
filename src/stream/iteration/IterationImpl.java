@@ -3,7 +3,6 @@ package stream.iteration;
 import core.util.contracts.Contract;
 import functional.IterationPredicate;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Optional;
@@ -18,6 +17,7 @@ import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
  */
 class IterationImpl<T> implements Iteration<T> {
     private final Iterator<T> _aggregator;
+    protected int _index; // = 0;
 
     public IterationImpl(Iterator<T> aggregator) {
         _aggregator = aggregator;
@@ -27,13 +27,13 @@ class IterationImpl<T> implements Iteration<T> {
     @Override
     public <R> Iteration<R> map(Function<T, R> mapper) {
         MappingOps<T, R> mappingOps = new MappingOps<>(_aggregator, mapper);
-        return Iteration.of(mappingOps.sinkIterator());
+        return Iteration.of(mappingOps);
     }
 
     @Override
     public <R> Iteration<R> mapIndices(BiFunction<T, Integer, R> mapper) {
         MappingOps<T, R> mappingOps = new MappingOps<>(_aggregator, mapper);
-        return Iteration.of(mappingOps.sinkIterator());
+        return Iteration.of(mappingOps);
     }
 
     @Override
@@ -42,7 +42,7 @@ class IterationImpl<T> implements Iteration<T> {
 
         LongPredicate predicate = index -> index >= start;
         FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
-        return Iteration.of(filterOps.sinkIterator());
+        return Iteration.of(filterOps);
     }
 
     @Override
@@ -51,7 +51,7 @@ class IterationImpl<T> implements Iteration<T> {
 
         LongPredicate predicate = index -> index <= end;
         FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
-        return Iteration.of(filterOps.sinkIterator());
+        return Iteration.of(filterOps);
     }
 
     @Override
@@ -59,14 +59,14 @@ class IterationImpl<T> implements Iteration<T> {
         Contract.checkNull(filter, "filter");
 
         WhileOps<T> filterOps = new WhileOps<>(_aggregator, filter, true);
-        return Iteration.of(filterOps.sinkIterator());    }
+        return Iteration.of(filterOps);    }
 
     @Override
     public Iteration<T> doWhile(Predicate<T> filter) {
         Contract.checkNull(filter, "filter");
 
         WhileOps<T> filterOps = new WhileOps<>(_aggregator, filter, true);
-        return Iteration.of(filterOps.sinkIterator());
+        return Iteration.of(filterOps);
     }
 
     @Override
@@ -74,7 +74,7 @@ class IterationImpl<T> implements Iteration<T> {
         Contract.checkNull(predicate, "end");
 
         FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
-        return Iteration.of(filterOps.sinkIterator());
+        return Iteration.of(filterOps);
     }
 
     @Override
@@ -82,7 +82,7 @@ class IterationImpl<T> implements Iteration<T> {
         Contract.checkNull(predicate, "end");
 
         FilterOps<T> filterOps = new FilterOps<>(_aggregator, predicate);
-        return Iteration.of(filterOps.sinkIterator());
+        return Iteration.of(filterOps);
     }
     //</editor-fold>
 
@@ -153,7 +153,12 @@ class IterationImpl<T> implements Iteration<T> {
 
     @Override
     public long count() {
-        return 0;
+        while (_aggregator.hasNext()){
+            T next = _aggregator.next();
+            ++_index;
+        }
+
+        return _index;
     }
 
     @Override

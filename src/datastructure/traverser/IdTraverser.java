@@ -16,8 +16,8 @@ import datastructure.tree.node.subtype.IdTreeNodeReader;
 public interface IdTraverser<I, V> extends Traverser<V>  {
 
     /**
-     * Returns the value of the input child node.
-     * @return the value of the input child node
+     * Returns the value of the aggregate child node.
+     * @return the value of the aggregate child node
      */
     IdTreeNodeReader<I, V> nextChild();
 

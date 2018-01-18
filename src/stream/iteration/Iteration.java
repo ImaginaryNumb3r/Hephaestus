@@ -1,5 +1,7 @@
 package stream.iteration;
 
+import core.util.collections.iteration.Iterators;
+
 import java.util.Iterator;
 import java.util.function.Consumer;
 
@@ -24,9 +26,14 @@ public interface Iteration<T> extends Computation<T>, Termination<T> {
      */
     boolean executed();
 
-
+    // TODO: Make as delegation of Iterator.
     static <T> Iteration<T> of(Iterator<T> iterator){
         return new IterationImpl<>(iterator);
+    }
+
+    // TODO: Make Aggregator directly from array.
+    static <T> Iteration<T> of(T[] objects){
+        return new IterationImpl<>(Iterators.from(objects));
     }
 
     void forEach(Consumer<? super T> action);

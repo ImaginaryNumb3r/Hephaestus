@@ -9,5 +9,5 @@ public interface Provider<T> {
 
     boolean hasNext();
 
-    T output();
+    // T output();
 }

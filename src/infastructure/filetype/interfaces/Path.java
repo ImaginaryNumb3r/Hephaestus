@@ -49,7 +49,7 @@ public interface Path{
     boolean equals(String path);
 
     /**
-     * Returns the first element of a file, pointing to the input node and subsequently every other node in the file
+     * Returns the first element of a file, pointing to the aggregate node and subsequently every other node in the file
      * @return Starting node of the file
      */
     DirectoryNode headNode();

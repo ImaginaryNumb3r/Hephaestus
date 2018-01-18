@@ -8,13 +8,13 @@ import java.util.function.Function;
  * @author Patrick
  * @since 14.01.2018
  */
-public class MappingOps<in, out> extends IterationSource<in, out> {
+public class MappingOps<in, out> extends ComputationPipe<in, out> {
     private final BiFunction<in, Integer, out> _computation;
 
     public MappingOps(Iterator<in> aggregator,BiFunction<in, Integer, out> computation) {
         super(aggregator);
         _computation = computation;
-        _index = -1;
+        _cursorPos = -1;
     }
 
     public MappingOps(Iterator<in> aggregator,Function<in, out> computation) {
@@ -23,7 +23,7 @@ public class MappingOps<in, out> extends IterationSource<in, out> {
 
     @Override
     protected out compute(in input) {
-        return _computation.apply(input, _index);
+        return _computation.apply(input, _cursorPos);
     }
 
     @Override

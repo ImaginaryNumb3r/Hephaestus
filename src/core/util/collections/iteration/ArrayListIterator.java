@@ -33,7 +33,7 @@ public class ArrayListIterator<T> extends ArrayIterator<T> implements ListIterat
      * position backwards.  This method may be called repeatedly to
      * iterate through the list backwards, or intermixed with calls to
      * {@link #next} to go back and forth.  (Note that alternating calls
-     * to {@code input} and {@code previous} will return the same
+     * to {@code aggregate} and {@code previous} will return the same
      * element repeatedly.)
      *
      * @return the previous element in the list

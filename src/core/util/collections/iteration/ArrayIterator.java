@@ -57,9 +57,7 @@ public class ArrayIterator<T> implements Iterator<T> {
     }
 
     /**
-     * Returns the input element in the iteration.
-     *
-     * @return the input element in the iteration
+     * @return the aggregate element in the iteration
      * @throws NoSuchElementException if the iteration has no more elements
      */
     @Override
@@ -67,7 +65,6 @@ public class ArrayIterator<T> implements Iterator<T> {
         if (!hasNext()) throw new NoSuchElementException();
         return _array[++_pos];
     }
-
 
     @Override
     public boolean equals(Object obj) {

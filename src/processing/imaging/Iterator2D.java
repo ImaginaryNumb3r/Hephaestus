@@ -42,8 +42,8 @@ public class Iterator2D<T> implements Iterator<T> {
     /**
      * Traverses the matrix line by line and returns the according pixels
      *
-     * Returns the input pixel of the matrix
-     * @return the input pixel of the matrix
+     * Returns the aggregate pixel of the matrix
+     * @return the aggregate pixel of the matrix
      */
     @Override
     public T next(){
@@ -51,7 +51,7 @@ public class Iterator2D<T> implements Iterator<T> {
         int y = _curY;
 
         ++_curY;
-        // Reset line and jump to input one
+        // Reset line and jump to aggregate one
         if (_curY >= _matrix.getWidth()){
             _curY = 0;
             ++_curX;

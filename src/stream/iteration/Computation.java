@@ -1,5 +1,6 @@
 package stream.iteration;
 
+import core.util.annotations.ToTest;
 import functional.IterationPredicate;
 
 import java.util.function.BiFunction;
@@ -18,39 +19,34 @@ interface Computation<T> {
 
     <R> Iteration<R> map(Function<T, R> mapper);
 
+    @ToTest
     <R> Iteration<R> mapIndices(BiFunction<T, Integer, R> mapper);
     // "while" is a reserved keyword
 
-    /**
-     * Equivalent to a Stream's "filter" function
-     * @param filter
-     * @return
-     */
     Iteration<T> doWhile(Predicate<T> filter);
 
-    /**
-     * Equivalent to a Stream's "filter" function
-     * @param filter
-     * @return
-     */
+    @ToTest
     Iteration<T> doWhile(IterationPredicate<T> filter);
 
     /**
-     * Stops the iteration until it has reached the index of the provided parameter.
-     * For example, an index of 1 would only return the first element (with index 0)
+     * Filters out all iteration elements until it has reached the index of the provided parameter.
+     * For example, an index of 1 would only return the first element (with index 0).
      * @param end Index of the item where the iteration will stop.
      */
+    @ToTest
     Iteration<T> start(int end);
 
     /**
      * Drops items of the iteration until it has reached the index of the provided parameter.
      * For example, an index of 1 would only return the first element (with index 0)
      * @param end Index of the item where the iteration will stop.
-     * @throws
      */
+    @ToTest
     Iteration<T> limit(int end);
 
+    @ToTest
     Iteration<T> filter(Predicate<T> predicate);
 
+    @ToTest
     Iteration<T> filter(IterationPredicate<T> predicate);
 }

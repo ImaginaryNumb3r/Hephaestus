@@ -10,31 +10,29 @@ import java.util.function.Predicate;
  * @author Patrick
  * @since 14.01.2018
  */
-class FilterOps<in> extends IterationSource<in, in> {
-    protected final IterationPredicate<in> _predicate;
-    protected int _index;
+class FilterOps<T> extends ComputationPipe<T, T> {
+    protected final IterationPredicate<T> _predicate;
 
-    public FilterOps(Iterator<in> aggregator, IterationPredicate<in> predicate) {
+    public FilterOps(Iterator<T> aggregator, IterationPredicate<T> predicate) {
         super(aggregator);
         _predicate = predicate;
-        _index = -1;
     }
 
-    public FilterOps(Iterator<in> aggregator, Predicate<in> predicate) {
+    public FilterOps(Iterator<T> aggregator, Predicate<T> predicate) {
         this(aggregator, (item, index) -> predicate.test(item));
     }
 
-    public FilterOps(Iterator<in> aggregator, LongPredicate predicate) {
+    public FilterOps(Iterator<T> aggregator, LongPredicate predicate) {
         this(aggregator, (item, index) -> predicate.test(index));
     }
 
     @Override
-    protected in compute(in item) {
+    protected T compute(T item) {
         return item;
     }
 
     @Override
-    protected boolean test(in item) {
-        return _predicate.test(item, _index);
+    protected boolean test(T item) {
+        return _predicate.test(item, _cursorPos);
     }
 }

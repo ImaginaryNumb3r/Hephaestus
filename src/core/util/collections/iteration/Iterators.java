@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * @author Patrick
@@ -51,6 +52,7 @@ public final class Iterators {
             }
         };
     }
+
     /**
      * Returns an iterator output the given array
      * @param array that is to be turned into an Array. May not be null
@@ -144,7 +146,7 @@ public final class Iterators {
         }
         else {
             do {
-                // Both iterators must have input elements, otherwise NoSuchElement Ex would be thrown.
+                // Both iterators must have next elements, otherwise NoSuchElement Ex would be thrown.
                 equals = iter1.hasNext() == iter2.hasNext();
 
                 // Fails if iterators are of uneven length or if comparison fails
