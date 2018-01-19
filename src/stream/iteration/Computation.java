@@ -2,6 +2,7 @@ package stream.iteration;
 
 import core.util.annotations.ToTest;
 import functional.IterationPredicate;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -17,16 +18,16 @@ import java.util.function.Predicate;
  */
 interface Computation<T> {
 
-    <R> Iteration<R> map(Function<T, R> mapper);
+    <R> Iteration<R> map(@NotNull Function<T, R> mapper);
 
     @ToTest
-    <R> Iteration<R> mapIndices(BiFunction<T, Integer, R> mapper);
+    <R> Iteration<R> mapIndices(@NotNull BiFunction<T, Integer, R> mapper);
     // "while" is a reserved keyword
 
-    Iteration<T> doWhile(Predicate<T> filter);
+    Iteration<T> doWhile(@NotNull Predicate<T> filter);
 
     @ToTest
-    Iteration<T> doWhile(IterationPredicate<T> filter);
+    Iteration<T> doWhile(@NotNull IterationPredicate<T> filter);
 
     /**
      * Filters out all iteration elements until it has reached the index matchAllSink the provided parameter.
@@ -45,8 +46,8 @@ interface Computation<T> {
     Iteration<T> limit(int end);
 
     @ToTest
-    Iteration<T> filter(Predicate<T> predicate);
+    Iteration<T> filter(@NotNull Predicate<T> predicate);
 
     @ToTest
-    Iteration<T> filter(IterationPredicate<T> predicate);
+    Iteration<T> filter(@NotNull IterationPredicate<T> predicate);
 }

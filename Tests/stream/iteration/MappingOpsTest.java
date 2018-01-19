@@ -1,12 +1,10 @@
 package stream.iteration;
 
+import core.util.collections.Lists;
 import core.util.collections.iteration.Iterators;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,5 +25,20 @@ public class MappingOpsTest {
                 .collect(Collectors.toList());
 
         assert Objects.equals(strings, mappedList);
+    }
+
+    @Test
+    public void testIndexMapping() throws Exception {
+        String[] strings = {"a", "ba", null, "ao", "%"};
+        Integer[] indices = {0, 1, 2, 3, 4};
+
+        ListIterator<String> iterator = Iterators.from(strings);
+
+        List<Integer> indexList = Iteration.of(iterator)
+                .mapIndices((val, index) -> index)
+                .collect(Collectors.toList());
+
+        ArrayList<Integer> expectedIndices = Lists.toArrayList(indices);
+        assert Objects.equals(expectedIndices, indexList);
     }
 }

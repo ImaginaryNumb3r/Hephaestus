@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * @author Patrick
  * @since 19.01.2018
  */
-final class CompositeIterator<T> implements Iterator<T> {
+public class CompositeIterator<T> implements Iterator<T> {
     private final Iterator<Iterator<T>> _iterators;
     private Iterator<T> _curIterator;
     private Iterator<T> _nextIterator;

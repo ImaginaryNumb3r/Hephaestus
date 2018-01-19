@@ -1,15 +1,16 @@
 package stream.iteration;
 
-import core.exception.NoImplementationException;
 import core.util.ComparisonResult;
+import core.util.collections.iteration.CompositeIterator;
+import core.util.collections.iteration.Iterators;
 import core.util.contracts.Contract;
 import functional.IterationPredicate;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collector;
 
-import static core.util.ComparisonResult.SMALLER;
 import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
 
 /**
@@ -26,13 +27,17 @@ class IterationImpl<T> implements Iteration<T> {
 
     //<editor-fold desc="Computation Method">
     @Override
-    public <R> Iteration<R> map(Function<T, R> mapper) {
+    public <R> Iteration<R> map(@NotNull Function<T, R> mapper) {
+        Contract.checkNull(mapper, "mapper");
+
         MappingOps<T, R> mappingOps = new MappingOps<>(_source, mapper);
         return Iteration.of(mappingOps);
     }
 
     @Override
-    public <R> Iteration<R> mapIndices(BiFunction<T, Integer, R> mapper) {
+    public <R> Iteration<R> mapIndices(@NotNull BiFunction<T, Integer, R> mapper) {
+        Contract.checkNull(mapper, "mapper");
+
         MappingOps<T, R> mappingOps = new MappingOps<>(_source, mapper);
         return Iteration.of(mappingOps);
     }
@@ -56,14 +61,14 @@ class IterationImpl<T> implements Iteration<T> {
     }
 
     @Override
-    public Iteration<T> doWhile(IterationPredicate<T> filter) {
+    public Iteration<T> doWhile(@NotNull IterationPredicate<T> filter) {
         Contract.checkNull(filter, "filter");
 
         WhileOps<T> filterOps = new WhileOps<>(_source, filter, true);
         return Iteration.of(filterOps);    }
 
     @Override
-    public Iteration<T> doWhile(Predicate<T> filter) {
+    public Iteration<T> doWhile(@NotNull Predicate<T> filter) {
         Contract.checkNull(filter, "filter");
 
         WhileOps<T> filterOps = new WhileOps<>(_source, filter, true);
@@ -71,7 +76,7 @@ class IterationImpl<T> implements Iteration<T> {
     }
 
     @Override
-    public Iteration<T> filter(Predicate<T> predicate) {
+    public Iteration<T> filter(@NotNull Predicate<T> predicate) {
         Contract.checkNull(predicate, "end");
 
         FilterOps<T> filterOps = new FilterOps<>(_source, predicate);
@@ -79,7 +84,7 @@ class IterationImpl<T> implements Iteration<T> {
     }
 
     @Override
-    public Iteration<T> filter(IterationPredicate<T> predicate) {
+    public Iteration<T> filter(@NotNull IterationPredicate<T> predicate) {
         Contract.checkNull(predicate, "end");
 
         FilterOps<T> filterOps = new FilterOps<>(_source, predicate);
@@ -108,34 +113,51 @@ class IterationImpl<T> implements Iteration<T> {
     }
 
     @Override
-    public <R> Iteration<R> toFlattened(Function<T, ? extends Iterable<? extends R>> mapper) {
-        ArrayList<T> list = new ArrayList<>();
-        throw new NoImplementationException();
+    public <R> Iteration<R> toFlattened(Function<T, Iterable<R>> mapper) {
+        // Map all iterables to iterators and concatenate them all in a composite iterator.
+        Iterator<Iterator<R>> iterators =
+                Iterators.map(_source, iterator -> {
+                    Iterable<R> iterable = mapper.apply(iterator);
+                    return iterable.iterator();
+        });
 
-        /*
-        while (_source.hasNext()){
-            T cur = _source.next();
-            Iteration<? extends R> apply = mapper.apply(cur);
+        CompositeIterator<R> compositeIterator = new CompositeIterator<>(iterators);
+        return Iteration.of(compositeIterator);
+    }
+
+    @Override
+    public Iteration<T> toReverse() {
+        // Push items on Stack and pop via Iterator in reverse.
+        Stack<T> collection = collect(Stack::new);
+        return Iteration.of(collection.iterator());
+    }
+
+    @Override
+    public Optional<T> reduce(BinaryOperator<T> operation) {
+        if (_source.hasNext()){
+            return Optional.empty();
         }
 
-        return Iteration.of(); */
-    }
+        T reduce = _source.next();
+        while (_source.hasNext()){
+            T next = _source.next();
+            reduce = operation.apply(reduce, next);
+        }
 
-    @Override
-    public Iteration<T> toReverse(Consumer<T> comparator) {
-
-
-        return null;
-    }
-
-    @Override
-    public T reduce(BinaryOperator<T> operation) {
-        return null;
+        return Optional.ofNullable(reduce);
     }
 
     @Override
     public Iteration<T> visitEach(Consumer<T> action) {
-        return null;
+        ArrayList<T> iterated = new ArrayList<>();
+
+        while (_source.hasNext()){
+            T cur = _source.next();
+            action.accept(cur);
+            iterated.add(cur);
+        }
+
+        return Iteration.of(iterated.iterator());
     }
 
     @Override

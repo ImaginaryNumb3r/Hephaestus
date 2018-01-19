@@ -1,6 +1,5 @@
 package stream.iteration;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 /**

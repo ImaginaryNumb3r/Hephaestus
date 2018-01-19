@@ -2,6 +2,7 @@ package stream;
 
 import core.exception.InstanceNotAllowedException;
 import core.util.annotations.Positive;
+import stream.iteration.Iteration;
 
 import java.util.function.IntConsumer;
 
@@ -11,6 +12,7 @@ import java.util.function.IntConsumer;
  *
  * A iteration class that essentially mimics a iteration for loop.
  */
+@Deprecated
 public final class Count {
 
     private Count(){
@@ -24,11 +26,7 @@ public final class Count {
      * @throws IllegalArgumentException if count is smaller than zero
      */
     public static void repeat(@Positive int count, Runnable runnable){
-        if (count < 0) throw new IllegalArgumentException("Argument \"count\" must not be smaller than zero");
-
-        for (int i= 0; i < count; ++i){
-            runnable.run();
-        }
+        Iteration.repeat(count, runnable);
     }
 
     /**
@@ -38,10 +36,6 @@ public final class Count {
      * @throws IllegalArgumentException if count is smaller than zero
      */
     public static void repeat(@Positive int count, IntConsumer consumer){
-        if (count < 0) throw new IllegalArgumentException("Argument \"count\" must not be smaller than zero");
-
-        for (int i = 0; i < count; ++i){
-            consumer.accept(i);
-        }
+        Iteration.repeat(count, consumer);
     }
 }

@@ -1,6 +1,5 @@
 package stream.streams;
 
-import core.exception.ParameterNullException;
 import core.util.contracts.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +49,6 @@ public class Streams<T> extends AbstractStreams<T> {
 
     public static <T> Stream<T> stream(@NotNull Spliterator<T> spliterator){
         Contract.checkNull(spliterator, "spliterator");
-        if (spliterator == null) throw new ParameterNullException();
         return new Streams<>(spliterator).stream();
     }
 

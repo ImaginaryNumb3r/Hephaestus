@@ -30,13 +30,13 @@ public interface Termination<T> {
     Iteration<T> toSorted(Comparator<T> comparator);
 
     @ToTest
-    <R> Iteration<R> toFlattened(Function<T, ? extends Iterable<? extends R>> mapper);
+    <R> Iteration<R> toFlattened(Function<T,Iterable<R>> mapper);
 
     @ToTest
-    Iteration<T> toReverse(Consumer<T> comparator);
+    Iteration<T> toReverse();
 
     @ToTest
-    T reduce(BinaryOperator<T> operation);
+    Optional<T> reduce(BinaryOperator<T> operation);
 
     @ToTest
     Iteration<T> visitEach(Consumer<T> action);
