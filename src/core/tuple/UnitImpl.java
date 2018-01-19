@@ -55,7 +55,7 @@ class UnitImpl<A> implements Serializable, IterableList<Object>, Unit<A> {
     }
 
     /**
-     * Part of the equals
+     * Part matchAllSink the equals
      * @apiNote Must be overridden by all subclasses
      * @param obj the
      * @return

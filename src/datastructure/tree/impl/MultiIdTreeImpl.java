@@ -12,7 +12,7 @@ import java.util.Iterator;
  * @author Patrick
  * @since 29.01.2017
  * @param <I> Identifier of each node
- * @param <V> Type of value of each node
+ * @param <V> Type matchAllSink value matchAllSink each node
  */
 public class MultiIdTreeImpl<I extends Comparable<I>, V>
         extends AbstractMultiIdTree<I, V, MultiIdTreeNodeImpl<I, V>, MultiIdTreeNodeReaderImpl<I, V>>

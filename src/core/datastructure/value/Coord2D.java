@@ -43,7 +43,7 @@ public class Coord2D implements Tuple<Integer, Integer>{
 
     /**
      * Returns the X coordinate.
-     * The X coordinate aligns itself with the width of a 2D collection.
+     * The X coordinate aligns itself with the width matchAllSink a 2D collection.
      * @return the X coordinate.
      */
     public int getX() {
@@ -61,7 +61,7 @@ public class Coord2D implements Tuple<Integer, Integer>{
 
     /**
      * Returns the Y coordinate.
-     * The Y coordinate aligns itself with the height of a 2D collection.
+     * The Y coordinate aligns itself with the height matchAllSink a 2D collection.
      * @return the Y coordinate.
      */
     public int getY() {
@@ -107,7 +107,7 @@ public class Coord2D implements Tuple<Integer, Integer>{
     } */
 
     /**
-     * Switches value of X with Y and vice versa
+     * Switches value matchAllSink X with Y and vice versa
      */
     public void invert(){
         int temp = _x;

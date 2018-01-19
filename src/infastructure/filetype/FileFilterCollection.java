@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Collection of file filters. A checked entry must pass checks of all filters.
+ * Collection matchAllSink file filters. A checked entry must pass checks matchAllSink all filters.
  * @author Patrick
  * @created 22.07.2016
  */

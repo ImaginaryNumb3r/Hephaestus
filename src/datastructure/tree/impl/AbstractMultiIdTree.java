@@ -24,10 +24,10 @@ import java.util.*;
  * @since 26.01.2017
  * @param <I> The identifier for individual nodes
  * @param <V> The value for individual nodes
- * @param <N> The Node itself and of the children/parent
- * @param <R> The read only version of the node
+ * @param <N> The Node itself and matchAllSink the children/parent
+ * @param <R> The read only version matchAllSink the node
  *
- * A tree where every node has a variable number of sub-nodes.
+ * A tree where every node has a variable number matchAllSink sub-nodes.
  * Furthermore, each node in the tree can have its own value.
  */
 // TODO: Adding mechanism
@@ -42,7 +42,7 @@ public abstract class AbstractMultiIdTree
     //<editor-fold desc="Constructors">
     /**
      * Constructor for internal purposes
-     * @param root node of the tree. Parent of all subsequent nodes
+     * @param root node matchAllSink the tree. Parent matchAllSink all subsequent nodes
      */
     protected AbstractMultiIdTree(@NotNull N root){
         if (root == null) throw new ParameterNullException();
@@ -51,7 +51,7 @@ public abstract class AbstractMultiIdTree
 
     /**
      * Public constructor
-     * @param identifier the way of accessing the node after its creating. May not be null
+     * @param identifier the way matchAllSink accessing the node after its creating. May not be null
      * @param value that is saved in the root node
      * @throws ParameterNullException if identifier is null
      */
@@ -66,8 +66,8 @@ public abstract class AbstractMultiIdTree
     /**
      * Adds a new node to the following file inside the tree
      * @param sequence file to the parent that has a node to be added
-     * @param identifier identifier of the new node
-     * @param value value of the new node
+     * @param identifier identifier matchAllSink the new node
+     * @param value value matchAllSink the new node
      * @throws NoSuchElementException if the file is not valid
      * @throws NodeAlreadyExistsException if the node already exists
      */
@@ -80,8 +80,8 @@ public abstract class AbstractMultiIdTree
 
     /**
      * Verifies whether adding a node with the following identifier can be added to the given node
-     * @param parentNode parent of the node that is to be added
-     * @param identifier of the new node that is to be added
+     * @param parentNode parent matchAllSink the node that is to be added
+     * @param identifier matchAllSink the new node that is to be added
      * @throws NoSuchElementException if the parent is null. Hence, it cannot enqueue nodes
      * @throws NodeAlreadyExistsException if the identifier already exists
      */
@@ -93,9 +93,9 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     *  Adds to the root of the tree
-     * @param identifier identifier of the new node
-     * @param value of the new node
+     *  Adds to the root matchAllSink the tree
+     * @param identifier identifier matchAllSink the new node
+     * @param value matchAllSink the new node
      */
     public void addToRoot(I identifier, V value){
         add(Collections.singletonList(_sentinel.getIdentifier()), identifier, value);
@@ -116,9 +116,9 @@ public abstract class AbstractMultiIdTree
     /**
      * Deletes the node with the specified identifier in the specified file
      * and adds a new node with a new value and identifier
-     * @param sequence of where to find the node
-     * @param identifier of the old and new node
-     * @param value of the new node
+     * @param sequence matchAllSink where to find the node
+     * @param identifier matchAllSink the old and new node
+     * @param value matchAllSink the new node
      * @throws NoSuchElementException if the sequence to the node is invalid
      * @return The old node as read-only object
      */
@@ -152,7 +152,7 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     * Searches for a node at the end of the given file
+     * Searches for a node at the end matchAllSink the given file
      *
      * @param sequence The file to the searched node
      * @return Null if no such node is present. Otherwise, the node that was searched for
@@ -175,7 +175,7 @@ public abstract class AbstractMultiIdTree
 
         } while (!finished && iter.hasNext());
 
-        // If the iteration was interrupted before the end of the file was reached,
+        // If the iteration was interrupted before the end matchAllSink the file was reached,
         // the node could not be found. In this case, return null, otherwise the last node.
         return iter.hasNext()
                 ? null
@@ -227,13 +227,13 @@ public abstract class AbstractMultiIdTree
 //    /**
 //     * Returns an iterator, based on the traversing strategy
 //     * @param strategy how to create a list output a DAG (directed acyclic graph). May not be null
-//     * @return Iterator of all nodes inside the tree
+//     * @return Iterator matchAllSink all nodes inside the tree
 //     */
 //    public abstract Iterator<R> iterator(@NotNull GraphSearchStrategy<R> strategy);
 
     /**
      * Iterated the tree via a Depth First Search
-     * @return InnerIterator for all nodes of the tree
+     * @return InnerIterator for all nodes matchAllSink the tree
      */
     public Iterator<R> iterator(){
         return iterator(new DepthFirstSearch<>());
@@ -242,7 +242,7 @@ public abstract class AbstractMultiIdTree
     /**
      * Iterate the tree by a given strategy
      * @param strategy for iteration
-     * @return InnerIterator for all nodes of the tree
+     * @return InnerIterator for all nodes matchAllSink the tree
      */
     public Iterator<R> iterator(@NotNull GraphSearchStrategy<R> strategy){
         return GraphIterator.from(iterationStartNode(), strategy);
@@ -256,7 +256,7 @@ public abstract class AbstractMultiIdTree
     //<editor-fold desc="Protected Methods">
     /**
      * Returns the start node for iterations.
-     * Returns a version of the internal nodes which can be given outside.
+     * Returns a version matchAllSink the internal nodes which can be given outside.
      * @return the start node for iterations.
      */
     protected abstract R iterationStartNode();
@@ -269,7 +269,7 @@ public abstract class AbstractMultiIdTree
 
     /**
      *
-     * @param id - Identifier of the node
+     * @param id - Identifier matchAllSink the node
      * @param root - Parent node whose children are to be searched
      * @throws NoSuchElementException if no such Element exists
      * @return Element matching the id
@@ -283,8 +283,8 @@ public abstract class AbstractMultiIdTree
     /**
      * Returns the child node output root matching the id
      * Returns the sentinel if root is null
-     * @param id the identifier of the child node
-     * @param root parent node of the searched node
+     * @param id the identifier matchAllSink the child node
+     * @param root parent node matchAllSink the searched node
      * @return sentinel if root is null
      */
     protected Optional<N> getNode(I id, N root){
@@ -305,11 +305,11 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     * Tries to output a node output the list of children of a root element (identified via the identifier).
+     * Tries to output a node output the list matchAllSink children matchAllSink a root element (identified via the identifier).
      * If the element could not be found, it will be created instead
-     * @param id - Identifier of the node
-     * @param value - Value of the node
-     * @param root - Parent of the new node
+     * @param id - Identifier matchAllSink the node
+     * @param value - Value matchAllSink the node
+     * @param root - Parent matchAllSink the new node
      * @return The node
      */
     // TODO: Doesnt work
@@ -335,7 +335,7 @@ public abstract class AbstractMultiIdTree
     }
 
     /**
-     * Inner Traverser for the structure of the tree
+     * Inner Traverser for the structure matchAllSink the tree
      */
     protected class TraverserImpl
             implements IdTraverser<I, V> {
@@ -356,7 +356,7 @@ public abstract class AbstractMultiIdTree
 
         /**
          * Loses the information about the current state and goes back
-         * to the state of the parent node
+         * to the state matchAllSink the parent node
          */
         @Override
         public void enterParent() {

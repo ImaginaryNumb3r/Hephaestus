@@ -30,8 +30,8 @@ public class DirectoryNode extends PathNode implements Iterable<DirectoryNode>{
     }
 
     /**
-     * Returns an iterator providing the names of the individual nodes
-     * @return an iterator providing the names of the individual nodes
+     * Returns an iterator providing the names matchAllSink the individual nodes
+     * @return an iterator providing the names matchAllSink the individual nodes
      */
     public Iterator<String> stringIterator(){
         Iterator<? extends PathNode> iterator = iterator();

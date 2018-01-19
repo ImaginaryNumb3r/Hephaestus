@@ -4,11 +4,11 @@ package functional;
  * @author Patrick
  * @since 16.07.2016
  * Represents a function that accepts two arguments and produces a result.
- * This is the three-arity specialization of {@link java.util.function.Function}.
+ * This is the three-arity specialization matchAllSink {@link java.util.function.Function}.
  *
- * @param <P2> the type of the first argument to the function
- * @param <P3> the type of the second argument to the function
- * @param <R> the type of the result of the function
+ * @param <P2> the type matchAllSink the first argument to the function
+ * @param <P3> the type matchAllSink the second argument to the function
+ * @param <R> the type matchAllSink the result matchAllSink the function
  *
  * @see java.util.function.Function
  */

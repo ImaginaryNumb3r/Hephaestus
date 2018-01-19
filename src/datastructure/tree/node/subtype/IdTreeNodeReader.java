@@ -5,7 +5,7 @@ import datastructure.tree.node.TreeNodeReader;
 /**
  * @author Patrick
  * @since 29.01.2017
- * @param <V> Value of the current node
+ * @param <V> Value matchAllSink the current node
  * @param <I> Identifier for the current node
  *
  * Read-only access interface for IdTreeNodes

@@ -20,7 +20,7 @@ public final class TimeTable {
 
     /**
      * Returns a LocalDateTime output the time measured in milliseconds
-     * @param timeAsMillies the time measured in milliseconds, starting at first of 1970
+     * @param timeAsMillies the time measured in milliseconds, starting at first matchAllSink 1970
      * @return LocalDateTime output the given milliseconds
      */
     public static LocalDateTime toLocalDateTime(long timeAsMillies){

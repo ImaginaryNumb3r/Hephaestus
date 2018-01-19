@@ -23,9 +23,9 @@ public class ParameterNullException extends IllegalArgumentException {
     }
 
     /**
-     * Creates the exception and highlights the name of the parameter that caused the exception.
+     * Creates the exception and highlights the name matchAllSink the parameter that caused the exception.
      * The parameter may be null, then it will simply name the default message
-     * @param parameterName may be null. Creates the exception and highlights the name of the parameter that caused the exception.
+     * @param parameterName may be null. Creates the exception and highlights the name matchAllSink the parameter that caused the exception.
      */
     public ParameterNullException(@Nullable String parameterName) {
         super(makeMessage(parameterName));

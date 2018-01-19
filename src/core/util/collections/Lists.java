@@ -59,19 +59,16 @@ public final class Lists {
     //</editor-fold>
 
     //<editor-fold desc="ArrayList">
-    public static <T> ArrayList<T> toArrayList(@NotNull Iterable<T> iterable){
-        if (iterable == null) throw new ParameterNullException("iterable");
+    public static <T> ArrayList<T> toArrayList(Iterable<T> iterable){
         return toList(iterable, ArrayList::new);
     }
 
-    public static <T> ArrayList<T> toArrayList(@NotNull Iterator<T> iterator){
-        if (iterator == null) throw new ParameterNullException("iterable");
+    public static <T> ArrayList<T> toArrayList(Iterator<T> iterator){
         return toList(() -> iterator, ArrayList::new);
     }
 
     @SafeVarargs
-    public static <T> ArrayList<T> toArrayList(@NotNull T... array){
-        if (array == null) throw new ParameterNullException("array");
+    public static <T> ArrayList<T> toArrayList(T... array){
         return toList(() -> ArrayIterator.from(array), ArrayList::new);
     }
 

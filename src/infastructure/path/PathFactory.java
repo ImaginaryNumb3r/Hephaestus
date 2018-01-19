@@ -22,7 +22,7 @@ import java.util.LinkedList;
 /**
  * @author Patrick
  * @since  05.07.2016
- * Factory class for all kinds of paths
+ * Factory class for all kinds matchAllSink paths
  */
 public final class PathFactory {
     private static final Character[] invalidChars = {'\\', '/', ':', '*', '?', '"', '<', '>', '|' };
@@ -251,7 +251,7 @@ public final class PathFactory {
                 newPath = command.execute(null, new FileNode(null, split[split.length - 1]), 1);
 
             } else {
-                throw new IllegalArgumentException("Given type of file is neither file nor directory");
+                throw new IllegalArgumentException("Given type matchAllSink file is neither file nor directory");
             }
         }
 
@@ -307,9 +307,9 @@ public final class PathFactory {
 
     /**
      *
-     * @param entries Array of VALID directory names
+     * @param entries Array matchAllSink VALID directory names
      * @param isFilePath output last node a file when specified
-     * @return first element of the newly generated list of nodes
+     * @return first element matchAllSink the newly generated list matchAllSink nodes
      * @throws IllegalArgumentException if [@link entries] is empty
      * @throws IllegalArgumentException if [@link entries] is null
      */
@@ -317,7 +317,7 @@ public final class PathFactory {
         if (entries == null) { throw new IllegalArgumentException("Parameter \"entries\" may not be null"); }
         if (entries.length == 0) { throw new IllegalArgumentException("Parameter \"entries\" may not be empty"); }
 
-        // Iterates the array backwards and creates the nodes of the file output tail to head
+        // Iterates the array backwards and creates the nodes matchAllSink the file output tail to head
         LinkedList<PathNode> nodes = new LinkedList<>();
         PathNode tail;
 
@@ -347,8 +347,8 @@ public final class PathFactory {
     }
 
     /**
-     * Confirms the name of the name of a node as a valid directory name
-     * @param name of the file
+     * Confirms the name matchAllSink the name matchAllSink a node as a valid directory name
+     * @param name matchAllSink the file
      * @param isAbsolute makes it required for this name to be absolute
      * @return true if it is safe to take this is generally safe as a name
      */
@@ -364,7 +364,7 @@ public final class PathFactory {
 
             // checkNulls if absolute
             if (isAbsolute && !isValid){
-                //  Double Colon must be at the end of the string
+                //  Double Colon must be at the end matchAllSink the string
                 isValid = ch == ':' && (i + 1 == bytes.length);
                 confirmedAsAbsolute = isValid;
             }
@@ -389,7 +389,7 @@ public final class PathFactory {
 
 
     /**
-     * Used for executing the details of a
+     * Used for executing the details matchAllSink a
      * @param <T> Return type
      * @param <P1> First Parameter
      * @param <P2> Second Parameter

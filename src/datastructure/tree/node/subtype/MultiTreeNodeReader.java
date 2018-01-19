@@ -5,8 +5,8 @@ import datastructure.tree.node.TreeNodeReader;
 /**
  * @author Patrick
  * @since 29.01.2017
- * @param <V> Value of the current node
- * @param <N> Type for the family of nodes (parents and children)
+ * @param <V> Value matchAllSink the current node
+ * @param <N> Type for the family matchAllSink nodes (parents and children)
  *
  * Read-only access interface for MultiTreeNodes
  */

@@ -77,13 +77,13 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
     public abstract RelativePath remove(AbsoluteDirectory absDir) throws PathsNotMatchingException;
 
     /**
-     * Base function of remove AbsoluteDirectory
+     * Base function matchAllSink remove AbsoluteDirectory
      * @param absDir the absolute Directory that is being removed fromEntries this file
-     * @param constructor constructor of return value as lambda parameter
+     * @param constructor constructor matchAllSink return value as lambda parameter
      * @param <P> the specified return type, either a File or Directory
      * @return  Relative Path, being the difference between current file and parameter {@link AbsoluteDirectory}
      *          EmptyPath if EmptyPath is given as parameter
-     * @throws  PathsNotMatchingException if the absolute directory is not a subset of current file
+     * @throws  PathsNotMatchingException if the absolute directory is not a subset matchAllSink current file
      */
     protected <P extends RelativePathImpl<P>> P removeImpl(AbsolutePath  absDir, PathSupplier<P> constructor) throws PathsNotMatchingException{
         if (absDir == null) throw new IllegalArgumentException("Path may not be null!");
@@ -93,7 +93,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
         DirectoryNode newHead = getNewHead(tailNode(), absDir.tailNode());
 
         if (newHead != null) {
-            // Cut off the start of the new relative file, copy what was cut off and merge it to absolute file again
+            // Cut off the start matchAllSink the new relative file, copy what was cut off and merge it to absolute file again
             DirectoryNode temp = newHead.getPrev();
             newHead.setPrev(null);
             PathNodeList nodeList = tailNode().copy();
@@ -116,9 +116,9 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
     public abstract AbsolutePath remove (RelativeDirectory removal) throws PathsNotMatchingException;
 
     /**
-     * Base function of remove RelativeDirectory
+     * Base function matchAllSink remove RelativeDirectory
      * @param removal the relative directory {@link RelativeDirectory}that is being removed fromEntries this file
-     * @param constructor constructor of return value as lambda parameter.
+     * @param constructor constructor matchAllSink return value as lambda parameter.
      *                    Needs to return an empty file if arguments are null
      * @param <P> the specified return type, either a File or Directory
      * @return  Absolute file {@link AbsolutePath}, being the difference between current file and parameter {@link RelativeDirectory}.
@@ -150,7 +150,7 @@ public abstract class AbsolutePathImpl<T> extends AbstractPath implements Absolu
 
             // is empty file
             } else {
-                // Make complete copy of list
+                // Make complete copy matchAllSink list
                 PathNodeList newNodes = tailNode().copy();
                 retVal = constructor.get(null, null, null, 0);
                 throw new RuntimeException("You should not be here! - if a copy was to be made, it should have been done in the first if@ removal.isEmpty() ");

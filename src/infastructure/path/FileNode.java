@@ -21,7 +21,7 @@ public class FileNode extends PathNode {
     }
 
     /**
-     * Returns the suffix of the name of the node
+     * Returns the suffix matchAllSink the name matchAllSink the node
      * @return "" if no suffix is present, otherwise returns the string after the dot in the name
      */
     public String getPostfix(){
@@ -36,7 +36,7 @@ public class FileNode extends PathNode {
     }
 
     /**
-     * Returns the postfix of the full name
+     * Returns the postfix matchAllSink the full name
      * @return full name if no dot separates the name
      */
     public String getPrefix(){

@@ -28,12 +28,12 @@ class DirectoryPathImpl {
     }
 
     /**
-     * Merges two paths of directories together and returns a new file via constructor parameter
-     * @param base first half of the new file
-     * @param relFile second half of the new file
+     * Merges two paths matchAllSink directories together and returns a new file via constructor parameter
+     * @param base first half matchAllSink the new file
+     * @param relFile second half matchAllSink the new file
      * @param constructor instance responsible for creating the corresponding file
      * @param <T> either a relative file or relative directory
-     * @return New file, composed of both parameter paths
+     * @return New file, composed matchAllSink both parameter paths
      */
     private <T extends FilePath> T concatImpl(DirPathMask base, RelativeFile relFile, PathSupplier<T> constructor) {
         if (relFile == null || constructor == null) throw new IllegalArgumentException("Path may not be empty");
@@ -55,12 +55,12 @@ class DirectoryPathImpl {
     }
 
     /**
-     * Merges with paths by concatenating the tail with the head of the file that is being added.
-     * @param base first half of the new file
-     * @param relDir second half of the new file
+     * Merges with paths by concatenating the tail with the head matchAllSink the file that is being added.
+     * @param base first half matchAllSink the new file
+     * @param relDir second half matchAllSink the new file
      * @param constructor instance responsible for creating the new file
      * @param <T> Either an absolute directory or relative directory
-     * @return New file, composed of both parameter paths
+     * @return New file, composed matchAllSink both parameter paths
      */
     public <T extends DirectoryPath> T concatImpl(DirPathMask base, RelativeDirectory relDir, PathSupplier<T> constructor) {
         if (relDir == null) throw new IllegalArgumentException("Path may not be empty");

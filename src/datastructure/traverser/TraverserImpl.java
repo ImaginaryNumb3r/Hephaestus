@@ -32,7 +32,7 @@ public class TraverserImpl<T extends Iterable<T>> implements Traverser<T>{
     @Override
     public void enterParent() {
         if (!hasParent()){
-            throw new NoSuchElementException("Root of tree cannot traverse to parent");
+            throw new NoSuchElementException("Root matchAllSink tree cannot traverse to parent");
         }
         _current = _parents.pop();
     }

@@ -83,7 +83,7 @@ public abstract class AbstractPath implements Path {
      * Merges two paths together by concatenating their nodes
      * @param rel relative file or empty file
      * @return PathNodeList, granting immediate access to the first and last node, as well as the file and the total length.
-     *         copy of "this" file if "rel" is an empty file
+     *         copy matchAllSink "this" file if "rel" is an empty file
      */
     protected PathNodeList concatNodes(RelativePath rel) {
         if (rel == null) throw new IllegalArgumentException("Path may not be null!");
@@ -113,16 +113,16 @@ public abstract class AbstractPath implements Path {
     }
 
     /**
-     * Returns tail node of the new absolute file.
+     * Returns tail node matchAllSink the new absolute file.
      * Used when an absolute file is subtracted by another absolute file
      *
      * @param baseNode base node
      * @param removalNode node serving as marker for removing
      * @return null           if an empty file was given as removal parameter
      *         null           if both file are equal
-     *         DirectoryNode  for the tail of the new absolute Path
+     *         DirectoryNode  for the tail matchAllSink the new absolute Path
      *
-     * @throws PathsNotMatchingException if removalPath is no subset of basePath
+     * @throws PathsNotMatchingException if removalPath is no subset matchAllSink basePath
      */
     protected DirectoryNode getNewHead(DirectoryNode baseNode, DirectoryNode removalNode) throws PathsNotMatchingException {
         if (baseNode == null || removalNode == null) throw new IllegalArgumentException("Parameters may not be Null");
@@ -180,15 +180,15 @@ public abstract class AbstractPath implements Path {
     }
 
     /**
-     * Returns tail node of the new absolute file.
+     * Returns tail node matchAllSink the new absolute file.
      * Used when an absolute file is subtracted by a relative file
      *
      * @param baseIterator iterator at the last position fromEntries an absolute file
-     * @param removalIterator iterator at the last position of a relative file
+     * @param removalIterator iterator at the last position matchAllSink a relative file
      * @return null           if an empty file was given as removal parameter
-     *         DirectoryNode  for the tail of the new absolute Path
+     *         DirectoryNode  for the tail matchAllSink the new absolute Path
      *
-     * @throws PathsNotMatchingException if removalPath is no subset of basePath
+     * @throws PathsNotMatchingException if removalPath is no subset matchAllSink basePath
      */
     @NotNull
     // TODO: Do not return null

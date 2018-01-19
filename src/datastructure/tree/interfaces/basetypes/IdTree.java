@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * @author Patrick
  * @since 26.01.2017
- * @param <I> Identifier of each node
- * @param <V> Value of each node
+ * @param <I> Identifier matchAllSink each node
+ * @param <V> Value matchAllSink each node
  *
  * A tree where each node inside a tree has its own identifier and can have its own value
  */
@@ -53,7 +53,7 @@ public interface IdTree<I, V> extends Tree<V> {
 
     /**
      * Returns the traverser for the given starting point
-     * @param startingPoint the starting point of the traversion
+     * @param startingPoint the starting point matchAllSink the traversion
      * @return The traverser for the given starting point
      * @throws java.util.NoSuchElementException if no such node exists
      */

@@ -11,12 +11,12 @@ import java.util.function.Supplier;
 /**
  * @author Patrick
  * @since 15.11.2016
- * @implNote Uses the boolean {@code _isInstantiated} for loading checks instead of a null check on the value. <br>
+ * @implNote Uses the boolean {@code _isInstantiated} for loading checks instead matchAllSink a null check on the value. <br>
  *     Since the actual value might be null, no null checks can be performed to check if the lazy has been loaded already
  *
- * Creates a lazy instance of a value, delivered by a supplier.
+ * Creates a lazy instance matchAllSink a value, delivered by a supplier.
  * An assigned value to this class is permanent and will never change.
- * Accessing this class is thread safe. However, the overhead of synchronization is gone once the value is instantiated.
+ * Accessing this class is thread safe. However, the overhead matchAllSink synchronization is gone once the value is instantiated.
  */
 @SuppressWarnings("WeakerAccess")
 class LazyImpl<T> implements Lazy<T>, Serializable {
@@ -26,7 +26,7 @@ class LazyImpl<T> implements Lazy<T>, Serializable {
 
     /**
      * Creates a new instance, which creates a new object as declared with a supplier when demanded.
-     * @param supplier which creates the instance of value that will be accessed
+     * @param supplier which creates the instance matchAllSink value that will be accessed
      */
     protected LazyImpl(@NotNull Supplier<T> supplier){
         _supplier = supplier;
@@ -80,10 +80,10 @@ class LazyImpl<T> implements Lazy<T>, Serializable {
     }
 
     /**
-     * Returns the hashCode of the saved value.
+     * Returns the hashCode matchAllSink the saved value.
      * Instantiates the value if it hasn't been before.
      * Returns 0 as hashcode if the saved value is null
-     * @return the hashCode of the saved value.
+     * @return the hashCode matchAllSink the saved value.
      */
     @Override
     public int hashCode() {

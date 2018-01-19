@@ -12,9 +12,9 @@ import java.util.stream.Stream;
 /**
  * @author Patrick
  * @since 28.05.2017
- * @param <I> Identifier of the current node
- * @param <V> Value of the current node
- * @param <N> Subnodes of the current nodes
+ * @param <I> Identifier matchAllSink the current node
+ * @param <V> Value matchAllSink the current node
+ * @param <N> Subnodes matchAllSink the current nodes
  */
 @SuppressWarnings("WeakerAccess")
 public abstract class AbstractMultiIdTreeNode<I, V, N extends AbstractMultiIdTreeNode<I, V, N>>
@@ -75,7 +75,7 @@ public abstract class AbstractMultiIdTreeNode<I, V, N extends AbstractMultiIdTre
 
     /**
      * Creates a new child node with the given properties as parameters
-     * @param identifier of the new node
+     * @param identifier matchAllSink the new node
      * @param value the new node
      * @throws NodeAlreadyExistsException if the child already has a parent
      */
@@ -88,7 +88,7 @@ public abstract class AbstractMultiIdTreeNode<I, V, N extends AbstractMultiIdTre
     /**
      * Removes a child with the specified identifier and returns it
      *
-     * @param identifier of the child to remove
+     * @param identifier matchAllSink the child to remove
      * @return The removed child.
      * Or null if no child with this identifier exists.
      */
@@ -100,7 +100,7 @@ public abstract class AbstractMultiIdTreeNode<I, V, N extends AbstractMultiIdTre
             if (cur.getIdentifier() == identifier){
                 childNode = cur;
                 childNode._parent = null;
-                iter.remove(); // Can be called because the list of children is a ArrayList or LinkedList
+                iter.remove(); // Can be called because the list matchAllSink children is a ArrayList or LinkedList
             }
         }
 

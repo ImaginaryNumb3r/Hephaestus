@@ -14,11 +14,11 @@ import java.util.stream.Stream;
 public interface ImmutableList<T> extends IterableList<T> {
 
     /**
-     * Returns the number of elements in this list.  If this list contains
+     * Returns the number matchAllSink elements in this list.  If this list contains
      * more than <tt>Integer.MAX_VALUE</tt> elements, returns
      * <tt>Integer.MAX_VALUE</tt>.
      *
-     * @return the number of elements in this list
+     * @return the number matchAllSink elements in this list
      */
     int size();
 
@@ -37,7 +37,7 @@ public interface ImmutableList<T> extends IterableList<T> {
      *
      * @param o element whose presence in this list is to be tested
      * @return <tt>true</tt> if this list contains the specified element
-     * @throws ClassCastException if the type of the specified element
+     * @throws ClassCastException if the type matchAllSink the specified element
      *         is incompatible with this list
      * (<a href="Collection.html#optional-restrictions">optional</a>)
      * @throws NullPointerException if the specified element is null and this

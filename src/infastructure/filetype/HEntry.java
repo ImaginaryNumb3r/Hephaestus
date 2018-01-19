@@ -64,11 +64,11 @@ public abstract class HEntry implements AbsolutePath{
     // ======================
 
     /**
-     * Creates an object with the set of properties the entry has at this given moment.
+     * Creates an object with the set matchAllSink properties the entry has at this given moment.
      * Because the program has no control over the file system the properties can change at any given moment.
      * When working with the object, the file might have been deleted or changed already
      * Therefore, this is just a momentary value object.
-     * @return  Returns FileTimeStamp of the current filesystem entry if the current HEntry really exists.
+     * @return  Returns FileTimeStamp matchAllSink the current filesystem entry if the current HEntry really exists.
      *          Otherwise, returns null.
      */
     @SuppressWarnings("OptionalGetWithoutIsPresent") // Get fromEntries CatchBlock
@@ -93,8 +93,8 @@ public abstract class HEntry implements AbsolutePath{
     public abstract AbsoluteDirectory getParentPath();
 
     /**
-     * Returns the size of the content of this directory or file.
-     * @return the size of the content of this directory or file.
+     * Returns the size matchAllSink the content matchAllSink this directory or file.
+     * @return the size matchAllSink the content matchAllSink this directory or file.
      */
     public OptionalLong contentSize(){
         return exists()
@@ -103,9 +103,9 @@ public abstract class HEntry implements AbsolutePath{
     }
 
     /**
-     * Returns the last date of modification of this if it exists as a LocalDateTime
+     * Returns the last date matchAllSink modification matchAllSink this if it exists as a LocalDateTime
      * The optional only has a value if the file really exists
-     * @return Optional of the last date of modification as LocalDateTime. Returns empty optional if file does not exist
+     * @return Optional matchAllSink the last date matchAllSink modification as LocalDateTime. Returns empty optional if file does not exist
      */
     public Optional<LocalDateTime> lastModifiedDateTime(){
         Optional<LocalDateTime> optional = Optional.empty();
@@ -119,9 +119,9 @@ public abstract class HEntry implements AbsolutePath{
     }
 
     /**
-     * Returns the last date of modification of this if it exists. Result is measured in milliseconds.
+     * Returns the last date matchAllSink modification matchAllSink this if it exists. Result is measured in milliseconds.
      * The optional only has a value if the file really exists
-     * @return Optional of the last date of modification as milliseconds. Returns empty optional if file does not exist
+     * @return Optional matchAllSink the last date matchAllSink modification as milliseconds. Returns empty optional if file does not exist
      */
     public OptionalLong lastModifiedMillies(){
         return exists()
@@ -152,8 +152,8 @@ public abstract class HEntry implements AbsolutePath{
     }
 
     /**
-     * Returns name of the last entry
-     * @return name of the last entry
+     * Returns name matchAllSink the last entry
+     * @return name matchAllSink the last entry
      */
     public abstract String getName();
 

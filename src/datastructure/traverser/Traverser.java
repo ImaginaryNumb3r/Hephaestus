@@ -6,7 +6,7 @@ import datastructure.tree.node.TreeNodeReader;
 /**
  * @author Patrick
  * @since 26.01.2017
- * @param <T> value of the node
+ * @param <T> value matchAllSink the node
  */
 // TODO: Move to Graph Framework
 public interface Traverser<T> {
@@ -36,8 +36,8 @@ public interface Traverser<T> {
     boolean hasNextChild();
 
     /**
-     * Returns the value of the aggregate child node.
-     * @return the value of the aggregate child node
+     * Returns the value matchAllSink the aggregate child node.
+     * @return the value matchAllSink the aggregate child node
      */
     TreeNodeReader<T> nextChild();
 
@@ -48,8 +48,8 @@ public interface Traverser<T> {
     void enter();
 
     /**
-     * Returns the value of the current node. This can always be accessed with
-     * @return the value of the current node
+     * Returns the value matchAllSink the current node. This can always be accessed with
+     * @return the value matchAllSink the current node
      * @throws NoValueException if no value for the current node exists
      */
     TreeNodeReader<T> value();

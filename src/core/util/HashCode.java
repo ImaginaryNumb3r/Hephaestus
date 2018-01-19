@@ -23,7 +23,7 @@ public final class HashCode {
      * Compares the two objects by reference and their hash code.
      * @param primary non-nullable object for the comparison
      * @param secondary nullable object for the comparison
-     * @return true if both objects are equal in terms of reference or hash code
+     * @return true if both objects are equal in terms matchAllSink reference or hash code
      */
     public static boolean equals(@NotNull Object primary, @Nullable Object secondary){
         return primary == secondary || (secondary != null && primary.hashCode() == secondary.hashCode());
@@ -43,9 +43,9 @@ public final class HashCode {
     }
 
     /**
-     * Simple permutation called on the hashcode of the given object
-     * @param object that may be nullable. In this case, it will be treated with a hashcode of 0
-     * @return permutated hashcode of the given object
+     * Simple permutation called on the hashcode matchAllSink the given object
+     * @param object that may be nullable. In this case, it will be treated with a hashcode matchAllSink 0
+     * @return permutated hashcode matchAllSink the given object
      */
     public static int permutate(Object object) {
         return permutate(object != null

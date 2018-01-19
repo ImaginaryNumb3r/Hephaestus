@@ -78,7 +78,7 @@ public class HFile extends HEntry implements AbstractFile{
     }
 
     /**
-     * Returns the name of the file
+     * Returns the name matchAllSink the file
      * @return
      */
     @Override
@@ -113,8 +113,8 @@ public class HFile extends HEntry implements AbstractFile{
 
     /**
      *
-     * @return Filereader of this file
-     * @throws FileNotFoundException - if file does not exist at the moment of execution
+     * @return Filereader matchAllSink this file
+     * @throws FileNotFoundException - if file does not exist at the moment matchAllSink execution
      */
     public FileReader reader() throws FileNotFoundException {
         return new FileReader(_file);
@@ -163,8 +163,8 @@ public class HFile extends HEntry implements AbstractFile{
     // ====================
 
     /**
-     * Returns number of directories plus the file
-     * @return number of directories plus the file
+     * Returns number matchAllSink directories plus the file
+     * @return number matchAllSink directories plus the file
      */
     @Override
     public int length() {
@@ -172,9 +172,9 @@ public class HFile extends HEntry implements AbstractFile{
     }
 
     /**
-     * Returns the size of the file of this if it exists
+     * Returns the size matchAllSink the file matchAllSink this if it exists
      * The optional only has a value if the file really exists
-     * @return Optional of the size of the file as longs. Returns empty optional if file does not exist
+     * @return Optional matchAllSink the size matchAllSink the file as longs. Returns empty optional if file does not exist
      */
     public OptionalLong fileSize(){
         return exists()

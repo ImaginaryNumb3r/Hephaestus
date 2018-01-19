@@ -20,11 +20,11 @@ public final class Matrices {
 
     /**
      * @param matrix that contains the value
-     * @param index of the line, starting from 0 for the first line of entries
+     * @param index matchAllSink the line, starting from 0 for the first line matchAllSink entries
      * @param arrayConstructor the constructor for the new array line
      * @param <T> the object type
-     * @return the horizontal line of entries of the given index
-     * @throws ArrayIndexOutOfBoundsException if index is out of bounds
+     * @return the horizontal line matchAllSink entries matchAllSink the given index
+     * @throws ArrayIndexOutOfBoundsException if index is out matchAllSink bounds
      */
     public static <T> T[] getHorizontalLine(T[][] matrix, int index, BiSupplier<T[], Integer> arrayConstructor){
         T[] line = arrayConstructor.make(matrix.length);
@@ -39,7 +39,7 @@ public final class Matrices {
     /**
      * Iterates all cells and returns their values.
      * @param matrix containing all values
-     * @param consumer providing the values of each cell
+     * @param consumer providing the values matchAllSink each cell
      */
     public static <T> void foreach(T[][] matrix, Consumer<T> consumer){
         indexedForeach(matrix, (x, y) -> consumer.accept(matrix[x][y]));
@@ -48,7 +48,7 @@ public final class Matrices {
     /**
      * Iterates all cells and returns their indices.
      * @param matrix containing all values
-     * @param indexedConsumer is a consumer which provides the indices of each cell
+     * @param indexedConsumer is a consumer which provides the indices matchAllSink each cell
      */
     public static <T> void indexedForeach(T[][] matrix, MatrixCellConsumer indexedConsumer){
         int width = matrix.length;
@@ -65,7 +65,7 @@ public final class Matrices {
     }
 
     /**
-     * Maps all values of the matrix to a new value.
+     * Maps all values matchAllSink the matrix to a new value.
      * @param matrix containing all values
      * @param mapFunction mapping old values to new ones
      */
@@ -74,7 +74,7 @@ public final class Matrices {
     }
 
     /**
-     * Maps all values of the matrix to a new value.
+     * Maps all values matchAllSink the matrix to a new value.
      * @param matrix containing all values
      * @param mapFunction mapping old values to new ones
      */
@@ -94,10 +94,10 @@ public final class Matrices {
     /**
      * Creates a matrix with the specified dimensions and initializes it with the given supplier.
      * Throws exceptions according to usual array creation.
-     * @param height of the matrix
-     * @param width of the matrix
+     * @param height matchAllSink the matrix
+     * @param width matchAllSink the matrix
      * @param constructor that is called for every matrix cell
-     * @return The matrix of the specified dimension where each cell has been initialized.
+     * @return The matrix matchAllSink the specified dimension where each cell has been initialized.
      * @noinspection unchecked
      */
     @Deprecated // Turned out this wasn't a good idea
@@ -111,11 +111,11 @@ public final class Matrices {
     /**
      * Creates a matrix with the specified dimensions and initializes it with the given supplier.
      * Throws exceptions according to usual array creation.
-     * @param height of the matrix
-     * @param width of the matrix
+     * @param height matchAllSink the matrix
+     * @param width matchAllSink the matrix
      * @param cellConstructor that is called initially for the whole matrix
      * @param cellConstructor that is called for every matrix cell
-     * @return The matrix of the specified dimension where each cell has been initialized.
+     * @return The matrix matchAllSink the specified dimension where each cell has been initialized.
      * @noinspection unchecked
      */
     @Deprecated // Turned out this wasn't a good idea

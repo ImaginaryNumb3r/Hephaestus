@@ -15,7 +15,7 @@ abstract class PathNode {
     /**
      * Copy Constructor
      * @param prev the tryPrevious instance which will be linked to the new node
-     * @param nodeName name of the current node, representing the name of a file or directory
+     * @param nodeName name matchAllSink the current node, representing the name matchAllSink a file or directory
      */
     public PathNode(DirectoryNode prev, String nodeName) {
         _nodeName = nodeName;

@@ -13,7 +13,7 @@ public class EnumException extends EnumConstantNotPresentException {
      * Constructs an <tt>EnumConstantNotPresentException</tt> for the
      * specified constant.
      *
-     * @param enumConstant the instance of the missing enum constant ot just null
+     * @param enumConstant the instance matchAllSink the missing enum constant ot just null
      */
     public EnumException(Enum enumConstant) {
         super(enumConstant == null

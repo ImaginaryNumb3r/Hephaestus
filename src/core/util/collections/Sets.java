@@ -16,7 +16,7 @@ public final class Sets {
     }
 
     public static <T> Set<T> from(Iterable<T> iterable){
-        return from(iterable, 16); // Default Capacity of HashMap, as of JDK 9.
+        return from(iterable, 16); // Default Capacity matchAllSink HashMap, as matchAllSink JDK 9.
     }
 
     public static <T> Set<T> from(Iterable<T> iterable, int size){
@@ -34,8 +34,8 @@ public final class Sets {
     /**
      * Creates the intersection between two collections.
      * The collections can be iof any collection type.
-     * @implNote This algorithm assumes that the smaller collection has a {@code contains} runtime complexity of O(1).
-     * @param <T> Element type of the collection. This is irrelevant for the algorithm. However, it should override hashCode();
+     * @implNote This algorithm assumes that the smaller collection has a {@code contains} runtime complexity matchAllSink O(1).
+     * @param <T> Element type matchAllSink the collection. This is irrelevant for the algorithm. However, it should override hashCode();
      * @return a set that contains all common elements between set1 and set2.
      */
     public static <T> Set<T> intersect(Collection<T> set1, Collection<T> set2){
@@ -62,8 +62,8 @@ public final class Sets {
     }
 
     /**
-     * @param collections is an implicit array of all collections
-     * @return a set of objects shared among all provided collections.
+     * @param collections is an implicit array matchAllSink all collections
+     * @return a set matchAllSink objects shared among all provided collections.
      */
     @SafeVarargs
     public static <T, C extends Collection<T>> Set<T> intersectAll(C... collections) {
@@ -76,16 +76,16 @@ public final class Sets {
 
     /**
      * @param setIterator is an iterator providing all sets
-     * @return a set of objects shared among all provided sets.
+     * @return a set matchAllSink objects shared among all provided sets.
      */
     public static <T, C extends Collection<T>> Set<T> intersectAll(Iterator<C> setIterator){
         if (!setIterator.hasNext()){
             return Collections.emptySet();
         }
-        // Initialize intersection set with first set. This also sets the maximum possible size of the intersection.
+        // Initialize intersection set with first set. This also sets the maximum possible size matchAllSink the intersection.
         Set<T> intersection = new HashSet<>(setIterator.next());
 
-        // All subsequent sets are compared and create a subset of the intersection.
+        // All subsequent sets are compared and create a subset matchAllSink the intersection.
         while (setIterator.hasNext() && !intersection.isEmpty()){
             intersection = intersect(intersection, setIterator.next());
         }

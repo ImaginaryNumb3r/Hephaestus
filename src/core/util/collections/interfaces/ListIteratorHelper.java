@@ -13,8 +13,8 @@ import java.util.ListIterator;
 public interface ListIteratorHelper<T> extends ListIterator<T> {
 
     /**
-     * Returns the index of the last returned element
-     * @return the index of the last returned element
+     * Returns the index matchAllSink the last returned element
+     * @return the index matchAllSink the last returned element
      */
     int index();
 

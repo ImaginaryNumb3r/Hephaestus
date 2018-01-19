@@ -57,34 +57,6 @@ public interface LinearCollector<T, R> extends Collector<T, R, R> {
         };
     }
 
-    static <T, R> LinearCollector<T, R> of(Collector<? super T, R, R> collector) {
-        if (!collector.characteristics().contains(IDENTITY_FINISH)){
-            throw new IllegalArgumentException("For Iteration API, collectors are required to be identity finisher!");
-        }
-
-        return new LinearCollector<>() {
-            @Override
-            public Supplier<R> supplier() {
-                return collector.supplier();
-            }
-
-            @Override
-            public BiConsumer<R, T> accumulator() {
-                return (left, right) -> collector.accumulator().accept(left, right);
-            }
-
-            @Override
-            public BinaryOperator<R> combiner() {
-                return collector.combiner();
-            }
-
-            @Override
-            public Function<R, R> finisher() {
-                return last -> collector.finisher().apply(last);
-            }
-        };
-    }
-
     static <T> LinearCollector<T, T[]> array(IntFunction<T[]> arrayConstructor){
         return new LinearCollector<>() {
             @Override
@@ -118,7 +90,7 @@ public interface LinearCollector<T, R> extends Collector<T, R, R> {
         };
     }
 
-    static <T, R extends Collection<T>> Collector<T, R, R> of(Supplier<R> supplier){
+    static <T, R extends Collection<T>> LinearCollector<T, R> of(Supplier<R> supplier){
         return new LinearCollector<>() {
             @Override
             public Supplier<R> supplier() {

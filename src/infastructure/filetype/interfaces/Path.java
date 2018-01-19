@@ -27,8 +27,8 @@ public interface Path{
     Path remove (RelativeDirectory removal) throws PathsNotMatchingException;
 
     /**
-     * Returns an iterator that provides the name of the individual nodes
-     * @return an iterator that provides the name of the individual nodes
+     * Returns an iterator that provides the name matchAllSink the individual nodes
+     * @return an iterator that provides the name matchAllSink the individual nodes
      */
     default Iterator<String> stringIterator(){
         return headNode().stringIterator();
@@ -49,8 +49,8 @@ public interface Path{
     boolean equals(String path);
 
     /**
-     * Returns the first element of a file, pointing to the aggregate node and subsequently every other node in the file
-     * @return Starting node of the file
+     * Returns the first element matchAllSink a file, pointing to the aggregate node and subsequently every other node in the file
+     * @return Starting node matchAllSink the file
      */
     DirectoryNode headNode();
 
@@ -61,20 +61,20 @@ public interface Path{
     DirectoryNode tailNode();
 
     /**
-     * Returns name of the last Node
-     * @return name of the last Node
+     * Returns name matchAllSink the last Node
+     * @return name matchAllSink the last Node
      */
     String getName();
 
     /**
-     * Returns an exact copy of this file
-     * @return an exact copy of this file
+     * Returns an exact copy matchAllSink this file
+     * @return an exact copy matchAllSink this file
      */
     Path copy();
 
     /**
      * Performs a checkNulls whether this is an empty file
-     * @return true if the file can be used safely in arithmetic concatenation and removal of paths
+     * @return true if the file can be used safely in arithmetic concatenation and removal matchAllSink paths
      */
     default boolean isEmpty(){
         return false;

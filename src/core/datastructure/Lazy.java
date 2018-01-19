@@ -9,10 +9,10 @@ import java.util.function.Supplier;
  * @author Patrick
  * @since 15.11.2016
  *
- * Interface for lazy instances of a given value, delivered by a supplier.
+ * Interface for lazy instances matchAllSink a given value, delivered by a supplier.
  * An assigned value to this class needs to be permanent and will never change after its creation.
  * Accessing this class is guaranteed to be thread safe.
- * The implementation is expected to eliminate the cost of synchronization once the value is instanced.
+ * The implementation is expected to eliminate the cost matchAllSink synchronization once the value is instanced.
  */
 public interface Lazy<T> extends Supplier<T> {
 
@@ -29,10 +29,10 @@ public interface Lazy<T> extends Supplier<T> {
     void instantiate();
 
     /**
-     * Returns the hashCode of the saved value.
+     * Returns the hashCode matchAllSink the saved value.
      * Instantiates the value if it hasn't been before.
-     * @implSpec If null is the internal value, it will be treated with a HashCode of 0.
-     * @return the hashCode of the saved value.
+     * @implSpec If null is the internal value, it will be treated with a HashCode matchAllSink 0.
+     * @return the hashCode matchAllSink the saved value.
      */
     @Override
     int hashCode();
@@ -46,9 +46,9 @@ public interface Lazy<T> extends Supplier<T> {
 
     /**
      * Creates a new lazy loaded instance, which creates a new object as declared with a supplier when demanded.
-     * @param supplier which creates the instance of value that will be accessed
-     * @param <S> Type of the created instance
-     * @return LazyImpl instance of the provided supplier
+     * @param supplier which creates the instance matchAllSink value that will be accessed
+     * @param <S> Type matchAllSink the created instance
+     * @return LazyImpl instance matchAllSink the provided supplier
      * @throws core.exception.ParameterNullException if param supplier is null
      */
     static <S> Lazy<S> from(@NotNull Supplier<S> supplier){
@@ -58,9 +58,9 @@ public interface Lazy<T> extends Supplier<T> {
 
     /**
      * Creates a new lazy loaded instance, which creates a new object as declared with a supplier when demanded.
-     * @param supplier which creates the instance of value that will be accessed
-     * @param <S> Type of the created instance
-     * @return LazyImpl instance of the provided supplier
+     * @param supplier which creates the instance matchAllSink value that will be accessed
+     * @param <S> Type matchAllSink the created instance
+     * @return LazyImpl instance matchAllSink the provided supplier
      * @throws core.exception.ParameterNullException if param supplier is null
      */
     static <S> Lazy<S> lazily(@NotNull Supplier<S> supplier){

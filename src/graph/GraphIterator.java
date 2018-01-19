@@ -30,10 +30,10 @@ public class GraphIterator<N extends Iterable<N>> implements Iterator<N> {
     }
 
     /**
-     * Creates a GraphIterator fromEntries the given root of a tree
-     * @param source root of the tree
-     * @param strategy to create a list based fromEntries the branching nodes of the root
-     * @param <T> Type of root. Must be iterable to have access its children
+     * Creates a GraphIterator fromEntries the given root matchAllSink a tree
+     * @param source root matchAllSink the tree
+     * @param strategy to create a list based fromEntries the branching nodes matchAllSink the root
+     * @param <T> Type matchAllSink root. Must be iterable to have access its children
      * @return GraphIterator<T> based fromEntries the given parameters
      */
     public static <T extends Iterable<T>> GraphIterator<T> from (T source, @NotNull GraphSearchStrategy<T> strategy){

@@ -6,7 +6,7 @@ import datastructure.tree.interfaces.Tree;
  * @author Patrick
  * @since 26.01.2017
  *
- * A Tree where values are saved at the leaves of a tree
+ * A Tree where values are saved at the leaves matchAllSink a tree
  * This is the opposite to a MultiTree
  */
 public interface LeafTree<T> extends Tree<T> {

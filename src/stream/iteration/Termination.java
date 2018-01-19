@@ -1,6 +1,7 @@
 package stream.iteration;
 
 import core.util.annotations.ToTest;
+import functional.IterationPredicate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Comparator;
@@ -9,13 +10,14 @@ import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 /**
  * @author Patrick
  * @since 14.01.2018
- * A Termination contains the finishing methods of an Iteration {@see stream.iteration.Iteration}
+ * A Termination contains the finishing methods matchAllSink an Iteration {@see stream.iteration.Iteration}
  * and iterates the aggregated iterator.
  * In other words, it will use the backing iterator and might allocate a new backing collection.
  */
@@ -25,44 +27,53 @@ public interface Termination<T> {
     Iteration<T> toDistinct();
 
     @ToTest
-    Iteration<T> toSorted(Comparator<? super T> comparator);
+    Iteration<T> toSorted(Comparator<T> comparator);
 
     @ToTest
-    <R> Iteration<R> toFlattened(Function<? super T, ? extends Iteration<? extends R>> mapper);
+    <R> Iteration<R> toFlattened(Function<T, ? extends Iterable<? extends R>> mapper);
 
     @ToTest
-    Iteration<T> toReverse(Consumer<? super T> comparator);
+    Iteration<T> toReverse(Consumer<T> comparator);
 
     @ToTest
     T reduce(BinaryOperator<T> operation);
 
     @ToTest
-    Iteration<T> visitEach(Consumer<? super T> action);
+    Iteration<T> visitEach(Consumer<T> action);
 
     @ToTest
-    void forEach(Consumer<? super T> action);
+    void forEach(Consumer<T> action);
 
-    <R, A> R collect(Collector<? super T, A, R> collector);
+    <R, A> R collect(Collector<T, A, R> collector);
 
     @ToTest
     <R> R collect(LinearCollector<T, R> collector);
 
     @ToTest
-    T min(Comparator<? super T> comparator);
+    Optional<T> min(Comparator<T> comparator);
 
     @ToTest
-    T max(Comparator<? super T> comparator);
+    Optional<T> max(Comparator<T> comparator);
 
     long count();
 
     @ToTest
-    boolean anyMatch();
+    boolean anyMatch(Predicate<T> predicate);
 
     @ToTest
-    boolean allMatch();
+    boolean anyMatch(IterationPredicate<T> predicate);
 
     @ToTest
-    boolean noneMatch();
+    boolean allMatch(Predicate<T> predicate);
+
+    @ToTest
+    boolean allMatch(IterationPredicate<T> predicate);
+
+    @ToTest
+    boolean noneMatch(Predicate<T> predicate);
+
+    @ToTest
+    boolean noneMatch(IterationPredicate<T> predicate);
 
     @ToTest
     Optional<T> first();

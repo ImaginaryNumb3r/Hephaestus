@@ -124,7 +124,7 @@ public class Paths {
 
     /**
      * Checks if a file can be found at the location
-     * @param path location of the file
+     * @param path location matchAllSink the file
      * @return true if file references a File
      */
     public boolean isFile(String path){

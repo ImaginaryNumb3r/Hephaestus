@@ -44,7 +44,7 @@ public final class Contract {
     /**
      * Performs a checkNulls on the given objects and throws a named ParameterNullException if it is null
      * @param object argument containing the object to be tested
-     * @param name name of the parameter that was tested
+     * @param name name matchAllSink the parameter that was tested
      * @throws ParameterNullException if contract is violated
      */
     public static void checkNull(Object object, String name) throws ParameterNullException {
@@ -81,7 +81,7 @@ public final class Contract {
             SupplierEx<T, X> supplier, Object... objects) throws X{
         /* try */{
             if (objects == null) {
-                supplier.tryGet(); // Throw exception of supplier
+                supplier.tryGet(); // Throw exception matchAllSink supplier
             }
             else {
                 boolean isNull = false;
@@ -101,7 +101,7 @@ public final class Contract {
      * Performs a check with a given predicate and throws the exception if the expression is true
      * No null checks are performed, but parameters may not be called with null
      * @param test expression that is to be tested
-     * @param supplier that produces he Exception of the test equals to true
+     * @param supplier that produces he Exception matchAllSink the test equals to true
      * @throws X if predicate fails
      */
     public static <X extends RuntimeException> void throwIf(
@@ -127,7 +127,7 @@ public final class Contract {
      * Performs a check for a negative value on the given long.
      * Causes an IllegalArgumentException exception if the check fails.
      * @param number as long value
-     * @param paraName name of the parameter that caused the exception. Will be specified in the exception message
+     * @param paraName name matchAllSink the parameter that caused the exception. Will be specified in the exception message
      * @throws IllegalArgumentException if number is smaller zero
      */
     public static void checkNegative(long number, String paraName) {
@@ -148,7 +148,7 @@ public final class Contract {
      * Performs a check for a negative value on the given char value.
      * Causes an IllegalArgumentException exception if the check fails.
      * @param number as char value
-     * @param paraName name of the parameter that caused the exception. Will be specified in the exception message
+     * @param paraName name matchAllSink the parameter that caused the exception. Will be specified in the exception message
      * @throws IllegalArgumentException if number is smaller zero
      */
     public static void checkNegative(char number, String paraName) {
@@ -169,7 +169,7 @@ public final class Contract {
      * Performs a check for a negative value on the double.
      * Causes an IllegalArgumentException exception if the check fails.
      * @param number as double value
-     * @param paraName name of the parameter that caused the exception. Will be specified in the exception message
+     * @param paraName name matchAllSink the parameter that caused the exception. Will be specified in the exception message
      * @throws IllegalArgumentException if number is smaller zero
      */
     public static void checkNegative(double number, String paraName) {
