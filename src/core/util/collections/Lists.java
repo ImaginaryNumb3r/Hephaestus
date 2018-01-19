@@ -29,19 +29,16 @@ public final class Lists {
         return list;
     }
 
-    public static <T> LinkedList<T> toLinkedList(@NotNull Iterable<T> iterable){
-        if (iterable == null) throw new ParameterNullException("iterable");
+    public static <T> LinkedList<T> toLinkedList(Iterable<T> iterable){
         return toList(iterable, LinkedList::new);
     }
 
-    public static <T> LinkedList<T> toLinkedList(@NotNull Iterator<T> iterator){
-        if (iterator == null) throw new ParameterNullException("iterable");
+    public static <T> LinkedList<T> toLinkedList(Iterator<T> iterator){
         return toList(() -> iterator, LinkedList::new);
     }
 
     @SafeVarargs
-    public static <T> LinkedList<T> toLinkedList(@NotNull T... array){
-        if (array == null) throw new ParameterNullException("array");
+    public static <T> LinkedList<T> toLinkedList(T... array){
         return toList(() -> ArrayIterator.from(array), LinkedList::new);
     }
 
