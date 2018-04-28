@@ -3,6 +3,7 @@ package core.util.collections.iteration;
 import core.exception.InstanceNotAllowedException;
 import core.util.annotations.ToTest;
 import core.util.collections.interfaces.BiLinkableImpl;
+import core.util.collections.interfaces.LinkableImpl;
 import core.util.contracts.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,10 +70,9 @@ public final class Iterators {
         return new GenericListIterator.GenericListIteratorImpl<>(sequence::charAt, sequence.length());
     }
 
-    public static <T> ListIterator<T> from(T startValue, Function<T, T> advanceFunction){
-//        BiLinkable<T> linkable = BiLinkable.fromEntries(startValue, advanceFunction, null);
-        BiLinkableImpl<T> linkable = new BiLinkableImpl<>(startValue, advanceFunction, null);
-        return new NodeListIterator.NodeListIteratorImpl<>(linkable);
+    public static <T> Iterator<T> from(T startValue, Function<T, T> advanceFunction){
+        LinkableImpl<T> linkable = new LinkableImpl<>(startValue, advanceFunction);
+        return new NodeIterator<>(linkable);
     }
 
     //<editor-fold desc="Primitives">

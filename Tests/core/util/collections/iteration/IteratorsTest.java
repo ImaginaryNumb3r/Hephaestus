@@ -32,17 +32,18 @@ public class IteratorsTest {
     @Test
     public void testNodeIterator() {
         int max = 10;
-        ListIterator<Integer> iterator = Iterators.from(0, i -> i != max ? ++i : null);
+        Iterator<Integer> iterator = Iterators.from(0, i -> i != max ? ++i : null);
 
         int cur = 0;
         for (Integer i : Iterables.from(iterator)) {
             assert i == ++cur;
         }
 
+        /*
         // Also test reverse
         cur = max;
         while (iterator.hasPrevious()){
             assert --cur == iterator.previous();
-        }
+        } */
     }
 }

@@ -1,7 +1,5 @@
 package functional;
 
-import java.util.function.Predicate;
-
 /**
  * @author Patrick
  * @since 14.01.2018

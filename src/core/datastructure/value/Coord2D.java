@@ -1,13 +1,9 @@
 package core.datastructure.value;
 
-import org.jetbrains.annotations.NotNull;
 import core.tuple.Tuple;
 import core.util.HashCode;
-import util.hash.HashGenerator;
 
 import java.awt.*;
-
-import static core.util.HashCode.permutate;
 
 /**
  * @author Patrick Plieschnegger

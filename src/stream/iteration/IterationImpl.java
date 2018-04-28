@@ -95,7 +95,7 @@ class IterationImpl<T> implements Iteration<T> {
     //<editor-fold desc="Termination Operation">
     @Override
     public Iteration<T> toDistinct() {
-        // Make distinct via HashSet;
+        // Make distinct via HashSet.
         HashSet<T> collection = collect(HashSet::new);
         return Iteration.of(collection.iterator());
     }
@@ -191,7 +191,13 @@ class IterationImpl<T> implements Iteration<T> {
         return desiredExtreme(comparator, ComparisonResult::isSmaller);
     }
 
-    public Optional<T> desiredExtreme(Comparator<T> comparator, IntPredicate predicate) {
+    /**
+     * Either returns the maximum or minimum element within the iteration.
+     * @param comparator which determines the max/min element.
+     * @param predicate to determine whether to keep the smaller or greater element.
+     * @return the min/max element if it exists.
+     */
+    private Optional<T> desiredExtreme(Comparator<T> comparator, IntPredicate predicate) {
         if (_source.hasNext()){
             return Optional.empty();
         }

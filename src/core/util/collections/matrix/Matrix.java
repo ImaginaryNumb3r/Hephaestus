@@ -2,6 +2,7 @@ package core.util.collections.matrix;
 
 import core.datastructure.value.Coord2D;
 import core.util.interfaces.Collection2D;
+import core.util.interfaces.ReadCollection2D;
 
 import java.util.Iterator;
 import java.util.function.Function;
@@ -13,7 +14,7 @@ import java.util.stream.Stream;
  * A read-only matrix interface.
  */
 // TODO: Move to Collections Framework
-public interface Matrix<T> extends Collection2D<T> {
+public interface Matrix<T> extends ReadCollection2D<T> {
 
     Iterator<Coord2D> coordIterator();
 

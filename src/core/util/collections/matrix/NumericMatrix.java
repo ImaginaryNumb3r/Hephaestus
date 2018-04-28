@@ -8,6 +8,8 @@ import functional.BiSupplier;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.UnaryOperator;
 
 /**
  * Creator: Patrick
@@ -86,7 +88,7 @@ public class NumericMatrix<T extends Number> extends MutatingMatrix<T> {
 
     //<editor-fold desc="Determinate">
     /**
-     * Calculates the determinate matchAllSink the current matrix
+     * Calculates the determinate of the current matrix
      * ( A B C )
      * ( D E F )
      * ( G H I )
@@ -162,7 +164,7 @@ public class NumericMatrix<T extends Number> extends MutatingMatrix<T> {
     protected void computeMultiplication(Matrix<T> other, T[][] matrix){
         checkBounds(other);
 
-        BiFunction<T, T, T> multiplication = (val1, val2) -> {
+        BinaryOperator<T> multiplication = (val1, val2) -> {
             double double1 = val1.doubleValue();
             double double2 = val2.doubleValue();
 

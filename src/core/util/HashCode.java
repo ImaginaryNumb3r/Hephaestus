@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import core.exception.InstanceNotAllowedException;
 import core.exception.ParameterNullException;
-import util.hash.HashGenerator;
 
 /**
  * @author Patrick

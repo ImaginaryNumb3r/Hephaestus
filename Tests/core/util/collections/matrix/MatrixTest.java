@@ -28,7 +28,7 @@ public class MatrixTest {
 
     @Test
     public void testIteration() throws Exception {
-        Matrix<Integer> matrix = new MutatingMatrix<>(3, 4);
+        MutatingMatrix<Integer> matrix = new MutatingMatrix<>(3, 4);
 
         int width = matrix.getWidth();
         int height = matrix.getHeight();
